@@ -95,11 +95,9 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getProperties(filters?: any): Promise<Property[]> {
-    let query = db.select().from(properties).where(eq(properties.isActive, true));
+    const conditions = [eq(properties.isActive, true)];
     
     if (filters) {
-      const conditions = [];
-      
       if (filters.propertyType) {
         conditions.push(eq(properties.propertyType, filters.propertyType));
       }
@@ -118,13 +116,9 @@ export class DatabaseStorage implements IStorage {
       if (filters.rooms) {
         conditions.push(eq(properties.rooms, filters.rooms));
       }
-      
-      if (conditions.length > 0) {
-        query = query.where(and(...conditions));
-      }
     }
     
-    return await query;
+    return await db.select().from(properties).where(and(...conditions));
   }
 
   async getProperty(id: number): Promise<Property | undefined> {
