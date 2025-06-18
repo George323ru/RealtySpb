@@ -1,130 +1,105 @@
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Slider } from "@/components/ui/slider";
-import { Checkbox } from "@/components/ui/checkbox";
 import ConsultationForm from "@/components/consultation-form";
-import { User, Award, Clock, MapPin, Star, Phone } from "lucide-react";
+import { User, Clock, Star, Phone, UserCheck, Briefcase, Home, Building, HandshakeIcon, Check, ArrowRight } from "lucide-react";
+
+interface Filters {
+  gender: string;
+  experience: string;
+  services: string[];
+}
 
 interface RealtorProfile {
   id: string;
+  name: string;
   gender: string;
-  age: number;
   experience: number;
   services: string[];
   rating: number;
   description: string;
   avatar: string;
+  specialization: string;
 }
 
 const mockRealtors: RealtorProfile[] = [
   {
     id: "1",
+    name: "Анна Петрова",
     gender: "Женщина",
-    age: 32,
     experience: 8,
     services: ["Покупка", "Продажа", "Ипотека"],
     rating: 4.9,
-    description: "Специализируюсь на жилой недвижимости в центральных районах. Помогу найти идеальный вариант с учетом всех ваших пожеланий.",
-    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150"
+    description: "Специализируюсь на жилой недвижимости в центральных районах",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150",
+    specialization: "Жилая недвижимость"
   },
   {
     id: "2", 
+    name: "Михаил Сидоров",
     gender: "Мужчина",
-    age: 45,
     experience: 15,
     services: ["Коммерческая", "Инвестиции", "Консультации"],
     rating: 4.8,
-    description: "Эксперт по коммерческой недвижимости и инвестиционным проектам. Более 15 лет успешной работы на рынке СПб.",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150"
+    description: "Эксперт по коммерческой недвижимости и инвестиционным проектам",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150",
+    specialization: "Коммерческая недвижимость"
   },
   {
     id: "3",
-    gender: "Женщина", 
-    age: 28,
+    name: "Елена Волкова", 
+    gender: "Женщина",
     experience: 5,
     services: ["Аренда", "Новостройки", "Сопровождение"],
     rating: 4.7,
-    description: "Молодой и энергичный специалист. Отлично разбираюсь в новостройках и помогаю с арендой жилья.",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150"
+    description: "Молодой и энергичный специалист по новостройкам и аренде",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150",
+    specialization: "Новостройки"
   },
   {
     id: "4",
+    name: "Дмитрий Козлов",
     gender: "Мужчина",
-    age: 38,
     experience: 12,
     services: ["Покупка", "Новостройки", "Ипотека"],
     rating: 4.6,
-    description: "Помогаю семьям найти квартиры в новостройках. Специализируюсь на работе с ипотечными программами.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
-  },
-  {
-    id: "5",
-    gender: "Женщина",
-    age: 41,
-    experience: 18,
-    services: ["Продажа", "Коммерческая", "Консультации"],
-    rating: 4.9,
-    description: "Старший риэлтор с большим опытом. Работаю с элитной недвижимостью и коммерческими объектами.",
-    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150"
-  },
-  {
-    id: "6",
-    gender: "Мужчина",
-    age: 29,
-    experience: 4,
-    services: ["Аренда", "Сопровождение", "Консультации"],
-    rating: 4.5,
-    description: "Специализируюсь на аренде жилья и полном сопровождении сделок. Быстро решаю любые вопросы.",
-    avatar: "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=150"
-  },
-  {
-    id: "7",
-    gender: "Женщина",
-    age: 35,
-    experience: 10,
-    services: ["Покупка", "Продажа", "Инвестиции"],
-    rating: 4.8,
-    description: "Помогаю клиентам принимать взвешенные решения при покупке и продаже недвижимости как инвестиции.",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150"
-  },
-  {
-    id: "8",
-    gender: "Мужчина",
-    age: 52,
-    experience: 20,
-    services: ["Коммерческая", "Инвестиции", "Консультации"],
-    rating: 5.0,
-    description: "Ведущий эксперт по коммерческой недвижимости. Помогаю крупным инвесторам и девелоперам.",
-    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150"
+    description: "Помогаю семьям найти квартиры в новостройках с ипотекой",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150",
+    specialization: "Семейное жилье"
   }
 ];
 
+const genderOptions = [
+  { value: "", label: "Не важно", icon: UserCheck },
+  { value: "Женщина", label: "Женщина", icon: User },
+  { value: "Мужчина", label: "Мужчина", icon: User }
+];
+
+const experienceOptions = [
+  { value: "", label: "Любой опыт" },
+  { value: "3-7", label: "3-7 лет" },
+  { value: "7-15", label: "7-15 лет" },
+  { value: "15+", label: "15+ лет" }
+];
+
+const serviceOptions = [
+  { value: "Покупка", label: "Покупка", icon: Home },
+  { value: "Продажа", label: "Продажа", icon: HandshakeIcon },
+  { value: "Аренда", label: "Аренда", icon: Building },
+  { value: "Ипотека", label: "Ипотека", icon: Briefcase },
+  { value: "Новостройки", label: "Новостройки", icon: Building },
+  { value: "Коммерческая", label: "Коммерческая", icon: Briefcase }
+];
+
 export default function RealtorConstructor() {
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<Filters>({
     gender: "",
-    ageRange: [25, 55],
-    experienceRange: [1, 20],
-    services: [] as string[]
+    experience: "",
+    services: []
   });
-  
-  const [showForm, setShowForm] = useState(false);
 
-  const serviceOptions = [
-    "Покупка", "Продажа", "Аренда", "Новостройки", 
-    "Коммерческая", "Ипотека", "Инвестиции", "Консультации", "Сопровождение"
-  ];
-
-  const filteredRealtors = mockRealtors.filter(realtor => {
-    if (filters.gender && realtor.gender !== filters.gender) return false;
-    if (realtor.age < filters.ageRange[0] || realtor.age > filters.ageRange[1]) return false;
-    if (realtor.experience < filters.experienceRange[0] || realtor.experience > filters.experienceRange[1]) return false;
-    if (filters.services.length > 0 && !filters.services.some(service => realtor.services.includes(service))) return false;
-    return true;
-  });
+  const [showResults, setShowResults] = useState(false);
 
   const handleServiceToggle = (service: string) => {
     setFilters(prev => ({
@@ -135,207 +110,253 @@ export default function RealtorConstructor() {
     }));
   };
 
+  const filteredRealtors = mockRealtors.filter(realtor => {
+    if (filters.gender && realtor.gender !== filters.gender) return false;
+    
+    if (filters.experience) {
+      const [min, max] = filters.experience.includes('+') 
+        ? [parseInt(filters.experience), 100] 
+        : filters.experience.split('-').map(Number);
+      if (realtor.experience < min || realtor.experience > max) return false;
+    }
+    
+    if (filters.services.length > 0) {
+      const hasMatchingService = filters.services.some(service => 
+        realtor.services.includes(service)
+      );
+      if (!hasMatchingService) return false;
+    }
+    
+    return true;
+  });
+
+  const handleSearch = () => {
+    setShowResults(true);
+  };
+
   return (
     <div className="min-h-screen bg-neutral-50">
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-            Подбор риэлтора
-          </h1>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-            Выберите параметры специалиста, который лучше всего подойдет для решения ваших задач
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-          {/* Filters */}
-          <div className="lg:col-span-1">
-            <Card className="sticky top-4">
-              <CardHeader>
-                <CardTitle className="text-lg">Параметры подбора</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                {/* Gender */}
-                <div>
-                  <Label className="text-sm font-medium mb-3 block">Пол специалиста</Label>
-                  <RadioGroup
-                    value={filters.gender}
-                    onValueChange={(value) => setFilters(prev => ({...prev, gender: value}))}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="" id="any" />
-                      <Label htmlFor="any">Любой</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="Мужчина" id="male" />
-                      <Label htmlFor="male">Мужчина</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="Женщина" id="female" />
-                      <Label htmlFor="female">Женщина</Label>
-                    </div>
-                  </RadioGroup>
-                </div>
-
-                {/* Age Range */}
-                <div>
-                  <Label className="text-sm font-medium mb-3 block">
-                    Возраст: {filters.ageRange[0]} - {filters.ageRange[1]} лет
-                  </Label>
-                  <Slider
-                    value={filters.ageRange}
-                    onValueChange={(value) => setFilters(prev => ({...prev, ageRange: value}))}
-                    max={65}
-                    min={22}
-                    step={1}
-                    className="w-full"
-                  />
-                </div>
-
-                {/* Experience Range */}
-                <div>
-                  <Label className="text-sm font-medium mb-3 block">
-                    Опыт: {filters.experienceRange[0]} - {filters.experienceRange[1]} лет
-                  </Label>
-                  <Slider
-                    value={filters.experienceRange}
-                    onValueChange={(value) => setFilters(prev => ({...prev, experienceRange: value}))}
-                    max={25}
-                    min={1}
-                    step={1}
-                    className="w-full"
-                  />
-                </div>
-
-                {/* Services */}
-                <div>
-                  <Label className="text-sm font-medium mb-3 block">Специализация</Label>
-                  <div className="space-y-2">
-                    {serviceOptions.map(service => (
-                      <div key={service} className="flex items-center space-x-2">
-                        <Checkbox
-                          id={service}
-                          checked={filters.services.includes(service)}
-                          onCheckedChange={() => handleServiceToggle(service)}
-                        />
-                        <Label htmlFor={service} className="text-sm cursor-pointer">{service}</Label>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <Button 
-                  onClick={() => setFilters({gender: "", ageRange: [25, 55], experienceRange: [1, 20], services: []})}
-                  variant="outline"
-                  className="w-full"
-                >
-                  Сбросить фильтры
-                </Button>
-              </CardContent>
-            </Card>
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-r from-blue-900 to-indigo-800 py-16">
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920')"}}
+        ></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
+              Подберите{" "}
+              <span className="text-yandex-yellow">идеального</span>{" "}
+              специалиста
+            </h1>
+            <p className="text-xl lg:text-2xl mb-8 font-light opacity-90">
+              Ответьте на 3 простых вопроса, и мы найдем риэлтора под ваши задачи
+            </p>
           </div>
+        </div>
+      </section>
 
-          {/* Results */}
-          <div className="lg:col-span-3">
-            <div className="mb-4">
-              <p className="text-text-secondary">
-                Найдено специалистов: <span className="font-semibold">{filteredRealtors.length}</span>
-              </p>
-            </div>
+      {/* Constructor Section */}
+      <section className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            
+            {!showResults ? (
+              <Card className="bg-white shadow-xl border-0 rounded-2xl">
+                <CardContent className="p-8">
+                  
+                  {/* Step 1: Gender */}
+                  <div className="mb-8">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-8 h-8 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                      <h3 className="text-xl font-semibold text-text-primary">Пол специалиста</h3>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      {genderOptions.map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => setFilters(prev => ({ ...prev, gender: option.value }))}
+                          className={`p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-3 hover:scale-105 ${
+                            filters.gender === option.value
+                              ? 'border-accent-orange bg-orange-50 text-accent-orange shadow-lg'
+                              : 'border-neutral-200 hover:border-neutral-300 text-text-secondary hover:bg-neutral-50'
+                          }`}
+                        >
+                          <option.icon className="w-5 h-5" />
+                          <span className="font-medium">{option.label}</span>
+                          {filters.gender === option.value && <Check className="w-4 h-4 ml-auto" />}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
 
-            <div className="space-y-4">
-              {filteredRealtors.map(realtor => (
-                <Card key={realtor.id} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex flex-col md:flex-row gap-4">
-                      <div className="flex-shrink-0">
-                        <img
-                          src={realtor.avatar}
-                          alt="Специалист"
-                          className="w-20 h-20 rounded-full object-cover"
-                        />
-                      </div>
-                      
-                      <div className="flex-1">
-                        <div className="flex items-start justify-between mb-3">
-                          <div>
-                            <div className="flex items-center gap-2 mb-1">
-                              <User className="w-4 h-4 text-accent-orange" />
-                              <span className="font-medium">{realtor.gender}, {realtor.age} лет</span>
-                            </div>
-                            <div className="flex items-center gap-4 text-sm text-text-secondary">
+                  {/* Step 2: Experience */}
+                  <div className="mb-8">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-8 h-8 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                      <h3 className="text-xl font-semibold text-text-primary">Опыт работы</h3>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+                      {experienceOptions.map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => setFilters(prev => ({ ...prev, experience: option.value }))}
+                          className={`p-3 rounded-lg border-2 transition-all duration-200 text-center hover:scale-105 ${
+                            filters.experience === option.value
+                              ? 'border-accent-orange bg-orange-50 text-accent-orange shadow-lg'
+                              : 'border-neutral-200 hover:border-neutral-300 text-text-secondary hover:bg-neutral-50'
+                          }`}
+                        >
+                          <span className="font-medium text-sm">{option.label}</span>
+                          {filters.experience === option.value && <Check className="w-4 h-4 mx-auto mt-1" />}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Step 3: Services */}
+                  <div className="mb-8">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-8 h-8 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                      <h3 className="text-xl font-semibold text-text-primary">Тип сделки</h3>
+                    </div>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                      {serviceOptions.map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => handleServiceToggle(option.value)}
+                          className={`p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-3 hover:scale-105 ${
+                            filters.services.includes(option.value)
+                              ? 'border-accent-orange bg-orange-50 text-accent-orange shadow-lg'
+                              : 'border-neutral-200 hover:border-neutral-300 text-text-secondary hover:bg-neutral-50'
+                          }`}
+                        >
+                          <option.icon className="w-5 h-5" />
+                          <span className="font-medium">{option.label}</span>
+                          {filters.services.includes(option.value) && (
+                            <Check className="w-4 h-4 ml-auto" />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Search Button */}
+                  <div className="text-center pt-4">
+                    <Button 
+                      onClick={handleSearch}
+                      className="bg-gradient-to-r from-accent-orange to-orange-600 text-white px-12 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 text-lg"
+                    >
+                      Найти специалиста
+                      <ArrowRight className="ml-2 w-5 h-5" />
+                    </Button>
+                  </div>
+
+                </CardContent>
+              </Card>
+            ) : (
+              <>
+                {/* Results Header */}
+                <div className="mb-8 text-center">
+                  <h2 className="text-3xl font-bold text-text-primary mb-4">
+                    Найдено {filteredRealtors.length} подходящих специалистов
+                  </h2>
+                  <Button 
+                    onClick={() => setShowResults(false)}
+                    variant="outline"
+                    className="mb-6 border-accent-orange text-accent-orange hover:bg-orange-50"
+                  >
+                    ← Изменить критерии
+                  </Button>
+                </div>
+
+                {/* Results Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+                  {filteredRealtors.map((realtor) => (
+                    <Card key={realtor.id} className="overflow-hidden hover:shadow-xl transition-all duration-300 hover:scale-105 border-0 shadow-lg">
+                      <CardContent className="p-6">
+                        <div className="flex items-start gap-4">
+                          <img 
+                            src={realtor.avatar} 
+                            alt={realtor.name}
+                            className="w-16 h-16 rounded-full object-cover border-2 border-orange-200"
+                          />
+                          <div className="flex-1">
+                            <h3 className="text-xl font-bold text-text-primary mb-1">{realtor.name}</h3>
+                            <p className="text-accent-orange font-medium mb-2">{realtor.specialization}</p>
+                            
+                            <div className="flex items-center gap-4 mb-3 text-sm">
                               <div className="flex items-center gap-1">
-                                <Award className="w-4 h-4" />
-                                <span>{realtor.experience} лет опыта</span>
+                                <Clock className="w-4 h-4 text-blue-600" />
+                                <span>{realtor.experience} лет</span>
                               </div>
                               <div className="flex items-center gap-1">
-                                <Star className="w-4 h-4 text-yellow-500" />
-                                <span>{realtor.rating}</span>
+                                <Star className="w-4 h-4 text-yellow-500 fill-current" />
+                                <span className="font-medium">{realtor.rating}</span>
                               </div>
                             </div>
+
+                            <p className="text-text-secondary text-sm mb-4 leading-relaxed">{realtor.description}</p>
+
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              {realtor.services.map((service) => (
+                                <Badge key={service} variant="secondary" className="text-xs bg-orange-100 text-accent-orange">
+                                  {service}
+                                </Badge>
+                              ))}
+                            </div>
+
+                            <Button className="bg-accent-orange text-white hover:bg-orange-600 w-full rounded-lg font-medium">
+                              <Phone className="w-4 h-4 mr-2" />
+                              Связаться со специалистом
+                            </Button>
                           </div>
                         </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
 
-                        <p className="text-text-secondary mb-3 text-sm">
-                          {realtor.description}
-                        </p>
-
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {realtor.services.map(service => (
-                            <Badge key={service} variant="outline" className="text-xs">
-                              {service}
-                            </Badge>
-                          ))}
-                        </div>
-
-                        <div className="flex gap-2">
-                          <Button 
-                            onClick={() => setShowForm(true)}
-                            className="bg-accent-orange hover:bg-orange-600 text-white"
-                          >
-                            <Phone className="w-4 h-4 mr-2" />
-                            Связаться
-                          </Button>
-                          <Button variant="outline">
-                            Подробнее
-                          </Button>
-                        </div>
-                      </div>
+                {/* No Results */}
+                {filteredRealtors.length === 0 && (
+                  <div className="text-center py-12">
+                    <div className="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                      <User className="w-12 h-12 text-neutral-400" />
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-
-              {filteredRealtors.length === 0 && (
-                <Card>
-                  <CardContent className="p-8 text-center">
-                    <p className="text-text-secondary">
-                      По заданным параметрам специалисты не найдены. Попробуйте изменить фильтры.
-                    </p>
-                  </CardContent>
-                </Card>
-              )}
-            </div>
+                    <h3 className="text-2xl font-bold text-text-primary mb-4">Специалисты не найдены</h3>
+                    <p className="text-text-secondary mb-6">Попробуйте изменить критерии поиска или оставьте заявку</p>
+                    <Button 
+                      onClick={() => setShowResults(false)}
+                      variant="outline"
+                      className="border-accent-orange text-accent-orange hover:bg-orange-50"
+                    >
+                      Изменить критерии
+                    </Button>
+                  </div>
+                )}
+              </>
+            )}
           </div>
         </div>
+      </section>
 
-        {/* Contact Form Modal */}
-        {showForm && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-            <div className="bg-white rounded-lg max-w-md w-full p-6">
-              <h3 className="text-xl font-bold mb-4">Связаться со специалистом</h3>
-              <ConsultationForm defaultService="Подбор риэлтора" />
-              <Button 
-                onClick={() => setShowForm(false)}
-                variant="outline"
-                className="w-full mt-4"
-              >
-                Закрыть
-              </Button>
-            </div>
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+              Не нашли подходящего специалиста?
+            </h2>
+            <p className="text-xl text-white mb-8 opacity-90">
+              Оставьте заявку и мы подберем эксперта под ваши требования в течение часа
+            </p>
+            
+            <ConsultationForm defaultService="Подбор специалиста" />
           </div>
-        )}
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
