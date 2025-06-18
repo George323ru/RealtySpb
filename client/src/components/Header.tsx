@@ -47,12 +47,12 @@ export default function Header() {
       title: "Предпродажная подготовка",
       items: [
         { name: "Предпродажная подготовка", href: "/services/pre-sale-preparation" },
-        { name: "Дизайн и ремонт", href: "/services/design-project" },
+        { name: "Дизайн-проект", href: "/services/design-project" },
         { name: "Ремонт", href: "/services/renovation" }
       ]
     },
     {
-      title: "Строительство",
+      title: "Строительство", 
       items: [
         { name: "Строительство", href: "/services/construction" },
         { name: "Проектирование", href: "/services/design" },
@@ -68,10 +68,11 @@ export default function Header() {
       ]
     },
     {
-      title: "Управление",
+      title: "Другое",
       items: [
         { name: "Управление недвижимостью", href: "/services/property-management" },
-        { name: "Комплектация мебелью", href: "/services/furniture-selection" }
+        { name: "Комплектация мебелью", href: "/services/furniture-selection" },
+        { name: "Земля", href: "/land" }
       ]
     }
   ];
