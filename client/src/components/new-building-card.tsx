@@ -18,7 +18,7 @@ export default function NewBuildingCard({ building, className = "" }: NewBuildin
         <img 
           src={building.images?.[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800"} 
           alt={building.name}
-          className="w-full h-48 object-cover" 
+          className="w-full h-40 object-cover" 
         />
         <div className="absolute top-4 left-4">
           <Badge 
@@ -40,22 +40,22 @@ export default function NewBuildingCard({ building, className = "" }: NewBuildin
         )}
       </div>
 
-      <CardContent className="p-6 flex flex-col h-full">
+      <CardContent className="p-4 flex flex-col h-full">
         <div className="flex-1">
-          <h3 className="font-bold text-xl text-text-primary mb-2 line-clamp-2">
+          <h3 className="font-bold text-lg text-text-primary mb-1 line-clamp-2">
             {building.name}
           </h3>
           
-          <div className="flex items-center text-text-secondary mb-3">
+          <div className="flex items-center text-text-secondary mb-2">
             <MapPin className="w-4 h-4 mr-1 text-accent-orange" />
             <span className="text-sm">{building.location}</span>
           </div>
 
-          <p className="text-sm text-text-secondary mb-4 line-clamp-2">
+          <p className="text-sm text-text-secondary mb-3 line-clamp-2">
             {building.description}
           </p>
 
-          <div className="grid grid-cols-2 gap-3 mb-4">
+          <div className="grid grid-cols-2 gap-2 mb-3">
             <div className="bg-neutral-50 rounded-lg p-3">
               <div className="flex items-center mb-1">
                 <Building className="w-4 h-4 mr-1 text-accent-orange" />
