@@ -8,6 +8,7 @@ import SearchForm from "@/components/search-form";
 import PropertyCard from "@/components/property-card";
 import NewBuildingCard from "@/components/new-building-card";
 import ConsultationForm from "@/components/consultation-form";
+import PromotionBanner from "@/components/promotion-banner";
 import useEmblaCarousel from 'embla-carousel-react';
 import { 
   Home as HomeIcon, 
@@ -27,7 +28,7 @@ import {
   CheckCircle,
   Clock
 } from "lucide-react";
-import type { Property, NewBuilding, Service, TeamMember } from "@shared/schema";
+import type { Property, NewBuilding, Service, TeamMember, Promotion } from "@shared/schema";
 
 
 
@@ -46,6 +47,10 @@ export default function Home() {
 
   const { data: team = [] } = useQuery<TeamMember[]>({
     queryKey: ["/api/team"],
+  });
+
+  const { data: promotions = [] } = useQuery<Promotion[]>({
+    queryKey: ["/api/promotions"],
   });
 
   const heroStyle = {

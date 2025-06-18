@@ -193,6 +193,32 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Promotions routes
+  app.get("/api/promotions", async (req, res) => {
+    try {
+      const category = req.query.category as string;
+      const promotions = await storage.getPromotions(category);
+      res.json(promotions);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch promotions" });
+    }
+  });
+
+  app.get("/api/promotions/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const promotion = await storage.getPromotion(id);
+      
+      if (!promotion) {
+        return res.status(404).json({ message: "Promotion not found" });
+      }
+      
+      res.json(promotion);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch promotion" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

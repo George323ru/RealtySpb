@@ -560,7 +560,7 @@ export class MemStorage implements IStorage {
 }
 
 import { db } from "./db";
-import { eq, like, and, gte, lte } from "drizzle-orm";
+import { eq, like, and, gte, lte, or } from "drizzle-orm";
 
 // Commented out MemStorage for database implementation
 // export const storage = new MemStorage();
@@ -717,6 +717,30 @@ export class DatabaseStorage implements IStorage {
       .values(post)
       .returning();
     return newPost;
+  }
+
+  async getPromotions(category?: string): Promise<Promotion[]> {
+    let query = db.select().from(promotions).where(eq(promotions.isActive, true));
+    
+    if (category && category !== "all") {
+      query = query.where(or(eq(promotions.category, category), eq(promotions.category, "all")));
+    }
+    
+    const results = await query;
+    return results.sort((a, b) => b.priority - a.priority);
+  }
+
+  async getPromotion(id: number): Promise<Promotion | undefined> {
+    const [promotion] = await db.select().from(promotions).where(eq(promotions.id, id));
+    return promotion || undefined;
+  }
+
+  async createPromotion(promotion: InsertPromotion): Promise<Promotion> {
+    const [newPromotion] = await db
+      .insert(promotions)
+      .values(promotion)
+      .returning();
+    return newPromotion;
   }
 }
 
