@@ -68,6 +68,7 @@ export class MemStorage implements IStorage {
   private leads: Map<number, Lead>;
   private reviews: Map<number, Review>;
   private blogPosts: Map<number, BlogPost>;
+  private promotions: Map<number, Promotion>;
   private currentId: number;
 
   constructor() {
@@ -79,6 +80,7 @@ export class MemStorage implements IStorage {
     this.leads = new Map();
     this.reviews = new Map();
     this.blogPosts = new Map();
+    this.promotions = new Map();
     this.currentId = 1;
     this.initializeData();
   }
@@ -91,6 +93,7 @@ export class MemStorage implements IStorage {
     this.initializeTeamMembers();
     this.initializeReviews();
     this.initializeBlogPosts();
+    this.initializePromotions();
   }
 
   private initializeProperties() {
@@ -256,6 +259,105 @@ export class MemStorage implements IStorage {
 
     samplePosts.forEach(post => {
       this.blogPosts.set(post.id, post);
+    });
+  }
+
+  private initializePromotions() {
+    const samplePromotions: Promotion[] = [
+      {
+        id: this.currentId++,
+        title: "Скидка 5% на покупку квартиры",
+        description: "При покупке квартиры через наше агентство получите скидку 5% на комиссию. Акция действует до конца месяца.",
+        discountType: "percentage",
+        discountValue: "5%",
+        category: "buy",
+        backgroundColor: "#2563eb",
+        textColor: "#ffffff",
+        buttonText: "Купить со скидкой",
+        priority: 100,
+        isActive: true,
+        validUntil: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000), // 30 days from now
+        createdAt: new Date()
+      },
+      {
+        id: this.currentId++,
+        title: "Бесплатная оценка недвижимости",
+        description: "Профессиональная оценка вашей недвижимости совершенно бесплатно. Узнайте реальную стоимость за 24 часа.",
+        discountType: "special",
+        discountValue: "0₽",
+        category: "sell",
+        backgroundColor: "#059669",
+        textColor: "#ffffff",
+        buttonText: "Получить оценку",
+        priority: 90,
+        isActive: true,
+        validUntil: null,
+        createdAt: new Date()
+      },
+      {
+        id: this.currentId++,
+        title: "Первый месяц аренды в подарок",
+        description: "При аренде квартиры через наше агентство первый месяц аренды за наш счет для новых клиентов.",
+        discountType: "fixed",
+        discountValue: "1 месяц",
+        category: "rent",
+        backgroundColor: "#dc2626",
+        textColor: "#ffffff",
+        buttonText: "Арендовать",
+        priority: 85,
+        isActive: true,
+        validUntil: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000), // 15 days from now
+        createdAt: new Date()
+      },
+      {
+        id: this.currentId++,
+        title: "Скидка на юридические услуги",
+        description: "Получите скидку 15% на все юридические услуги при сделках с недвижимостью.",
+        discountType: "percentage",
+        discountValue: "15%",
+        category: "services",
+        backgroundColor: "#7c3aed",
+        textColor: "#ffffff",
+        buttonText: "Получить скидку",
+        priority: 80,
+        isActive: true,
+        validUntil: new Date(Date.now() + 45 * 24 * 60 * 60 * 1000), // 45 days from now
+        createdAt: new Date()
+      },
+      {
+        id: this.currentId++,
+        title: "Специальное предложение на новостройки",
+        description: "Эксклюзивные условия от застройщиков: скидки до 10% и рассрочка без переплат.",
+        discountType: "percentage",
+        discountValue: "до 10%",
+        category: "new-buildings",
+        backgroundColor: "#ea580c",
+        textColor: "#ffffff",
+        buttonText: "Смотреть предложения",
+        priority: 95,
+        isActive: true,
+        validUntil: new Date(Date.now() + 60 * 24 * 60 * 60 * 1000), // 60 days from now
+        createdAt: new Date()
+      },
+      {
+        id: this.currentId++,
+        title: "Комплексное обслуживание",
+        description: "Полный цикл услуг по недвижимости со скидкой 20% при заказе пакета услуг.",
+        discountType: "percentage",
+        discountValue: "20%",
+        category: "all",
+        backgroundColor: "#0891b2",
+        textColor: "#ffffff",
+        buttonText: "Заказать пакет",
+        priority: 75,
+        isActive: true,
+        validUntil: null,
+        createdAt: new Date()
+      }
+    ];
+
+    samplePromotions.forEach(promotion => {
+      this.promotions.set(promotion.id, promotion);
     });
   }
 
@@ -428,6 +530,32 @@ export class MemStorage implements IStorage {
     };
     this.blogPosts.set(id, newPost);
     return newPost;
+  }
+
+  // Promotion methods
+  async getPromotions(category?: string): Promise<Promotion[]> {
+    let promotions = Array.from(this.promotions.values()).filter(p => p.isActive);
+    
+    if (category && category !== "all") {
+      promotions = promotions.filter(p => p.category === category || p.category === "all");
+    }
+    
+    return promotions.sort((a, b) => b.priority - a.priority);
+  }
+
+  async getPromotion(id: number): Promise<Promotion | undefined> {
+    return this.promotions.get(id);
+  }
+
+  async createPromotion(promotion: InsertPromotion): Promise<Promotion> {
+    const id = this.currentId++;
+    const newPromotion: Promotion = { 
+      ...promotion, 
+      id, 
+      createdAt: new Date() 
+    };
+    this.promotions.set(id, newPromotion);
+    return newPromotion;
   }
 }
 
