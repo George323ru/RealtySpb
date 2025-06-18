@@ -67,16 +67,10 @@ export const SERVICES = [
     color: "green",
   },
   {
-    name: "Услуги по земле и строительству",
-    slug: "land-and-construction",
-    icon: "fas fa-map",
-    color: "yellow",
-  },
-  {
-    name: "Подбор участка",
-    slug: "land-selection",
-    icon: "fas fa-search-location",
-    color: "red",
+    name: "Земля",
+    slug: "land",
+    icon: "fas fa-seedling",
+    color: "green",
   },
   {
     name: "Строительство",

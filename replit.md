@@ -115,6 +115,8 @@ Changelog:
 - June 18, 2025. Unified "Земля" page created combining land services and land selection with comprehensive filters and service descriptions
 - June 18, 2025. Navigation updated to include unified "Земля" section in services dropdown
 - June 18, 2025. Building cards enhanced with compact "Подробнее" buttons (text-sm h-8)
+- June 18, 2025. Removed old separate "Услуги по земле" and "Подбор участка" references from homepage, services, and constants
+- June 18, 2025. Deleted obsolete LandServices.tsx and LandSelection.tsx files - now unified under single /land route
 ```
 
 ## User Preferences
