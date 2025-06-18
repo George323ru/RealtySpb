@@ -27,12 +27,21 @@ const districts = [
 ];
 
 const propertyTypes = [
-  { value: "квартира", label: "Квартира" },
-  { value: "дом", label: "Дом" },
-  { value: "коммерческая", label: "Коммерческая" },
-  { value: "земля", label: "Земля" },
-  { value: "гараж", label: "Гараж" },
-  { value: "машиноместо", label: "Машиноместо" }
+  { value: "apartment", label: "Квартира" },
+  { value: "house", label: "Дом" },
+  { value: "office", label: "Офисное помещение" },
+  { value: "retail", label: "Торговое помещение" },
+  { value: "warehouse", label: "Склад" },
+  { value: "production", label: "Производственное помещение" },
+  { value: "restaurant", label: "Ресторан/Кафе" },
+  { value: "hotel", label: "Гостиница" },
+  { value: "medical", label: "Медицинский центр" },
+  { value: "beauty", label: "Салон красоты" },
+  { value: "fitness", label: "Спортзал/Фитнес" },
+  { value: "auto", label: "Автосервис" },
+  { value: "land", label: "Земля" },
+  { value: "garage", label: "Гараж" },
+  { value: "parking", label: "Машиноместо" }
 ];
 
 export default function SearchForm({ className, onSearch }: SearchFormProps) {

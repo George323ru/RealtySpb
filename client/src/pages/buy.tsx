@@ -16,7 +16,7 @@ export default function Buy() {
   const searchParams = new URLSearchParams(location.split('?')[1] || '');
   
   const [filters, setFilters] = useState({
-    propertyType: searchParams.get('type') || '',
+    propertyType: searchParams.get('propertyType') || searchParams.get('type') || '',
     district: searchParams.get('district') || '',
     priceFrom: searchParams.get('priceFrom') || '',
     priceTo: searchParams.get('priceTo') || '',
@@ -32,12 +32,21 @@ export default function Buy() {
   });
 
   const propertyTypes = [
-    { value: "квартира", label: "Квартиры" },
-    { value: "дом", label: "Дома" },
-    { value: "коммерческая", label: "Коммерческая недвижимость" },
-    { value: "земля", label: "Земельные участки" },
-    { value: "гараж", label: "Гаражи" },
-    { value: "машиноместо", label: "Машиноместа" }
+    { value: "apartment", label: "Квартиры" },
+    { value: "house", label: "Дома" },
+    { value: "office", label: "Офисные помещения" },
+    { value: "retail", label: "Торговые помещения" },
+    { value: "warehouse", label: "Склады" },
+    { value: "production", label: "Производственные помещения" },
+    { value: "restaurant", label: "Рестораны/Кафе" },
+    { value: "hotel", label: "Гостиницы" },
+    { value: "medical", label: "Медицинские центры" },
+    { value: "beauty", label: "Салоны красоты" },
+    { value: "fitness", label: "Спортзалы/Фитнес" },
+    { value: "auto", label: "Автосервисы" },
+    { value: "land", label: "Земельные участки" },
+    { value: "garage", label: "Гаражи" },
+    { value: "parking", label: "Машиноместа" }
   ];
 
   const districts = [

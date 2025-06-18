@@ -32,8 +32,8 @@
   --neutral-100: hsl(0, 0%, 96%);
   --neutral-200: hsl(0, 0%, 93%);
   --neutral-300: hsl(0, 0%, 80%);
-  --text-primary: hsl(0, 0%, 20%);
-  --text-secondary: hsl(0, 0%, 40%);
+  --text-primary: hsl(0, 0%, 10%);
+  --text-secondary: hsl(0, 0%, 25%);
 }
 
 /* Hide scrollbars for horizontal scroll */
