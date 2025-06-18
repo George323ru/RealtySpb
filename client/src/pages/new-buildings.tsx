@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Building, Calendar, ArrowRight, Search, Filter } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
+import NewBuildingCard from "@/components/new-building-card";
 import type { NewBuilding } from "@shared/schema";
 
 export default function NewBuildings() {
@@ -129,79 +130,9 @@ export default function NewBuildings() {
                 </p>
               </Card>
             ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
                 {buildings.map((building) => (
-                  <Card key={building.id} className="overflow-hidden hover:shadow-xl transition-shadow">
-                    <div className="flex flex-col lg:flex-row">
-                      <div className="lg:w-1/2">
-                        <img 
-                          src={building.images?.[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800"} 
-                          alt={building.name}
-                          className="w-full h-64 lg:h-full object-cover" 
-                        />
-                      </div>
-                      <div className="lg:w-1/2 p-8">
-                        <div className="flex items-center mb-4">
-                          <Badge 
-                            className={
-                              building.readiness === "Сдан" 
-                                ? "bg-green-500 text-white" 
-                                : "bg-blue-500 text-white"
-                            }
-                          >
-                            {building.readiness}
-                          </Badge>
-                          <span className="text-sm text-text-secondary ml-3">
-                            {building.developer}
-                          </span>
-                        </div>
-                        
-                        <h3 className="text-2xl font-bold text-text-primary mb-3">
-                          {building.name}
-                        </h3>
-                        
-                        <p className="text-text-secondary mb-4 flex items-center">
-                          <MapPin className="w-4 h-4 mr-1 text-accent-orange" />
-                          {building.location}
-                        </p>
-                        
-                        <div className="grid grid-cols-2 gap-4 mb-6">
-                          <div>
-                            <div className="text-sm text-text-secondary">Квартиры от</div>
-                            <div className="text-xl font-bold text-text-primary">
-                              {formatPrice(building.priceFrom)}
-                            </div>
-                          </div>
-                          <div>
-                            <div className="text-sm text-text-secondary">За м²</div>
-                            <div className="text-xl font-bold text-text-primary">
-                              {building.pricePerMeter ? `от ${formatPrice(building.pricePerMeter)}` : "—"}
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center justify-between text-sm text-text-secondary mb-6">
-                          <span className="flex items-center">
-                            <Building className="w-4 h-4 mr-1" />
-                            {building.totalFlats} квартир
-                          </span>
-                          {building.completionYear && (
-                            <span className="flex items-center">
-                              <Calendar className="w-4 h-4 mr-1" />
-                              {building.completionYear} год
-                            </span>
-                          )}
-                        </div>
-                        
-                        <Link href={`/new-buildings/${building.id}`}>
-                          <Button className="w-full bg-blue-500 text-white hover:bg-blue-600">
-                            Посмотреть планировки
-                            <ArrowRight className="w-4 h-4 ml-2" />
-                          </Button>
-                        </Link>
-                      </div>
-                    </div>
-                  </Card>
+                  <NewBuildingCard key={building.id} building={building} />
                 ))}
               </div>
             )}
