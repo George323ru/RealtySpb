@@ -56,43 +56,43 @@ export default function NewBuildingCard({ building, className = "" }: NewBuildin
           </p>
 
           <div className="grid grid-cols-2 gap-2 mb-3">
-            <div className="bg-neutral-50 rounded-lg p-3">
+            <div className="bg-neutral-50 rounded-lg p-2">
               <div className="flex items-center mb-1">
-                <Building className="w-4 h-4 mr-1 text-accent-orange" />
+                <Building className="w-3 h-3 mr-1 text-accent-orange" />
                 <span className="text-xs text-text-secondary">Застройщик</span>
               </div>
-              <p className="font-medium text-sm text-text-primary">{building.developer}</p>
+              <p className="font-medium text-xs text-text-primary">{building.developer}</p>
             </div>
             
-            <div className="bg-neutral-50 rounded-lg p-3">
+            <div className="bg-neutral-50 rounded-lg p-2">
               <div className="flex items-center mb-1">
-                <Calendar className="w-4 h-4 mr-1 text-accent-orange" />
+                <Calendar className="w-3 h-3 mr-1 text-accent-orange" />
                 <span className="text-xs text-text-secondary">Срок сдачи</span>
               </div>
-              <p className="font-medium text-sm text-text-primary">
+              <p className="font-medium text-xs text-text-primary">
                 {building.completionYear || "Уточняется"}
               </p>
             </div>
           </div>
 
           {building.features && building.features.length > 0 && (
-            <div className="mb-4">
+            <div className="mb-2">
               <div className="flex flex-wrap gap-1">
-                {building.features.slice(0, 3).map((feature, index) => (
-                  <Badge key={index} variant="outline" className="text-xs">
+                {building.features.slice(0, 2).map((feature, index) => (
+                  <Badge key={index} variant="outline" className="text-xs px-2 py-0">
                     {feature}
                   </Badge>
                 ))}
-                {building.features.length > 3 && (
-                  <Badge variant="outline" className="text-xs">
-                    +{building.features.length - 3}
+                {building.features.length > 2 && (
+                  <Badge variant="outline" className="text-xs px-2 py-0">
+                    +{building.features.length - 2}
                   </Badge>
                 )}
               </div>
             </div>
           )}
 
-          <div className="border-t border-neutral-100 pt-4 mb-4">
+          <div className="border-t border-neutral-100 pt-3 mb-3">
             <div className="flex justify-between items-center">
               <div>
                 <p className="text-xs text-text-secondary">Цена от</p>

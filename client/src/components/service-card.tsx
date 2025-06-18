@@ -8,6 +8,16 @@ interface ServiceCardProps {
   className?: string;
 }
 
+// Related services mapping
+const relatedServicesMap: Record<string, string[]> = {
+  "Предпродажная подготовка": ["Дизайн-проект", "Фотосъемка", "Юридическая проверка"],
+  "Юридическое сопровождение": ["Регистрация права", "Проверка документов", "Нотариальные услуги"],
+  "Оценка недвижимости": ["Анализ рынка", "Техническая экспертиза", "Страхование"],
+  "Ипотечное консультирование": ["Подбор банка", "Помощь с документами", "Страхование жизни"],
+  "Управление инвестициями": ["Анализ доходности", "Налоговое планирование", "Мониторинг рынка"],
+  "Коммерческая недвижимость": ["Бизнес-план", "Лицензирование", "Арендные отношения"]
+};
+
 const ServiceCard = ({ service, className = "" }: ServiceCardProps) => {
   const getIconColorClass = (serviceId: number) => {
     const colors = [
@@ -22,6 +32,8 @@ const ServiceCard = ({ service, className = "" }: ServiceCardProps) => {
     ];
     return colors[serviceId % colors.length];
   };
+
+  const relatedServices = relatedServicesMap[service.name] || [];
 
   return (
     <Card className={`hover:shadow-lg transition-shadow border border-neutral-200 h-full ${className}`}>
@@ -53,6 +65,19 @@ const ServiceCard = ({ service, className = "" }: ServiceCardProps) => {
                   {feature}
                 </div>
               ))}
+            </div>
+          )}
+
+          {relatedServices.length > 0 && (
+            <div className="border-t border-neutral-100 pt-3 mt-3">
+              <p className="text-xs text-text-secondary mb-2">Дополнительные услуги:</p>
+              <div className="space-y-1">
+                {relatedServices.map((relatedService, index) => (
+                  <div key={index} className="text-xs text-text-secondary">
+                    • {relatedService}
+                  </div>
+                ))}
+              </div>
             </div>
           )}
           

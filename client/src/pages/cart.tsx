@@ -2,134 +2,303 @@ import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Trash2, Download, Share2, Heart } from "lucide-react";
-import { useCart } from "@/components/CartProvider";
-import PropertyCard from "@/components/property-card";
-import ConsultationForm from "@/components/consultation-form";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { Trash2, Download, Eye, MapPin, Home, Building } from "lucide-react";
+import { formatPrice } from "@/lib/utils";
+
+interface CartItem {
+  id: string;
+  type: 'property' | 'newBuilding';
+  title: string;
+  price: number;
+  location: string;
+  image: string;
+  details: string;
+  addedAt: Date;
+}
+
+// Mock cart data - in real app this would come from context/state
+const mockCartItems: CartItem[] = [
+  {
+    id: "1",
+    type: "property",
+    title: "3-комнатная квартира в центре",
+    price: 12500000,
+    location: "Центральный район",
+    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=300",
+    details: "120 м², 5 этаж, евроремонт",
+    addedAt: new Date()
+  },
+  {
+    id: "2", 
+    type: "newBuilding",
+    title: "ЖК Северный Парк",
+    price: 8900000,
+    location: "Приморский район",
+    image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=300",
+    details: "85 м², 12 этаж, сдача в 2025",
+    addedAt: new Date()
+  }
+];
 
 export default function Cart() {
-  const { items, removeFromCart, clearCart, getTotalItems } = useCart();
-  const [showForm, setShowForm] = useState(false);
+  const [cartItems, setCartItems] = useState<CartItem[]>(mockCartItems);
+  const [clientInfo, setClientInfo] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    notes: ""
+  });
 
-  const handleExportPDF = () => {
-    // PDF export functionality would be implemented here
-    alert("Функция экспорта в PDF будет добавлена");
+  const removeItem = (id: string) => {
+    setCartItems(items => items.filter(item => item.id !== id));
   };
 
-  const handleShare = () => {
-    // Share functionality would be implemented here
-    alert("Функция поделиться будет добавлена");
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
+  const generatePDF = () => {
+    // In real app, this would generate actual PDF
+    alert("PDF-подборка будет сгенерирована");
+  };
+
+  const sendToEmail = () => {
+    // In real app, this would send email
+    alert("Подборка отправлена на email");
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background-light to-background-secondary">
-      {/* Hero Section */}
-      <div className="bg-gradient-to-r from-accent-orange to-orange-600 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Избранное
-            </h1>
-            <p className="text-xl lg:text-2xl mb-8 text-orange-100">
-              Ваш список сохраненных объектов недвижимости
-            </p>
-            <div className="flex items-center justify-center space-x-8 text-orange-100">
-              <div className="flex items-center space-x-2">
-                <Heart className="h-6 w-6" />
-                <span>{getTotalItems()} объектов</span>
-              </div>
+    <div className="min-h-screen bg-neutral-50">
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            Избранные объекты
+          </h1>
+          <p className="text-lg text-text-secondary">
+            Ваша персональная подборка недвижимости
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Cart Items */}
+          <div className="lg:col-span-2">
+            {cartItems.length === 0 ? (
+              <Card>
+                <CardContent className="p-8 text-center">
+                  <Home className="w-16 h-16 text-text-secondary mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">
+                    Подборка пуста
+                  </h3>
+                  <p className="text-text-secondary mb-4">
+                    Добавьте интересующие объекты для создания персональной подборки
+                  </p>
+                  <Button asChild>
+                    <a href="/buy" className="bg-accent-orange hover:bg-orange-600 text-white">
+                      Найти недвижимость
+                    </a>
+                  </Button>
+                </CardContent>
+              </Card>
+            ) : (
+              <>
+                <div className="flex justify-between items-center mb-4">
+                  <p className="text-text-secondary">
+                    Объектов в подборке: <span className="font-semibold">{cartItems.length}</span>
+                  </p>
+                  <Button
+                    onClick={clearCart}
+                    variant="outline"
+                    size="sm"
+                    className="text-red-600 hover:text-red-700"
+                  >
+                    <Trash2 className="w-4 h-4 mr-2" />
+                    Очистить все
+                  </Button>
+                </div>
+
+                <div className="space-y-4">
+                  {cartItems.map(item => (
+                    <Card key={item.id} className="hover:shadow-md transition-shadow">
+                      <CardContent className="p-4">
+                        <div className="flex gap-4">
+                          <img
+                            src={item.image}
+                            alt={item.title}
+                            className="w-24 h-24 object-cover rounded-lg flex-shrink-0"
+                          />
+                          
+                          <div className="flex-1">
+                            <div className="flex justify-between items-start mb-2">
+                              <h3 className="font-semibold text-text-primary">
+                                {item.title}
+                              </h3>
+                              <Button
+                                onClick={() => removeItem(item.id)}
+                                variant="ghost"
+                                size="sm"
+                                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                              >
+                                <Trash2 className="w-4 h-4" />
+                              </Button>
+                            </div>
+                            
+                            <div className="flex items-center text-text-secondary text-sm mb-2">
+                              <MapPin className="w-4 h-4 mr-1 text-accent-orange" />
+                              {item.location}
+                            </div>
+                            
+                            <p className="text-sm text-text-secondary mb-2">
+                              {item.details}
+                            </p>
+                            
+                            <div className="flex justify-between items-center">
+                              <p className="font-bold text-lg text-accent-orange">
+                                {formatPrice(item.price)}
+                              </p>
+                              
+                              <Badge variant="outline">
+                                {item.type === 'property' ? 'Вторичка' : 'Новостройка'}
+                              </Badge>
+                            </div>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+
+          {/* Actions Panel */}
+          <div className="lg:col-span-1">
+            <div className="space-y-6">
+              {/* Export Actions */}
+              {cartItems.length > 0 && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Экспорт подборки</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <Button
+                      onClick={generatePDF}
+                      className="w-full bg-accent-orange hover:bg-orange-600 text-white"
+                    >
+                      <Download className="w-4 h-4 mr-2" />
+                      Скачать PDF
+                    </Button>
+                    
+                    <Button
+                      onClick={sendToEmail}
+                      variant="outline"
+                      className="w-full"
+                    >
+                      <Eye className="w-4 h-4 mr-2" />
+                      Отправить на email
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Contact Form */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Консультация</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div>
+                    <Label htmlFor="name">Имя *</Label>
+                    <Input
+                      id="name"
+                      placeholder="Ваше имя"
+                      value={clientInfo.name}
+                      onChange={(e) => setClientInfo(prev => ({...prev, name: e.target.value}))}
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="phone">Телефон *</Label>
+                    <Input
+                      id="phone"
+                      placeholder="+7 (999) 999-99-99"
+                      value={clientInfo.phone}
+                      onChange={(e) => setClientInfo(prev => ({...prev, phone: e.target.value}))}
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="your@email.com"
+                      value={clientInfo.email}
+                      onChange={(e) => setClientInfo(prev => ({...prev, email: e.target.value}))}
+                    />
+                  </div>
+
+                  <div>
+                    <Label htmlFor="notes">Комментарий</Label>
+                    <Textarea
+                      id="notes"
+                      placeholder="Дополнительные пожелания..."
+                      value={clientInfo.notes}
+                      onChange={(e) => setClientInfo(prev => ({...prev, notes: e.target.value}))}
+                      rows={3}
+                    />
+                  </div>
+
+                  <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white">
+                    Получить консультацию
+                  </Button>
+                  
+                  <p className="text-xs text-text-secondary text-center">
+                    Наш специалист свяжется с вами в течение 30 минут
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Statistics */}
+              {cartItems.length > 0 && (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-lg">Статистика</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-text-secondary">Средняя цена:</span>
+                      <span className="font-medium">
+                        {formatPrice(cartItems.reduce((sum, item) => sum + item.price, 0) / cartItems.length)}
+                      </span>
+                    </div>
+                    
+                    <div className="flex justify-between text-sm">
+                      <span className="text-text-secondary">Всего объектов:</span>
+                      <span className="font-medium">{cartItems.length}</span>
+                    </div>
+                    
+                    <div className="flex justify-between text-sm">
+                      <span className="text-text-secondary">Новостройки:</span>
+                      <span className="font-medium">
+                        {cartItems.filter(item => item.type === 'newBuilding').length}
+                      </span>
+                    </div>
+                    
+                    <div className="flex justify-between text-sm">
+                      <span className="text-text-secondary">Вторичка:</span>
+                      <span className="font-medium">
+                        {cartItems.filter(item => item.type === 'property').length}
+                      </span>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           </div>
         </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-16">
-        {items.length === 0 ? (
-          <div className="text-center py-16">
-            <Heart className="h-24 w-24 text-gray-300 mx-auto mb-8" />
-            <h2 className="text-3xl font-bold text-text-primary mb-4">
-              Список пуст
-            </h2>
-            <p className="text-text-secondary mb-8 max-w-2xl mx-auto">
-              Добавьте понравившиеся объекты в избранное, чтобы легко к ним вернуться
-            </p>
-            <Button asChild className="bg-accent-orange text-white hover:bg-orange-600">
-              <a href="/buy">Посмотреть объекты</a>
-            </Button>
-          </div>
-        ) : (
-          <>
-            {/* Actions Bar */}
-            <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-              <div>
-                <h2 className="text-2xl font-bold text-text-primary">
-                  Избранные объекты ({getTotalItems()})
-                </h2>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  onClick={handleExportPDF}
-                  variant="outline"
-                  className="flex items-center space-x-2"
-                >
-                  <Download className="h-4 w-4" />
-                  <span>Экспорт в PDF</span>
-                </Button>
-                <Button
-                  onClick={handleShare}
-                  variant="outline"
-                  className="flex items-center space-x-2"
-                >
-                  <Share2 className="h-4 w-4" />
-                  <span>Поделиться</span>
-                </Button>
-                <Button
-                  onClick={clearCart}
-                  variant="outline"
-                  className="flex items-center space-x-2 text-red-600 hover:text-red-700"
-                >
-                  <Trash2 className="h-4 w-4" />
-                  <span>Очистить все</span>
-                </Button>
-              </div>
-            </div>
-
-            {/* Properties List */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {items.map((item) => (
-                <div key={item.id} className="relative">
-                  <PropertyCard property={item.data} />
-                  <Button
-                    onClick={() => removeFromCart(item.id)}
-                    size="sm"
-                    variant="outline"
-                    className="absolute top-4 right-4 bg-white/90 hover:bg-white"
-                  >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                  <Badge className="absolute top-4 left-4 bg-accent-orange text-white">
-                    {item.type === 'property' ? 'Объект' : 'Новостройка'}
-                  </Badge>
-                </div>
-              ))}
-            </div>
-
-            {/* Consultation Form */}
-            <Card className="max-w-2xl mx-auto">
-              <CardHeader>
-                <CardTitle className="text-center text-2xl">
-                  Получить консультацию по выбранным объектам
-                </CardTitle>
-                <p className="text-center text-text-secondary">
-                  Наш специалист поможет вам с выбором и организует просмотры
-                </p>
-              </CardHeader>
-              <CardContent>
-                <ConsultationForm defaultService="Консультация по избранным объектам" />
-              </CardContent>
-            </Card>
-          </>
-        )}
       </div>
     </div>
   );
