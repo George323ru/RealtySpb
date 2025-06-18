@@ -110,6 +110,22 @@ export const blogPosts = pgTable("blog_posts", {
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
+export const promotions = pgTable("promotions", {
+  id: serial("id").primaryKey(),
+  title: text("title").notNull(),
+  description: text("description").notNull(),
+  discountType: text("discount_type").notNull(), // percentage, fixed, special
+  discountValue: text("discount_value"), // "15%", "50000₽", "Бесплатно"
+  validUntil: timestamp("valid_until"),
+  category: text("category").notNull(), // buy, sell, rent, services, newbuildings, all
+  isActive: boolean("is_active").default(true).notNull(),
+  priority: integer("priority").default(0).notNull(), // higher = more important
+  backgroundColor: text("background_color").default("#f97316").notNull(),
+  textColor: text("text_color").default("#ffffff").notNull(),
+  buttonText: text("button_text").default("Получить скидку").notNull(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
 // Insert schemas
 export const insertPropertySchema = createInsertSchema(properties).omit({
   id: true,
@@ -149,6 +165,11 @@ export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
   updatedAt: true,
 });
 
+export const insertPromotionSchema = createInsertSchema(promotions).omit({
+  id: true,
+  createdAt: true,
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -178,3 +199,6 @@ export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
 
 export type User = typeof users.$inferSelect;
 export type InsertUser = z.infer<typeof insertUserSchema>;
+
+export type Promotion = typeof promotions.$inferSelect;
+export type InsertPromotion = z.infer<typeof insertPromotionSchema>;

@@ -1,9 +1,10 @@
 import { 
-  users, properties, newBuildings, services, teamMembers, leads, reviews, blogPosts,
+  users, properties, newBuildings, services, teamMembers, leads, reviews, blogPosts, promotions,
   type User, type InsertUser, type Property, type InsertProperty,
   type NewBuilding, type InsertNewBuilding, type Service, type InsertService,
   type TeamMember, type InsertTeamMember, type Lead, type InsertLead,
-  type Review, type InsertReview, type BlogPost, type InsertBlogPost
+  type Review, type InsertReview, type BlogPost, type InsertBlogPost,
+  type Promotion, type InsertPromotion
 } from "@shared/schema";
 
 export interface IStorage {
@@ -51,6 +52,11 @@ export interface IStorage {
   getBlogPosts(): Promise<BlogPost[]>;
   getBlogPost(slug: string): Promise<BlogPost | undefined>;
   createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
+
+  // Promotions
+  getPromotions(category?: string): Promise<Promotion[]>;
+  getPromotion(id: number): Promise<Promotion | undefined>;
+  createPromotion(promotion: InsertPromotion): Promise<Promotion>;
 }
 
 export class MemStorage implements IStorage {
