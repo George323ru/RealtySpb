@@ -52,22 +52,13 @@ export default function Header() {
     {
       name: "Услуги",
       href: "/services",
-      megaMenu: {
-        services: [
-          { name: "Предпродажная подготовка", href: "/services/pre-sale-preparation" },
-          { name: "Дизайн-проект", href: "/services/design-project" },
-          { name: "Ремонт под ключ", href: "/services/renovation" },
-          { name: "Строительство домов", href: "/services/construction" },
-          { name: "Проектирование", href: "/services/design" },
-          { name: "Инженерные системы", href: "/services/engineering-systems" },
-          { name: "Ландшафтный дизайн", href: "/services/landscape-design" },
-          { name: "Юридическая проверка", href: "/services/legal-check" },
-          { name: "Сопровождение сделки", href: "/services/transaction-support" },
-          { name: "Управление недвижимостью", href: "/services/property-management" },
-          { name: "Комплектация мебелью", href: "/services/furniture-selection" },
-          { name: "Земельные участки", href: "/land" },
-        ]
-      }
+      dropdown: [
+        { name: "Предпродажная подготовка", href: "/services/1" },
+        { name: "Дизайн и ремонт", href: "/services/2" },
+        { name: "Земля", href: "/land" },
+        { name: "Юридическое сопровождение", href: "/services/5" },
+        { name: "Все услуги", href: "/services" },
+      ]
     },
     { name: "Специалисты", href: "/realtor-constructor", icon: "Users" },
     { name: "Блог", href: "/blog", icon: "BookOpen" },
@@ -144,63 +135,37 @@ export default function Header() {
                     {(item.dropdown || item.megaMenu) && <ChevronDown className="ml-1 w-3 h-3" />}
                   </Link>
                   
-                  {/* Mega Menu */}
+                  {/* Mega Menu for "Купить" */}
                   {item.megaMenu && (
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-xl mt-2 py-6 w-[700px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-neutral-200">
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-xl mt-2 py-6 w-[600px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-neutral-200">
                       <div className="px-6">
-                        {/* Services Grid for "Услуги" */}
-                        {item.megaMenu.services ? (
-                          <div>
-                            <div className="grid grid-cols-4 gap-2 mb-4">
-                              {item.megaMenu.services.map((service) => (
-                                <Link
-                                  key={service.name}
-                                  href={service.href}
-                                  className="block px-2 py-2 text-xs text-gray-700 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors whitespace-nowrap"
-                                >
-                                  {service.name}
-                                </Link>
-                              ))}
-                            </div>
-                            <div className="border-t border-gray-200 pt-3">
-                              <Link
-                                href="/services"
-                                className="block px-3 py-2 text-sm text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded transition-colors font-medium text-center"
-                              >
-                                Все услуги →
-                              </Link>
-                            </div>
-                          </div>
-                        ) : (
-                          /* Regular sections for other menus */
-                          <div className="grid grid-cols-3 gap-6">
-                            {item.megaMenu.sections?.map((section, idx) => (
-                              <div key={idx}>
-                                <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">
-                                  {section.title}
-                                </h4>
-                                <div className="space-y-2">
-                                  {section.links.map((link) => (
-                                    <Link
-                                      key={link.name}
-                                      href={link.href}
-                                      className="block group/item"
-                                    >
-                                      <div className="px-3 py-2 rounded-lg hover:bg-orange-50 transition-colors">
-                                        <div className="font-medium text-text-primary group-hover/item:text-accent-orange text-sm">
-                                          {link.name}
-                                        </div>
-                                        <div className="text-xs text-text-secondary mt-1">
-                                          {link.desc}
-                                        </div>
+                        <div className="grid grid-cols-3 gap-6">
+                          {item.megaMenu.sections.map((section, idx) => (
+                            <div key={idx}>
+                              <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">
+                                {section.title}
+                              </h4>
+                              <div className="space-y-2">
+                                {section.links.map((link) => (
+                                  <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    className="block group/item"
+                                  >
+                                    <div className="px-3 py-2 rounded-lg hover:bg-orange-50 transition-colors">
+                                      <div className="font-medium text-text-primary group-hover/item:text-accent-orange text-sm">
+                                        {link.name}
                                       </div>
-                                    </Link>
-                                  ))}
-                                </div>
+                                      <div className="text-xs text-text-secondary mt-1">
+                                        {link.desc}
+                                      </div>
+                                    </div>
+                                  </Link>
+                                ))}
                               </div>
-                            ))}
-                          </div>
-                        )}
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   )}
@@ -288,21 +253,7 @@ export default function Header() {
                             {item.name}
                           </Link>
                           
-                          {/* Mobile Services or Dropdown */}
-                          {item.megaMenu?.services && (
-                            <div className="ml-7 mt-1 space-y-1">
-                              {item.megaMenu.services.map((service) => (
-                                <Link
-                                  key={service.name}
-                                  href={service.href}
-                                  onClick={() => setIsMenuOpen(false)}
-                                  className="block px-3 py-2 text-xs text-text-secondary hover:text-accent-orange hover:bg-orange-50 rounded-lg transition-colors"
-                                >
-                                  {service.name}
-                                </Link>
-                              ))}
-                            </div>
-                          )}
+                          {/* Mobile Dropdown */}
                           {item.dropdown && (
                             <div className="ml-7 mt-1 space-y-1">
                               {item.dropdown.map((dropdownItem) => (
