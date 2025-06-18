@@ -26,6 +26,7 @@ import Cart from "@/pages/cart";
 import RealtorConstructor from "@/pages/realtor-constructor";
 import Land from "@/pages/land";
 import Calculator from "@/pages/calculator";
+import ServiceLanding from "@/pages/services/service-landing";
 
 function Router() {
   return (
@@ -39,6 +40,7 @@ function Router() {
       <Route path="/property/:id" component={PropertyDetail} />
       <Route path="/services" component={Services} />
       <Route path="/services/:id" component={ServiceDetail} />
+      <Route path="/services/:slug" component={ServiceLanding} />
       <Route path="/land" component={Land} />
       <Route path="/about" component={About} />
       <Route path="/team" component={RealtorConstructor} />

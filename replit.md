@@ -126,6 +126,9 @@ Changelog:
 - June 18, 2025. Simplified new building cards to match other interface elements with clean, unified design
 - June 18, 2025. Enhanced property carousel navigation with visible buttons, hover effects, and clear scroll indicators
 - June 18, 2025. Updated property types to focus on commercial real estate - removed residential types, kept only business premises
+- June 18, 2025. Created individual service landing pages - each service now has dedicated landing page with detailed information, benefits, process steps, and conversion forms
+- June 18, 2025. Updated navigation menu - replaced general "Услуги" with specific service buttons for direct access to individual service pages
+- June 18, 2025. All 12 services now available in header navigation with shortened names for space efficiency
 ```
 
 ## User Preferences
