@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
+import { Checkbox } from "@/components/ui/checkbox";
 import ConsultationForm from "@/components/consultation-form";
 import { User, Award, Clock, MapPin, Star, Phone } from "lucide-react";
 
@@ -49,6 +50,56 @@ const mockRealtors: RealtorProfile[] = [
     rating: 4.7,
     description: "Молодой и энергичный специалист. Отлично разбираюсь в новостройках и помогаю с арендой жилья.",
     avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150"
+  },
+  {
+    id: "4",
+    gender: "Мужчина",
+    age: 38,
+    experience: 12,
+    services: ["Покупка", "Новостройки", "Ипотека"],
+    rating: 4.6,
+    description: "Помогаю семьям найти квартиры в новостройках. Специализируюсь на работе с ипотечными программами.",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150"
+  },
+  {
+    id: "5",
+    gender: "Женщина",
+    age: 41,
+    experience: 18,
+    services: ["Продажа", "Коммерческая", "Консультации"],
+    rating: 4.9,
+    description: "Старший риэлтор с большим опытом. Работаю с элитной недвижимостью и коммерческими объектами.",
+    avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150"
+  },
+  {
+    id: "6",
+    gender: "Мужчина",
+    age: 29,
+    experience: 4,
+    services: ["Аренда", "Сопровождение", "Консультации"],
+    rating: 4.5,
+    description: "Специализируюсь на аренде жилья и полном сопровождении сделок. Быстро решаю любые вопросы.",
+    avatar: "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=150"
+  },
+  {
+    id: "7",
+    gender: "Женщина",
+    age: 35,
+    experience: 10,
+    services: ["Покупка", "Продажа", "Инвестиции"],
+    rating: 4.8,
+    description: "Помогаю клиентам принимать взвешенные решения при покупке и продаже недвижимости как инвестиции.",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150"
+  },
+  {
+    id: "8",
+    gender: "Мужчина",
+    age: 52,
+    experience: 20,
+    services: ["Коммерческая", "Инвестиции", "Консультации"],
+    rating: 5.0,
+    description: "Ведущий эксперт по коммерческой недвижимости. Помогаю крупным инвесторам и девелоперам.",
+    avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150"
   }
 ];
 
@@ -162,14 +213,12 @@ export default function RealtorConstructor() {
                   <div className="space-y-2">
                     {serviceOptions.map(service => (
                       <div key={service} className="flex items-center space-x-2">
-                        <input
-                          type="checkbox"
+                        <Checkbox
                           id={service}
                           checked={filters.services.includes(service)}
-                          onChange={() => handleServiceToggle(service)}
-                          className="rounded"
+                          onCheckedChange={() => handleServiceToggle(service)}
                         />
-                        <Label htmlFor={service} className="text-sm">{service}</Label>
+                        <Label htmlFor={service} className="text-sm cursor-pointer">{service}</Label>
                       </div>
                     ))}
                   </div>
