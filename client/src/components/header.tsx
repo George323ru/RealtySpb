@@ -98,31 +98,31 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-2">
             {navigation.map((item) => (
               <div key={item.name} className="relative group">
                 <Link
                   href={item.href}
                   className={cn(
-                    "flex items-center py-2 font-medium transition-colors",
+                    "flex items-center px-3 py-2 text-sm font-medium rounded-md transition-colors whitespace-nowrap",
                     location === item.href
-                      ? "text-accent-orange"
-                      : "text-text-primary hover:text-accent-orange"
+                      ? "text-accent-orange bg-orange-50"
+                      : "text-text-primary hover:text-accent-orange hover:bg-neutral-50"
                   )}
                 >
                   {item.name}
-                  {item.dropdown && <ChevronDown className="ml-1 w-4 h-4" />}
+                  {item.dropdown && <ChevronDown className="ml-1 w-3 h-3" />}
                 </Link>
                 
                 {item.dropdown && (
-                  <div className="absolute top-full left-0 bg-white shadow-lg rounded-lg mt-2 py-4 w-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                    <div className="px-6 py-2">
-                      <div className="grid grid-cols-2 gap-2">
+                  <div className="absolute top-full left-0 bg-white shadow-xl rounded-lg mt-1 py-2 w-72 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-neutral-200">
+                    <div className="px-4 py-2">
+                      <div className="grid grid-cols-1 gap-1">
                         {item.dropdown.map((dropdownItem) => (
                           <Link
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className="block py-2 text-sm text-text-secondary hover:text-accent-orange transition-colors"
+                            className="block px-3 py-2 text-sm text-text-secondary hover:text-accent-orange hover:bg-orange-50 rounded-md transition-colors"
                           >
                             {dropdownItem.name}
                           </Link>
@@ -136,10 +136,10 @@ export default function Header() {
           </div>
 
           {/* Cart and CTA Buttons - Desktop */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="hidden lg:flex items-center space-x-3">
             <Link href="/cart" className="relative">
-              <Button variant="outline" size="icon" className="relative">
-                <ShoppingCart className="h-5 w-5" />
+              <Button variant="outline" size="sm" className="relative">
+                <ShoppingCart className="h-4 w-4" />
                 {getTotalItems() > 0 && (
                   <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-orange-500 text-white text-xs">
                     {getTotalItems()}
@@ -148,7 +148,7 @@ export default function Header() {
               </Button>
             </Link>
             <Link href="/contacts">
-              <Button className="bg-accent-orange hover:bg-orange-600 text-white">
+              <Button size="sm" className="bg-accent-orange hover:bg-orange-600 text-white whitespace-nowrap">
                 Оценить недвижимость
               </Button>
             </Link>

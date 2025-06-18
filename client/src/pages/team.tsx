@@ -78,8 +78,8 @@ export default function Team() {
   }
 
   const TeamMemberCard = ({ member }: { member: TeamMember }) => (
-    <Card className="text-center group hover:shadow-lg transition-all duration-300">
-      <CardContent className="p-8">
+    <Card className="text-center group hover:shadow-lg transition-all duration-300 h-full">
+      <CardContent className="p-8 h-full flex flex-col">
         <div className="relative mb-6">
           <img 
             src={member.photo} 
@@ -91,7 +91,7 @@ export default function Team() {
         
         <h3 className="text-xl font-semibold text-text-primary mb-2">{member.name}</h3>
         <p className="text-accent-orange font-medium mb-2">{member.position}</p>
-        <p className="text-sm text-text-secondary mb-4">{member.experience}</p>
+        <p className="text-sm text-text-secondary mb-4 flex-1">{member.experience}</p>
         
         {member.specialization && member.specialization.length > 0 && (
           <div className="mb-6">
@@ -105,7 +105,7 @@ export default function Team() {
           </div>
         )}
         
-        <div className="flex justify-center space-x-2">
+        <div className="flex justify-center space-x-2 mt-auto">
           {member.phone && (
             <Button
               size="sm"

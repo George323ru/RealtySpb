@@ -209,7 +209,7 @@ export default function Blog() {
               <>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {filteredPosts.map((post) => (
-                    <Card key={post.id} className="group hover:shadow-xl transition-shadow">
+                    <Card key={post.id} className="group hover:shadow-xl transition-shadow h-full flex flex-col">
                       <div className="relative">
                         <img
                           src={post.image || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400"}
@@ -223,11 +223,11 @@ export default function Blog() {
                         </div>
                       </div>
                       
-                      <CardContent className="p-6">
+                      <CardContent className="p-6 flex flex-col flex-1">
                         <h3 className="text-xl font-semibold text-text-primary mb-2 line-clamp-2">
                           {post.title}
                         </h3>
-                        <p className="text-text-secondary mb-4 text-sm leading-relaxed">
+                        <p className="text-text-secondary mb-4 text-sm leading-relaxed flex-1">
                           {truncateText(post.excerpt, 120)}
                         </p>
                         
@@ -239,7 +239,7 @@ export default function Blog() {
                         </div>
                         
                         {post.tags && post.tags.length > 0 && (
-                          <div className="flex flex-wrap gap-1 mb-4">
+                          <div className="flex flex-wrap gap-1 mb-4 min-h-[28px]">
                             {post.tags.slice(0, 3).map((tag, index) => (
                               <Badge key={index} variant="outline" className="text-xs">
                                 {tag}
@@ -248,7 +248,7 @@ export default function Blog() {
                           </div>
                         )}
                         
-                        <Link href={`/blog/${post.slug}`}>
+                        <Link href={`/blog/${post.slug}`} className="mt-auto">
                           <Button 
                             variant="ghost" 
                             className="w-full text-accent-orange hover:text-orange-600 hover:bg-orange-50"

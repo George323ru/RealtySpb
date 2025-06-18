@@ -185,16 +185,16 @@ export default function Services() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {serviceCategories.map((category, index) => (
-                <Card key={index} className={`${category.color} hover:shadow-lg transition-all duration-300 cursor-pointer`}>
-                  <CardContent className="p-8 text-center">
+                <Card key={index} className={`${category.color} hover:shadow-lg transition-all duration-300 cursor-pointer h-full`}>
+                  <CardContent className="p-8 text-center h-full flex flex-col">
                     <div className="text-4xl mb-4">{category.icon}</div>
                     <h3 className="text-xl font-semibold text-text-primary mb-3">
                       {category.title}
                     </h3>
-                    <p className="text-text-secondary text-sm mb-4">
+                    <p className="text-text-secondary text-sm mb-4 flex-1">
                       {category.description}
                     </p>
-                    <Button variant="ghost" className="text-accent-orange font-medium">
+                    <Button variant="ghost" className="text-accent-orange font-medium mt-auto">
                       Подробнее →
                     </Button>
                   </CardContent>

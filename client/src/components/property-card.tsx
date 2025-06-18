@@ -26,7 +26,7 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
   };
 
   return (
-    <Card className={`group hover:shadow-xl transition-shadow duration-300 ${className || ''}`}>
+    <Card className={`group hover:shadow-xl transition-shadow duration-300 h-full flex flex-col ${className || ''}`}>
       <div className="relative">
         <img
           src={mainImage}
@@ -45,7 +45,7 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
         </button>
       </div>
       
-      <CardContent className="p-6">
+      <CardContent className="p-6 flex flex-col flex-1">
         <div className="flex items-center justify-between mb-3">
           <span className="text-2xl font-bold text-text-primary">
             {formatPrice(property.price)}
@@ -61,7 +61,7 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
           {property.title}
         </h3>
         
-        <p className="text-text-secondary mb-4 flex items-center">
+        <p className="text-text-secondary mb-4 flex items-center flex-1">
           <MapPin className="w-4 h-4 mr-1 text-accent-orange" />
           {property.district}, {property.address}
         </p>
@@ -74,7 +74,7 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
           <span>{formatArea(property.area)}</span>
         </div>
         
-        <Link href={`/property/${property.id}`}>
+        <Link href={`/property/${property.id}`} className="mt-auto">
           <Button className="w-full bg-accent-orange text-white hover:bg-orange-600">
             Подробнее
           </Button>
