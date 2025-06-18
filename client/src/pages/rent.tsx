@@ -47,7 +47,11 @@ export default function Rent() {
 
   const mutation = useMutation({
     mutationFn: async (data: RentFormData) => {
-      return apiRequest("POST", "/api/leads", data);
+      return apiRequest("POST", "/api/leads", {
+        ...data,
+        serviceType: "сдать",
+        source: "rent-page",
+      });
     },
     onSuccess: () => {
       setIsSubmitted(true);
@@ -179,59 +183,6 @@ export default function Rent() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <FormField
                           control={form.control}
-                          name="propertyType"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Тип недвижимости</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Выберите тип" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="квартира">Квартира</SelectItem>
-                                  <SelectItem value="дом">Дом</SelectItem>
-                                  <SelectItem value="коммерческая">Коммерческое помещение</SelectItem>
-                                  <SelectItem value="офис">Офис</SelectItem>
-                                  <SelectItem value="склад">Склад</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name="address"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Адрес</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Адрес объекта" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name="desiredRent"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Желаемая арендная плата</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Сумма в месяц (₽)" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
                           name="name"
                           render={({ field }) => (
                             <FormItem>
@@ -257,39 +208,7 @@ export default function Rent() {
                             </FormItem>
                           )}
                         />
-
-                        <FormField
-                          control={form.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Email (необязательно)</FormLabel>
-                              <FormControl>
-                                <Input type="email" placeholder="your@email.com" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
                       </div>
-
-                      <FormField
-                        control={form.control}
-                        name="message"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Дополнительная информация</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                placeholder="Особенности объекта, требования к арендаторам..."
-                                rows={3}
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
 
                       <Button
                         type="submit"

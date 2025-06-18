@@ -13,11 +13,11 @@
   --card-foreground: hsl(20, 14.3%, 4.1%);
   --border: hsl(20, 5.9%, 90%);
   --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(45, 100%, 65%);
+  --primary: hsl(45, 100%, 50%);
   --primary-foreground: hsl(0, 0%, 0%);
   --secondary: hsl(60, 4.8%, 95.9%);
   --secondary-foreground: hsl(24, 9.8%, 10%);
-  --accent: hsl(20, 90%, 58%);
+  --accent: hsl(20, 90%, 48%);
   --accent-foreground: hsl(0, 0%, 100%);
   --destructive: hsl(0, 84.2%, 60.2%);
   --destructive-foreground: hsl(60, 9.1%, 97.8%);
@@ -25,9 +25,9 @@
   --radius: 0.5rem;
   
   /* Yandex-inspired colors */
-  --yandex-yellow: hsl(49, 100%, 65%);
+  --yandex-yellow: hsl(49, 100%, 50%);
   --yandex-black: hsl(0, 0%, 0%);
-  --accent-orange: hsl(20, 90%, 58%);
+  --accent-orange: hsl(20, 90%, 48%);
   --neutral-50: hsl(0, 0%, 98%);
   --neutral-100: hsl(0, 0%, 96%);
   --neutral-200: hsl(0, 0%, 93%);
@@ -135,5 +135,34 @@
   
   .border-neutral-300 {
     border-color: var(--neutral-300);
+  }
+
+  /* Enhanced button contrast */
+  .btn-enhanced-contrast {
+    background-color: hsl(45, 100%, 50%);
+    color: hsl(0, 0%, 0%);
+    font-weight: 600;
+    border: 2px solid hsl(0, 0%, 0%);
+    transition: all 0.2s ease;
+  }
+
+  .btn-enhanced-contrast:hover {
+    background-color: hsl(45, 100%, 45%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .btn-accent-enhanced {
+    background-color: hsl(20, 90%, 48%);
+    color: hsl(0, 0%, 100%);
+    font-weight: 600;
+    border: 2px solid hsl(20, 90%, 38%);
+    transition: all 0.2s ease;
+  }
+
+  .btn-accent-enhanced:hover {
+    background-color: hsl(20, 90%, 43%);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 }

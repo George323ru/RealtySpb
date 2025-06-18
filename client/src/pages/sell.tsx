@@ -48,7 +48,11 @@ export default function Sell() {
 
   const mutation = useMutation({
     mutationFn: async (data: SellFormData) => {
-      return apiRequest("POST", "/api/leads", data);
+      return apiRequest("POST", "/api/leads", {
+        ...data,
+        serviceType: "продать",
+        source: "sell-page",
+      });
     },
     onSuccess: () => {
       setIsSubmitted(true);
