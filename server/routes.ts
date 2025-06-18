@@ -1,6 +1,6 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
-import { storage } from "./storage";
+import { storage } from "./database-storage";
 import { insertLeadSchema, insertReviewSchema } from "@shared/schema";
 import { z } from "zod";
 
@@ -21,6 +21,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(properties);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch properties" });
+    }
+  });
+
+  app.get("/api/properties/featured", async (req, res) => {
+    try {
+      const properties = await storage.getProperties();
+      // Return first 6 properties as featured
+      const featured = properties.slice(0, 6);
+      res.json(featured);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch featured properties" });
     }
   });
 

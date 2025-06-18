@@ -425,12 +425,11 @@ export class MemStorage implements IStorage {
   }
 }
 
-// Commented out MemStorage for database implementation
-// export const storage = new MemStorage();
-
-import { users, properties, newBuildings, services, teamMembers, leads, reviews, blogPosts, type User, type InsertUser, type Property, type InsertProperty, type NewBuilding, type InsertNewBuilding, type Service, type InsertService, type TeamMember, type InsertTeamMember, type Lead, type InsertLead, type Review, type InsertReview, type BlogPost, type InsertBlogPost } from "@shared/schema";
 import { db } from "./db";
 import { eq, like, and, gte, lte } from "drizzle-orm";
+
+// Commented out MemStorage for database implementation
+// export const storage = new MemStorage();
 
 export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
