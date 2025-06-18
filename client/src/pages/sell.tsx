@@ -1,167 +1,379 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
-import ConsultationForm from "@/components/consultation-form";
-import { CheckCircle, DollarSign, Clock, Shield, Star, Calculator, Camera, FileText, Users, TrendingUp } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { useToast } from "@/hooks/use-toast";
+import { apiRequest } from "@/lib/queryClient";
+import { insertLeadSchema } from "@shared/schema";
+import { z } from "zod";
+import { 
+  DollarSign, 
+  Calculator, 
+  FileText, 
+  Users, 
+  CheckCircle, 
+  TrendingUp,
+  Camera,
+  Shield,
+  Clock,
+  Award
+} from "lucide-react";
 
-const Sell = () => {
-  const [activeStep, setActiveStep] = useState(1);
+const sellFormSchema = insertLeadSchema.extend({
+  serviceType: z.literal("продать"),
+  propertyType: z.string().min(1, "Выберите тип недвижимости"),
+  address: z.string().min(1, "Укажите адрес"),
+  area: z.string().min(1, "Укажите площадь"),
+  condition: z.string().min(1, "Укажите состояние"),
+});
+
+type SellFormData = z.infer<typeof sellFormSchema>;
+
+export default function Sell() {
+  const { toast } = useToast();
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const form = useForm<SellFormData>({
+    resolver: zodResolver(sellFormSchema),
+    defaultValues: {
+      name: "",
+      phone: "",
+      email: "",
+      serviceType: "продать",
+      propertyType: "",
+      address: "",
+      area: "",
+      condition: "",
+      message: "",
+    },
+  });
+
+  const mutation = useMutation({
+    mutationFn: async (data: SellFormData) => {
+      return apiRequest("POST", "/api/leads", data);
+    },
+    onSuccess: () => {
+      setIsSubmitted(true);
+      form.reset();
+      toast({
+        title: "Заявка отправлена!",
+        description: "Мы свяжемся с вами для оценки недвижимости.",
+      });
+    },
+    onError: () => {
+      toast({
+        title: "Ошибка",
+        description: "Не удалось отправить заявку. Попробуйте еще раз.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const onSubmit = (data: SellFormData) => {
+    mutation.mutate(data);
+  };
 
   const advantages = [
     {
-      icon: <DollarSign className="w-8 h-8 text-green-500" />,
-      title: "Максимальная цена",
-      description: "Продадим вашу недвижимость по рыночной стоимости или выше благодаря профессиональной подготовке"
+      icon: Calculator,
+      title: "Бесплатная оценка",
+      description: "Точная рыночная стоимость вашей недвижимости"
     },
     {
-      icon: <Clock className="w-8 h-8 text-blue-500" />,
+      icon: Camera,
+      title: "Профессиональная съемка",
+      description: "Качественные фото и виртуальные туры"
+    },
+    {
+      icon: Users,
+      title: "Активный поиск покупателей",
+      description: "Более 10 000 клиентов в нашей базе"
+    },
+    {
+      icon: Shield,
+      title: "Юридическая безопасность",
+      description: "Полная проверка документов и сопровождение сделки"
+    },
+    {
+      icon: Clock,
       title: "Быстрая продажа",
-      description: "Средний срок продажи 45-60 дней благодаря активному маркетингу и большой клиентской базе"
+      description: "Средний срок продажи 45 дней"
     },
     {
-      icon: <Shield className="w-8 h-8 text-purple-500" />,
-      title: "Юридическая защита",
-      description: "Полная правовая проверка и сопровождение сделки, страхование рисков"
-    },
-    {
-      icon: <Star className="w-8 h-8 text-yellow-500" />,
-      title: "Профессиональный подход",
-      description: "15+ лет опыта, современные технологии продаж, индивидуальная стратегия для каждого объекта"
+      icon: Award,
+      title: "Максимальная цена",
+      description: "Получите на 15% больше рыночной стоимости"
     }
   ];
 
   const steps = [
     {
-      number: 1,
+      number: "01",
       title: "Оценка недвижимости",
       description: "Бесплатная оценка рыночной стоимости вашего объекта",
-      icon: <Calculator className="w-6 h-6" />,
-      details: [
-        "Анализ рынка и аналогичных объектов",
-        "Профессиональная оценка состояния",
-        "Определение конкурентных преимуществ",
-        "Рекомендации по цене"
-      ]
+      color: "bg-blue-500"
     },
     {
-      number: 2,
+      number: "02", 
       title: "Подготовка к продаже",
-      description: "Подготовим объект для максимально выгодной продажи",
-      icon: <Camera className="w-6 h-6" />,
-      details: [
-        "Профессиональная фотосъемка",
-        "Создание презентации объекта",
-        "Рекомендации по улучшению",
-        "Подготовка документов"
-      ]
+      description: "Подготовка документов, фотосъемка, создание презентации",
+      color: "bg-green-500"
     },
     {
-      number: 3,
-      title: "Маркетинг и реклама",
-      description: "Активное продвижение на всех площадках и каналах",
-      icon: <TrendingUp className="w-6 h-6" />,
-      details: [
-        "Размещение на всех сайтах недвижимости",
-        "Социальные сети и таргетированная реклама",
-        "Печатная реклама в специализированных изданиях",
-        "Работа с нашей клиентской базой"
-      ]
+      number: "03",
+      title: "Размещение и реклама",
+      description: "Размещение на всех площадках и активное продвижение",
+      color: "bg-purple-500"
     },
     {
-      number: 4,
+      number: "04",
       title: "Показы и переговоры",
-      description: "Организуем показы и проведем переговоры с покупателями",
-      icon: <Users className="w-6 h-6" />,
-      details: [
-        "Квалификация потенциальных покупателей",
-        "Организация и проведение показов",
-        "Переговоры о цене и условиях",
-        "Помощь в выборе лучшего предложения"
-      ]
+      description: "Организация показов и ведение переговоров с покупателями",
+      color: "bg-orange-500"
     },
     {
-      number: 5,
-      title: "Сопровождение сделки",
-      description: "Полное юридическое и техническое сопровождение",
-      icon: <FileText className="w-6 h-6" />,
-      details: [
-        "Проверка документов покупателя",
-        "Подготовка договора купли-продажи",
-        "Сопровождение в МФЦ/Росреестре",
-        "Контроль расчетов и передача ключей"
-      ]
-    }
-  ];
-
-  const testimonials = [
-    {
-      name: "Анна Михайлова",
-      text: "Продали квартиру в центре за 2 месяца на 500 тысяч дороже первоначальной оценки. Команда работала очень профессионально!",
-      rating: 5,
-      property: "3-комн. квартира, Центральный район"
-    },
-    {
-      name: "Дмитрий Петров",
-      text: "Отличный сервис! Все прошло быстро и без проблем. Особенно понравилось юридическое сопровождение.",
-      rating: 5,
-      property: "Загородный дом, Пушкинский район"
-    },
-    {
-      name: "Елена Сергеева",
-      text: "Профессиональная команда, которая действительно заботится о результате. Рекомендую всем знакомым!",
-      rating: 5,
-      property: "2-комн. квартира, Московский район"
+      number: "05",
+      title: "Сделка",
+      description: "Оформление сделки и передача ключей новому владельцу",
+      color: "bg-accent-orange"
     }
   ];
 
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-600 to-green-700 text-white py-16">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-              Продайте недвижимость выгодно и быстро
+      <section className="relative bg-gradient-to-r from-green-900 to-green-700 py-20">
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920')"}}
+        ></div>
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              Продать недвижимость{" "}
+              <span className="text-yandex-yellow">выгодно</span>
             </h1>
-            <p className="text-xl lg:text-2xl mb-8 opacity-90">
-              Профессиональный подход, максимальная цена, полное сопровождение сделки
+            <p className="text-xl lg:text-2xl mb-8 font-light opacity-90">
+              Получите максимальную стоимость за вашу недвижимость. Бесплатная оценка и полное сопровождение сделки.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2">45-60 дней</div>
-                <div className="text-sm opacity-80">Средний срок продажи</div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
+                <div className="text-3xl font-bold text-yandex-yellow mb-2">15%</div>
+                <div className="text-sm">Выше рыночной цены</div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2">98%</div>
-                <div className="text-sm opacity-80">Успешных сделок</div>
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
+                <div className="text-3xl font-bold text-yandex-yellow mb-2">45</div>
+                <div className="text-sm">Дней средний срок</div>
               </div>
-              <div className="text-center">
-                <div className="text-3xl font-bold mb-2">15+ лет</div>
-                <div className="text-sm opacity-80">Опыт на рынке</div>
+              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
+                <div className="text-3xl font-bold text-yandex-yellow mb-2">100%</div>
+                <div className="text-sm">Юридическая чистота</div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Advantages */}
+      {/* Evaluation Form */}
       <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+                Получите бесплатную оценку недвижимости
+              </h2>
+              <p className="text-lg text-text-secondary">
+                Заполните форму и узнайте точную рыночную стоимость вашего объекта
+              </p>
+            </div>
+
+            {isSubmitted ? (
+              <Card className="p-12 text-center">
+                <div className="text-green-500 text-5xl mb-4">✓</div>
+                <h3 className="text-2xl font-bold text-text-primary mb-2">
+                  Заявка отправлена!
+                </h3>
+                <p className="text-text-secondary">
+                  Наш специалист свяжется с вами в течение 30 минут для проведения оценки.
+                </p>
+              </Card>
+            ) : (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-2xl text-center">Форма оценки недвижимости</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <FormField
+                          control={form.control}
+                          name="propertyType"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Тип недвижимости</FormLabel>
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Выберите тип" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="квартира">Квартира</SelectItem>
+                                  <SelectItem value="дом">Дом</SelectItem>
+                                  <SelectItem value="коммерческая">Коммерческая недвижимость</SelectItem>
+                                  <SelectItem value="земля">Земельный участок</SelectItem>
+                                  <SelectItem value="гараж">Гараж</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="address"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Адрес</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Укажите адрес объекта" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="area"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Площадь (м²)</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Общая площадь" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="condition"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Состояние</FormLabel>
+                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Состояние объекта" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="отличное">Отличное</SelectItem>
+                                  <SelectItem value="хорошее">Хорошее</SelectItem>
+                                  <SelectItem value="удовлетворительное">Удовлетворительное</SelectItem>
+                                  <SelectItem value="требует_ремонта">Требует ремонта</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Ваше имя</FormLabel>
+                              <FormControl>
+                                <Input placeholder="Как к вам обращаться?" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+
+                        <FormField
+                          control={form.control}
+                          name="phone"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Телефон</FormLabel>
+                              <FormControl>
+                                <Input placeholder="+7 (___) ___-__-__" {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <FormField
+                        control={form.control}
+                        name="message"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Дополнительная информация</FormLabel>
+                            <FormControl>
+                              <Textarea
+                                placeholder="Особенности объекта, пожелания по продаже..."
+                                rows={3}
+                                {...field}
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+
+                      <Button
+                        type="submit"
+                        disabled={mutation.isPending}
+                        className="w-full bg-green-500 hover:bg-green-600 text-white py-4 text-lg font-semibold"
+                      >
+                        {mutation.isPending ? "Отправляем..." : "Получить бесплатную оценку"}
+                      </Button>
+                    </form>
+                  </Form>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Advantages */}
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Почему выбирают нас
+              Почему выбирают нас для продажи
             </h2>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Мы обеспечиваем максимальную выгоду и комфорт при продаже вашей недвижимости
+              Наш опыт и профессиональный подход помогают продать недвижимость быстро и выгодно
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {advantages.map((advantage, index) => (
               <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex justify-center mb-4">
-                    {advantage.icon}
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <advantage.icon className="w-8 h-8 text-green-500" />
                   </div>
                   <h3 className="text-xl font-semibold text-text-primary mb-3">
                     {advantage.title}
@@ -177,196 +389,61 @@ const Sell = () => {
       </section>
 
       {/* Process Steps */}
-      <section className="py-16 bg-neutral-100">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Как проходит продажа
-            </h2>
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Пошаговый процесс продажи недвижимости с полным сопровождением на каждом этапе
-            </p>
-          </div>
-
-          <div className="mb-8">
-            <div className="flex flex-wrap justify-center gap-2">
-              {steps.map((step) => (
-                <Button
-                  key={step.number}
-                  variant={activeStep === step.number ? "default" : "outline"}
-                  onClick={() => setActiveStep(step.number)}
-                  className="mb-2"
-                >
-                  <span className="mr-2">{step.number}</span>
-                  {step.title}
-                </Button>
-              ))}
-            </div>
-          </div>
-
-          <Card className="max-w-4xl mx-auto">
-            <CardContent className="p-8">
-              {steps.map((step) => (
-                <div
-                  key={step.number}
-                  className={`${activeStep === step.number ? "block" : "hidden"}`}
-                >
-                  <div className="flex items-start mb-6">
-                    <div className="w-12 h-12 bg-accent-orange rounded-full flex items-center justify-center text-white mr-4 flex-shrink-0">
-                      {step.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-2xl font-bold text-text-primary mb-2">
-                        {step.title}
-                      </h3>
-                      <p className="text-lg text-text-secondary mb-4">
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {step.details.map((detail, index) => (
-                      <div key={index} className="flex items-center">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span className="text-text-secondary">{detail}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Testimonials */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Отзывы клиентов
+              Процесс продажи
             </h2>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Реальные отзывы от людей, которые успешно продали недвижимость с нашей помощью
+              Пошаговый план работы для успешной продажи вашей недвижимости
             </p>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-text-secondary mb-4 italic">
-                    "{testimonial.text}"
+
+          <div className="max-w-4xl mx-auto">
+            {steps.map((step, index) => (
+              <div key={index} className="flex items-start mb-8 last:mb-0">
+                <div className={`w-16 h-16 ${step.color} rounded-full flex items-center justify-center text-white font-bold text-xl mr-6 flex-shrink-0`}>
+                  {step.number}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-text-secondary">
+                    {step.description}
                   </p>
-                  <div>
-                    <div className="font-semibold text-text-primary">
-                      {testimonial.name}
-                    </div>
-                    <div className="text-sm text-text-secondary">
-                      {testimonial.property}
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600">
+      <section className="py-16 bg-gradient-to-r from-green-500 to-green-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <ConsultationForm 
-              title="Получите бесплатную оценку недвижимости"
-              description="Оставьте заявку и наш эксперт проведет оценку вашего объекта в течение 24 часов"
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Additional Info */}
-      <section className="py-16 bg-neutral-100">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-2xl font-bold text-text-primary mb-6">
-                Что входит в наши услуги
-              </h3>
-              <div className="space-y-4">
-                {[
-                  "Профессиональная оценка рыночной стоимости",
-                  "Юридическая проверка документов",
-                  "Профессиональная фотосъемка и создание презентации",
-                  "Размещение на всех площадках недвижимости",
-                  "Активный поиск покупателей через нашу клиентскую базу",
-                  "Организация и проведение показов",
-                  "Переговоры с покупателями",
-                  "Помощь в оформлении документов",
-                  "Сопровождение сделки до полного завершения",
-                  "Консультации по налогообложению"
-                ].map((item, index) => (
-                  <div key={index} className="flex items-start">
-                    <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                    <span className="text-text-secondary">{item}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            
-            <div>
-              <h3 className="text-2xl font-bold text-text-primary mb-6">
-                Наши гарантии
-              </h3>
-              <div className="space-y-6">
-                <Card>
-                  <CardContent className="p-6">
-                    <h4 className="font-semibold text-text-primary mb-2">
-                      Гарантия результата
-                    </h4>
-                    <p className="text-text-secondary">
-                      Если мы не продадим вашу недвижимость в течение 6 месяцев, 
-                      мы вернем 50% от суммы вознаграждения.
-                    </p>
-                  </CardContent>
-                </Card>
-                
-                <Card>
-                  <CardContent className="p-6">
-                    <h4 className="font-semibold text-text-primary mb-2">
-                      Юридическая защита
-                    </h4>
-                    <p className="text-text-secondary">
-                      Страхование профессиональной ответственности до 10 млн рублей. 
-                      Полная правовая защита сделки.
-                    </p>
-                  </CardContent>
-                </Card>
-                
-                <Card>
-                  <CardContent className="p-6">
-                    <h4 className="font-semibold text-text-primary mb-2">
-                      Прозрачность
-                    </h4>
-                    <p className="text-text-secondary">
-                      Еженедельные отчеты о проделанной работе. 
-                      Полная прозрачность всех этапов продажи.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
+          <div className="max-w-3xl mx-auto text-center text-white">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+              Готовы продать недвижимость?
+            </h2>
+            <p className="text-xl mb-8 opacity-90">
+              Получите бесплатную консультацию и узнайте точную стоимость вашего объекта
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button className="bg-white text-green-600 hover:bg-neutral-100 px-8 py-3 text-lg font-semibold">
+                Узнать стоимость
+              </Button>
+              <Button 
+                variant="outline" 
+                className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-3 text-lg font-semibold"
+              >
+                Позвонить сейчас
+              </Button>
             </div>
           </div>
         </div>
       </section>
     </div>
   );
-};
-
-export default Sell;
+}

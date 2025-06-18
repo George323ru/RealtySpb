@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { z } from "zod";
+import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -10,33 +9,23 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
-import { Loader2 } from "lucide-react";
+import { insertLeadSchema } from "@shared/schema";
+import { z } from "zod";
 
-const consultationSchema = z.object({
-  name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
-  phone: z.string().min(10, "Введите корректный номер телефона"),
-  email: z.string().email("Введите корректный email").optional().or(z.literal("")),
-  service: z.string().min(1, "Выберите услугу"),
-  message: z.string().optional(),
+const consultationSchema = insertLeadSchema.extend({
+  serviceType: z.string().min(1, "Выберите услугу"),
 });
 
 type ConsultationFormData = z.infer<typeof consultationSchema>;
 
 interface ConsultationFormProps {
-  title?: string;
-  description?: string;
-  onSuccess?: () => void;
-  propertyId?: number;
+  className?: string;
+  defaultService?: string;
 }
 
-const ConsultationForm = ({ 
-  title = "Получите консультацию эксперта бесплатно",
-  description = "Оставьте заявку и наш специалист свяжется с вами в течение 15 минут",
-  onSuccess,
-  propertyId
-}: ConsultationFormProps) => {
+export default function ConsultationForm({ className, defaultService }: ConsultationFormProps) {
   const { toast } = useToast();
-  const queryClient = useQueryClient();
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const form = useForm<ConsultationFormData>({
     resolver: zodResolver(consultationSchema),
@@ -44,56 +33,56 @@ const ConsultationForm = ({
       name: "",
       phone: "",
       email: "",
-      service: "",
+      serviceType: defaultService || "",
       message: "",
+      propertyType: "",
+      budget: "",
     },
   });
 
-  const createLeadMutation = useMutation({
+  const mutation = useMutation({
     mutationFn: async (data: ConsultationFormData) => {
-      const leadData = {
-        ...data,
-        email: data.email || undefined,
-        propertyId,
-        source: "website",
-      };
-      return apiRequest("POST", "/api/leads", leadData);
+      return apiRequest("POST", "/api/contact", data);
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["/api/leads"] });
+      setIsSubmitted(true);
+      form.reset();
       toast({
         title: "Заявка отправлена!",
-        description: "Мы свяжемся с вами в ближайшее время.",
+        description: "Наш специалист свяжется с вами в течение 15 минут.",
       });
-      form.reset();
-      onSuccess?.();
     },
-    onError: (error: any) => {
+    onError: () => {
       toast({
-        title: "Ошибка отправки",
-        description: error.message || "Попробуйте еще раз позже",
+        title: "Ошибка",
+        description: "Не удалось отправить заявку. Попробуйте еще раз.",
         variant: "destructive",
       });
     },
   });
 
   const onSubmit = (data: ConsultationFormData) => {
-    createLeadMutation.mutate(data);
+    mutation.mutate(data);
   };
 
-  return (
-    <div className="space-y-6">
-      <div className="text-center">
-        <h2 className="text-2xl lg:text-3xl font-bold text-text-primary mb-3">
-          {title}
-        </h2>
+  if (isSubmitted) {
+    return (
+      <div className={`bg-white rounded-2xl p-8 text-center ${className || ''}`}>
+        <div className="text-green-500 text-5xl mb-4">✓</div>
+        <h3 className="text-2xl font-bold text-text-primary mb-2">
+          Заявка отправлена!
+        </h3>
         <p className="text-text-secondary">
-          {description}
+          Наш специалист свяжется с вами в течение 15 минут.
         </p>
       </div>
+    );
+  }
 
+  return (
+    <div className={`bg-white rounded-2xl p-8 ${className || ''}`}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <FormField
               control={form.control}
@@ -108,6 +97,7 @@ const ConsultationForm = ({
                 </FormItem>
               )}
             />
+            
             <FormField
               control={form.control}
               name="phone"
@@ -130,7 +120,7 @@ const ConsultationForm = ({
               <FormItem>
                 <FormLabel>Email (необязательно)</FormLabel>
                 <FormControl>
-                  <Input placeholder="your@email.com" {...field} />
+                  <Input type="email" placeholder="your@email.com" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -139,7 +129,7 @@ const ConsultationForm = ({
 
           <FormField
             control={form.control}
-            name="service"
+            name="serviceType"
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Выберите услугу</FormLabel>
@@ -150,13 +140,12 @@ const ConsultationForm = ({
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent>
-                    <SelectItem value="buy">Хочу купить недвижимость</SelectItem>
-                    <SelectItem value="sell">Хочу продать недвижимость</SelectItem>
-                    <SelectItem value="rent">Хочу сдать в аренду</SelectItem>
-                    <SelectItem value="evaluation">Оценка недвижимости</SelectItem>
-                    <SelectItem value="legal">Юридическая консультация</SelectItem>
-                    <SelectItem value="design">Дизайн и ремонт</SelectItem>
-                    <SelectItem value="other">Другое</SelectItem>
+                    <SelectItem value="купить">Хочу купить недвижимость</SelectItem>
+                    <SelectItem value="продать">Хочу продать недвижимость</SelectItem>
+                    <SelectItem value="сдать">Хочу сдать в аренду</SelectItem>
+                    <SelectItem value="оценка">Оценка недвижимости</SelectItem>
+                    <SelectItem value="консультация">Юридическая консультация</SelectItem>
+                    <SelectItem value="другое">Другое</SelectItem>
                   </SelectContent>
                 </Select>
                 <FormMessage />
@@ -169,13 +158,12 @@ const ConsultationForm = ({
             name="message"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Сообщение (необязательно)</FormLabel>
+                <FormLabel>Опишите ваш вопрос (необязательно)</FormLabel>
                 <FormControl>
-                  <Textarea 
-                    placeholder="Опишите ваш вопрос подробнее" 
-                    className="resize-none"
+                  <Textarea
+                    placeholder="Расскажите подробнее о ваших потребностях..."
                     rows={3}
-                    {...field} 
+                    {...field}
                   />
                 </FormControl>
                 <FormMessage />
@@ -183,19 +171,12 @@ const ConsultationForm = ({
             )}
           />
 
-          <Button 
-            type="submit" 
-            className="w-full bg-accent-orange hover:bg-orange-600 text-white"
-            disabled={createLeadMutation.isPending}
+          <Button
+            type="submit"
+            disabled={mutation.isPending}
+            className="w-full bg-accent-orange text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-orange-600"
           >
-            {createLeadMutation.isPending ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Отправляем...
-              </>
-            ) : (
-              "Получить консультацию"
-            )}
+            {mutation.isPending ? "Отправляем..." : "Получить консультацию"}
           </Button>
 
           <p className="text-sm text-text-secondary text-center">
@@ -208,6 +189,4 @@ const ConsultationForm = ({
       </Form>
     </div>
   );
-};
-
-export default ConsultationForm;
+}

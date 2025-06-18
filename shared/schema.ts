@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, boolean, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, boolean, timestamp, decimal } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
@@ -14,45 +14,47 @@ export const properties = pgTable("properties", {
   description: text("description").notNull(),
   price: integer("price").notNull(),
   pricePerMeter: integer("price_per_meter"),
-  area: integer("area").notNull(),
+  address: text("address").notNull(),
+  district: text("district").notNull(),
+  propertyType: text("property_type").notNull(), // квартира, дом, коммерческая, земля, гараж, машиноместо
   rooms: integer("rooms"),
+  area: decimal("area", { precision: 10, scale: 2 }).notNull(),
   floor: integer("floor"),
   totalFloors: integer("total_floors"),
-  propertyType: text("property_type").notNull(), // apartment, house, commercial, land, garage, parking
-  transactionType: text("transaction_type").notNull(), // sale, rent
-  district: text("district").notNull(),
-  address: text("address").notNull(),
-  coordinates: jsonb("coordinates").$type<{lat: number, lng: number}>(),
+  buildingType: text("building_type"), // новостройка, вторичка
   images: text("images").array().notNull().default([]),
   features: text("features").array().default([]),
-  isNewBuilding: boolean("is_new_building").default(false),
-  buildingClass: text("building_class"), // economy, comfort, business, premium
-  yearBuilt: integer("year_built"),
-  parking: boolean("parking").default(false),
-  elevator: boolean("elevator").default(false),
-  balcony: boolean("balcony").default(false),
-  renovation: text("renovation"), // none, cosmetic, euro, designer
-  furnished: boolean("furnished").default(false),
-  active: boolean("active").default(true),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const newBuildings = pgTable("new_buildings", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  developer: text("developer").notNull(),
   description: text("description").notNull(),
   location: text("location").notNull(),
-  district: text("district").notNull(),
+  developer: text("developer").notNull(),
+  completionYear: integer("completion_year"),
   priceFrom: integer("price_from").notNull(),
-  pricePerMeterFrom: integer("price_per_meter_from").notNull(),
-  totalFlats: integer("total_flats").notNull(),
-  readiness: text("readiness").notNull(), // percentage or "ready"
-  completionDate: text("completion_date"),
-  buildingClass: text("building_class").notNull(),
+  pricePerMeter: integer("price_per_meter"),
+  totalFlats: integer("total_flats"),
+  readiness: text("readiness"), // процент готовности или "Сдан"
   images: text("images").array().notNull().default([]),
   features: text("features").array().default([]),
-  coordinates: jsonb("coordinates").$type<{lat: number, lng: number}>(),
-  active: boolean("active").default(true),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const services = pgTable("services", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  description: text("description").notNull(),
+  shortDescription: text("short_description").notNull(),
+  icon: text("icon").notNull(),
+  price: text("price"), // "от 50 000 ₽" или "по договоренности"
+  features: text("features").array().default([]),
+  isActive: boolean("is_active").notNull().default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const teamMembers = pgTable("team_members", {
@@ -62,26 +64,35 @@ export const teamMembers = pgTable("team_members", {
   experience: text("experience").notNull(),
   photo: text("photo").notNull(),
   phone: text("phone"),
-  email: text("email"),
   telegram: text("telegram"),
   whatsapp: text("whatsapp"),
   specialization: text("specialization").array().default([]),
-  description: text("description"),
-  active: boolean("active").default(true),
+  isActive: boolean("is_active").notNull().default(true),
 });
 
-export const services = pgTable("services", {
+export const leads = pgTable("leads", {
   id: serial("id").primaryKey(),
   name: text("name").notNull(),
-  slug: text("slug").notNull().unique(),
-  description: text("description").notNull(),
-  fullDescription: text("full_description"),
-  icon: text("icon").notNull(),
-  category: text("category").notNull(), // main, additional
-  price: text("price"), // price range or "by consultation"
-  duration: text("duration"),
-  features: text("features").array().default([]),
-  active: boolean("active").default(true),
+  phone: text("phone").notNull(),
+  email: text("email"),
+  serviceType: text("service_type").notNull(), // купить, продать, сдать, консультация, оценка
+  message: text("message"),
+  propertyType: text("property_type"),
+  budget: text("budget"),
+  status: text("status").notNull().default("new"), // new, contacted, in_progress, closed
+  source: text("source").default("website"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+export const reviews = pgTable("reviews", {
+  id: serial("id").primaryKey(),
+  clientName: text("client_name").notNull(),
+  rating: integer("rating").notNull(),
+  review: text("review").notNull(),
+  propertyType: text("property_type"),
+  serviceType: text("service_type"),
+  isPublished: boolean("is_published").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
 export const blogPosts = pgTable("blog_posts", {
@@ -90,97 +101,80 @@ export const blogPosts = pgTable("blog_posts", {
   slug: text("slug").notNull().unique(),
   excerpt: text("excerpt").notNull(),
   content: text("content").notNull(),
-  image: text("image"),
   author: text("author").notNull(),
-  publishedAt: timestamp("published_at").defaultNow(),
-  tags: text("tags").array().default([]),
   category: text("category").notNull(),
-  active: boolean("active").default(true),
-});
-
-export const leads = pgTable("leads", {
-  id: serial("id").primaryKey(),
-  name: text("name").notNull(),
-  phone: text("phone").notNull(),
-  email: text("email"),
-  service: text("service").notNull(),
-  message: text("message"),
-  propertyId: integer("property_id"),
-  source: text("source"), // website, phone, social
-  status: text("status").default("new"), // new, contacted, qualified, closed
-  createdAt: timestamp("created_at").defaultNow(),
-});
-
-export const reviews = pgTable("reviews", {
-  id: serial("id").primaryKey(),
-  clientName: text("client_name").notNull(),
-  clientPhoto: text("client_photo"),
-  rating: integer("rating").notNull(),
-  review: text("review").notNull(),
-  propertyType: text("property_type"),
-  serviceType: text("service_type"),
-  date: timestamp("date").defaultNow(),
-  active: boolean("active").default(true),
+  tags: text("tags").array().default([]),
+  image: text("image"),
+  isPublished: boolean("is_published").notNull().default(false),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 // Insert schemas
-export const insertUserSchema = createInsertSchema(users).pick({
-  username: true,
-  password: true,
-});
-
 export const insertPropertySchema = createInsertSchema(properties).omit({
   id: true,
+  createdAt: true,
 });
 
 export const insertNewBuildingSchema = createInsertSchema(newBuildings).omit({
   id: true,
+  createdAt: true,
+});
+
+export const insertServiceSchema = createInsertSchema(services).omit({
+  id: true,
+  createdAt: true,
 });
 
 export const insertTeamMemberSchema = createInsertSchema(teamMembers).omit({
   id: true,
 });
 
-export const insertServiceSchema = createInsertSchema(services).omit({
-  id: true,
-});
-
-export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
-  id: true,
-  publishedAt: true,
-});
-
 export const insertLeadSchema = createInsertSchema(leads).omit({
   id: true,
   createdAt: true,
+  status: true,
+  source: true,
 });
 
 export const insertReviewSchema = createInsertSchema(reviews).omit({
   id: true,
-  date: true,
+  createdAt: true,
+  isPublished: true,
+});
+
+export const insertBlogPostSchema = createInsertSchema(blogPosts).omit({
+  id: true,
+  createdAt: true,
+  updatedAt: true,
+});
+
+export const insertUserSchema = createInsertSchema(users).pick({
+  username: true,
+  password: true,
 });
 
 // Types
-export type User = typeof users.$inferSelect;
-export type InsertUser = z.infer<typeof insertUserSchema>;
-
 export type Property = typeof properties.$inferSelect;
 export type InsertProperty = z.infer<typeof insertPropertySchema>;
 
 export type NewBuilding = typeof newBuildings.$inferSelect;
 export type InsertNewBuilding = z.infer<typeof insertNewBuildingSchema>;
 
-export type TeamMember = typeof teamMembers.$inferSelect;
-export type InsertTeamMember = z.infer<typeof insertTeamMemberSchema>;
-
 export type Service = typeof services.$inferSelect;
 export type InsertService = z.infer<typeof insertServiceSchema>;
 
-export type BlogPost = typeof blogPosts.$inferSelect;
-export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+export type TeamMember = typeof teamMembers.$inferSelect;
+export type InsertTeamMember = z.infer<typeof insertTeamMemberSchema>;
 
 export type Lead = typeof leads.$inferSelect;
 export type InsertLead = z.infer<typeof insertLeadSchema>;
 
 export type Review = typeof reviews.$inferSelect;
 export type InsertReview = z.infer<typeof insertReviewSchema>;
+
+export type BlogPost = typeof blogPosts.$inferSelect;
+export type InsertBlogPost = z.infer<typeof insertBlogPostSchema>;
+
+export type User = typeof users.$inferSelect;
+export type InsertUser = z.infer<typeof insertUserSchema>;

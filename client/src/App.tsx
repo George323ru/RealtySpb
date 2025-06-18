@@ -3,7 +3,9 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import NotFound from "@/pages/not-found";
+import Header from "@/components/header";
+import Footer from "@/components/footer";
+import FloatingCTA from "@/components/floating-cta";
 import Home from "@/pages/home";
 import Buy from "@/pages/buy";
 import Sell from "@/pages/sell";
@@ -19,9 +21,7 @@ import Reviews from "@/pages/reviews";
 import Blog from "@/pages/blog";
 import BlogPost from "@/pages/blog-post";
 import Contacts from "@/pages/contacts";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import FloatingCTA from "@/components/floating-cta";
+import NotFound from "@/pages/not-found";
 
 function Router() {
   return (
@@ -34,7 +34,7 @@ function Router() {
       <Route path="/secondary" component={Secondary} />
       <Route path="/property/:id" component={PropertyDetail} />
       <Route path="/services" component={Services} />
-      <Route path="/services/:slug" component={ServiceDetail} />
+      <Route path="/services/:id" component={ServiceDetail} />
       <Route path="/about" component={About} />
       <Route path="/team" component={Team} />
       <Route path="/reviews" component={Reviews} />
@@ -50,9 +50,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <div className="min-h-screen flex flex-col bg-neutral-50">
+        <div className="min-h-screen bg-neutral-50">
           <Header />
-          <main className="flex-1">
+          <main>
             <Router />
           </main>
           <Footer />

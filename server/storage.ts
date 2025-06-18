@@ -1,9 +1,9 @@
 import { 
-  users, properties, newBuildings, teamMembers, services, blogPosts, leads, reviews,
-  type User, type InsertUser, type Property, type InsertProperty, 
-  type NewBuilding, type InsertNewBuilding, type TeamMember, type InsertTeamMember,
-  type Service, type InsertService, type BlogPost, type InsertBlogPost,
-  type Lead, type InsertLead, type Review, type InsertReview
+  users, properties, newBuildings, services, teamMembers, leads, reviews, blogPosts,
+  type User, type InsertUser, type Property, type InsertProperty,
+  type NewBuilding, type InsertNewBuilding, type Service, type InsertService,
+  type TeamMember, type InsertTeamMember, type Lead, type InsertLead,
+  type Review, type InsertReview, type BlogPost, type InsertBlogPost
 } from "@shared/schema";
 
 export interface IStorage {
@@ -11,223 +11,249 @@ export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
-  
+
   // Properties
-  getProperties(filters?: PropertyFilters): Promise<Property[]>;
+  getProperties(filters?: {
+    propertyType?: string;
+    district?: string;
+    priceFrom?: number;
+    priceTo?: number;
+    buildingType?: string;
+    rooms?: number;
+  }): Promise<Property[]>;
   getProperty(id: number): Promise<Property | undefined>;
   createProperty(property: InsertProperty): Promise<Property>;
-  updateProperty(id: number, property: Partial<InsertProperty>): Promise<Property | undefined>;
-  deleteProperty(id: number): Promise<boolean>;
-  
+
   // New Buildings
   getNewBuildings(): Promise<NewBuilding[]>;
   getNewBuilding(id: number): Promise<NewBuilding | undefined>;
   createNewBuilding(building: InsertNewBuilding): Promise<NewBuilding>;
-  
+
+  // Services
+  getServices(): Promise<Service[]>;
+  getService(id: number): Promise<Service | undefined>;
+  createService(service: InsertService): Promise<Service>;
+
   // Team Members
   getTeamMembers(): Promise<TeamMember[]>;
   getTeamMember(id: number): Promise<TeamMember | undefined>;
   createTeamMember(member: InsertTeamMember): Promise<TeamMember>;
-  
-  // Services
-  getServices(): Promise<Service[]>;
-  getService(id: number): Promise<Service | undefined>;
-  getServiceBySlug(slug: string): Promise<Service | undefined>;
-  createService(service: InsertService): Promise<Service>;
-  
-  // Blog Posts
-  getBlogPosts(): Promise<BlogPost[]>;
-  getBlogPost(id: number): Promise<BlogPost | undefined>;
-  getBlogPostBySlug(slug: string): Promise<BlogPost | undefined>;
-  createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
-  
+
   // Leads
   getLeads(): Promise<Lead[]>;
   createLead(lead: InsertLead): Promise<Lead>;
-  
+
   // Reviews
   getReviews(): Promise<Review[]>;
   createReview(review: InsertReview): Promise<Review>;
-}
 
-export interface PropertyFilters {
-  propertyType?: string;
-  transactionType?: string;
-  district?: string;
-  priceFrom?: number;
-  priceTo?: number;
-  areaFrom?: number;
-  areaTo?: number;
-  rooms?: number;
-  isNewBuilding?: boolean;
+  // Blog Posts
+  getBlogPosts(): Promise<BlogPost[]>;
+  getBlogPost(slug: string): Promise<BlogPost | undefined>;
+  createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
 }
 
 export class MemStorage implements IStorage {
-  private users: Map<number, User> = new Map();
-  private properties: Map<number, Property> = new Map();
-  private newBuildings: Map<number, NewBuilding> = new Map();
-  private teamMembers: Map<number, TeamMember> = new Map();
-  private services: Map<number, Service> = new Map();
-  private blogPosts: Map<number, BlogPost> = new Map();
-  private leads: Map<number, Lead> = new Map();
-  private reviews: Map<number, Review> = new Map();
-  
-  private currentUserId = 1;
-  private currentPropertyId = 1;
-  private currentNewBuildingId = 1;
-  private currentTeamMemberId = 1;
-  private currentServiceId = 1;
-  private currentBlogPostId = 1;
-  private currentLeadId = 1;
-  private currentReviewId = 1;
+  private users: Map<number, User>;
+  private properties: Map<number, Property>;
+  private newBuildings: Map<number, NewBuilding>;
+  private services: Map<number, Service>;
+  private teamMembers: Map<number, TeamMember>;
+  private leads: Map<number, Lead>;
+  private reviews: Map<number, Review>;
+  private blogPosts: Map<number, BlogPost>;
+  private currentId: number;
 
   constructor() {
-    this.seedData();
+    this.users = new Map();
+    this.properties = new Map();
+    this.newBuildings = new Map();
+    this.services = new Map();
+    this.teamMembers = new Map();
+    this.leads = new Map();
+    this.reviews = new Map();
+    this.blogPosts = new Map();
+    this.currentId = 1;
+    this.initializeData();
   }
 
-  private seedData() {
-    // Seed properties
-    const sampleProperties: InsertProperty[] = [
+  private initializeData() {
+    // Initialize with sample data for demonstration
+    this.initializeProperties();
+    this.initializeNewBuildings();
+    this.initializeServices();
+    this.initializeTeamMembers();
+    this.initializeReviews();
+    this.initializeBlogPosts();
+  }
+
+  private initializeProperties() {
+    const sampleProperties: Property[] = [
       {
+        id: this.currentId++,
         title: "3-комнатная квартира в центре",
-        description: "Просторная квартира с ремонтом в центральном районе",
+        description: "Просторная квартира с отличным ремонтом и видом на Неву",
         price: 12500000,
         pricePerMeter: 141667,
-        area: 88,
+        address: "ул. Рубинштейна, 15",
+        district: "Центральный",
+        propertyType: "квартира",
         rooms: 3,
+        area: "88.2",
         floor: 7,
         totalFloors: 12,
-        propertyType: "apartment",
-        transactionType: "sale",
-        district: "Центральный",
-        address: "ул. Рубинштейна, 15",
+        buildingType: "новостройка",
         images: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800"],
-        features: ["Ремонт", "Балкон", "Парковка"],
-        isNewBuilding: true,
-        buildingClass: "comfort",
-        yearBuilt: 2023,
-        parking: true,
-        elevator: true,
-        balcony: true,
-        renovation: "euro",
-        furnished: false,
-        active: true,
+        features: ["Евроремонт", "Балкон", "Кондиционер"],
+        isActive: true,
+        createdAt: new Date(),
       },
       {
-        title: "Загородный дом, 180 м²",
-        description: "Современный дом с участком в тихом районе",
+        id: this.currentId++,
+        title: "Загородный дом в Пушкине",
+        description: "Дом с участком в тихом районе",
         price: 24900000,
         pricePerMeter: 138333,
-        area: 180,
+        address: "пос. Павловск, ул. Садовая",
+        district: "Пушкинский",
+        propertyType: "дом",
         rooms: 5,
+        area: "180.0",
         floor: 2,
         totalFloors: 2,
-        propertyType: "house",
-        transactionType: "sale",
-        district: "Пушкинский",
-        address: "пос. Павловск, ул. Садовая",
+        buildingType: "вторичка",
         images: ["https://images.unsplash.com/photo-1449844908441-8829872d2607?w=800"],
-        features: ["Участок", "Гараж", "Сауна"],
-        isNewBuilding: false,
-        buildingClass: "premium",
-        yearBuilt: 2020,
-        parking: true,
-        elevator: false,
-        balcony: false,
-        renovation: "designer",
-        furnished: false,
-        active: true,
+        features: ["Участок 10 соток", "Гараж", "Баня"],
+        isActive: true,
+        createdAt: new Date(),
       }
     ];
 
     sampleProperties.forEach(property => {
-      this.createProperty(property);
+      this.properties.set(property.id, property);
     });
+  }
 
-    // Seed new buildings
-    const sampleNewBuildings: InsertNewBuilding[] = [
+  private initializeNewBuildings() {
+    const sampleBuildings: NewBuilding[] = [
       {
-        name: "ЖК \"Северный Парк\"",
-        developer: "ПСК Группа",
+        id: this.currentId++,
+        name: "ЖК Северный Парк",
         description: "Современный жилой комплекс с развитой инфраструктурой",
         location: "Приморский район, м. Комендантский проспект",
-        district: "Приморский",
+        developer: "ПСК Группа",
+        completionYear: 2025,
         priceFrom: 4200000,
-        pricePerMeterFrom: 115000,
+        pricePerMeter: 115000,
         totalFlats: 324,
-        readiness: "75%",
-        completionDate: "IV кв. 2025",
-        buildingClass: "comfort",
+        readiness: "75% готовности",
         images: ["https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800"],
-        features: ["Детская площадка", "Подземная парковка", "Фитнес-центр"],
-        active: true,
+        features: ["Детский сад", "Фитнес-центр", "Подземный паркинг"],
+        isActive: true,
+        createdAt: new Date(),
       }
     ];
 
-    sampleNewBuildings.forEach(building => {
-      this.createNewBuilding(building);
+    sampleBuildings.forEach(building => {
+      this.newBuildings.set(building.id, building);
     });
+  }
 
-    // Seed team members
-    const sampleTeamMembers: InsertTeamMember[] = [
+  private initializeServices() {
+    const sampleServices: Service[] = [
       {
-        name: "Анна Петрова",
-        position: "Руководитель отдела продаж",
-        experience: "8 лет",
-        photo: "https://images.unsplash.com/photo-1494790108755-2616b612b587?w=400",
-        phone: "+7 (812) 123-45-67",
-        email: "anna@spb-realty.ru",
-        telegram: "@anna_realty",
-        whatsapp: "+79123456789",
-        specialization: ["Новостройки", "Премиум недвижимость"],
-        description: "Профессиональный риэлтор с большим опытом работы",
-        active: true,
-      }
-    ];
-
-    sampleTeamMembers.forEach(member => {
-      this.createTeamMember(member);
-    });
-
-    // Seed services
-    const sampleServices: InsertService[] = [
-      {
+        id: this.currentId++,
         name: "Предпродажная подготовка",
-        slug: "pre-sale-preparation",
-        description: "Подготовим вашу недвижимость к продаже для максимальной стоимости",
-        fullDescription: "Комплексная подготовка недвижимости включает оценку, рекомендации по улучшению, staging и маркетинг",
+        description: "Комплексная подготовка недвижимости к продаже",
+        shortDescription: "Подготовим вашу недвижимость к продаже для максимальной стоимости",
         icon: "fas fa-hammer",
-        category: "additional",
         price: "от 50 000 ₽",
-        duration: "1-2 недели",
-        features: ["Профессиональная оценка", "Рекомендации по улучшению", "Staging", "Фотосъемка"],
-        active: true,
+        features: ["Оценка состояния", "План улучшений", "Косметический ремонт"],
+        isActive: true,
+        createdAt: new Date(),
+      },
+      {
+        id: this.currentId++,
+        name: "Дизайн-проект",
+        description: "Создание уникального дизайна интерьера",
+        shortDescription: "Создание уникального дизайна интерьера под ваши потребности",
+        icon: "fas fa-paint-brush",
+        price: "от 3 000 ₽/м²",
+        features: ["3D визуализация", "Планировочные решения", "Подбор материалов"],
+        isActive: true,
+        createdAt: new Date(),
       }
     ];
 
     sampleServices.forEach(service => {
-      this.createService(service);
+      this.services.set(service.id, service);
     });
+  }
 
-    // Seed reviews
-    const sampleReviews: InsertReview[] = [
+  private initializeTeamMembers() {
+    const sampleMembers: TeamMember[] = [
       {
-        clientName: "Мария Иванова",
-        clientPhoto: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200",
+        id: this.currentId++,
+        name: "Анна Петрова",
+        position: "Руководитель отдела продаж",
+        experience: "Опыт работы: 8 лет",
+        photo: "https://images.unsplash.com/photo-1494790108755-2616b5c1b1e4?w=400",
+        phone: "+7 (812) 123-45-67",
+        telegram: "@anna_petro",
+        whatsapp: "+78121234567",
+        specialization: ["Продажа квартир", "Новостройки"],
+        isActive: true,
+      }
+    ];
+
+    sampleMembers.forEach(member => {
+      this.teamMembers.set(member.id, member);
+    });
+  }
+
+  private initializeReviews() {
+    const sampleReviews: Review[] = [
+      {
+        id: this.currentId++,
+        clientName: "Дмитрий Иванов",
         rating: 5,
-        review: "Отличная работа команды! Помогли быстро продать квартиру по хорошей цене.",
-        propertyType: "apartment",
-        serviceType: "sale",
-        active: true,
+        review: "Отличная работа! Помогли продать квартиру за 2 недели по хорошей цене.",
+        propertyType: "квартира",
+        serviceType: "продажа",
+        isPublished: true,
+        createdAt: new Date(),
       }
     ];
 
     sampleReviews.forEach(review => {
-      this.createReview(review);
+      this.reviews.set(review.id, review);
     });
   }
 
-  // Users
+  private initializeBlogPosts() {
+    const samplePosts: BlogPost[] = [
+      {
+        id: this.currentId++,
+        title: "Как выбрать квартиру в новостройке",
+        slug: "kak-vybrat-kvartiru-v-novostroike",
+        excerpt: "Подробный гид по выбору квартиры в новостройке",
+        content: "Полное содержание статьи...",
+        author: "Анна Петрова",
+        category: "Покупка",
+        tags: ["новостройки", "покупка", "советы"],
+        image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800",
+        isPublished: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      }
+    ];
+
+    samplePosts.forEach(post => {
+      this.blogPosts.set(post.id, post);
+    });
+  }
+
+  // User methods
   async getUser(id: number): Promise<User | undefined> {
     return this.users.get(id);
   }
@@ -237,43 +263,34 @@ export class MemStorage implements IStorage {
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
+    const id = this.currentId++;
     const user: User = { ...insertUser, id };
     this.users.set(id, user);
     return user;
   }
 
-  // Properties
-  async getProperties(filters?: PropertyFilters): Promise<Property[]> {
-    let properties = Array.from(this.properties.values()).filter(p => p.active);
+  // Property methods
+  async getProperties(filters?: any): Promise<Property[]> {
+    let properties = Array.from(this.properties.values()).filter(p => p.isActive);
     
     if (filters) {
       if (filters.propertyType) {
         properties = properties.filter(p => p.propertyType === filters.propertyType);
       }
-      if (filters.transactionType) {
-        properties = properties.filter(p => p.transactionType === filters.transactionType);
-      }
       if (filters.district) {
         properties = properties.filter(p => p.district === filters.district);
       }
       if (filters.priceFrom) {
-        properties = properties.filter(p => p.price >= filters.priceFrom!);
+        properties = properties.filter(p => p.price >= filters.priceFrom);
       }
       if (filters.priceTo) {
-        properties = properties.filter(p => p.price <= filters.priceTo!);
+        properties = properties.filter(p => p.price <= filters.priceTo);
       }
-      if (filters.areaFrom) {
-        properties = properties.filter(p => p.area >= filters.areaFrom!);
-      }
-      if (filters.areaTo) {
-        properties = properties.filter(p => p.area <= filters.areaTo!);
+      if (filters.buildingType) {
+        properties = properties.filter(p => p.buildingType === filters.buildingType);
       }
       if (filters.rooms) {
         properties = properties.filter(p => p.rooms === filters.rooms);
-      }
-      if (filters.isNewBuilding !== undefined) {
-        properties = properties.filter(p => p.isNewBuilding === filters.isNewBuilding);
       }
     }
     
@@ -284,132 +301,127 @@ export class MemStorage implements IStorage {
     return this.properties.get(id);
   }
 
-  async createProperty(insertProperty: InsertProperty): Promise<Property> {
-    const id = this.currentPropertyId++;
-    const property: Property = { ...insertProperty, id };
-    this.properties.set(id, property);
-    return property;
+  async createProperty(property: InsertProperty): Promise<Property> {
+    const id = this.currentId++;
+    const newProperty: Property = { 
+      ...property, 
+      id, 
+      createdAt: new Date() 
+    };
+    this.properties.set(id, newProperty);
+    return newProperty;
   }
 
-  async updateProperty(id: number, updates: Partial<InsertProperty>): Promise<Property | undefined> {
-    const existing = this.properties.get(id);
-    if (!existing) return undefined;
-    
-    const updated = { ...existing, ...updates };
-    this.properties.set(id, updated);
-    return updated;
-  }
-
-  async deleteProperty(id: number): Promise<boolean> {
-    return this.properties.delete(id);
-  }
-
-  // New Buildings
+  // New Building methods
   async getNewBuildings(): Promise<NewBuilding[]> {
-    return Array.from(this.newBuildings.values()).filter(b => b.active);
+    return Array.from(this.newBuildings.values()).filter(b => b.isActive);
   }
 
   async getNewBuilding(id: number): Promise<NewBuilding | undefined> {
     return this.newBuildings.get(id);
   }
 
-  async createNewBuilding(insertNewBuilding: InsertNewBuilding): Promise<NewBuilding> {
-    const id = this.currentNewBuildingId++;
-    const building: NewBuilding = { ...insertNewBuilding, id };
-    this.newBuildings.set(id, building);
-    return building;
+  async createNewBuilding(building: InsertNewBuilding): Promise<NewBuilding> {
+    const id = this.currentId++;
+    const newBuilding: NewBuilding = { 
+      ...building, 
+      id, 
+      createdAt: new Date() 
+    };
+    this.newBuildings.set(id, newBuilding);
+    return newBuilding;
   }
 
-  // Team Members
-  async getTeamMembers(): Promise<TeamMember[]> {
-    return Array.from(this.teamMembers.values()).filter(m => m.active);
-  }
-
-  async getTeamMember(id: number): Promise<TeamMember | undefined> {
-    return this.teamMembers.get(id);
-  }
-
-  async createTeamMember(insertTeamMember: InsertTeamMember): Promise<TeamMember> {
-    const id = this.currentTeamMemberId++;
-    const member: TeamMember = { ...insertTeamMember, id };
-    this.teamMembers.set(id, member);
-    return member;
-  }
-
-  // Services
+  // Service methods
   async getServices(): Promise<Service[]> {
-    return Array.from(this.services.values()).filter(s => s.active);
+    return Array.from(this.services.values()).filter(s => s.isActive);
   }
 
   async getService(id: number): Promise<Service | undefined> {
     return this.services.get(id);
   }
 
-  async getServiceBySlug(slug: string): Promise<Service | undefined> {
-    return Array.from(this.services.values()).find(s => s.slug === slug && s.active);
-  }
-
-  async createService(insertService: InsertService): Promise<Service> {
-    const id = this.currentServiceId++;
-    const service: Service = { ...insertService, id };
-    this.services.set(id, service);
-    return service;
-  }
-
-  // Blog Posts
-  async getBlogPosts(): Promise<BlogPost[]> {
-    return Array.from(this.blogPosts.values()).filter(p => p.active);
-  }
-
-  async getBlogPost(id: number): Promise<BlogPost | undefined> {
-    return this.blogPosts.get(id);
-  }
-
-  async getBlogPostBySlug(slug: string): Promise<BlogPost | undefined> {
-    return Array.from(this.blogPosts.values()).find(p => p.slug === slug && p.active);
-  }
-
-  async createBlogPost(insertBlogPost: InsertBlogPost): Promise<BlogPost> {
-    const id = this.currentBlogPostId++;
-    const post: BlogPost = { 
-      ...insertBlogPost, 
+  async createService(service: InsertService): Promise<Service> {
+    const id = this.currentId++;
+    const newService: Service = { 
+      ...service, 
       id, 
-      publishedAt: new Date() 
+      createdAt: new Date() 
     };
-    this.blogPosts.set(id, post);
-    return post;
+    this.services.set(id, newService);
+    return newService;
   }
 
-  // Leads
+  // Team Member methods
+  async getTeamMembers(): Promise<TeamMember[]> {
+    return Array.from(this.teamMembers.values()).filter(m => m.isActive);
+  }
+
+  async getTeamMember(id: number): Promise<TeamMember | undefined> {
+    return this.teamMembers.get(id);
+  }
+
+  async createTeamMember(member: InsertTeamMember): Promise<TeamMember> {
+    const id = this.currentId++;
+    const newMember: TeamMember = { ...member, id };
+    this.teamMembers.set(id, newMember);
+    return newMember;
+  }
+
+  // Lead methods
   async getLeads(): Promise<Lead[]> {
     return Array.from(this.leads.values());
   }
 
-  async createLead(insertLead: InsertLead): Promise<Lead> {
-    const id = this.currentLeadId++;
-    const lead: Lead = { 
-      ...insertLead, 
+  async createLead(lead: InsertLead): Promise<Lead> {
+    const id = this.currentId++;
+    const newLead: Lead = { 
+      ...lead, 
       id, 
+      status: "new",
+      source: "website",
       createdAt: new Date() 
     };
-    this.leads.set(id, lead);
-    return lead;
+    this.leads.set(id, newLead);
+    return newLead;
   }
 
-  // Reviews
+  // Review methods
   async getReviews(): Promise<Review[]> {
-    return Array.from(this.reviews.values()).filter(r => r.active);
+    return Array.from(this.reviews.values()).filter(r => r.isPublished);
   }
 
-  async createReview(insertReview: InsertReview): Promise<Review> {
-    const id = this.currentReviewId++;
-    const review: Review = { 
-      ...insertReview, 
+  async createReview(review: InsertReview): Promise<Review> {
+    const id = this.currentId++;
+    const newReview: Review = { 
+      ...review, 
       id, 
-      date: new Date() 
+      isPublished: false,
+      createdAt: new Date() 
     };
-    this.reviews.set(id, review);
-    return review;
+    this.reviews.set(id, newReview);
+    return newReview;
+  }
+
+  // Blog Post methods
+  async getBlogPosts(): Promise<BlogPost[]> {
+    return Array.from(this.blogPosts.values()).filter(p => p.isPublished);
+  }
+
+  async getBlogPost(slug: string): Promise<BlogPost | undefined> {
+    return Array.from(this.blogPosts.values()).find(p => p.slug === slug && p.isPublished);
+  }
+
+  async createBlogPost(post: InsertBlogPost): Promise<BlogPost> {
+    const id = this.currentId++;
+    const newPost: BlogPost = { 
+      ...post, 
+      id, 
+      createdAt: new Date(),
+      updatedAt: new Date()
+    };
+    this.blogPosts.set(id, newPost);
+    return newPost;
   }
 }
 

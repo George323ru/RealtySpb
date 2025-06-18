@@ -1,23 +1,20 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertLeadSchema, insertPropertySchema } from "@shared/schema";
+import { insertLeadSchema, insertReviewSchema } from "@shared/schema";
 import { z } from "zod";
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  // Properties
+  // Properties routes
   app.get("/api/properties", async (req, res) => {
     try {
       const filters = {
         propertyType: req.query.propertyType as string,
-        transactionType: req.query.transactionType as string,
         district: req.query.district as string,
         priceFrom: req.query.priceFrom ? parseInt(req.query.priceFrom as string) : undefined,
         priceTo: req.query.priceTo ? parseInt(req.query.priceTo as string) : undefined,
-        areaFrom: req.query.areaFrom ? parseInt(req.query.areaFrom as string) : undefined,
-        areaTo: req.query.areaTo ? parseInt(req.query.areaTo as string) : undefined,
+        buildingType: req.query.buildingType as string,
         rooms: req.query.rooms ? parseInt(req.query.rooms as string) : undefined,
-        isNewBuilding: req.query.isNewBuilding === 'true' ? true : req.query.isNewBuilding === 'false' ? false : undefined,
       };
       
       const properties = await storage.getProperties(filters);
@@ -42,20 +39,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/properties", async (req, res) => {
-    try {
-      const validatedData = insertPropertySchema.parse(req.body);
-      const property = await storage.createProperty(validatedData);
-      res.status(201).json(property);
-    } catch (error) {
-      if (error instanceof z.ZodError) {
-        return res.status(400).json({ message: "Invalid property data", errors: error.errors });
-      }
-      res.status(500).json({ message: "Failed to create property" });
-    }
-  });
-
-  // New Buildings
+  // New buildings routes
   app.get("/api/new-buildings", async (req, res) => {
     try {
       const buildings = await storage.getNewBuildings();
@@ -71,41 +55,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const building = await storage.getNewBuilding(id);
       
       if (!building) {
-        return res.status(404).json({ message: "New building not found" });
+        return res.status(404).json({ message: "Building not found" });
       }
       
       res.json(building);
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch new building" });
+      res.status(500).json({ message: "Failed to fetch building" });
     }
   });
 
-  // Team
-  app.get("/api/team", async (req, res) => {
-    try {
-      const team = await storage.getTeamMembers();
-      res.json(team);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch team members" });
-    }
-  });
-
-  app.get("/api/team/:id", async (req, res) => {
-    try {
-      const id = parseInt(req.params.id);
-      const member = await storage.getTeamMember(id);
-      
-      if (!member) {
-        return res.status(404).json({ message: "Team member not found" });
-      }
-      
-      res.json(member);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch team member" });
-    }
-  });
-
-  // Services
+  // Services routes
   app.get("/api/services", async (req, res) => {
     try {
       const services = await storage.getServices();
@@ -115,10 +74,10 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/services/:slug", async (req, res) => {
+  app.get("/api/services/:id", async (req, res) => {
     try {
-      const slug = req.params.slug;
-      const service = await storage.getServiceBySlug(slug);
+      const id = parseInt(req.params.id);
+      const service = await storage.getService(id);
       
       if (!service) {
         return res.status(404).json({ message: "Service not found" });
@@ -130,7 +89,41 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Blog
+  // Team routes
+  app.get("/api/team", async (req, res) => {
+    try {
+      const team = await storage.getTeamMembers();
+      res.json(team);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch team members" });
+    }
+  });
+
+  // Reviews routes
+  app.get("/api/reviews", async (req, res) => {
+    try {
+      const reviews = await storage.getReviews();
+      res.json(reviews);
+    } catch (error) {
+      res.status(500).json({ message: "Failed to fetch reviews" });
+    }
+  });
+
+  app.post("/api/reviews", async (req, res) => {
+    try {
+      const validatedData = insertReviewSchema.parse(req.body);
+      const review = await storage.createReview(validatedData);
+      res.status(201).json(review);
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ message: "Invalid review data", errors: error.errors });
+      } else {
+        res.status(500).json({ message: "Failed to create review" });
+      }
+    }
+  });
+
+  // Blog routes
   app.get("/api/blog", async (req, res) => {
     try {
       const posts = await storage.getBlogPosts();
@@ -143,7 +136,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/blog/:slug", async (req, res) => {
     try {
       const slug = req.params.slug;
-      const post = await storage.getBlogPostBySlug(slug);
+      const post = await storage.getBlogPost(slug);
       
       if (!post) {
         return res.status(404).json({ message: "Blog post not found" });
@@ -155,17 +148,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Reviews
-  app.get("/api/reviews", async (req, res) => {
-    try {
-      const reviews = await storage.getReviews();
-      res.json(reviews);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch reviews" });
-    }
-  });
-
-  // Leads
+  // Leads routes
   app.post("/api/leads", async (req, res) => {
     try {
       const validatedData = insertLeadSchema.parse(req.body);
@@ -173,18 +156,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(201).json(lead);
     } catch (error) {
       if (error instanceof z.ZodError) {
-        return res.status(400).json({ message: "Invalid lead data", errors: error.errors });
+        res.status(400).json({ message: "Invalid lead data", errors: error.errors });
+      } else {
+        res.status(500).json({ message: "Failed to create lead" });
       }
-      res.status(500).json({ message: "Failed to create lead" });
     }
   });
 
-  app.get("/api/leads", async (req, res) => {
+  // Contact form route
+  app.post("/api/contact", async (req, res) => {
     try {
-      const leads = await storage.getLeads();
-      res.json(leads);
+      const contactData = {
+        ...req.body,
+        serviceType: "консультация"
+      };
+      const validatedData = insertLeadSchema.parse(contactData);
+      const lead = await storage.createLead(validatedData);
+      res.status(201).json({ message: "Заявка отправлена успешно", lead });
     } catch (error) {
-      res.status(500).json({ message: "Failed to fetch leads" });
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ message: "Invalid contact data", errors: error.errors });
+      } else {
+        res.status(500).json({ message: "Failed to send contact form" });
+      }
     }
   });
 

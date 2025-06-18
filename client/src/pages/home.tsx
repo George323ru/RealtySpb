@@ -5,52 +5,115 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import SearchForm from "@/components/search-form";
 import PropertyCard from "@/components/property-card";
-import TeamCard from "@/components/team-card";
-import ServiceCard from "@/components/service-card";
 import ConsultationForm from "@/components/consultation-form";
-import { Property, NewBuilding, TeamMember, Service } from "@shared/schema";
 import { 
-  ShoppingCart, 
+  Home as HomeIcon, 
   DollarSign, 
   Key, 
-  Settings, 
+  Wrench,
   ArrowRight,
-  Star,
-  CheckCircle
+  Hammer,
+  PaintbrushVertical,
+  Building,
+  MapPin,
+  Scale,
+  Handshake
 } from "lucide-react";
+import type { Property, NewBuilding, Service, TeamMember } from "@shared/schema";
 
-const Home = () => {
-  const { data: featuredProperties = [], isLoading: propertiesLoading } = useQuery<Property[]>({
-    queryKey: ["/api/properties?limit=3"],
+export default function Home() {
+  const { data: properties = [] } = useQuery<Property[]>({
+    queryKey: ["/api/properties"],
   });
 
-  const { data: newBuildings = [], isLoading: buildingsLoading } = useQuery<NewBuilding[]>({
+  const { data: newBuildings = [] } = useQuery<NewBuilding[]>({
     queryKey: ["/api/new-buildings"],
   });
 
-  const { data: teamMembers = [], isLoading: teamLoading } = useQuery<TeamMember[]>({
+  const { data: services = [] } = useQuery<Service[]>({
+    queryKey: ["/api/services"],
+  });
+
+  const { data: team = [] } = useQuery<TeamMember[]>({
     queryKey: ["/api/team"],
   });
 
-  const { data: services = [], isLoading: servicesLoading } = useQuery<Service[]>({
-    queryKey: ["/api/services"],
-  });
+  const heroStyle = {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat'
+  };
+
+  const quickActions = [
+    {
+      title: "Хочу купить",
+      description: "Квартиры, дома, коммерческая недвижимость, земля",
+      features: ["Новостройки", "Вторичный рынок", "Инвестиции"],
+      icon: HomeIcon,
+      color: "from-blue-50 to-blue-100 border-blue-200",
+      iconBg: "bg-blue-500",
+      buttonColor: "bg-blue-500 hover:bg-blue-600",
+      link: "/buy"
+    },
+    {
+      title: "Хочу продать",
+      description: "Быстрая и выгодная продажа вашей недвижимости",
+      features: ["Оценка стоимости", "Подготовка к продаже", "Поиск покупателей"],
+      icon: DollarSign,
+      color: "from-green-50 to-green-100 border-green-200",
+      iconBg: "bg-green-500",
+      buttonColor: "bg-green-500 hover:bg-green-600",
+      link: "/sell"
+    },
+    {
+      title: "Хочу сдать",
+      description: "Сдача в аренду с гарантией дохода",
+      features: ["Поиск арендаторов", "Оформление договора", "Управление арендой"],
+      icon: Key,
+      color: "from-purple-50 to-purple-100 border-purple-200",
+      iconBg: "bg-purple-500",
+      buttonColor: "bg-purple-500 hover:bg-purple-600",
+      link: "/rent"
+    },
+    {
+      title: "Дополнительные услуги",
+      description: "Ремонт, дизайн, юридическое сопровождение",
+      features: ["13 видов услуг", "Полный цикл работ", "Профессиональная команда"],
+      icon: Wrench,
+      color: "from-orange-50 to-orange-100 border-orange-200",
+      iconBg: "bg-accent-orange",
+      buttonColor: "bg-accent-orange hover:bg-orange-600",
+      link: "/services"
+    }
+  ];
+
+  const additionalServices = [
+    { name: "Предпродажная подготовка", icon: Hammer, color: "bg-blue-100 text-blue-500" },
+    { name: "Дизайн-проект", icon: PaintbrushVertical, color: "bg-purple-100 text-purple-500" },
+    { name: "Ремонт", icon: Wrench, color: "bg-green-100 text-green-500" },
+    { name: "Услуги по земле", icon: MapPin, color: "bg-yellow-100 text-yellow-500" },
+    { name: "Подбор участка", icon: MapPin, color: "bg-red-100 text-red-500" },
+    { name: "Строительство", icon: Building, color: "bg-indigo-100 text-indigo-500" },
+    { name: "Проектирование", icon: Building, color: "bg-pink-100 text-pink-500" },
+    { name: "Инженерные системы", icon: Wrench, color: "bg-teal-100 text-teal-500" },
+    { name: "Ландшафтный дизайн", icon: PaintbrushVertical, color: "bg-emerald-100 text-emerald-500" },
+    { name: "Юридическая проверка", icon: Scale, color: "bg-orange-100 text-orange-500" },
+    { name: "Сопровождение сделки", icon: Handshake, color: "bg-cyan-100 text-cyan-500" },
+    { name: "Управление недвижимостью", icon: Building, color: "bg-violet-100 text-violet-500" },
+    { name: "Комплектация мебелью", icon: HomeIcon, color: "bg-rose-100 text-rose-500" }
+  ];
 
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative hero-bg min-h-screen flex items-center">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1600')",
-          }}
-        />
-        <div className="absolute inset-0 bg-black bg-opacity-40" />
-        
+      <section 
+        className="relative min-h-screen flex items-center"
+        style={heroStyle}
+      >
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight animate-fade-in-up">
+            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Недвижимость в{" "}
               <span className="text-yandex-yellow">Санкт-Петербурге</span>
             </h1>
@@ -58,9 +121,7 @@ const Home = () => {
               Профессиональные услуги по покупке, продаже и аренде недвижимости. Более 15 лет на рынке СПб.
             </p>
             
-            <div className="mt-12">
-              <SearchForm />
-            </div>
+            <SearchForm className="max-w-5xl mx-auto mt-12" />
           </div>
         </div>
       </section>
@@ -78,89 +139,29 @@ const Home = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Buy Card */}
-            <Card className="group bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200 hover:shadow-xl transition-all duration-300 cursor-pointer">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <ShoppingCart className="text-white w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-text-primary mb-3">Хочу купить</h3>
-                <p className="text-text-secondary mb-6">Квартиры, дома, коммерческая недвижимость, земля</p>
-                <div className="text-sm text-text-secondary space-y-1 mb-6">
-                  <div>• Новостройки</div>
-                  <div>• Вторичный рынок</div>
-                  <div>• Инвестиции</div>
-                </div>
-                <Link href="/buy">
-                  <Button className="w-full bg-blue-500 hover:bg-blue-600">
-                    Начать поиск
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-            
-            {/* Sell Card */}
-            <Card className="group bg-gradient-to-br from-green-50 to-green-100 border-green-200 hover:shadow-xl transition-all duration-300 cursor-pointer">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <DollarSign className="text-white w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-text-primary mb-3">Хочу продать</h3>
-                <p className="text-text-secondary mb-6">Быстрая и выгодная продажа вашей недвижимости</p>
-                <div className="text-sm text-text-secondary space-y-1 mb-6">
-                  <div>• Оценка стоимости</div>
-                  <div>• Подготовка к продаже</div>
-                  <div>• Поиск покупателей</div>
-                </div>
-                <Link href="/sell">
-                  <Button className="w-full bg-green-500 hover:bg-green-600">
-                    Оценить квартиру
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-            
-            {/* Rent Card */}
-            <Card className="group bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200 hover:shadow-xl transition-all duration-300 cursor-pointer">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-purple-500 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Key className="text-white w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-text-primary mb-3">Хочу сдать</h3>
-                <p className="text-text-secondary mb-6">Сдача в аренду с гарантией дохода</p>
-                <div className="text-sm text-text-secondary space-y-1 mb-6">
-                  <div>• Поиск арендаторов</div>
-                  <div>• Оформление договора</div>
-                  <div>• Управление арендой</div>
-                </div>
-                <Link href="/rent">
-                  <Button className="w-full bg-purple-500 hover:bg-purple-600">
-                    Сдать в аренду
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
-            
-            {/* Services Card */}
-            <Card className="group bg-gradient-to-br from-orange-50 to-orange-100 border-orange-200 hover:shadow-xl transition-all duration-300 cursor-pointer">
-              <CardContent className="p-8 text-center">
-                <div className="w-16 h-16 bg-accent-orange rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-                  <Settings className="text-white w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold text-text-primary mb-3">Дополнительные услуги</h3>
-                <p className="text-text-secondary mb-6">Ремонт, дизайн, юридическое сопровождение</p>
-                <div className="text-sm text-text-secondary space-y-1 mb-6">
-                  <div>• 13 видов услуг</div>
-                  <div>• Полный цикл работ</div>
-                  <div>• Профессиональная команда</div>
-                </div>
-                <Link href="/services">
-                  <Button className="w-full bg-accent-orange hover:bg-orange-600">
-                    Все услуги
-                  </Button>
-                </Link>
-              </CardContent>
-            </Card>
+            {quickActions.map((action, index) => (
+              <Card key={index} className={`group bg-gradient-to-br ${action.color} hover:shadow-xl transition-all duration-300 cursor-pointer`}>
+                <CardContent className="p-8 text-center">
+                  <div className={`w-16 h-16 ${action.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
+                    <action.icon className="text-white text-2xl w-8 h-8" />
+                  </div>
+                  <h3 className="text-xl font-bold text-text-primary mb-3">{action.title}</h3>
+                  <p className="text-text-secondary mb-6">{action.description}</p>
+                  <div className="text-sm text-text-secondary space-y-1 mb-6">
+                    {action.features.map((feature, idx) => (
+                      <div key={idx}>• {feature}</div>
+                    ))}
+                  </div>
+                  <Link href={action.link}>
+                    <Button className={`w-full ${action.buttonColor} text-white font-medium`}>
+                      {action.title === "Хочу купить" ? "Начать поиск" :
+                       action.title === "Хочу продать" ? "Оценить квартиру" :
+                       action.title === "Хочу сдать" ? "Сдать в аренду" : "Все услуги"}
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
@@ -178,34 +179,20 @@ const Home = () => {
               </p>
             </div>
             <div className="mt-6 lg:mt-0">
-              <Link href="/buy" className="inline-flex items-center text-accent-orange font-medium hover:underline">
-                Смотреть все объекты
-                <ArrowRight className="ml-2 w-4 h-4" />
+              <Link href="/buy">
+                <Button variant="ghost" className="text-accent-orange font-medium hover:underline">
+                  Смотреть все объекты
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
               </Link>
             </div>
           </div>
           
-          {propertiesLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="bg-white rounded-2xl p-4">
-                  <div className="w-full h-64 bg-gray-200 rounded-lg mb-4 skeleton" />
-                  <div className="h-4 bg-gray-200 rounded mb-2 skeleton" />
-                  <div className="h-4 bg-gray-200 rounded w-3/4 skeleton" />
-                </div>
-              ))}
-            </div>
-          ) : featuredProperties.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {featuredProperties.slice(0, 3).map((property) => (
-                <PropertyCard key={property.id} property={property} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-text-secondary">Нет доступных объектов для отображения</p>
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {properties.slice(0, 3).map((property) => (
+              <PropertyCard key={property.id} property={property} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -221,77 +208,61 @@ const Home = () => {
             </p>
           </div>
           
-          {buildingsLoading ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {[1, 2].map((i) => (
-                <div key={i} className="bg-neutral-100 rounded-2xl p-8">
-                  <div className="h-6 bg-gray-200 rounded mb-4 skeleton" />
-                  <div className="h-4 bg-gray-200 rounded mb-2 skeleton" />
-                  <div className="h-4 bg-gray-200 rounded w-2/3 skeleton" />
-                </div>
-              ))}
-            </div>
-          ) : newBuildings.length > 0 ? (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {newBuildings.slice(0, 2).map((building) => (
-                <Card key={building.id} className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200 overflow-hidden">
-                  <div className="flex flex-col lg:flex-row">
-                    <div className="lg:w-1/2">
-                      <img
-                        src={building.images[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800"}
-                        alt={building.name}
-                        className="w-full h-64 lg:h-full object-cover"
-                      />
-                    </div>
-                    <CardContent className="lg:w-1/2 p-8">
-                      <div className="flex items-center mb-4">
-                        <Badge className="bg-green-500 text-white mr-3">
-                          {building.readiness}
-                        </Badge>
-                        <span className="text-sm text-text-secondary">от застройщика</span>
-                      </div>
-                      <h3 className="text-2xl font-bold text-text-primary mb-3">{building.name}</h3>
-                      <p className="text-text-secondary mb-4 flex items-center">
-                        <i className="fas fa-map-marker-alt mr-1 text-accent-orange"></i>
-                        {building.location}
-                      </p>
-                      <div className="grid grid-cols-2 gap-4 mb-6">
-                        <div>
-                          <div className="text-sm text-text-secondary">Квартиры от</div>
-                          <div className="text-xl font-bold text-text-primary">
-                            {new Intl.NumberFormat("ru-RU").format(building.priceFrom)} ₽
-                          </div>
-                        </div>
-                        <div>
-                          <div className="text-sm text-text-secondary">За м²</div>
-                          <div className="text-xl font-bold text-text-primary">
-                            от {new Intl.NumberFormat("ru-RU").format(building.pricePerMeterFrom)} ₽
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-4 text-sm text-text-secondary mb-6">
-                        <span>{building.totalFlats} квартир</span>
-                        <span>{building.readiness}</span>
-                      </div>
-                      <Button className="w-full bg-blue-500 hover:bg-blue-600">
-                        Посмотреть планировки
-                      </Button>
-                    </CardContent>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {newBuildings.slice(0, 2).map((building) => (
+              <Card key={building.id} className="overflow-hidden border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
+                <div className="flex flex-col lg:flex-row">
+                  <div className="lg:w-1/2">
+                    <img 
+                      src={building.images?.[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800"} 
+                      alt={building.name}
+                      className="w-full h-64 lg:h-full object-cover" 
+                    />
                   </div>
-                </Card>
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-text-secondary">Нет доступных новостроек для отображения</p>
-            </div>
-          )}
+                  <div className="lg:w-1/2 p-8">
+                    <div className="flex items-center mb-4">
+                      <Badge className="bg-green-500 text-white mr-3">
+                        {building.readiness}
+                      </Badge>
+                      <span className="text-sm text-text-secondary">от застройщика</span>
+                    </div>
+                    <h3 className="text-2xl font-bold text-text-primary mb-3">{building.name}</h3>
+                    <p className="text-text-secondary mb-4 flex items-center">
+                      <MapPin className="w-4 h-4 mr-1 text-accent-orange" />
+                      {building.location}
+                    </p>
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div>
+                        <div className="text-sm text-text-secondary">Квартиры от</div>
+                        <div className="text-xl font-bold text-text-primary">
+                          {building.priceFrom?.toLocaleString('ru-RU')} ₽
+                        </div>
+                      </div>
+                      <div>
+                        <div className="text-sm text-text-secondary">За м²</div>
+                        <div className="text-xl font-bold text-text-primary">
+                          от {building.pricePerMeter?.toLocaleString('ru-RU')} ₽
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4 text-sm text-text-secondary mb-6">
+                      <span>{building.totalFlats} квартир</span>
+                      <span>{building.readiness}</span>
+                    </div>
+                    <Button className="w-full bg-blue-500 text-white hover:bg-blue-600">
+                      Посмотреть планировки
+                    </Button>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
           
           <div className="text-center mt-12">
             <Link href="/new-buildings">
-              <Button className="bg-accent-orange hover:bg-orange-600 text-white px-8 py-4 text-lg">
+              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600">
                 Все новостройки СПб
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
           </div>
@@ -310,27 +281,26 @@ const Home = () => {
             </p>
           </div>
           
-          {servicesLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
-                <div key={i} className="bg-white rounded-xl p-6">
-                  <div className="w-12 h-12 bg-gray-200 rounded-lg mb-4 skeleton" />
-                  <div className="h-4 bg-gray-200 rounded mb-2 skeleton" />
-                  <div className="h-3 bg-gray-200 rounded mb-4 skeleton" />
-                </div>
-              ))}
-            </div>
-          ) : services.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-              {services.slice(0, 8).map((service) => (
-                <ServiceCard key={service.id} service={service} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-text-secondary">Нет доступных услуг для отображения</p>
-            </div>
-          )}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {additionalServices.map((service, index) => (
+              <Card key={index} className="bg-white hover:shadow-lg transition-shadow border border-neutral-200">
+                <CardContent className="p-6">
+                  <div className={`w-12 h-12 ${service.color} rounded-lg flex items-center justify-center mb-4`}>
+                    <service.icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-semibold text-text-primary mb-2">{service.name}</h3>
+                  <p className="text-sm text-text-secondary mb-4">
+                    Профессиональные услуги высокого качества с гарантией результата
+                  </p>
+                  <Link href="/services">
+                    <Button variant="ghost" className="text-accent-orange font-medium text-sm hover:underline p-0">
+                      Подробнее →
+                    </Button>
+                  </Link>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -346,27 +316,41 @@ const Home = () => {
             </p>
           </div>
           
-          {teamLoading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {[1, 2, 3, 4].map((i) => (
-                <div key={i} className="text-center">
-                  <div className="w-32 h-32 bg-gray-200 rounded-full mx-auto mb-6 skeleton" />
-                  <div className="h-4 bg-gray-200 rounded mb-2 skeleton" />
-                  <div className="h-3 bg-gray-200 rounded skeleton" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {team.slice(0, 4).map((member) => (
+              <div key={member.id} className="text-center group">
+                <div className="relative mb-6">
+                  <img 
+                    src={member.photo} 
+                    alt={member.name}
+                    className="w-32 h-32 rounded-full mx-auto object-cover group-hover:scale-105 transition-transform" 
+                  />
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                 </div>
-              ))}
-            </div>
-          ) : teamMembers.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {teamMembers.slice(0, 4).map((member) => (
-                <TeamCard key={member.id} member={member} />
-              ))}
-            </div>
-          ) : (
-            <div className="text-center py-12">
-              <p className="text-text-secondary">Информация о команде не доступна</p>
-            </div>
-          )}
+                <h3 className="text-xl font-semibold text-text-primary mb-2">{member.name}</h3>
+                <p className="text-accent-orange font-medium mb-2">{member.position}</p>
+                <p className="text-sm text-text-secondary mb-4">{member.experience}</p>
+                <div className="flex justify-center space-x-3">
+                  {member.telegram && (
+                    <a 
+                      href={`https://t.me/${member.telegram.replace('@', '')}`}
+                      className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+                    >
+                      <i className="fab fa-telegram text-sm"></i>
+                    </a>
+                  )}
+                  {member.whatsapp && (
+                    <a 
+                      href={`https://wa.me/${member.whatsapp.replace(/[^0-9]/g, '')}`}
+                      className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+                    >
+                      <i className="fab fa-whatsapp text-sm"></i>
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -374,15 +358,17 @@ const Home = () => {
       <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <ConsultationForm 
-              title="Получите консультацию эксперта бесплатно"
-              description="Оставьте заявку и наш специалист свяжется с вами в течение 15 минут для решения вашего вопроса"
-            />
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
+              Получите консультацию эксперта бесплатно
+            </h2>
+            <p className="text-xl mb-8 opacity-90">
+              Оставьте заявку и наш специалист свяжется с вами в течение 15 минут для решения вашего вопроса
+            </p>
+            
+            <ConsultationForm className="max-w-2xl mx-auto" />
           </div>
         </div>
       </section>
     </div>
   );
-};
-
-export default Home;
+}

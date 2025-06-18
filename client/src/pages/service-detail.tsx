@@ -1,52 +1,70 @@
 import { useQuery } from "@tanstack/react-query";
-import { useParams, Link } from "wouter";
-import { Card, CardContent } from "@/components/ui/card";
+import { Link, useParams } from "wouter";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Separator } from "@/components/ui/separator";
 import ConsultationForm from "@/components/consultation-form";
-import ServiceCard from "@/components/service-card";
-import { Service } from "@shared/schema";
 import { 
   ArrowLeft, 
   CheckCircle, 
   Clock, 
-  DollarSign, 
-  Star,
+  Star, 
   Award,
-  Shield,
-  Users,
-  X
+  Phone,
+  MessageCircle
 } from "lucide-react";
+import type { Service } from "@shared/schema";
 
-const ServiceDetail = () => {
-  const { slug } = useParams<{ slug: string }>();
+export default function ServiceDetail() {
+  const params = useParams();
+  const serviceId = parseInt(params.id || '1');
 
-  const { data: service, isLoading, error } = useQuery<Service>({
-    queryKey: [`/api/services/${slug}`],
+  const { data: service, isLoading } = useQuery<Service>({
+    queryKey: [`/api/services/${serviceId}`],
   });
 
-  const { data: allServices = [] } = useQuery<Service[]>({
-    queryKey: ["/api/services"],
-  });
+  // Mock detailed service data since we don't have extended schema
+  const serviceDetails = {
+    1: {
+      fullDescription: "Предпродажная подготовка — это комплекс мероприятий, направленных на увеличение рыночной стоимости недвижимости и ускорение процесса продажи. Наши специалисты проведут детальный анализ объекта, выявят его слабые стороны и предложат экономически обоснованные улучшения.",
+      stages: [
+        "Первичный осмотр и анализ объекта",
+        "Составление плана улучшений",
+        "Выполнение косметических работ",
+        "Профессиональная фотосъемка",
+        "Подготовка презентационных материалов"
+      ],
+      benefits: [
+        "Увеличение стоимости на 10-20%",
+        "Сокращение времени продажи",
+        "Привлечение большего числа покупателей",
+        "Улучшение восприятия объекта"
+      ],
+      timeline: "7-14 дней",
+      warranty: "6 месяцев",
+      images: [
+        "https://images.unsplash.com/photo-1581858726788-75bc0f6a952d?w=800",
+        "https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800"
+      ]
+    }
+  };
+
+  const details = serviceDetails[serviceId as keyof typeof serviceDetails] || serviceDetails[1];
 
   if (isLoading) {
     return (
       <div className="min-h-screen bg-neutral-50">
         <div className="container mx-auto px-4 py-8">
-          <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-1/4 mb-8"></div>
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              <div className="lg:col-span-2">
-                <div className="h-6 bg-gray-200 rounded w-3/4 mb-4"></div>
-                <div className="h-4 bg-gray-200 rounded w-1/2 mb-8"></div>
-                <div className="space-y-4">
-                  <div className="h-4 bg-gray-200 rounded"></div>
-                  <div className="h-4 bg-gray-200 rounded w-5/6"></div>
-                  <div className="h-4 bg-gray-200 rounded w-4/6"></div>
+          <div className="max-w-6xl mx-auto">
+            <div className="animate-pulse">
+              <div className="h-8 bg-neutral-200 rounded mb-8 w-1/3"></div>
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div className="lg:col-span-2">
+                  <div className="h-64 bg-neutral-200 rounded mb-6"></div>
+                  <div className="h-32 bg-neutral-200 rounded mb-6"></div>
                 </div>
-              </div>
-              <div>
-                <div className="h-64 bg-gray-200 rounded"></div>
+                <div className="h-96 bg-neutral-200 rounded"></div>
               </div>
             </div>
           </div>
@@ -55,345 +73,297 @@ const ServiceDetail = () => {
     );
   }
 
-  if (error || !service) {
+  if (!service) {
     return (
       <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
-        <Card className="w-full max-w-md mx-4">
-          <CardContent className="pt-6">
-            <div className="text-center">
-              <X className="h-16 w-16 text-red-500 mx-auto mb-4" />
-              <h1 className="text-2xl font-bold text-text-primary mb-2">
-                Услуга не найдена
-              </h1>
-              <p className="text-text-secondary mb-6">
-                Запрашиваемая услуга не существует или была удалена
-              </p>
-              <Link href="/services">
-                <Button className="bg-accent-orange hover:bg-orange-600">
-                  Вернуться к услугам
-                </Button>
-              </Link>
-            </div>
-          </CardContent>
+        <Card className="p-8 text-center">
+          <h2 className="text-2xl font-bold text-text-primary mb-2">
+            Услуга не найдена
+          </h2>
+          <p className="text-text-secondary mb-4">
+            Возможно, услуга была удалена или перемещена
+          </p>
+          <Link href="/services">
+            <Button>Вернуться к услугам</Button>
+          </Link>
         </Card>
       </div>
     );
   }
-
-  const relatedServices = allServices
-    .filter(s => s.id !== service.id && s.category === service.category)
-    .slice(0, 3);
-
-  const getIconColorClass = (category: string) => {
-    const colors = {
-      blue: "bg-blue-100 text-blue-500",
-      purple: "bg-purple-100 text-purple-500",
-      green: "bg-green-100 text-green-500",
-      yellow: "bg-yellow-100 text-yellow-500",
-      red: "bg-red-100 text-red-500",
-      indigo: "bg-indigo-100 text-indigo-500",
-      pink: "bg-pink-100 text-pink-500",
-      teal: "bg-teal-100 text-teal-500",
-      emerald: "bg-emerald-100 text-emerald-500",
-      orange: "bg-orange-100 text-orange-500",
-      cyan: "bg-cyan-100 text-cyan-500",
-      violet: "bg-violet-100 text-violet-500",
-      rose: "bg-rose-100 text-rose-500",
-    };
-    return colors[category as keyof typeof colors] || colors.blue;
-  };
 
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Breadcrumb */}
       <div className="bg-white border-b border-neutral-200">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center space-x-2 text-sm text-text-secondary">
-            <Link href="/" className="hover:text-accent-orange">Главная</Link>
-            <span>/</span>
-            <Link href="/services" className="hover:text-accent-orange">Услуги</Link>
-            <span>/</span>
-            <span className="text-text-primary">{service.name}</span>
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center space-x-2 text-sm text-text-secondary">
+              <Link href="/" className="hover:text-accent-orange">Главная</Link>
+              <span>/</span>
+              <Link href="/services" className="hover:text-accent-orange">Услуги</Link>
+              <span>/</span>
+              <span className="text-text-primary">{service.name}</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div className="container mx-auto px-4 py-8">
-        <div className="mb-6">
+        <div className="max-w-6xl mx-auto">
+          {/* Back Button */}
           <Link href="/services">
-            <Button variant="outline" className="mb-4">
+            <Button variant="ghost" className="mb-6">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Назад к услугам
             </Button>
           </Link>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Main Content */}
-          <div className="lg:col-span-2 space-y-8">
-            {/* Service Header */}
-            <Card>
-              <CardContent className="p-8">
-                <div className="flex items-start space-x-6">
-                  <div className={`w-16 h-16 rounded-xl flex items-center justify-center flex-shrink-0 ${getIconColorClass(service.category)}`}>
-                    <i className={`${service.icon} text-2xl`}></i>
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-3 mb-3">
-                      <h1 className="text-3xl font-bold text-text-primary">
-                        {service.name}
-                      </h1>
-                      <Badge variant="outline" className="capitalize">
-                        {service.category === "main" ? "Основная" : "Дополнительная"}
-                      </Badge>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {/* Main Content */}
+            <div className="lg:col-span-2">
+              {/* Service Header */}
+              <Card className="mb-8">
+                <CardHeader>
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <CardTitle className="text-3xl mb-2">{service.name}</CardTitle>
+                      <p className="text-lg text-text-secondary">{service.shortDescription}</p>
                     </div>
-                    <p className="text-lg text-text-secondary mb-4">
+                    <Badge className="bg-accent-orange text-white text-lg px-4 py-2">
+                      {service.price}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                
+                <CardContent>
+                  {/* Images */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                    {details.images.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt={`${service.name} - фото ${index + 1}`}
+                        className="w-full h-48 object-cover rounded-lg"
+                      />
+                    ))}
+                  </div>
+
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+                    <div className="text-center p-4 bg-neutral-100 rounded-lg">
+                      <Clock className="w-6 h-6 mx-auto mb-2 text-text-secondary" />
+                      <div className="text-sm text-text-secondary">Срок выполнения</div>
+                      <div className="font-semibold">{details.timeline}</div>
+                    </div>
+                    
+                    <div className="text-center p-4 bg-neutral-100 rounded-lg">
+                      <Award className="w-6 h-6 mx-auto mb-2 text-text-secondary" />
+                      <div className="text-sm text-text-secondary">Гарантия</div>
+                      <div className="font-semibold">{details.warranty}</div>
+                    </div>
+                    
+                    <div className="text-center p-4 bg-neutral-100 rounded-lg">
+                      <Star className="w-6 h-6 mx-auto mb-2 text-text-secondary" />
+                      <div className="text-sm text-text-secondary">Рейтинг</div>
+                      <div className="font-semibold">4.9/5</div>
+                    </div>
+                  </div>
+
+                  <Separator className="my-8" />
+
+                  {/* Description */}
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-semibold mb-4">Описание услуги</h3>
+                    <p className="text-text-secondary leading-relaxed mb-6">
+                      {details.fullDescription}
+                    </p>
+                    <p className="text-text-secondary leading-relaxed">
                       {service.description}
                     </p>
-                    <div className="flex items-center space-x-6">
-                      {service.price && (
-                        <div className="flex items-center">
-                          <DollarSign className="w-5 h-5 text-accent-orange mr-2" />
-                          <span className="font-semibold text-text-primary">{service.price}</span>
+                  </div>
+
+                  {/* Stages */}
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-semibold mb-4">Этапы выполнения</h3>
+                    <div className="space-y-4">
+                      {details.stages.map((stage, index) => (
+                        <div key={index} className="flex items-start">
+                          <div className="w-8 h-8 bg-accent-orange text-white rounded-full flex items-center justify-center text-sm font-semibold mr-4 flex-shrink-0 mt-1">
+                            {index + 1}
+                          </div>
+                          <p className="text-text-secondary">{stage}</p>
                         </div>
-                      )}
-                      {service.duration && (
-                        <div className="flex items-center">
-                          <Clock className="w-5 h-5 text-accent-orange mr-2" />
-                          <span className="text-text-secondary">{service.duration}</span>
-                        </div>
-                      )}
+                      ))}
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
 
-            {/* Full Description */}
-            {service.fullDescription && (
-              <Card>
-                <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold text-text-primary mb-6">
-                    Подробное описание
-                  </h2>
-                  <div className="prose max-w-none text-text-secondary">
-                    {service.fullDescription.split('\n').map((paragraph, index) => (
-                      <p key={index} className="mb-4 leading-relaxed">
-                        {paragraph}
-                      </p>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Features */}
-            {service.features && service.features.length > 0 && (
-              <Card>
-                <CardContent className="p-8">
-                  <h2 className="text-2xl font-bold text-text-primary mb-6">
-                    Что включает услуга
-                  </h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {service.features.map((feature, index) => (
-                      <div key={index} className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0 mt-0.5" />
-                        <span className="text-text-secondary">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Process Steps */}
-            <Card>
-              <CardContent className="p-8">
-                <h2 className="text-2xl font-bold text-text-primary mb-6">
-                  Этапы выполнения
-                </h2>
-                <div className="space-y-6">
-                  {[
-                    {
-                      step: "1",
-                      title: "Первичная консультация",
-                      description: "Обсуждаем ваши потребности, анализируем задачи и составляем план работ"
-                    },
-                    {
-                      step: "2", 
-                      title: "Планирование и согласование",
-                      description: "Разрабатываем детальный план, составляем смету и согласовываем с вами все детали"
-                    },
-                    {
-                      step: "3",
-                      title: "Выполнение работ",
-                      description: "Реализуем проект согласно плану с регулярными отчетами о прогрессе"
-                    },
-                    {
-                      step: "4",
-                      title: "Контроль качества и сдача",
-                      description: "Проверяем качество выполненных работ и сдаем готовый результат"
-                    }
-                  ].map((step, index) => (
-                    <div key={index} className="flex items-start space-x-4">
-                      <div className="w-8 h-8 bg-accent-orange text-white rounded-full flex items-center justify-center font-semibold text-sm flex-shrink-0">
-                        {step.step}
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-text-primary mb-2">{step.title}</h3>
-                        <p className="text-text-secondary">{step.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Why Choose Us */}
-            <Card>
-              <CardContent className="p-8">
-                <h2 className="text-2xl font-bold text-text-primary mb-6">
-                  Почему выбирают нас
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="flex items-start space-x-3">
-                    <Star className="w-6 h-6 text-yellow-500 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-text-primary mb-1">Опыт и экспертиза</h3>
-                      <p className="text-text-secondary text-sm">15+ лет работы на рынке недвижимости</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <Award className="w-6 h-6 text-purple-500 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-text-primary mb-1">Сертификация</h3>
-                      <p className="text-text-secondary text-sm">Все необходимые лицензии и сертификаты</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <Shield className="w-6 h-6 text-green-500 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-text-primary mb-1">Гарантии</h3>
-                      <p className="text-text-secondary text-sm">Полная гарантия на выполненные работы</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3">
-                    <Users className="w-6 h-6 text-blue-500 flex-shrink-0 mt-1" />
-                    <div>
-                      <h3 className="font-semibold text-text-primary mb-1">Команда профессионалов</h3>
-                      <p className="text-text-secondary text-sm">Специалисты высокого уровня в каждой области</p>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Sidebar */}
-          <div className="space-y-6">
-            {/* Contact Form */}
-            <Card>
-              <CardContent className="p-6">
-                <ConsultationForm 
-                  title="Заказать услугу"
-                  description="Оставьте заявку и мы рассчитаем стоимость для вашего случая"
-                />
-              </CardContent>
-            </Card>
-
-            {/* Service Info */}
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-text-primary mb-4">
-                  Информация об услуге
-                </h3>
-                <div className="space-y-4">
-                  {service.price && (
-                    <div>
-                      <div className="text-sm text-text-secondary mb-1">Стоимость</div>
-                      <div className="font-semibold text-text-primary">{service.price}</div>
-                    </div>
-                  )}
-                  {service.duration && (
-                    <div>
-                      <div className="text-sm text-text-secondary mb-1">Срок выполнения</div>
-                      <div className="font-semibold text-text-primary">{service.duration}</div>
-                    </div>
-                  )}
+                  {/* Benefits */}
                   <div>
-                    <div className="text-sm text-text-secondary mb-1">Категория</div>
-                    <div className="font-semibold text-text-primary capitalize">
-                      {service.category === "main" ? "Основная услуга" : "Дополнительная услуга"}
+                    <h3 className="text-2xl font-semibold mb-4">Преимущества</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {details.benefits.map((benefit, index) => (
+                        <div key={index} className="flex items-center">
+                          <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                          <span className="text-text-secondary">{benefit}</span>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
 
-            {/* Quick Actions */}
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-text-primary mb-4">
-                  Связаться с нами
-                </h3>
-                <div className="space-y-3">
-                  <Button className="w-full bg-green-500 hover:bg-green-600 text-white">
-                    <i className="fab fa-whatsapp mr-2"></i>
-                    WhatsApp
-                  </Button>
-                  <Button className="w-full bg-blue-500 hover:bg-blue-600 text-white">
-                    <i className="fab fa-telegram mr-2"></i>
-                    Telegram
-                  </Button>
-                  <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white">
-                    <i className="fas fa-phone mr-2"></i>
-                    Позвонить
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+              {/* Features */}
+              {service.features && service.features.length > 0 && (
+                <Card className="mb-8">
+                  <CardHeader>
+                    <CardTitle>Что входит в услугу</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {service.features.map((feature, index) => (
+                        <div key={index} className="flex items-center">
+                          <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                          <span className="text-text-secondary">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
 
-            {/* Download Materials */}
-            <Card>
-              <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-text-primary mb-4">
-                  Материалы
-                </h3>
-                <div className="space-y-3">
-                  <Button variant="outline" className="w-full justify-start">
-                    <i className="fas fa-file-pdf mr-2 text-red-500"></i>
-                    Презентация услуги
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <i className="fas fa-file-alt mr-2 text-blue-500"></i>
-                    Техническое задание
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <i className="fas fa-calculator mr-2 text-green-500"></i>
-                    Калькулятор стоимости
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+              {/* FAQ */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Часто задаваемые вопросы</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    <div>
+                      <h4 className="font-semibold text-text-primary mb-2">
+                        Сколько времени занимает выполнение услуги?
+                      </h4>
+                      <p className="text-text-secondary">
+                        Срок выполнения зависит от объема работ и составляет от {details.timeline}. 
+                        Точные сроки определяются после осмотра объекта.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-text-primary mb-2">
+                        Предоставляете ли вы гарантию на выполненные работы?
+                      </h4>
+                      <p className="text-text-secondary">
+                        Да, мы предоставляем гарантию {details.warranty} на все выполненные работы 
+                        и используемые материалы.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-text-primary mb-2">
+                        Можно ли заказать услугу частично?
+                      </h4>
+                      <p className="text-text-secondary">
+                        Конечно! Мы можем адаптировать услугу под ваши потребности и бюджет, 
+                        выполнив только необходимые этапы работ.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              {/* Order Form */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Заказать услугу</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ConsultationForm 
+                    defaultService={service.name}
+                    className="!p-0 !bg-transparent"
+                  />
+                </CardContent>
+              </Card>
+
+              {/* Quick Contact */}
+              <Card>
+                <CardContent className="p-6">
+                  <h3 className="font-semibold text-text-primary mb-4">Нужна консультация?</h3>
+                  <div className="space-y-3">
+                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white">
+                      <Phone className="w-4 h-4 mr-2" />
+                      Позвонить сейчас
+                    </Button>
+                    <Button variant="outline" className="w-full">
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Написать в WhatsApp
+                    </Button>
+                  </div>
+                  <p className="text-sm text-text-secondary mt-4 text-center">
+                    Бесплатная консультация по телефону
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Service Info */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Информация об услуге</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <div className="flex justify-between">
+                      <span className="text-text-secondary">Стоимость:</span>
+                      <span className="font-semibold text-accent-orange">{service.price}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-text-secondary">Срок:</span>
+                      <span className="font-semibold">{details.timeline}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-text-secondary">Гарантия:</span>
+                      <span className="font-semibold">{details.warranty}</span>
+                    </div>
+                    <div className="flex justify-between">
+                      <span className="text-text-secondary">Рейтинг:</span>
+                      <div className="flex items-center">
+                        <Star className="w-4 h-4 text-yellow-400 fill-current" />
+                        <span className="font-semibold ml-1">4.9</span>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Related Services */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>Дополнительные услуги</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3">
+                    <Link href="/services/2">
+                      <Button variant="ghost" className="w-full justify-start text-left p-2">
+                        <div>
+                          <div className="font-medium">Дизайн-проект</div>
+                          <div className="text-sm text-text-secondary">от 3 000 ₽/м²</div>
+                        </div>
+                      </Button>
+                    </Link>
+                    <Link href="/services/3">
+                      <Button variant="ghost" className="w-full justify-start text-left p-2">
+                        <div>
+                          <div className="font-medium">Ремонт под ключ</div>
+                          <div className="text-sm text-text-secondary">от 15 000 ₽/м²</div>
+                        </div>
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
-
-        {/* Related Services */}
-        {relatedServices.length > 0 && (
-          <section className="mt-16">
-            <h2 className="text-2xl font-bold text-text-primary mb-8">
-              Похожие услуги
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {relatedServices.map((relatedService) => (
-                <ServiceCard key={relatedService.id} service={relatedService} />
-              ))}
-            </div>
-          </section>
-        )}
       </div>
     </div>
   );
-};
-
-export default ServiceDetail;
+}
