@@ -55,6 +55,7 @@ export default function Header() {
       dropdown: [
         { name: "Предпродажная подготовка", href: "/services/1" },
         { name: "Дизайн и ремонт", href: "/services/2" },
+        { name: "Земля", href: "/land" },
         { name: "Юридическое сопровождение", href: "/services/5" },
         { name: "Все услуги", href: "/services" },
       ]

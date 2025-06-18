@@ -191,6 +191,17 @@ export class MemStorage implements IStorage {
         features: ["3D визуализация", "Планировочные решения", "Подбор материалов"],
         isActive: true,
         createdAt: new Date(),
+      },
+      {
+        id: this.currentId++,
+        name: "Земля",
+        description: "Комплексные услуги по земельным участкам",
+        shortDescription: "Подбор участков, юридическое сопровождение и помощь в строительстве",
+        icon: "fas fa-seedling",
+        price: "от 100 000 ₽",
+        features: ["Подбор участка", "Проверка документов", "Подключение коммуникаций", "Разрешения на строительство"],
+        isActive: true,
+        createdAt: new Date(),
       }
     ];
 
