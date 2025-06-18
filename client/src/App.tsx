@@ -25,6 +25,7 @@ import NotFound from "@/pages/not-found";
 import Cart from "@/pages/cart";
 import RealtorConstructor from "@/pages/realtor-constructor";
 import Land from "@/pages/land";
+import Calculator from "@/pages/calculator";
 
 function Router() {
   return (
@@ -47,6 +48,7 @@ function Router() {
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/contacts" component={Contacts} />
       <Route path="/cart" component={Cart} />
+      <Route path="/calculator" component={Calculator} />
       <Route component={NotFound} />
     </Switch>
   );

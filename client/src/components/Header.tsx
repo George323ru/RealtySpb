@@ -49,6 +49,7 @@ export default function Header() {
       ]
     },
     { title: "Подбор специалиста", href: "/realtor-constructor" },
+    { title: "Калькулятор ипотеки", href: "/calculator" },
     { title: "О нас", href: "/about" },
     { title: "Блог", href: "/blog" },
     { title: "Контакты", href: "/contact" }
