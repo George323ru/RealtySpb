@@ -110,4 +110,14 @@ Changelog:
 
 ```
 Preferred communication style: Simple, everyday language.
+Company domain: realtorvspb.ru
+Company name: "риэлтор в СПБ"
+Design consistency: All pages must match homepage design
+Forms: Only name and phone (Russian mask) fields across all pages
+Land services: Merge "услуги по земле" and "подбор участка" into single "земля" section
+Realtor selection: Anonymous constructor (gender, age, experience, services) instead of specific people
+Shopping cart: Users can create property lists and export to PDF
+All buttons and filters must be functional
+Search filters must work and show matching results
+Each page should work as standalone landing page with relevant conversion elements
 ```
