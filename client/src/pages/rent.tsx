@@ -41,7 +41,7 @@ export default function Rent() {
     defaultValues: {
       name: "",
       phone: "",
-      message: "",
+
     },
   });
 

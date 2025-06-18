@@ -227,65 +227,7 @@ export default function Contacts() {
                             />
                           </div>
 
-                          <FormField
-                            control={form.control}
-                            name="email"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Email (необязательно)</FormLabel>
-                                <FormControl>
-                                  <Input type="email" placeholder="your@email.com" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
 
-                          <FormField
-                            control={form.control}
-                            name="serviceType"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Тип обращения</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                  <FormControl>
-                                    <SelectTrigger>
-                                      <SelectValue placeholder="Выберите тип обращения" />
-                                    </SelectTrigger>
-                                  </FormControl>
-                                  <SelectContent>
-                                    <SelectItem value="купить">Хочу купить недвижимость</SelectItem>
-                                    <SelectItem value="продать">Хочу продать недвижимость</SelectItem>
-                                    <SelectItem value="сдать">Хочу сдать в аренду</SelectItem>
-                                    <SelectItem value="оценка">Оценка недвижимости</SelectItem>
-                                    <SelectItem value="услуги">Дополнительные услуги</SelectItem>
-                                    <SelectItem value="консультация">Консультация</SelectItem>
-                                    <SelectItem value="жалоба">Жалоба или предложение</SelectItem>
-                                    <SelectItem value="другое">Другое</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-
-                          <FormField
-                            control={form.control}
-                            name="message"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Сообщение</FormLabel>
-                                <FormControl>
-                                  <Textarea
-                                    placeholder="Опишите ваш вопрос или задачу..."
-                                    rows={5}
-                                    {...field}
-                                  />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
 
                           <Button
                             type="submit"

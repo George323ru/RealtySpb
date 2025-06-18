@@ -42,10 +42,7 @@ export default function Sell() {
     defaultValues: {
       name: "",
       phone: "",
-      address: "",
-      area: "",
-      condition: "",
-      message: "",
+
     },
   });
 
@@ -212,83 +209,6 @@ export default function Sell() {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <FormField
                           control={form.control}
-                          name="propertyType"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Тип недвижимости</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Выберите тип" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="квартира">Квартира</SelectItem>
-                                  <SelectItem value="дом">Дом</SelectItem>
-                                  <SelectItem value="коммерческая">Коммерческая недвижимость</SelectItem>
-                                  <SelectItem value="земля">Земельный участок</SelectItem>
-                                  <SelectItem value="гараж">Гараж</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name="address"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Адрес</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Укажите адрес объекта" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name="area"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Площадь (м²)</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Общая площадь" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
-                          name="condition"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Состояние</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                <FormControl>
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Состояние объекта" />
-                                  </SelectTrigger>
-                                </FormControl>
-                                <SelectContent>
-                                  <SelectItem value="отличное">Отличное</SelectItem>
-                                  <SelectItem value="хорошее">Хорошее</SelectItem>
-                                  <SelectItem value="удовлетворительное">Удовлетворительное</SelectItem>
-                                  <SelectItem value="требует_ремонта">Требует ремонта</SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-
-                        <FormField
-                          control={form.control}
                           name="name"
                           render={({ field }) => (
                             <FormItem>
@@ -315,24 +235,6 @@ export default function Sell() {
                           )}
                         />
                       </div>
-
-                      <FormField
-                        control={form.control}
-                        name="message"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Дополнительная информация</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                placeholder="Особенности объекта, пожелания по продаже..."
-                                rows={3}
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
 
                       <Button
                         type="submit"
