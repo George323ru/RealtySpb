@@ -141,6 +141,9 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Promotions Banner - Primary Focus */}
+      <PromotionBanner promotions={promotions} category="all" className="mb-0" />
+
       {/* Quick Actions */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">

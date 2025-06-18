@@ -723,7 +723,12 @@ export class DatabaseStorage implements IStorage {
     let query = db.select().from(promotions).where(eq(promotions.isActive, true));
     
     if (category && category !== "all") {
-      query = query.where(or(eq(promotions.category, category), eq(promotions.category, "all")));
+      query = query.where(
+        and(
+          eq(promotions.isActive, true),
+          or(eq(promotions.category, category), eq(promotions.category, "all"))
+        )
+      );
     }
     
     const results = await query;
