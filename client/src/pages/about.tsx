@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "wouter";
@@ -48,156 +48,129 @@ export default function About() {
 
   const achievements = [
     "Лидер рынка недвижимости Санкт-Петербурга",
-    "Более 15 лет успешной работы",
-    "Собственная база из 10,000+ объектов",
-    "Команда из 50+ сертифицированных специалистов",
-    "Партнерство с ведущими застройщиками",
-    "Полный цикл услуг от поиска до сопровождения"
+    "Партнер ведущих застройщиков города", 
+    "Сертифицированное агентство недвижимости",
+    "Официальный партнер банков по ипотечному кредитованию",
+    "Член Российской гильдии риэлторов",
+    "Лауреат премии 'Лучшее агентство недвижимости 2023'"
   ];
 
-  const timeline = [
+  const services = [
     {
-      year: "2009",
-      title: "Основание компании",
-      description: "Начало работы с фокусом на вторичную недвижимость"
+      title: "Покупка недвижимости",
+      description: "Полное сопровождение сделки от поиска до оформления",
+      features: ["Поиск по критериям", "Проверка документов", "Юридическое сопровождение", "Ипотечная поддержка"]
     },
     {
-      year: "2012",
-      title: "Расширение услуг",
-      description: "Добавление услуг по новостройкам и коммерческой недвижимости"
+      title: "Продажа недвижимости", 
+      description: "Максимальная цена в кратчайшие сроки",
+      features: ["Оценка рыночной стоимости", "Предпродажная подготовка", "Маркетинг и реклама", "Ведение переговоров"]
     },
     {
-      year: "2015",
-      title: "Дополнительные услуги",
-      description: "Запуск направлений дизайна, ремонта и строительства"
+      title: "Аренда недвижимости",
+      description: "Быстрый поиск арендаторов и качественных объектов",
+      features: ["Подбор объектов", "Проверка арендаторов", "Юридическое оформление", "Управление арендой"]
     },
     {
-      year: "2018",
-      title: "Цифровизация",
-      description: "Внедрение современных IT-решений и онлайн-сервисов"
+      title: "Инвестиционные решения",
+      description: "Профессиональные консультации по инвестициям в недвижимость",
+      features: ["Анализ рынка", "Подбор объектов", "Расчет доходности", "Долгосрочное сопровождение"]
+    }
+  ];
+
+  const team = [
+    {
+      role: "Управляющий директор",
+      experience: "15+ лет",
+      description: "Эксперт рынка недвижимости СПб, автор более 100 статей"
     },
     {
-      year: "2021",
-      title: "Лидерство",
-      description: "Признание лидером рынка недвижимости СПб"
+      role: "Коммерческий директор", 
+      experience: "12+ лет",
+      description: "Специалист по коммерческой недвижимости и инвестициям"
     },
     {
-      year: "2025",
-      title: "Инновации",
-      description: "Запуск новых сервисов и расширение географии"
+      role: "Руководители отделов",
+      experience: "8+ лет",
+      description: "Команда профессионалов с глубокой экспертизой"
+    },
+    {
+      role: "Риэлторы",
+      experience: "3+ года",
+      description: "50+ сертифицированных специалистов"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-900 to-indigo-800 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{backgroundImage: "url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920')"}}
-        ></div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              О компании{" "}
-              <span className="text-yandex-yellow">СПБ Недвижимость</span>
+      <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <h1 className="text-5xl font-bold text-text-primary mb-6">
+              О компании "риэлтор в СПБ"
             </h1>
-            <p className="text-xl lg:text-2xl mb-8 font-light opacity-90">
-              Лидирующее агентство недвижимости в Санкт-Петербурге с более чем 15-летним опытом работы
+            <p className="text-xl text-text-secondary mb-8 leading-relaxed">
+              Мы — ведущее агентство недвижимости Санкт-Петербурга с 15-летним опытом. 
+              Помогаем клиентам принимать правильные решения в сфере недвижимости, 
+              обеспечивая надежность, профессионализм и индивидуальный подход.
             </p>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
-              {stats.map((stat, index) => (
-                <div key={index} className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                  <stat.icon className="w-8 h-8 mx-auto mb-2 text-yandex-yellow" />
-                  <div className="text-3xl font-bold text-yandex-yellow mb-1">{stat.value}</div>
-                  <div className="text-sm">{stat.label}</div>
-                </div>
-              ))}
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/realtor-constructor">
+                <Button className="bg-accent-orange text-white hover:bg-orange-600 px-8 py-3">
+                  Подобрать специалиста
+                </Button>
+              </Link>
+              <Link href="/contacts">
+                <Button variant="outline" className="border-2 border-accent-orange text-accent-orange hover:bg-orange-50 px-8 py-3">
+                  Связаться с нами
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Company Story */}
+      {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-6">
-                  Наша история
-                </h2>
-                <p className="text-lg text-text-secondary mb-6 leading-relaxed">
-                  Компания "СПБ Недвижимость" была основана в 2009 году группой профессионалов 
-                  с многолетним опытом работы на рынке недвижимости Санкт-Петербурга.
-                </p>
-                <p className="text-lg text-text-secondary mb-6 leading-relaxed">
-                  За годы работы мы помогли тысячам семей найти дом своей мечты, а также 
-                  обеспечили успешную продажу недвижимости для многих собственников.
-                </p>
-                <p className="text-lg text-text-secondary mb-8 leading-relaxed">
-                  Сегодня мы предлагаем полный спектр услуг: от поиска и продажи недвижимости 
-                  до дизайна, ремонта и юридического сопровождения сделок.
-                </p>
-                <Link href="/contacts">
-                  <Button className="bg-accent-orange hover:bg-orange-600 text-white px-8 py-3 text-lg">
-                    Связаться с нами
-                  </Button>
-                </Link>
-              </div>
-              <div className="grid grid-cols-1 gap-4">
-                <img
-                  src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800"
-                  alt="Офис компании"
-                  className="w-full h-64 object-cover rounded-lg"
-                />
-                <div className="grid grid-cols-2 gap-4">
-                  <img
-                    src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400"
-                    alt="Команда"
-                    className="w-full h-32 object-cover rounded-lg"
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400"
-                    alt="Недвижимость"
-                    className="w-full h-32 object-cover rounded-lg"
-                  />
-                </div>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <Card key={index} className="text-center p-8 hover:shadow-lg transition-shadow">
+                <CardContent className="space-y-4">
+                  <div className="w-16 h-16 bg-accent-orange/10 rounded-full flex items-center justify-center mx-auto">
+                    <stat.icon className="w-8 h-8 text-accent-orange" />
+                  </div>
+                  <h3 className="text-3xl font-bold text-text-primary">{stat.value}</h3>
+                  <p className="text-text-secondary">{stat.label}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Values */}
-      <section className="py-16 bg-neutral-100">
+      {/* Mission & Values */}
+      <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-                Наши ценности
-              </h2>
-              <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-                Принципы, которыми мы руководствуемся в работе с каждым клиентом
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-text-primary mb-6">Наша миссия и ценности</h2>
+              <p className="text-xl text-text-secondary">
+                Мы создаем доверительные отношения с клиентами, предоставляя экспертные услуги 
+                и персональный подход к решению любых задач в сфере недвижимости.
               </p>
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {values.map((value, index) => (
-                <Card key={index} className="text-center hover:shadow-lg transition-shadow">
-                  <CardContent className="p-8">
-                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <value.icon className="w-8 h-8 text-blue-500" />
+                <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
+                  <CardContent className="space-y-4">
+                    <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                      <value.icon className="w-8 h-8 text-blue-600" />
                     </div>
-                    <h3 className="text-xl font-semibold text-text-primary mb-3">
-                      {value.title}
-                    </h3>
-                    <p className="text-text-secondary text-sm">
-                      {value.description}
-                    </p>
+                    <h3 className="text-2xl font-bold text-text-primary">{value.title}</h3>
+                    <p className="text-text-secondary">{value.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -206,70 +179,88 @@ export default function About() {
         </div>
       </section>
 
-      {/* Timeline */}
+      {/* Services Overview */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-text-primary mb-6">Наши услуги</h2>
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto">
+              Предоставляем полный спектр услуг по недвижимости — 
+              от консультаций до полного сопровождения сложных сделок.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {services.map((service, index) => (
+              <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
+                <CardContent className="space-y-6">
+                  <div>
+                    <h3 className="text-2xl font-bold text-text-primary mb-3">{service.title}</h3>
+                    <p className="text-text-secondary mb-6">{service.description}</p>
+                  </div>
+                  <div className="space-y-3">
+                    {service.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center">
+                        <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
+                        <span className="text-text-secondary">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Team Structure */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-                Этапы развития
-              </h2>
-              <p className="text-lg text-text-secondary">
-                Ключевые моменты в истории нашей компании
+            <div className="text-center mb-16">
+              <h2 className="text-4xl font-bold text-text-primary mb-6">Структура команды</h2>
+              <p className="text-xl text-text-secondary">
+                Профессиональная команда из 50+ специалистов с многолетним опытом
               </p>
             </div>
-
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-neutral-200"></div>
-              
-              {timeline.map((item, index) => (
-                <div key={index} className={`relative flex items-center mb-12 ${
-                  index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
-                }`}>
-                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8'}`}>
-                    <Card className="inline-block max-w-sm">
-                      <CardContent className="p-6">
-                        <Badge className="bg-accent-orange text-white mb-2">
-                          {item.year}
-                        </Badge>
-                        <h3 className="text-lg font-semibold text-text-primary mb-2">
-                          {item.title}
-                        </h3>
-                        <p className="text-text-secondary text-sm">
-                          {item.description}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </div>
-                  
-                  {/* Timeline dot */}
-                  <div className="absolute left-1/2 transform -translate-x-1/2 w-4 h-4 bg-accent-orange rounded-full border-4 border-white shadow-lg"></div>
-                </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {team.map((member, index) => (
+                <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
+                  <CardContent className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-xl font-bold text-text-primary">{member.role}</h3>
+                      <Badge variant="secondary" className="bg-accent-orange/10 text-accent-orange">
+                        {member.experience}
+                      </Badge>
+                    </div>
+                    <p className="text-text-secondary">{member.description}</p>
+                  </CardContent>
+                </Card>
               ))}
+            </div>
+            
+            <div className="text-center mt-12">
+              <Link href="/realtor-constructor">
+                <Button className="bg-accent-orange text-white hover:bg-orange-600 px-8 py-4 text-lg">
+                  Подобрать вашего специалиста
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
       {/* Achievements */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-                Наши достижения
-              </h2>
-              <p className="text-lg text-text-secondary">
-                Результаты, которыми мы гордимся
-              </p>
-            </div>
-
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl font-bold text-text-primary mb-12">Наши достижения</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {achievements.map((achievement, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6 flex items-center">
-                    <CheckCircle className="w-6 h-6 text-green-500 mr-4 flex-shrink-0" />
+                <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
+                  <CardContent className="flex items-center space-x-4">
+                    <Award className="w-8 h-8 text-accent-orange flex-shrink-0" />
                     <span className="text-text-primary font-medium">{achievement}</span>
                   </CardContent>
                 </Card>
@@ -279,30 +270,23 @@ export default function About() {
         </div>
       </section>
 
-      {/* Mission */}
-      <section className="py-16 bg-gradient-to-r from-blue-500 to-indigo-600">
+      {/* CTA Section */}
+      <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Наша миссия
-            </h2>
-            <p className="text-xl leading-relaxed mb-8 opacity-90">
-              Сделать рынок недвижимости Санкт-Петербурга более прозрачным, безопасным и 
-              доступным для каждого человека. Мы стремимся к тому, чтобы покупка, продажа 
-              или аренда недвижимости стала простым и понятным процессом.
+            <h2 className="text-4xl font-bold mb-6">Готовы начать работу с нами?</h2>
+            <p className="text-xl mb-8 opacity-90">
+              Получите профессиональную консультацию и подберите идеального специалиста для ваших задач
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/team">
-                <Button className="bg-white text-blue-600 hover:bg-neutral-100 px-8 py-3 text-lg font-semibold">
-                  Познакомиться с командой
+            <div className="flex flex-wrap justify-center gap-4">
+              <Link href="/realtor-constructor">
+                <Button className="bg-white text-accent-orange hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                  Подобрать специалиста
                 </Button>
               </Link>
               <Link href="/contacts">
-                <Button 
-                  variant="outline" 
-                  className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg font-semibold"
-                >
-                  Начать сотрудничество
+                <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-accent-orange px-8 py-4 text-lg">
+                  Связаться с нами
                 </Button>
               </Link>
             </div>

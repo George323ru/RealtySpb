@@ -105,7 +105,7 @@ export default function Footer() {
               <h4 className="font-semibold mb-3">Информация</h4>
               <ul className="space-y-2 text-sm">
                 <li><Link href="/about" className="text-gray-400 hover:text-yandex-yellow transition-colors">О компании</Link></li>
-                <li><Link href="/team" className="text-gray-400 hover:text-yandex-yellow transition-colors">Наша команда</Link></li>
+                <li><Link href="/realtor-constructor" className="text-gray-400 hover:text-yandex-yellow transition-colors">Подобрать специалиста</Link></li>
                 <li><Link href="/reviews" className="text-gray-400 hover:text-yandex-yellow transition-colors">Отзывы клиентов</Link></li>
                 <li><Link href="/blog" className="text-gray-400 hover:text-yandex-yellow transition-colors">Блог</Link></li>
               </ul>
