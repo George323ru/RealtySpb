@@ -42,40 +42,7 @@ export default function Header() {
     { title: "Контакты", href: "/contacts" }
   ];
 
-  const serviceCategories = [
-    {
-      title: "Предпродажная подготовка",
-      items: [
-        { name: "Предпродажная подготовка", href: "/services/pre-sale-preparation" },
-        { name: "Дизайн-проект", href: "/services/design-project" },
-        { name: "Ремонт", href: "/services/renovation" }
-      ]
-    },
-    {
-      title: "Строительство", 
-      items: [
-        { name: "Строительство", href: "/services/construction" },
-        { name: "Проектирование", href: "/services/design" },
-        { name: "Инженерные системы", href: "/services/engineering-systems" },
-        { name: "Ландшафтный дизайн", href: "/services/landscape-design" }
-      ]
-    },
-    {
-      title: "Юридическое сопровождение",
-      items: [
-        { name: "Юридическая проверка", href: "/services/legal-check" },
-        { name: "Сопровождение сделки", href: "/services/transaction-support" }
-      ]
-    },
-    {
-      title: "Другое",
-      items: [
-        { name: "Управление недвижимостью", href: "/services/property-management" },
-        { name: "Комплектация мебелью", href: "/services/furniture-selection" },
-        { name: "Земля", href: "/land" }
-      ]
-    }
-  ];
+
 
   return (
     <header
@@ -156,41 +123,101 @@ export default function Header() {
               </button>
               
               {showServicesDropdown && (
-                <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[800px]">
-                  <div className="p-4 grid grid-cols-4 gap-6">
-                    {serviceCategories.map((category) => (
-                      <div key={category.title} className="space-y-2">
-                        <h3 className="font-semibold text-gray-900 text-sm uppercase tracking-wide border-b border-gray-200 pb-1">
-                          {category.title}
-                        </h3>
-                        <div className="space-y-1">
-                          {category.items.map((service) => (
-                            <Link
-                              key={service.href}
-                              href={service.href}
-                              onClick={() => setShowServicesDropdown(false)}
-                              className="block px-2 py-1 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
-                            >
-                              {service.name}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[500px]">
+                  <div className="p-4 grid grid-cols-3 gap-2">
+                    <Link
+                      href="/services/pre-sale-preparation"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Предпродажная подготовка
+                    </Link>
+                    <Link
+                      href="/services/design-project"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Дизайн-проект
+                    </Link>
+                    <Link
+                      href="/services/renovation"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Ремонт
+                    </Link>
+                    <Link
+                      href="/services/construction"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Строительство
+                    </Link>
+                    <Link
+                      href="/services/design"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Проектирование
+                    </Link>
+                    <Link
+                      href="/services/engineering-systems"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Инженерные системы
+                    </Link>
+                    <Link
+                      href="/services/landscape-design"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Ландшафтный дизайн
+                    </Link>
+                    <Link
+                      href="/services/legal-check"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Юридическая проверка
+                    </Link>
+                    <Link
+                      href="/services/transaction-support"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Сопровождение сделки
+                    </Link>
+                    <Link
+                      href="/services/property-management"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Управление недвижимостью
+                    </Link>
+                    <Link
+                      href="/services/furniture-selection"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Комплектация мебелью
+                    </Link>
+                    <Link
+                      href="/land"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="block px-3 py-2 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                    >
+                      Земля
+                    </Link>
                     
-                    {/* All services link */}
-                    <div className="space-y-2">
-                      <h3 className="font-semibold text-gray-900 text-sm uppercase tracking-wide border-b border-gray-200 pb-1">
-                        Все услуги
-                      </h3>
-                      <Link
-                        href="/services"
-                        onClick={() => setShowServicesDropdown(false)}
-                        className="block px-2 py-1 text-sm text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded transition-colors font-medium"
-                      >
-                        Все услуги
-                      </Link>
-                    </div>
+                    {/* All services link - spans full width */}
+                    <Link
+                      href="/services"
+                      onClick={() => setShowServicesDropdown(false)}
+                      className="col-span-3 block px-3 py-2 text-sm text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded transition-colors font-medium border-t border-gray-200 mt-2 pt-3 text-center"
+                    >
+                      Все услуги
+                    </Link>
                   </div>
                 </div>
               )}
