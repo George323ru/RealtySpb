@@ -3,7 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Phone, MessageCircle, Send, User, Award, Star, Search, Users } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { User, Star, Phone, MessageCircle, Filter, Users } from "lucide-react";
 import ConsultationForm from "@/components/consultation-form";
 
 interface RealtorFilters {
@@ -39,105 +40,75 @@ export default function RealtorConstructor() {
     availability: ""
   });
 
+  const [showResults, setShowResults] = useState(false);
   const [selectedRealtor, setSelectedRealtor] = useState<GeneratedRealtor | null>(null);
-  const [showForm, setShowForm] = useState(false);
-  const [searchResults, setSearchResults] = useState<GeneratedRealtor[]>([]);
 
-  // Generate realtors based on filters
-  const generateRealtors = (): GeneratedRealtor[] => {
-    const maleNames = ["Александр", "Дмитрий", "Сергей", "Андрей", "Владимир", "Михаил", "Алексей", "Максим"];
-    const femaleNames = ["Анна", "Елена", "Мария", "Ольга", "Татьяна", "Ирина", "Светлана", "Наталья"];
-    const lastNames = ["Петров", "Иванов", "Сидоров", "Козлов", "Волков", "Смирнов", "Новиков", "Морозов"];
-    
-    const specializations = [
-      ["Жилая недвижимость", "Вторичка"],
-      ["Новостройки", "Инвестиции"],
-      ["Коммерческая недвижимость"],
-      ["Загородная недвижимость", "Дома"],
-      ["Элитная недвижимость"],
-      ["Аренда", "Жилая недвижимость"]
-    ];
-
-    const photos = {
-      male: [
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
-        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face",
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
-        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&crop=face"
-      ],
-      female: [
-        "https://images.unsplash.com/photo-1494790108755-2616b4db8f79?w=200&h=200&fit=crop&crop=face",
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face",
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop&crop=face",
-        "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=200&h=200&fit=crop&crop=face"
-      ]
-    };
-
-    let results: GeneratedRealtor[] = [];
-    let id = 1;
-
-    // Generate combinations based on filters
-    const genders = filters.gender ? [filters.gender] : ["Мужской", "Женский"];
-    const experiences = filters.experience ? [filters.experience] : ["1-3 года", "3-5 лет", "5-10 лет", "10+ лет"];
-    const ratings = filters.rating ? [parseFloat(filters.rating)] : [4.5, 4.7, 4.8, 4.9, 5.0];
-
-    genders.forEach(gender => {
-      experiences.forEach(experience => {
-        ratings.forEach(rating => {
-          const isMale = gender === "Мужской";
-          const names = isMale ? maleNames : femaleNames;
-          const name = `${names[Math.floor(Math.random() * names.length)]} ${lastNames[Math.floor(Math.random() * lastNames.length)]}${isMale ? '' : 'а'}`;
-          
-          let realtorSpecs = specializations[Math.floor(Math.random() * specializations.length)];
-          if (filters.specialization) {
-            realtorSpecs = specializations.find(specs => 
-              specs.some(spec => spec.includes(filters.specialization))
-            ) || [filters.specialization];
-          }
-
-          const photoArray = isMale ? photos.male : photos.female;
-          const photo = photoArray[Math.floor(Math.random() * photoArray.length)];
-
-          const realtor: GeneratedRealtor = {
-            id: `generated-${id++}`,
-            name,
-            gender,
-            experience,
-            specialization: realtorSpecs,
-            rating,
-            photo,
-            phone: `+7 (812) ${Math.floor(Math.random() * 900 + 100)}-${Math.floor(Math.random() * 90 + 10)}-${Math.floor(Math.random() * 90 + 10)}`,
-            telegram: Math.random() > 0.3 ? `@${name.split(' ')[0].toLowerCase()}` : undefined,
-            whatsapp: Math.random() > 0.4 ? `+7 (812) ${Math.floor(Math.random() * 900 + 100)}-${Math.floor(Math.random() * 90 + 10)}-${Math.floor(Math.random() * 90 + 10)}` : undefined,
-            availability: filters.availability || (Math.random() > 0.7 ? "Занят" : "Свободен"),
-            completedDeals: Math.floor(Math.random() * 200 + 50),
-            description: `Опытный риэлтор с ${experience} стажа работы. Специализация: ${realtorSpecs.join(", ").toLowerCase()}. Помогу найти идеальный вариант недвижимости в Санкт-Петербурге.`
-          };
-
-          results.push(realtor);
-        });
-      });
-    });
-
-    // Filter by availability if specified
-    if (filters.availability) {
-      results = results.filter(r => r.availability === filters.availability);
-    }
-
-    // Limit results to avoid overwhelming the user
-    return results.slice(0, 6);
+  const handleFilterChange = (key: keyof RealtorFilters, value: string) => {
+    setFilters(prev => ({ ...prev, [key]: value }));
   };
 
-  const handleSearch = () => {
-    const results = generateRealtors();
-    setSearchResults(results);
-    setSelectedRealtor(null);
+  const generateRealtors = () => {
+    setShowResults(true);
+    // In a real implementation, this would call an API to generate realtors based on filters
+  };
+
+  const generateMockRealtors = (): GeneratedRealtor[] => {
+    const maleNames = ["Александр", "Дмитрий", "Михаил", "Андрей", "Сергей"];
+    const femaleNames = ["Елена", "Анна", "Мария", "Ольга", "Татьяна"];
+    const surnames = ["Петров", "Иванов", "Сидоров", "Козлов", "Волков"];
+    
+    const specializations = [
+      ["Квартиры", "Вторичка"],
+      ["Новостройки", "Коммерческая"],
+      ["Загородная", "Дома"],
+      ["Инвестиции", "Элитная"],
+      ["Земля", "Участки"]
+    ];
+
+    const realtors: GeneratedRealtor[] = [];
+    
+    for (let i = 0; i < 6; i++) {
+      const isMan = filters.gender === "мужчина" || (filters.gender === "" && Math.random() > 0.5);
+      const names = isMan ? maleNames : femaleNames;
+      const name = `${names[Math.floor(Math.random() * names.length)]} ${surnames[Math.floor(Math.random() * surnames.length)]}`;
+      
+      let experienceYears = 5;
+      if (filters.experience === "1-3 года") experienceYears = 2;
+      else if (filters.experience === "3-5 лет") experienceYears = 4;
+      else if (filters.experience === "5-10 лет") experienceYears = 7;
+      else if (filters.experience === "10+ лет") experienceYears = 12;
+      else experienceYears = Math.floor(Math.random() * 15) + 1;
+
+      const baseRating = filters.rating ? parseFloat(filters.rating) : 4.5;
+      const rating = Math.min(5, baseRating + (Math.random() - 0.5) * 0.4);
+
+      const realtor: GeneratedRealtor = {
+        id: `realtor-${i}`,
+        name,
+        gender: isMan ? "мужчина" : "женщина",
+        experience: `${experienceYears} лет`,
+        specialization: specializations[Math.floor(Math.random() * specializations.length)],
+        rating: Math.round(rating * 10) / 10,
+        photo: `https://images.unsplash.com/photo-${isMan ? '1472099645785-5658abf4ff4e' : '1494790108755-2616c7bea3a0'}?w=150&h=150&fit=crop&crop=face`,
+        phone: `+7 (${900 + Math.floor(Math.random() * 99)}) ${100 + Math.floor(Math.random() * 899)}-${10 + Math.floor(Math.random() * 89)}-${10 + Math.floor(Math.random() * 89)}`,
+        telegram: Math.random() > 0.3 ? "@realtor_spb" : undefined,
+        whatsapp: Math.random() > 0.4 ? "+7900000000" : undefined,
+        availability: filters.availability || (Math.random() > 0.3 ? "Свободен" : "Занят до завтра"),
+        completedDeals: Math.floor(Math.random() * 200) + 50,
+        description: `Специалист по ${specializations[Math.floor(Math.random() * specializations.length)].join(" и ").toLowerCase()}. Опыт работы ${experienceYears} лет. Помогу найти идеальный вариант для ваших потребностей.`
+      };
+
+      realtors.push(realtor);
+    }
+
+    return realtors;
   };
 
   const handleSelectRealtor = (realtor: GeneratedRealtor) => {
     setSelectedRealtor(realtor);
-    setShowForm(true);
   };
+
+  const mockRealtors = showResults ? generateMockRealtors() : [];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background-light to-background-secondary">
@@ -154,15 +125,15 @@ export default function RealtorConstructor() {
             <div className="flex items-center justify-center space-x-8 text-orange-100">
               <div className="flex items-center space-x-2">
                 <Users className="h-6 w-6" />
-                <span>200+ специалистов</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Award className="h-6 w-6" />
-                <span>Проверенные профессионалы</span>
+                <span>Персональный подход</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Star className="h-6 w-6" />
-                <span>Высокий рейтинг</span>
+                <span>Проверенные специалисты</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Filter className="h-6 w-6" />
+                <span>Умный подбор</span>
               </div>
             </div>
           </div>
@@ -170,30 +141,30 @@ export default function RealtorConstructor() {
       </div>
 
       <div className="container mx-auto px-4 py-16">
-        {/* Constructor Form */}
+        {/* Filters */}
         <Card className="mb-12 shadow-xl">
           <CardHeader>
             <CardTitle className="text-2xl text-center text-text-primary">
               Конструктор специалиста
             </CardTitle>
             <p className="text-center text-text-secondary">
-              Выберите критерии для поиска идеального риэлтора
+              Укажите предпочтения, и мы подберем идеального риэлтора
             </p>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
               <div>
                 <label className="block text-sm font-medium text-text-primary mb-2">
                   Пол
                 </label>
-                <Select value={filters.gender} onValueChange={(value) => setFilters(prev => ({ ...prev, gender: value }))}>
+                <Select value={filters.gender} onValueChange={(value) => handleFilterChange('gender', value)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Любой" />
+                    <SelectValue placeholder="Не важно" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Любой</SelectItem>
-                    <SelectItem value="Мужской">Мужской</SelectItem>
-                    <SelectItem value="Женский">Женский</SelectItem>
+                    <SelectItem value="">Не важно</SelectItem>
+                    <SelectItem value="мужчина">Мужчина</SelectItem>
+                    <SelectItem value="женщина">Женщина</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -202,7 +173,7 @@ export default function RealtorConstructor() {
                 <label className="block text-sm font-medium text-text-primary mb-2">
                   Опыт работы
                 </label>
-                <Select value={filters.experience} onValueChange={(value) => setFilters(prev => ({ ...prev, experience: value }))}>
+                <Select value={filters.experience} onValueChange={(value) => handleFilterChange('experience', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Любой" />
                   </SelectTrigger>
@@ -211,7 +182,7 @@ export default function RealtorConstructor() {
                     <SelectItem value="1-3 года">1-3 года</SelectItem>
                     <SelectItem value="3-5 лет">3-5 лет</SelectItem>
                     <SelectItem value="5-10 лет">5-10 лет</SelectItem>
-                    <SelectItem value="10+ лет">10+ лет</SelectItem>
+                    <SelectItem value="10+ лет">Более 10 лет</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -220,36 +191,34 @@ export default function RealtorConstructor() {
                 <label className="block text-sm font-medium text-text-primary mb-2">
                   Специализация
                 </label>
-                <Select value={filters.specialization} onValueChange={(value) => setFilters(prev => ({ ...prev, specialization: value }))}>
+                <Select value={filters.specialization} onValueChange={(value) => handleFilterChange('specialization', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Любая" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="">Любая</SelectItem>
-                    <SelectItem value="Жилая недвижимость">Жилая недвижимость</SelectItem>
+                    <SelectItem value="Квартиры">Квартиры</SelectItem>
                     <SelectItem value="Новостройки">Новостройки</SelectItem>
-                    <SelectItem value="Коммерческая">Коммерческая</SelectItem>
                     <SelectItem value="Загородная">Загородная недвижимость</SelectItem>
-                    <SelectItem value="Элитная">Элитная недвижимость</SelectItem>
-                    <SelectItem value="Аренда">Аренда</SelectItem>
+                    <SelectItem value="Коммерческая">Коммерческая</SelectItem>
+                    <SelectItem value="Инвестиции">Инвестиции</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-text-primary mb-2">
-                  Рейтинг от
+                  Минимальный рейтинг
                 </label>
-                <Select value={filters.rating} onValueChange={(value) => setFilters(prev => ({ ...prev, rating: value }))}>
+                <Select value={filters.rating} onValueChange={(value) => handleFilterChange('rating', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Любой" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="">Любой</SelectItem>
+                    <SelectItem value="4.0">4.0+</SelectItem>
                     <SelectItem value="4.5">4.5+</SelectItem>
-                    <SelectItem value="4.7">4.7+</SelectItem>
                     <SelectItem value="4.8">4.8+</SelectItem>
-                    <SelectItem value="4.9">4.9+</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -258,90 +227,80 @@ export default function RealtorConstructor() {
                 <label className="block text-sm font-medium text-text-primary mb-2">
                   Доступность
                 </label>
-                <Select value={filters.availability} onValueChange={(value) => setFilters(prev => ({ ...prev, availability: value }))}>
+                <Select value={filters.availability} onValueChange={(value) => handleFilterChange('availability', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Любая" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="">Любая</SelectItem>
-                    <SelectItem value="Свободен">Свободен</SelectItem>
-                    <SelectItem value="Занят">Занят</SelectItem>
+                    <SelectItem value="Свободен">Свободен сегодня</SelectItem>
+                    <SelectItem value="Завтра">Свободен завтра</SelectItem>
+                    <SelectItem value="На неделе">На этой неделе</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
-            </div>
 
-            <div className="text-center">
-              <Button 
-                onClick={handleSearch}
-                className="bg-accent-orange text-white hover:bg-orange-600 px-8 py-3 text-lg"
-                size="lg"
-              >
-                <Search className="h-5 w-5 mr-2" />
-                Найти специалистов
-              </Button>
+              <div className="flex items-end">
+                <Button 
+                  onClick={generateRealtors}
+                  className="w-full bg-accent-orange text-white hover:bg-orange-600"
+                >
+                  Подобрать специалистов
+                </Button>
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Search Results */}
-        {searchResults.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-3xl font-bold text-text-primary mb-8 text-center">
-              Подходящие специалисты ({searchResults.length})
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {searchResults.map((realtor) => (
-                <Card key={realtor.id} className="overflow-hidden hover:shadow-xl transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex items-center space-x-4 mb-4">
-                      <img
-                        src={realtor.photo}
-                        alt={realtor.name}
-                        className="w-16 h-16 rounded-full object-cover"
-                      />
-                      <div>
-                        <h3 className="text-xl font-semibold text-text-primary">{realtor.name}</h3>
-                        <div className="flex items-center space-x-2">
-                          <div className="flex items-center">
-                            {Array.from({ length: 5 }).map((_, i) => (
-                              <Star
-                                key={i}
-                                className={`h-4 w-4 ${
-                                  i < Math.floor(realtor.rating)
-                                    ? "text-yellow-400 fill-current"
-                                    : "text-gray-300"
-                                }`}
-                              />
-                            ))}
-                          </div>
-                          <span className="text-sm text-text-secondary">{realtor.rating}</span>
-                        </div>
-                      </div>
-                    </div>
+        {/* Results */}
+        {showResults && (
+          <>
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-3xl font-bold text-text-primary">
+                Подходящие специалисты ({mockRealtors.length})
+              </h2>
+              <Badge variant="outline" className="text-accent-orange border-accent-orange">
+                <Filter className="h-4 w-4 mr-1" />
+                По вашим критериям
+              </Badge>
+            </div>
 
-                    <div className="space-y-3 mb-4">
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-text-secondary">Опыт:</span>
-                        <Badge variant="secondary">{realtor.experience}</Badge>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+              {mockRealtors.map((realtor) => (
+                <Card key={realtor.id} className="overflow-hidden hover:shadow-xl transition-shadow">
+                  <CardHeader className="text-center pb-4">
+                    <Avatar className="w-24 h-24 mx-auto mb-4">
+                      <AvatarImage src={realtor.photo} alt={realtor.name} />
+                      <AvatarFallback>
+                        <User className="h-12 w-12" />
+                      </AvatarFallback>
+                    </Avatar>
+                    <CardTitle className="text-xl">{realtor.name}</CardTitle>
+                    <div className="flex items-center justify-center space-x-1 text-yellow-500">
+                      <Star className="h-4 w-4 fill-current" />
+                      <span className="font-semibold">{realtor.rating}</span>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-text-secondary">Опыт:</span>
+                        <span className="font-medium">{realtor.experience}</span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-text-secondary">Сделок:</span>
-                        <span className="text-sm font-medium">{realtor.completedDeals}</span>
+                      <div className="flex justify-between">
+                        <span className="text-text-secondary">Сделок:</span>
+                        <span className="font-medium">{realtor.completedDeals}</span>
                       </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-sm text-text-secondary">Статус:</span>
-                        <Badge 
-                          variant={realtor.availability === "Свободен" ? "default" : "secondary"}
-                          className={realtor.availability === "Свободен" ? "bg-green-100 text-green-700" : ""}
-                        >
+                      <div className="flex justify-between">
+                        <span className="text-text-secondary">Статус:</span>
+                        <Badge variant={realtor.availability === "Свободен" ? "default" : "secondary"}>
                           {realtor.availability}
                         </Badge>
                       </div>
                     </div>
 
-                    <div className="mb-4">
-                      <p className="text-sm text-text-secondary mb-2">Специализация:</p>
+                    <div>
+                      <h4 className="font-medium mb-2">Специализация:</h4>
                       <div className="flex flex-wrap gap-1">
                         {realtor.specialization.map((spec, index) => (
                           <Badge key={index} variant="outline" className="text-xs">
@@ -351,27 +310,18 @@ export default function RealtorConstructor() {
                       </div>
                     </div>
 
-                    <p className="text-sm text-text-secondary mb-4">{realtor.description}</p>
+                    <p className="text-sm text-text-secondary">{realtor.description}</p>
 
                     <div className="flex space-x-2">
                       <Button
                         onClick={() => handleSelectRealtor(realtor)}
                         className="flex-1 bg-accent-orange text-white hover:bg-orange-600"
-                        size="sm"
                       >
-                        <User className="h-4 w-4 mr-1" />
+                        <Phone className="h-4 w-4 mr-2" />
                         Выбрать
                       </Button>
-                      <Button variant="outline" size="sm">
-                        <Phone className="h-4 w-4" />
-                      </Button>
                       {realtor.telegram && (
-                        <Button variant="outline" size="sm">
-                          <Send className="h-4 w-4" />
-                        </Button>
-                      )}
-                      {realtor.whatsapp && (
-                        <Button variant="outline" size="sm">
+                        <Button size="sm" variant="outline">
                           <MessageCircle className="h-4 w-4" />
                         </Button>
                       )}
@@ -380,47 +330,42 @@ export default function RealtorConstructor() {
                 </Card>
               ))}
             </div>
-          </div>
+          </>
         )}
 
         {/* Selected Realtor Form */}
-        {selectedRealtor && showForm && (
+        {selectedRealtor && (
           <Card className="max-w-2xl mx-auto">
             <CardHeader>
               <CardTitle className="text-center text-2xl">
-                Связаться со специалистом
+                Связаться с {selectedRealtor.name}
               </CardTitle>
-              <div className="flex items-center justify-center space-x-4">
-                <img
-                  src={selectedRealtor.photo}
-                  alt={selectedRealtor.name}
-                  className="w-16 h-16 rounded-full object-cover"
-                />
-                <div>
-                  <h3 className="text-xl font-semibold">{selectedRealtor.name}</h3>
-                  <p className="text-text-secondary">{selectedRealtor.specialization.join(", ")}</p>
-                </div>
-              </div>
+              <p className="text-center text-text-secondary">
+                Специалист свяжется с вами в ближайшее время
+              </p>
             </CardHeader>
             <CardContent>
-              <ConsultationForm
+              <div className="flex items-center space-x-4 mb-6 p-4 bg-gray-50 rounded-lg">
+                <Avatar className="w-16 h-16">
+                  <AvatarImage src={selectedRealtor.photo} alt={selectedRealtor.name} />
+                  <AvatarFallback>
+                    <User className="h-8 w-8" />
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <h3 className="font-semibold text-lg">{selectedRealtor.name}</h3>
+                  <p className="text-text-secondary">{selectedRealtor.experience} опыта</p>
+                  <div className="flex items-center space-x-1 text-yellow-500">
+                    <Star className="h-4 w-4 fill-current" />
+                    <span>{selectedRealtor.rating}</span>
+                  </div>
+                </div>
+              </div>
+              <ConsultationForm 
                 defaultService={`Консультация с ${selectedRealtor.name}`}
               />
             </CardContent>
           </Card>
-        )}
-
-        {/* Call to Action */}
-        {!showForm && (
-          <div className="text-center py-16">
-            <h2 className="text-3xl font-bold text-text-primary mb-4">
-              Не нашли подходящего специалиста?
-            </h2>
-            <p className="text-text-secondary mb-8 max-w-2xl mx-auto">
-              Оставьте заявку, и мы подберем для вас идеального риэлтора под ваши требования
-            </p>
-            <ConsultationForm defaultService="Подбор специалиста" />
-          </div>
         )}
       </div>
     </div>

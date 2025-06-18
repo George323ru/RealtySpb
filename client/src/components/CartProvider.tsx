@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import type { Property, NewBuilding } from '@shared/schema';
+import { createContext, useContext, useState, ReactNode } from "react";
+import { type Property, type NewBuilding } from "@shared/schema";
 
 interface CartItem {
   id: string;
@@ -21,7 +21,7 @@ const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const useCart = () => {
   const context = useContext(CartContext);
-  if (!context) {
+  if (context === undefined) {
     throw new Error('useCart must be used within a CartProvider');
   }
   return context;
@@ -34,17 +34,21 @@ interface CartProviderProps {
 export default function CartProvider({ children }: CartProviderProps) {
   const [items, setItems] = useState<CartItem[]>([]);
 
-  const addToCart = (data: Property | NewBuilding, type: 'property' | 'newBuilding') => {
-    const itemId = `${type}-${data.id}`;
-    
-    if (!isInCart(data.id, type)) {
-      setItems(prev => [...prev, {
-        id: itemId,
-        type,
-        data,
-        addedAt: new Date()
-      }]);
-    }
+  const addToCart = (item: Property | NewBuilding, type: 'property' | 'newBuilding') => {
+    const cartItem: CartItem = {
+      id: `${type}-${item.id}`,
+      type,
+      data: item,
+      addedAt: new Date()
+    };
+
+    setItems(prev => {
+      // Check if item already exists
+      const exists = prev.some(cartItem => cartItem.id === `${type}-${item.id}`);
+      if (exists) return prev;
+      
+      return [...prev, cartItem];
+    });
   };
 
   const removeFromCart = (id: string) => {
@@ -55,22 +59,25 @@ export default function CartProvider({ children }: CartProviderProps) {
     setItems([]);
   };
 
-  const getTotalItems = () => items.length;
+  const getTotalItems = () => {
+    return items.length;
+  };
 
   const isInCart = (id: number, type: 'property' | 'newBuilding') => {
-    const itemId = `${type}-${id}`;
-    return items.some(item => item.id === itemId);
+    return items.some(item => item.id === `${type}-${id}`);
+  };
+
+  const value: CartContextType = {
+    items,
+    addToCart,
+    removeFromCart,
+    clearCart,
+    getTotalItems,
+    isInCart
   };
 
   return (
-    <CartContext.Provider value={{
-      items,
-      addToCart,
-      removeFromCart,
-      clearCart,
-      getTotalItems,
-      isInCart
-    }}>
+    <CartContext.Provider value={value}>
       {children}
     </CartContext.Provider>
   );

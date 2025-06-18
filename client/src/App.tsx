@@ -7,20 +7,20 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import FloatingCTA from "@/components/floating-cta";
 import CartProvider from "@/components/CartProvider";
-import Home from "@/pages/Home";
-import Buy from "@/pages/Buy";
-import Sell from "@/pages/Sell";
-import Rent from "@/pages/Rent";
-import NewBuildings from "@/pages/NewBuildings";
-import Secondary from "@/pages/Secondary";
-import PropertyDetail from "@/pages/PropertyDetail";
-import Services from "@/pages/Services";
-import ServiceDetail from "@/pages/ServiceDetail";
-import About from "@/pages/About";
-import Reviews from "@/pages/Reviews";
-import Blog from "@/pages/Blog";
-import BlogPost from "@/pages/BlogPost";
-import Contacts from "@/pages/Contact";
+import Home from "@/pages/home";
+import Buy from "@/pages/buy";
+import Sell from "@/pages/sell";
+import Rent from "@/pages/rent";
+import NewBuildings from "@/pages/new-buildings";
+import Secondary from "@/pages/secondary";
+import PropertyDetail from "@/pages/property-detail";
+import Services from "@/pages/services";
+import ServiceDetail from "@/pages/service-detail";
+import About from "@/pages/about";
+import Reviews from "@/pages/reviews";
+import Blog from "@/pages/blog";
+import BlogPost from "@/pages/blog-post";
+import Contacts from "@/pages/contacts";
 import NotFound from "@/pages/not-found";
 import Cart from "@/pages/cart";
 import RealtorConstructor from "@/pages/realtor-constructor";
@@ -46,7 +46,6 @@ function Router() {
       <Route path="/blog/:slug" component={BlogPost} />
       <Route path="/contacts" component={Contacts} />
       <Route path="/cart" component={Cart} />
-      <Route path="/realtor-constructor" component={RealtorConstructor} />
       <Route component={NotFound} />
     </Switch>
   );
