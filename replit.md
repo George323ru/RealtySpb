@@ -129,6 +129,8 @@ Changelog:
 - June 18, 2025. Created individual service landing pages - each service now has dedicated landing page with detailed information, benefits, process steps, and conversion forms
 - June 18, 2025. Updated navigation menu - replaced general "Услуги" with specific service buttons for direct access to individual service pages
 - June 18, 2025. All 12 services now available in header navigation with shortened names for space efficiency
+- June 18, 2025. Redesigned services navigation - replaced individual service buttons with dropdown menu grouped by categories (like "Купить" button structure)
+- June 18, 2025. Services dropdown menu includes 4 categories: Предпродажная подготовка, Строительство, Юридическое сопровождение, Управление
 ```
 
 ## User Preferences

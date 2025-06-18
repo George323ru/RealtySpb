@@ -1,21 +1,32 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail, Clock } from "lucide-react";
-import { CONTACT_INFO } from "@/lib/constants";
+import { Phone, Mail, Clock, ChevronDown } from "lucide-react";
+import { CONTACT_INFO, SERVICES } from "@/lib/constants";
 
 export default function Header() {
   const [isSticky, setIsSticky] = useState(false);
   const [location] = useLocation();
+  const [showServicesDropdown, setShowServicesDropdown] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 100);
     };
 
+    const handleClickOutside = (event: MouseEvent) => {
+      if (showServicesDropdown && !(event.target as Element).closest('.services-dropdown')) {
+        setShowServicesDropdown(false);
+      }
+    };
+
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, [showServicesDropdown]);
 
   const mainNavItems = [
     { title: "Купить", href: "/buy" },
@@ -24,22 +35,45 @@ export default function Header() {
     { title: "Новостройки", href: "/new-buildings" },
     { title: "Вторичка", href: "/secondary" },
     { title: "Земля", href: "/land" },
-    { title: "Предпродажная", href: "/services/pre-sale-preparation" },
-    { title: "Дизайн-проект", href: "/services/design-project" },
-    { title: "Ремонт", href: "/services/renovation" },
-    { title: "Строительство", href: "/services/construction" },
-    { title: "Проектирование", href: "/services/design" },
-    { title: "Инженерные", href: "/services/engineering-systems" },
-    { title: "Ландшафт", href: "/services/landscape-design" },
-    { title: "Юридическая", href: "/services/legal-check" },
-    { title: "Сопровождение", href: "/services/transaction-support" },
-    { title: "Управление", href: "/services/property-management" },
-    { title: "Мебель", href: "/services/furniture-selection" },
     { title: "Специалист", href: "/realtor-constructor" },
     { title: "Калькулятор", href: "/calculator" },
     { title: "О нас", href: "/about" },
     { title: "Блог", href: "/blog" },
     { title: "Контакты", href: "/contacts" }
+  ];
+
+  const serviceCategories = [
+    {
+      title: "Предпродажная подготовка",
+      items: [
+        { name: "Предпродажная подготовка", href: "/services/pre-sale-preparation" },
+        { name: "Дизайн и ремонт", href: "/services/design-project" },
+        { name: "Ремонт", href: "/services/renovation" }
+      ]
+    },
+    {
+      title: "Строительство",
+      items: [
+        { name: "Строительство", href: "/services/construction" },
+        { name: "Проектирование", href: "/services/design" },
+        { name: "Инженерные системы", href: "/services/engineering-systems" },
+        { name: "Ландшафтный дизайн", href: "/services/landscape-design" }
+      ]
+    },
+    {
+      title: "Юридическое сопровождение",
+      items: [
+        { name: "Юридическая проверка", href: "/services/legal-check" },
+        { name: "Сопровождение сделки", href: "/services/transaction-support" }
+      ]
+    },
+    {
+      title: "Управление",
+      items: [
+        { name: "Управление недвижимостью", href: "/services/property-management" },
+        { name: "Комплектация мебелью", href: "/services/furniture-selection" }
+      ]
+    }
   ];
 
   return (
@@ -105,6 +139,61 @@ export default function Header() {
                 {item.title}
               </Link>
             ))}
+            
+            {/* Services Dropdown */}
+            <div className="relative services-dropdown">
+              <button
+                onClick={() => setShowServicesDropdown(!showServicesDropdown)}
+                className={`px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors rounded-lg whitespace-nowrap flex items-center space-x-1 ${
+                  location.startsWith('/services')
+                    ? "text-accent-orange bg-orange-50"
+                    : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
+                }`}
+              >
+                <span>Услуги</span>
+                <ChevronDown className="w-3 h-3" />
+              </button>
+              
+              {showServicesDropdown && (
+                <div className="absolute top-full left-0 mt-1 bg-white border border-gray-200 rounded-lg shadow-lg z-50 min-w-[800px]">
+                  <div className="p-4 grid grid-cols-4 gap-6">
+                    {serviceCategories.map((category) => (
+                      <div key={category.title} className="space-y-2">
+                        <h3 className="font-semibold text-gray-900 text-sm uppercase tracking-wide border-b border-gray-200 pb-1">
+                          {category.title}
+                        </h3>
+                        <div className="space-y-1">
+                          {category.items.map((service) => (
+                            <Link
+                              key={service.href}
+                              href={service.href}
+                              onClick={() => setShowServicesDropdown(false)}
+                              className="block px-2 py-1 text-sm text-gray-600 hover:text-orange-600 hover:bg-orange-50 rounded transition-colors"
+                            >
+                              {service.name}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                    
+                    {/* All services link */}
+                    <div className="space-y-2">
+                      <h3 className="font-semibold text-gray-900 text-sm uppercase tracking-wide border-b border-gray-200 pb-1">
+                        Все услуги
+                      </h3>
+                      <Link
+                        href="/services"
+                        onClick={() => setShowServicesDropdown(false)}
+                        className="block px-2 py-1 text-sm text-orange-600 hover:text-orange-700 hover:bg-orange-50 rounded transition-colors font-medium"
+                      >
+                        Все услуги
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* CTA Button */}
