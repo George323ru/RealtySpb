@@ -321,47 +321,54 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Наша команда
+              Подберем идеального специалиста
             </h2>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Профессиональные риэлторы с многолетним опытом работы на рынке недвижимости Санкт-Петербурга
+              Ответьте на несколько вопросов, и мы найдем риэлтора с нужным опытом и специализацией
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.slice(0, 4).map((member) => (
-              <div key={member.id} className="text-center group">
-                <div className="relative mb-6">
-                  <img 
-                    src={member.photo} 
-                    alt={member.name}
-                    className="w-32 h-32 rounded-full mx-auto object-cover group-hover:scale-105 transition-transform" 
-                  />
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                </div>
-                <h3 className="text-xl font-semibold text-text-primary mb-2">{member.name}</h3>
-                <p className="text-accent-orange font-medium mb-2">{member.position}</p>
-                <p className="text-sm text-text-secondary mb-4">{member.experience}</p>
-                <div className="flex justify-center space-x-3">
-                  {member.telegram && (
-                    <a 
-                      href={`https://t.me/${member.telegram.replace('@', '')}`}
-                      className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
-                    >
-                      <i className="fab fa-telegram text-sm"></i>
-                    </a>
-                  )}
-                  {member.whatsapp && (
-                    <a 
-                      href={`https://wa.me/${member.whatsapp.replace(/[^0-9]/g, '')}`}
-                      className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
-                    >
-                      <i className="fab fa-whatsapp text-sm"></i>
-                    </a>
-                  )}
-                </div>
-              </div>
-            ))}
+          <div className="max-w-4xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+              <Card className="bg-white hover:shadow-lg transition-shadow text-center border border-neutral-200">
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Users className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-text-primary mb-2">50+ специалистов</h3>
+                  <p className="text-text-secondary">Только проверенные эксперты с опытом от 3 лет</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white hover:shadow-lg transition-shadow text-center border border-neutral-200">
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <CheckCircle className="w-8 h-8 text-green-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-text-primary mb-2">Персональный подбор</h3>
+                  <p className="text-text-secondary">Учитываем ваши требования и тип сделки</p>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white hover:shadow-lg transition-shadow text-center border border-neutral-200">
+                <CardContent className="p-8">
+                  <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Clock className="w-8 h-8 text-orange-600" />
+                  </div>
+                  <h3 className="text-xl font-bold text-text-primary mb-2">Быстрый отклик</h3>
+                  <p className="text-text-secondary">Специалист свяжется с вами в течение часа</p>
+                </CardContent>
+              </Card>
+            </div>
+            
+            <div className="text-center">
+              <Link href="/realtor-constructor">
+                <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 text-lg">
+                  Подобрать специалиста
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

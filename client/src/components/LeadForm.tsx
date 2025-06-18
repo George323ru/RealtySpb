@@ -15,10 +15,9 @@ import { apiRequest } from "@/lib/queryClient";
 import { SERVICE_TYPES } from "@/lib/constants";
 import { insertLeadSchema } from "@shared/schema";
 
-const leadFormSchema = insertLeadSchema.extend({
+const leadFormSchema = z.object({
   name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
   phone: z.string().min(10, "Введите корректный номер телефона"),
-  email: z.string().email("Введите корректный email").optional().or(z.literal("")),
 });
 
 type LeadFormData = z.infer<typeof leadFormSchema>;
@@ -44,17 +43,16 @@ export default function LeadForm({
     defaultValues: {
       name: "",
       phone: "",
-      email: "",
-      serviceType: serviceType || SERVICE_TYPES[0],
-      message: "",
-      source: "website",
-      status: "new"
     },
   });
 
   const createLeadMutation = useMutation({
     mutationFn: async (data: LeadFormData) => {
-      const response = await apiRequest("POST", "/api/leads", data);
+      const response = await apiRequest("POST", "/api/leads", {
+        ...data,
+        serviceType: serviceType || "консультация",
+        source: "website",
+      });
       return response.json();
     },
     onSuccess: () => {
@@ -170,62 +168,7 @@ export default function LeadForm({
               />
             </div>
 
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email (необязательно)</FormLabel>
-                  <FormControl>
-                    <Input type="email" placeholder="your@email.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
-            <FormField
-              control={form.control}
-              name="serviceType"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Выберите услугу</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Выберите услугу" />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {SERVICE_TYPES.map((service) => (
-                        <SelectItem key={service} value={service}>
-                          {service}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Сообщение (необязательно)</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Расскажите о ваших потребностях"
-                      rows={4}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
             <Button 
               type="submit" 

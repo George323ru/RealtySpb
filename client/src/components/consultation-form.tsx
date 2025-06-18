@@ -12,8 +12,9 @@ import { apiRequest } from "@/lib/queryClient";
 import { insertLeadSchema } from "@shared/schema";
 import { z } from "zod";
 
-const consultationSchema = insertLeadSchema.extend({
-  serviceType: z.string().min(1, "Выберите услугу"),
+const consultationSchema = z.object({
+  name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
+  phone: z.string().min(10, "Введите корректный номер телефона"),
 });
 
 type ConsultationFormData = z.infer<typeof consultationSchema>;
@@ -32,17 +33,17 @@ export default function ConsultationForm({ className, defaultService }: Consulta
     defaultValues: {
       name: "",
       phone: "",
-      email: "",
-      serviceType: defaultService || "",
-      message: "",
-      propertyType: "",
-      budget: "",
     },
   });
 
   const mutation = useMutation({
     mutationFn: async (data: ConsultationFormData) => {
-      return apiRequest("POST", "/api/contact", data);
+      const response = await apiRequest("POST", "/api/leads", {
+        ...data,
+        serviceType: defaultService || "консультация",
+        source: "website",
+      });
+      return response.json();
     },
     onSuccess: () => {
       setIsSubmitted(true);
