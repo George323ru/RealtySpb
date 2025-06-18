@@ -107,6 +107,12 @@ Changelog:
 - June 18, 2025. Database integration completed - PostgreSQL database now provides persistent data storage
 - June 18, 2025. Sample data populated for all entities (properties, services, team, reviews, blog posts)
 - June 18, 2025. DatabaseStorage implemented replacing MemStorage for production-ready data persistence
+- June 18, 2025. Building cards optimized - reduced spacing and made more compact layout
+- June 18, 2025. Specialist selection page created with filtering system (gender, age, experience, services)
+- June 18, 2025. Related services added to main service cards showing additional offerings
+- June 18, 2025. Promotion banner removed from homepage as requested
+- June 18, 2025. Cart page implemented for property list management and PDF export
+- June 18, 2025. Land services page created merging "услуги по земле" and "подбор участка"
 ```
 
 ## User Preferences
