@@ -198,24 +198,24 @@ export default function Home() {
             {/* Navigation Buttons */}
             <button 
               id="scroll-left"
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-colors border border-neutral-200"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-white transition-all duration-300 border border-neutral-200"
               onClick={() => {
                 const container = document.getElementById('properties-scroll');
                 if (container) container.scrollBy({ left: -400, behavior: 'smooth' });
               }}
             >
-              <ChevronLeft className="w-5 h-5 text-gray-600" />
+              <ChevronLeft className="w-6 h-6 text-gray-700" />
             </button>
             
             <button 
               id="scroll-right"
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-colors border border-neutral-200"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-white transition-all duration-300 border border-neutral-200"
               onClick={() => {
                 const container = document.getElementById('properties-scroll');
                 if (container) container.scrollBy({ left: 400, behavior: 'smooth' });
               }}
             >
-              <ChevronRight className="w-5 h-5 text-gray-600" />
+              <ChevronRight className="w-6 h-6 text-gray-700" />
             </button>
 
             <div 
@@ -232,11 +232,11 @@ export default function Home() {
             </div>
             
             {/* Scroll Indicators */}
-            <div className="flex justify-center mt-6 gap-2">
+            <div className="flex justify-center mt-6 gap-3">
               {Array.from({ length: Math.ceil(properties.length / 3) }).map((_, index) => (
-                <div 
+                <button 
                   key={index}
-                  className="w-2 h-2 rounded-full bg-neutral-300 hover:bg-accent-orange transition-colors cursor-pointer"
+                  className="w-3 h-3 rounded-full bg-neutral-300 hover:bg-accent-orange active:bg-accent-orange transition-colors cursor-pointer"
                   onClick={() => {
                     const container = document.getElementById('properties-scroll');
                     if (container) container.scrollTo({ left: index * 400, behavior: 'smooth' });

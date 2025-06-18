@@ -124,6 +124,7 @@ Changelog:
 - June 18, 2025. Fixed CTA section text readability with black text on orange background
 - June 18, 2025. Redesigned search form to compact horizontal layout in Yandex style with visual separators
 - June 18, 2025. Simplified new building cards to match other interface elements with clean, unified design
+- June 18, 2025. Enhanced property carousel navigation with visible buttons, hover effects, and clear scroll indicators
 ```
 
 ## User Preferences

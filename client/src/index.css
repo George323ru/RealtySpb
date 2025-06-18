@@ -117,6 +117,15 @@
     color: var(--text-secondary);
   }
   
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
   .bg-neutral-50 {
     background-color: var(--neutral-50);
   }
