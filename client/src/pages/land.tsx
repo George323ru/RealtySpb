@@ -24,7 +24,7 @@ export default function LandPage() {
     queryKey: ['/api/properties', { ...filters, propertyType: 'land' }],
   });
 
-  const landProperties = properties.filter((property: Property) => 
+  const landProperties = (properties as Property[]).filter((property: Property) => 
     property.propertyType === 'Участок' || 
     property.title.toLowerCase().includes('участок') ||
     property.description.toLowerCase().includes('участок')
@@ -224,7 +224,7 @@ export default function LandPage() {
                       </div>
                       <div className="bg-gray-50 rounded p-2">
                         <div className="text-xs text-gray-500">За сотку</div>
-                        <div className="font-medium">{Math.round(property.price / (property.area / 100)).toLocaleString()} ₽</div>
+                        <div className="font-medium">{Math.round(Number(property.price) / (parseInt(property.area) / 100)).toLocaleString()} ₽</div>
                       </div>
                     </div>
                     
