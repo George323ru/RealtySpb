@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -25,69 +25,7 @@ import {
 } from "lucide-react";
 import type { Property, NewBuilding, Service, TeamMember } from "@shared/schema";
 
-// Property Carousel Component
-function PropertyCarousel({ properties }: { properties: Property[] }) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    align: 'start',
-    skipSnaps: false,
-    dragFree: true,
-  });
-  const [canScrollPrev, setCanScrollPrev] = useState(false);
-  const [canScrollNext, setCanScrollNext] = useState(false);
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setCanScrollPrev(emblaApi.canScrollPrev());
-    setCanScrollNext(emblaApi.canScrollNext());
-  }, [emblaApi]);
-
-  useState(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on('select', onSelect);
-    emblaApi.on('reInit', onSelect);
-    return () => emblaApi && emblaApi.destroy();
-  }, [emblaApi, onSelect]);
-
-  return (
-    <div className="relative">
-      <div className="overflow-hidden" ref={emblaRef}>
-        <div className="flex gap-6">
-          {properties.slice(0, 8).map((property) => (
-            <div key={property.id} className="flex-none w-80 lg:w-96">
-              <PropertyCard property={property} />
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {canScrollPrev && (
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm shadow-lg z-10"
-          onClick={scrollPrev}
-        >
-          <ChevronLeft className="h-4 w-4" />
-        </Button>
-      )}
-      
-      {canScrollNext && (
-        <Button
-          variant="outline"
-          size="icon"
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm shadow-lg z-10"
-          onClick={scrollNext}
-        >
-          <ChevronRight className="h-4 w-4" />
-        </Button>
-      )}
-    </div>
-  );
-}
 
 export default function Home() {
   const { data: properties = [] } = useQuery<Property[]>({
@@ -248,7 +186,15 @@ export default function Home() {
           
           {/* Property Carousel */}
           <div className="relative mb-8">
-            <PropertyCarousel properties={properties || []} />
+            <div className="overflow-x-auto scrollbar-hide">
+              <div className="flex gap-6 pb-4 min-w-max">
+                {properties.slice(0, 8).map((property) => (
+                  <div key={property.id} className="flex-none w-80 lg:w-96">
+                    <PropertyCard property={property} />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
           
           {/* CTA Button */}
