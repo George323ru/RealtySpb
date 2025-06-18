@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { ChevronDown, Menu, X, Phone, Mail, Clock } from "lucide-react";
+import { Menu, X, Phone, Mail, Clock } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
 
 export default function Header() {
@@ -18,41 +18,19 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navItems = [
-    {
-      title: "Хочу купить",
-      href: "/buy",
-      dropdown: [
-        { title: "Квартиры", href: "/buy?type=apartment" },
-        { title: "Дома", href: "/buy?type=house" },
-        { title: "Коммерческая", href: "/buy?type=commercial" },
-        { title: "Земля", href: "/buy?type=land" },
-        { title: "Гаражи", href: "/buy?type=garage" },
-        { title: "Машиноместа", href: "/buy?type=parking" },
-        { title: "Новостройки", href: "/new-buildings" },
-        { title: "Вторичная недвижимость", href: "/secondary" }
-      ]
-    },
-    { title: "Хочу продать", href: "/sell" },
-    { title: "Хочу сдать", href: "/rent" },
-    {
-      title: "Услуги",
-      href: "/services",
-      dropdown: [
-        { title: "Предпродажная подготовка", href: "/services/pre-sale-preparation" },
-        { title: "Дизайн-проект", href: "/services/design-project" },
-        { title: "Ремонт", href: "/services/renovation" },
-        { title: "Строительство", href: "/services/construction" },
-        { title: "Юридическая проверка", href: "/services/legal-verification" },
-        { title: "Сопровождение сделки", href: "/services/transaction-support" },
-        { title: "Все услуги →", href: "/services" }
-      ]
-    },
-    { title: "Подбор специалиста", href: "/realtor-constructor" },
-    { title: "Калькулятор ипотеки", href: "/calculator" },
+  const mainNavItems = [
+    { title: "Купить", href: "/buy" },
+    { title: "Продать", href: "/sell" },
+    { title: "Сдать", href: "/rent" },
+    { title: "Новостройки", href: "/new-buildings" },
+    { title: "Вторичка", href: "/secondary" },
+    { title: "Земля", href: "/land" },
+    { title: "Услуги", href: "/services" },
+    { title: "Специалист", href: "/realtor-constructor" },
+    { title: "Калькулятор", href: "/calculator" },
     { title: "О нас", href: "/about" },
     { title: "Блог", href: "/blog" },
-    { title: "Контакты", href: "/contact" }
+    { title: "Контакты", href: "/contacts" }
   ];
 
   return (
@@ -104,81 +82,19 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <div key={item.title} className="relative group">
-                {item.dropdown ? (
-                  <>
-                    <button className="flex items-center py-2 text-text-primary hover:text-accent-orange transition-colors font-medium">
-                      {item.title}
-                      <ChevronDown className="ml-1 w-4 h-4" />
-                    </button>
-                    <div className="absolute top-full left-0 bg-white shadow-lg rounded-lg mt-2 py-4 w-80 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
-                      <div className="px-6 py-2">
-                        {item.title === "Хочу купить" && (
-                          <>
-                            <h3 className="font-semibold text-text-primary mb-3">Тип недвижимости</h3>
-                            <div className="grid grid-cols-2 gap-2">
-                              {item.dropdown.slice(0, 6).map((subItem) => (
-                                <Link
-                                  key={subItem.href}
-                                  href={subItem.href}
-                                  className="block py-2 text-sm text-text-secondary hover:text-accent-orange transition-colors"
-                                >
-                                  {subItem.title}
-                                </Link>
-                              ))}
-                            </div>
-                            <div className="border-t border-neutral-200 mt-3 pt-3">
-                              {item.dropdown.slice(6).map((subItem) => (
-                                <Link
-                                  key={subItem.href}
-                                  href={subItem.href}
-                                  className="block py-1 text-sm font-medium text-accent-orange hover:underline"
-                                >
-                                  {subItem.title}
-                                </Link>
-                              ))}
-                            </div>
-                          </>
-                        )}
-                        {item.title === "Услуги" && (
-                          <>
-                            {item.dropdown.slice(0, -1).map((subItem) => (
-                              <Link
-                                key={subItem.href}
-                                href={subItem.href}
-                                className="block py-2 text-sm text-text-secondary hover:text-accent-orange transition-colors"
-                              >
-                                {subItem.title}
-                              </Link>
-                            ))}
-                            <div className="border-t border-neutral-200 mt-2 pt-2">
-                              <Link
-                                href={item.dropdown[item.dropdown.length - 1].href}
-                                className="block py-1 text-sm font-medium text-accent-orange hover:underline"
-                              >
-                                {item.dropdown[item.dropdown.length - 1].title}
-                              </Link>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                  </>
-                ) : (
-                  <Link
-                    href={item.href}
-                    className={`py-2 font-medium transition-colors ${
-                      location === item.href
-                        ? "text-accent-orange"
-                        : "text-text-primary hover:text-accent-orange"
-                    }`}
-                  >
-                    {item.title}
-                  </Link>
-                )}
-              </div>
+          <div className="hidden lg:flex items-center space-x-1">
+            {mainNavItems.map((item) => (
+              <Link
+                key={item.title}
+                href={item.href}
+                className={`px-3 py-2 text-sm font-medium transition-colors rounded-lg ${
+                  location === item.href
+                    ? "text-accent-orange bg-orange-50"
+                    : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
+                }`}
+              >
+                {item.title}
+              </Link>
             ))}
           </div>
 
@@ -204,30 +120,15 @@ export default function Header() {
         {isMenuOpen && (
           <div className="lg:hidden border-t border-neutral-200 py-4">
             <div className="space-y-4">
-              {navItems.map((item) => (
-                <div key={item.title}>
-                  <Link
-                    href={item.href}
-                    className="block py-2 text-text-primary hover:text-accent-orange transition-colors font-medium"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item.title}
-                  </Link>
-                  {item.dropdown && (
-                    <div className="ml-4 space-y-2">
-                      {item.dropdown.map((subItem) => (
-                        <Link
-                          key={subItem.href}
-                          href={subItem.href}
-                          className="block py-1 text-sm text-text-secondary hover:text-accent-orange transition-colors"
-                          onClick={() => setIsMenuOpen(false)}
-                        >
-                          {subItem.title}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
+              {mainNavItems.map((item) => (
+                <Link
+                  key={item.title}
+                  href={item.href}
+                  className="block py-2 text-text-primary hover:text-accent-orange transition-colors font-medium"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.title}
+                </Link>
               ))}
               <div className="pt-4 border-t border-neutral-200">
                 <Link href="/sell" onClick={() => setIsMenuOpen(false)}>

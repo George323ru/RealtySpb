@@ -117,6 +117,8 @@ Changelog:
 - June 18, 2025. Building cards enhanced with compact "Подробнее" buttons (text-sm h-8)
 - June 18, 2025. Removed old separate "Услуги по земле" and "Подбор участка" references from homepage, services, and constants
 - June 18, 2025. Deleted obsolete LandServices.tsx and LandSelection.tsx files - now unified under single /land route
+- June 18, 2025. Navigation redesigned to horizontal layout with always-visible menu items instead of dropdown menus
+- June 18, 2025. Simplified navigation structure with 12 main sections displayed as compact horizontal buttons
 ```
 
 ## User Preferences
