@@ -131,6 +131,7 @@ Changelog:
 - June 18, 2025. All 12 services now available in header navigation with shortened names for space efficiency
 - June 18, 2025. Redesigned services navigation - replaced individual service buttons with dropdown menu grouped by categories (like "Купить" button structure)
 - June 18, 2025. Services dropdown menu restructured to flat list - all 12 services now visible without categories in 3-column grid layout for immediate access
+- June 18, 2025. Completely unified land services - removed all separate references to "Услуги по земле" and "Подбор участка", now single "Земля" section throughout entire site
 ```
 
 ## User Preferences

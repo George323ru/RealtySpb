@@ -43,7 +43,7 @@ export default function LandPage() {
 
   const services = [
     {
-      title: "Подбор участка",
+      title: "Поиск участков",
       description: "Найдем идеальный участок под ваши требования и бюджет",
       icon: <MapPin className="w-6 h-6" />,
       features: ["Анализ локации", "Проверка документов", "Осмотр участка", "Переговоры с продавцом"]
