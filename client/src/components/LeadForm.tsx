@@ -15,7 +15,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { SERVICE_TYPES } from "@/lib/constants";
 import { insertLeadSchema } from "@shared/schema";
 
-const leadFormSchema = z.object({
+const leadFormSchema = insertLeadSchema.extend({
   name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
   phone: z.string().min(10, "Введите корректный номер телефона"),
 });

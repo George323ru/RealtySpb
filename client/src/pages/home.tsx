@@ -21,7 +21,10 @@ import {
   Scale,
   Handshake,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  Users,
+  CheckCircle,
+  Clock
 } from "lucide-react";
 import type { Property, NewBuilding, Service, TeamMember } from "@shared/schema";
 

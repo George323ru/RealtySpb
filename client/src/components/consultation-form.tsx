@@ -12,7 +12,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { insertLeadSchema } from "@shared/schema";
 import { z } from "zod";
 
-const consultationSchema = z.object({
+const consultationSchema = insertLeadSchema.extend({
   name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
   phone: z.string().min(10, "Введите корректный номер телефона"),
 });
@@ -114,63 +114,7 @@ export default function ConsultationForm({ className, defaultService }: Consulta
             />
           </div>
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email (необязательно)</FormLabel>
-                <FormControl>
-                  <Input type="email" placeholder="your@email.com" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
-          <FormField
-            control={form.control}
-            name="serviceType"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Выберите услугу</FormLabel>
-                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Выберите услугу" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    <SelectItem value="купить">Хочу купить недвижимость</SelectItem>
-                    <SelectItem value="продать">Хочу продать недвижимость</SelectItem>
-                    <SelectItem value="сдать">Хочу сдать в аренду</SelectItem>
-                    <SelectItem value="оценка">Оценка недвижимости</SelectItem>
-                    <SelectItem value="консультация">Юридическая консультация</SelectItem>
-                    <SelectItem value="другое">Другое</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="message"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Опишите ваш вопрос (необязательно)</FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Расскажите подробнее о ваших потребностях..."
-                    rows={3}
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
 
           <Button
             type="submit"
