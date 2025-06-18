@@ -419,10 +419,10 @@ export default function Home() {
       <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-white drop-shadow-lg">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-black">
               Получите консультацию эксперта бесплатно
             </h2>
-            <p className="text-xl mb-8 text-white drop-shadow-md">
+            <p className="text-xl mb-8 text-black">
               Оставьте заявку и наш специалист свяжется с вами в течение 15 минут для решения вашего вопроса
             </p>
             
