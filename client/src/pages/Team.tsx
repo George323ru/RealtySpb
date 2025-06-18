@@ -33,22 +33,22 @@ export default function Team() {
   const specializations = [
     {
       title: "Жилая недвижимость",
-      count: teamMembers?.filter(m => m.specializations.includes("Жилая недвижимость")).length || 0,
+      count: teamMembers?.filter(m => m.specialization && m.specialization.includes("Жилая недвижимость")).length || 0,
       color: "bg-blue-100 text-blue-700"
     },
     {
       title: "Коммерческая недвижимость", 
-      count: teamMembers?.filter(m => m.specializations.includes("Коммерческая недвижимость")).length || 0,
+      count: teamMembers?.filter(m => m.specialization && m.specialization.includes("Коммерческая недвижимость")).length || 0,
       color: "bg-green-100 text-green-700"
     },
     {
       title: "Новостройки",
-      count: teamMembers?.filter(m => m.specializations.includes("Новостройки")).length || 0,
+      count: teamMembers?.filter(m => m.specialization && m.specialization.includes("Новостройки")).length || 0,
       color: "bg-purple-100 text-purple-700"
     },
     {
       title: "Инвестиции",
-      count: teamMembers?.filter(m => m.specializations.includes("Инвестиции")).length || 0,
+      count: teamMembers?.filter(m => m.specialization && m.specialization.includes("Инвестиции")).length || 0,
       color: "bg-orange-100 text-orange-700"
     }
   ];
