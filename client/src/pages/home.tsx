@@ -149,19 +149,19 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {quickActions.map((action, index) => (
-              <Card key={index} className={`group bg-gradient-to-br ${action.color} hover:shadow-xl transition-all duration-300 cursor-pointer`}>
-                <CardContent className="p-8 text-center">
+              <Card key={index} className={`group bg-gradient-to-br ${action.color} hover:shadow-xl transition-all duration-300 cursor-pointer h-full`}>
+                <CardContent className="p-8 text-center h-full flex flex-col">
                   <div className={`w-16 h-16 ${action.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
                     <action.icon className="text-white text-2xl w-8 h-8" />
                   </div>
                   <h3 className="text-xl font-bold text-text-primary mb-3">{action.title}</h3>
-                  <p className="text-text-secondary mb-6">{action.description}</p>
-                  <div className="text-sm text-text-secondary space-y-1 mb-6">
+                  <p className="text-text-secondary mb-6 flex-1">{action.description}</p>
+                  <div className="text-sm text-text-secondary space-y-1 mb-6 min-h-[72px] flex flex-col justify-center">
                     {action.features.map((feature, idx) => (
                       <div key={idx}>• {feature}</div>
                     ))}
                   </div>
-                  <Link href={action.link}>
+                  <Link href={action.link} className="mt-auto">
                     <Button className={`w-full ${action.buttonColor} text-white font-medium`}>
                       {action.title === "Хочу купить" ? "Начать поиск" :
                        action.title === "Хочу продать" ? "Оценить квартиру" :
