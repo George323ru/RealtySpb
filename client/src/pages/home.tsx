@@ -9,6 +9,7 @@ import PropertyCard from "@/components/property-card";
 import NewBuildingCard from "@/components/new-building-card";
 import ConsultationForm from "@/components/consultation-form";
 import PromotionBanner from "@/components/promotion-banner";
+import MortgageCalculator from "@/components/MortgageCalculator";
 import useEmblaCarousel from 'embla-carousel-react';
 import { 
   Home as HomeIcon, 
@@ -276,6 +277,43 @@ export default function Home() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Mortgage Calculator Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-6">
+                  Рассчитайте ипотеку онлайн
+                </h2>
+                <p className="text-lg text-text-secondary mb-8">
+                  Узнайте размер ежемесячного платежа и общую переплату по кредиту. 
+                  Наш калькулятор поможет спланировать покупку недвижимости.
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500" />
+                    <span className="text-text-secondary">Точные расчеты по актуальным ставкам</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500" />
+                    <span className="text-text-secondary">Учет всех параметров кредита</span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500" />
+                    <span className="text-text-secondary">Подбор лучших банковских предложений</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="flex justify-center">
+                <MortgageCalculator compact={true} />
+              </div>
+            </div>
           </div>
         </div>
       </section>
