@@ -48,6 +48,7 @@ export default function Header() {
         { title: "Все услуги →", href: "/services" }
       ]
     },
+    { title: "Подбор специалиста", href: "/realtor-constructor" },
     { title: "О нас", href: "/about" },
     { title: "Блог", href: "/blog" },
     { title: "Контакты", href: "/contact" }
