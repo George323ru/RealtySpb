@@ -1,6 +1,4 @@
 export const PROPERTY_TYPES = [
-  { value: "apartment", label: "Квартира" },
-  { value: "house", label: "Дом" },
   { value: "office", label: "Офисное помещение" },
   { value: "retail", label: "Торговое помещение" },
   { value: "warehouse", label: "Склад" },
@@ -11,9 +9,6 @@ export const PROPERTY_TYPES = [
   { value: "beauty", label: "Салон красоты" },
   { value: "fitness", label: "Спортзал/Фитнес" },
   { value: "auto", label: "Автосервис" },
-  { value: "land", label: "Земля" },
-  { value: "garage", label: "Гараж" },
-  { value: "parking", label: "Машиноместо" },
 ];
 
 export const TRANSACTION_TYPES = [
