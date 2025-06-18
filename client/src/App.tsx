@@ -3,7 +3,7 @@ import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Header from "@/components/Header";
+import Header from "@/components/header";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/floating-cta";
 import CartProvider from "@/components/CartProvider";
