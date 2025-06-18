@@ -2,12 +2,15 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Menu, Phone, Mail, Clock, Home, ChevronDown } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Menu, Phone, Mail, Clock, Home, ChevronDown, ShoppingCart } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCart } from "@/components/CartProvider";
 
 export default function Header() {
   const [location] = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { getTotalItems } = useCart();
 
   const navigation = [
     {
@@ -88,8 +91,8 @@ export default function Header() {
               <Home className="text-yandex-black text-xl" />
             </div>
             <div>
-              <div className="text-xl font-bold text-yandex-black">СПБ Недвижимость</div>
-              <div className="text-xs text-text-secondary">Профессиональные услуги</div>
+              <div className="text-xl font-bold text-yandex-black">риэлтор в СПБ</div>
+              <div className="text-xs text-text-secondary">realtorvspb.ru</div>
             </div>
           </Link>
 
@@ -131,8 +134,18 @@ export default function Header() {
             ))}
           </div>
 
-          {/* CTA Button - Desktop */}
-          <div className="hidden lg:flex items-center">
+          {/* Cart and CTA Buttons - Desktop */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <Link href="/cart" className="relative">
+              <Button variant="outline" size="icon" className="relative">
+                <ShoppingCart className="h-5 w-5" />
+                {getTotalItems() > 0 && (
+                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-orange-500 text-white text-xs">
+                    {getTotalItems()}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
             <Link href="/contacts">
               <Button className="bg-accent-orange hover:bg-orange-600 text-white">
                 Оценить недвижимость

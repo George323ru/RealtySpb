@@ -137,5 +137,21 @@ export const VK = "vk.com/spb_realty";
 export const INSTAGRAM = "@spb_realty";
 
 export const COMPANY_ADDRESS = "Невский проспект, 15, БЦ \"Северная Столица\", 5 этаж";
-export const COMPANY_NAME = "СПБ Недвижимость";
-export const COMPANY_TAGLINE = "Профессиональные услуги";
+export const COMPANY_NAME = "риэлтор в СПБ";
+export const COMPANY_TAGLINE = "realtorvspb.ru";
+
+export const SERVICE_TYPES = [
+  "Покупка недвижимости",
+  "Продажа недвижимости", 
+  "Аренда недвижимости",
+  "Предпродажная подготовка",
+  "Дизайн-проект",
+  "Ремонт",
+  "Земля",
+  "Строительство",
+  "Юридическая проверка",
+  "Сопровождение сделки",
+  "Управление недвижимостью",
+  "Консультация риэлтора",
+  "Оценка недвижимости"
+];

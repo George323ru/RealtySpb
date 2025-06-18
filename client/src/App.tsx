@@ -56,17 +56,19 @@ function Router() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <div className="min-h-screen bg-neutral-50">
-          <Header />
-          <main>
-            <Router />
-          </main>
-          <Footer />
-          <FloatingCTA />
-          <Toaster />
-        </div>
-      </TooltipProvider>
+      <CartProvider>
+        <TooltipProvider>
+          <div className="min-h-screen bg-neutral-50">
+            <Header />
+            <main>
+              <Router />
+            </main>
+            <Footer />
+            <FloatingCTA />
+            <Toaster />
+          </div>
+        </TooltipProvider>
+      </CartProvider>
     </QueryClientProvider>
   );
 }
