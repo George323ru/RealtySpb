@@ -125,6 +125,7 @@ Changelog:
 - June 18, 2025. Redesigned search form to compact horizontal layout in Yandex style with visual separators
 - June 18, 2025. Simplified new building cards to match other interface elements with clean, unified design
 - June 18, 2025. Enhanced property carousel navigation with visible buttons, hover effects, and clear scroll indicators
+- June 18, 2025. Updated property types to focus on commercial real estate - removed residential types, kept only business premises
 ```
 
 ## User Preferences
