@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Mail, Clock } from "lucide-react";
+import { Phone, Mail, Clock } from "lucide-react";
 import { CONTACT_INFO } from "@/lib/constants";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false);
   const [location] = useLocation();
 
@@ -81,13 +80,13 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
+          {/* Always Visible Navigation */}
+          <div className="flex items-center space-x-1 overflow-x-auto flex-1 mx-4">
             {mainNavItems.map((item) => (
               <Link
                 key={item.title}
                 href={item.href}
-                className={`px-3 py-2 text-sm font-medium transition-colors rounded-lg ${
+                className={`px-2 lg:px-3 py-2 text-xs lg:text-sm font-medium transition-colors rounded-lg whitespace-nowrap ${
                   location === item.href
                     ? "text-accent-orange bg-orange-50"
                     : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
@@ -99,47 +98,14 @@ export default function Header() {
           </div>
 
           {/* CTA Button */}
-          <div className="hidden lg:flex items-center space-x-4">
+          <div className="flex items-center">
             <Link href="/sell">
-              <Button className="bg-accent-orange text-white hover:bg-orange-600">
-                Оценить недвижимость
+              <Button className="bg-accent-orange text-white hover:bg-orange-600 text-xs lg:text-sm px-2 lg:px-4">
+                Оценить
               </Button>
             </Link>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden text-text-primary"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-          >
-            {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </nav>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="lg:hidden border-t border-neutral-200 py-4">
-            <div className="space-y-4">
-              {mainNavItems.map((item) => (
-                <Link
-                  key={item.title}
-                  href={item.href}
-                  className="block py-2 text-text-primary hover:text-accent-orange transition-colors font-medium"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.title}
-                </Link>
-              ))}
-              <div className="pt-4 border-t border-neutral-200">
-                <Link href="/sell" onClick={() => setIsMenuOpen(false)}>
-                  <Button className="w-full bg-accent-orange text-white hover:bg-orange-600">
-                    Оценить недвижимость
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
     </header>
   );
