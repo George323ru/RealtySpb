@@ -162,28 +162,28 @@ export default function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-80">
-              <div className="flex flex-col space-y-4 mt-8">
+              <div className="flex flex-col space-y-2 mt-8">
                 {navigation.map((item) => (
-                  <div key={item.name}>
+                  <div key={item.name} className="space-y-2">
                     <Link
                       href={item.href}
                       className={cn(
-                        "block py-2 text-lg font-medium transition-colors",
+                        "block px-3 py-3 text-base font-medium rounded-md transition-colors",
                         location === item.href
-                          ? "text-accent-orange"
-                          : "text-text-primary hover:text-accent-orange"
+                          ? "text-accent-orange bg-orange-50"
+                          : "text-text-primary hover:text-accent-orange hover:bg-neutral-50"
                       )}
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {item.name}
                     </Link>
                     {item.dropdown && (
-                      <div className="ml-4 mt-2 space-y-2">
+                      <div className="ml-3 space-y-1 border-l-2 border-neutral-200 pl-4">
                         {item.dropdown.map((dropdownItem) => (
                           <Link
                             key={dropdownItem.name}
                             href={dropdownItem.href}
-                            className="block py-1 text-sm text-text-secondary hover:text-accent-orange transition-colors"
+                            className="block px-3 py-2 text-sm text-text-secondary hover:text-accent-orange hover:bg-orange-50 rounded-md transition-colors"
                             onClick={() => setIsMenuOpen(false)}
                           >
                             {dropdownItem.name}
@@ -193,7 +193,15 @@ export default function Header() {
                     )}
                   </div>
                 ))}
-                <div className="pt-4 border-t">
+                
+                {/* Mobile Cart and CTA */}
+                <div className="pt-6 border-t border-neutral-200 space-y-3">
+                  <Link href="/cart" onClick={() => setIsMenuOpen(false)}>
+                    <Button variant="outline" className="w-full justify-start">
+                      <ShoppingCart className="h-4 w-4 mr-2" />
+                      Корзина ({getTotalItems()})
+                    </Button>
+                  </Link>
                   <Link href="/contacts" onClick={() => setIsMenuOpen(false)}>
                     <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white">
                       Оценить недвижимость
