@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import SearchForm from "@/components/search-form";
 import PropertyCard from "@/components/property-card";
+import NewBuildingCard from "@/components/new-building-card";
 import ConsultationForm from "@/components/consultation-form";
 import useEmblaCarousel from 'embla-carousel-react';
 import { 
@@ -223,53 +224,9 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {newBuildings.slice(0, 2).map((building) => (
-              <Card key={building.id} className="overflow-hidden border border-blue-200 bg-gradient-to-r from-blue-50 to-indigo-50">
-                <div className="flex flex-col lg:flex-row">
-                  <div className="lg:w-1/2">
-                    <img 
-                      src={building.images?.[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800"} 
-                      alt={building.name}
-                      className="w-full h-64 lg:h-full object-cover" 
-                    />
-                  </div>
-                  <div className="lg:w-1/2 p-8">
-                    <div className="flex items-center mb-4">
-                      <Badge className="bg-green-500 text-white mr-3">
-                        {building.readiness}
-                      </Badge>
-                      <span className="text-sm text-text-secondary">от застройщика</span>
-                    </div>
-                    <h3 className="text-2xl font-bold text-text-primary mb-3">{building.name}</h3>
-                    <p className="text-text-secondary mb-4 flex items-center">
-                      <MapPin className="w-4 h-4 mr-1 text-accent-orange" />
-                      {building.location}
-                    </p>
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div>
-                        <div className="text-sm text-text-secondary">Квартиры от</div>
-                        <div className="text-xl font-bold text-text-primary">
-                          {building.priceFrom?.toLocaleString('ru-RU')} ₽
-                        </div>
-                      </div>
-                      <div>
-                        <div className="text-sm text-text-secondary">За м²</div>
-                        <div className="text-xl font-bold text-text-primary">
-                          от {building.pricePerMeter?.toLocaleString('ru-RU')} ₽
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-4 text-sm text-text-secondary mb-6">
-                      <span>{building.totalFlats} квартир</span>
-                      <span>{building.readiness}</span>
-                    </div>
-                    <Button className="w-full bg-blue-500 text-white hover:bg-blue-600">
-                      Посмотреть планировки
-                    </Button>
-                  </div>
-                </div>
-              </Card>
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            {newBuildings.slice(0, 3).map((building) => (
+              <NewBuildingCard key={building.id} building={building} />
             ))}
           </div>
           
