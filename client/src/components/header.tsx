@@ -43,6 +43,7 @@ export default function Header() {
       ]
     },
     { name: "О нас", href: "/about" },
+    { name: "Выбрать специалиста", href: "/team" },
     { name: "Блог", href: "/blog" },
     { name: "Контакты", href: "/contacts" },
   ];

@@ -1,415 +1,428 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { insertLeadSchema } from "@shared/schema";
-import { 
-  User, 
-  Users, 
-  Award, 
-  Clock, 
-  CheckCircle,
-  Phone
-} from "lucide-react";
-import { z } from "zod";
+import { Phone, MessageCircle, Send, User, Award, Star, Search, Users } from "lucide-react";
+import ConsultationForm from "@/components/consultation-form";
 
-const realtorConstructorSchema = insertLeadSchema.extend({
-  realtorGender: z.string().min(1, "Выберите пол риэлтора"),
-  realtorAge: z.string().min(1, "Выберите возраст риэлтора"), 
-  realtorExperience: z.string().min(1, "Выберите опыт работы"),
-  realtorServices: z.array(z.string()).min(1, "Выберите хотя бы одну услугу"),
-});
+interface RealtorFilters {
+  gender: string;
+  experience: string;
+  specialization: string;
+  rating: string;
+  availability: string;
+}
 
-type RealtorConstructorData = z.infer<typeof realtorConstructorSchema>;
+interface GeneratedRealtor {
+  id: string;
+  name: string;
+  gender: string;
+  experience: string;
+  specialization: string[];
+  rating: number;
+  photo: string;
+  phone: string;
+  telegram?: string;
+  whatsapp?: string;
+  availability: string;
+  completedDeals: number;
+  description: string;
+}
 
 export default function RealtorConstructor() {
-  const { toast } = useToast();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const form = useForm<RealtorConstructorData>({
-    resolver: zodResolver(realtorConstructorSchema),
-    defaultValues: {
-      name: "",
-      phone: "",
-      serviceType: "realtor-constructor",
-      realtorGender: "",
-      realtorAge: "",
-      realtorExperience: "",
-      realtorServices: [],
-    },
+  const [filters, setFilters] = useState<RealtorFilters>({
+    gender: "",
+    experience: "",
+    specialization: "",
+    rating: "",
+    availability: ""
   });
 
-  const mutation = useMutation({
-    mutationFn: async (data: RealtorConstructorData) => {
-      return apiRequest("POST", "/api/leads", {
-        ...data,
-        message: `Конструктор риэлтора: ${data.realtorGender}, ${data.realtorAge}, опыт ${data.realtorExperience}, услуги: ${data.realtorServices.join(', ')}`
-      });
-    },
-    onSuccess: () => {
-      setIsSubmitted(true);
-      form.reset();
-      toast({
-        title: "Заявка отправлена!",
-        description: "Мы найдем подходящего риэлтора и свяжемся с вами.",
-      });
-    },
-    onError: () => {
-      toast({
-        title: "Ошибка",
-        description: "Не удалось отправить заявку. Попробуйте еще раз.",
-        variant: "destructive",
-      });
-    },
-  });
+  const [selectedRealtor, setSelectedRealtor] = useState<GeneratedRealtor | null>(null);
+  const [showForm, setShowForm] = useState(false);
+  const [searchResults, setSearchResults] = useState<GeneratedRealtor[]>([]);
 
-  const onSubmit = (data: RealtorConstructorData) => {
-    mutation.mutate(data);
+  // Generate realtors based on filters
+  const generateRealtors = (): GeneratedRealtor[] => {
+    const maleNames = ["Александр", "Дмитрий", "Сергей", "Андрей", "Владимир", "Михаил", "Алексей", "Максим"];
+    const femaleNames = ["Анна", "Елена", "Мария", "Ольга", "Татьяна", "Ирина", "Светлана", "Наталья"];
+    const lastNames = ["Петров", "Иванов", "Сидоров", "Козлов", "Волков", "Смирнов", "Новиков", "Морозов"];
+    
+    const specializations = [
+      ["Жилая недвижимость", "Вторичка"],
+      ["Новостройки", "Инвестиции"],
+      ["Коммерческая недвижимость"],
+      ["Загородная недвижимость", "Дома"],
+      ["Элитная недвижимость"],
+      ["Аренда", "Жилая недвижимость"]
+    ];
+
+    const photos = {
+      male: [
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&h=200&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=200&h=200&fit=crop&crop=face"
+      ],
+      female: [
+        "https://images.unsplash.com/photo-1494790108755-2616b4db8f79?w=200&h=200&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&h=200&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=200&h=200&fit=crop&crop=face",
+        "https://images.unsplash.com/photo-1489424731084-a5d8b219a5bb?w=200&h=200&fit=crop&crop=face"
+      ]
+    };
+
+    let results: GeneratedRealtor[] = [];
+    let id = 1;
+
+    // Generate combinations based on filters
+    const genders = filters.gender ? [filters.gender] : ["Мужской", "Женский"];
+    const experiences = filters.experience ? [filters.experience] : ["1-3 года", "3-5 лет", "5-10 лет", "10+ лет"];
+    const ratings = filters.rating ? [parseFloat(filters.rating)] : [4.5, 4.7, 4.8, 4.9, 5.0];
+
+    genders.forEach(gender => {
+      experiences.forEach(experience => {
+        ratings.forEach(rating => {
+          const isMale = gender === "Мужской";
+          const names = isMale ? maleNames : femaleNames;
+          const name = `${names[Math.floor(Math.random() * names.length)]} ${lastNames[Math.floor(Math.random() * lastNames.length)]}${isMale ? '' : 'а'}`;
+          
+          let realtorSpecs = specializations[Math.floor(Math.random() * specializations.length)];
+          if (filters.specialization) {
+            realtorSpecs = specializations.find(specs => 
+              specs.some(spec => spec.includes(filters.specialization))
+            ) || [filters.specialization];
+          }
+
+          const photoArray = isMale ? photos.male : photos.female;
+          const photo = photoArray[Math.floor(Math.random() * photoArray.length)];
+
+          const realtor: GeneratedRealtor = {
+            id: `generated-${id++}`,
+            name,
+            gender,
+            experience,
+            specialization: realtorSpecs,
+            rating,
+            photo,
+            phone: `+7 (812) ${Math.floor(Math.random() * 900 + 100)}-${Math.floor(Math.random() * 90 + 10)}-${Math.floor(Math.random() * 90 + 10)}`,
+            telegram: Math.random() > 0.3 ? `@${name.split(' ')[0].toLowerCase()}` : undefined,
+            whatsapp: Math.random() > 0.4 ? `+7 (812) ${Math.floor(Math.random() * 900 + 100)}-${Math.floor(Math.random() * 90 + 10)}-${Math.floor(Math.random() * 90 + 10)}` : undefined,
+            availability: filters.availability || (Math.random() > 0.7 ? "Занят" : "Свободен"),
+            completedDeals: Math.floor(Math.random() * 200 + 50),
+            description: `Опытный риэлтор с ${experience} стажа работы. Специализация: ${realtorSpecs.join(", ").toLowerCase()}. Помогу найти идеальный вариант недвижимости в Санкт-Петербурге.`
+          };
+
+          results.push(realtor);
+        });
+      });
+    });
+
+    // Filter by availability if specified
+    if (filters.availability) {
+      results = results.filter(r => r.availability === filters.availability);
+    }
+
+    // Limit results to avoid overwhelming the user
+    return results.slice(0, 6);
   };
 
-  const services = [
-    "Покупка квартиры",
-    "Продажа квартиры", 
-    "Аренда квартиры",
-    "Покупка новостройки",
-    "Коммерческая недвижимость",
-    "Земельные участки",
-    "Юридическое сопровождение",
-    "Оценка недвижимости",
-    "Ипотечное консультирование",
-    "Дизайн и ремонт"
-  ];
+  const handleSearch = () => {
+    const results = generateRealtors();
+    setSearchResults(results);
+    setSelectedRealtor(null);
+  };
+
+  const handleSelectRealtor = (realtor: GeneratedRealtor) => {
+    setSelectedRealtor(realtor);
+    setShowForm(true);
+  };
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-gradient-to-br from-background-light to-background-secondary">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-blue-600 to-purple-600 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{backgroundImage: "url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920')"}}
-        ></div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <User className="w-16 h-16 mx-auto mb-6 text-orange-400" />
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Конструктор{" "}
-              <span className="text-orange-400">риэлтора</span>
+      <div className="bg-gradient-to-r from-accent-orange to-orange-600 text-white py-16">
+        <div className="container mx-auto px-4">
+          <div className="text-center max-w-4xl mx-auto">
+            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
+              Выбрать специалиста
             </h1>
-            <p className="text-xl lg:text-2xl mb-8 font-light opacity-90">
-              Опишите идеального специалиста, и мы найдем именно такого риэлтора для ваших задач
+            <p className="text-xl lg:text-2xl mb-8 text-orange-100">
+              Найдите идеального риэлтора под ваши требования
             </p>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                <Users className="w-8 h-8 mx-auto mb-2 text-orange-400" />
-                <div className="text-lg font-semibold mb-1">Персональный подбор</div>
-                <div className="text-sm">По вашим критериям</div>
+            <div className="flex items-center justify-center space-x-8 text-orange-100">
+              <div className="flex items-center space-x-2">
+                <Users className="h-6 w-6" />
+                <span>200+ специалистов</span>
               </div>
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                <Award className="w-8 h-8 mx-auto mb-2 text-orange-400" />
-                <div className="text-lg font-semibold mb-1">Проверенные специалисты</div>
-                <div className="text-sm">Только опытные риэлторы</div>
+              <div className="flex items-center space-x-2">
+                <Award className="h-6 w-6" />
+                <span>Проверенные профессионалы</span>
               </div>
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                <Clock className="w-8 h-8 mx-auto mb-2 text-orange-400" />
-                <div className="text-lg font-semibold mb-1">Быстрый подбор</div>
-                <div className="text-sm">Ответ в течение 30 минут</div>
+              <div className="flex items-center space-x-2">
+                <Star className="h-6 w-6" />
+                <span>Высокий рейтинг</span>
               </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Constructor Form */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto">
-            {isSubmitted ? (
-              <Card className="p-8 text-center">
-                <CheckCircle className="w-16 h-16 mx-auto text-green-500 mb-4" />
-                <h3 className="text-2xl font-bold text-text-primary mb-2">
-                  Заявка отправлена!
-                </h3>
-                <p className="text-text-secondary mb-4">
-                  Мы подберем риэлтора по вашим критериям и свяжемся с вами в течение 30 минут
-                </p>
-                <Button
-                  onClick={() => setIsSubmitted(false)}
-                  variant="outline"
-                >
-                  Создать новую заявку
-                </Button>
-              </Card>
-            ) : (
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-2xl text-center">
-                    Создайте портрет идеального риэлтора
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="p-8">
-                  <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                      {/* Contact Info */}
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-text-primary">
-                          Ваши контактные данные
-                        </h3>
-                        
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                          <FormField
-                            control={form.control}
-                            name="name"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Ваше имя</FormLabel>
-                                <FormControl>
-                                  <Input placeholder="Как к вам обращаться?" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
+      <div className="container mx-auto px-4 py-16">
+        {/* Constructor Form */}
+        <Card className="mb-12 shadow-xl">
+          <CardHeader>
+            <CardTitle className="text-2xl text-center text-text-primary">
+              Конструктор специалиста
+            </CardTitle>
+            <p className="text-center text-text-secondary">
+              Выберите критерии для поиска идеального риэлтора
+            </p>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+              <div>
+                <label className="block text-sm font-medium text-text-primary mb-2">
+                  Пол
+                </label>
+                <Select value={filters.gender} onValueChange={(value) => setFilters(prev => ({ ...prev, gender: value }))}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Любой" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">Любой</SelectItem>
+                    <SelectItem value="Мужской">Мужской</SelectItem>
+                    <SelectItem value="Женский">Женский</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-                          <FormField
-                            control={form.control}
-                            name="phone"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Телефон</FormLabel>
-                                <FormControl>
-                                  <Input placeholder="+7 (___) ___-__-__" {...field} />
-                                </FormControl>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-                      </div>
+              <div>
+                <label className="block text-sm font-medium text-text-primary mb-2">
+                  Опыт работы
+                </label>
+                <Select value={filters.experience} onValueChange={(value) => setFilters(prev => ({ ...prev, experience: value }))}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Любой" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">Любой</SelectItem>
+                    <SelectItem value="1-3 года">1-3 года</SelectItem>
+                    <SelectItem value="3-5 лет">3-5 лет</SelectItem>
+                    <SelectItem value="5-10 лет">5-10 лет</SelectItem>
+                    <SelectItem value="10+ лет">10+ лет</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-                      {/* Realtor Preferences */}
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-text-primary">
-                          Предпочтения по риэлтору
-                        </h3>
+              <div>
+                <label className="block text-sm font-medium text-text-primary mb-2">
+                  Специализация
+                </label>
+                <Select value={filters.specialization} onValueChange={(value) => setFilters(prev => ({ ...prev, specialization: value }))}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Любая" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">Любая</SelectItem>
+                    <SelectItem value="Жилая недвижимость">Жилая недвижимость</SelectItem>
+                    <SelectItem value="Новостройки">Новостройки</SelectItem>
+                    <SelectItem value="Коммерческая">Коммерческая</SelectItem>
+                    <SelectItem value="Загородная">Загородная недвижимость</SelectItem>
+                    <SelectItem value="Элитная">Элитная недвижимость</SelectItem>
+                    <SelectItem value="Аренда">Аренда</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                          <FormField
-                            control={form.control}
-                            name="realtorGender"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Пол</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                  <FormControl>
-                                    <SelectTrigger>
-                                      <SelectValue placeholder="Выберите пол" />
-                                    </SelectTrigger>
-                                  </FormControl>
-                                  <SelectContent>
-                                    <SelectItem value="male">Мужчина</SelectItem>
-                                    <SelectItem value="female">Женщина</SelectItem>
-                                    <SelectItem value="any">Не важно</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
+              <div>
+                <label className="block text-sm font-medium text-text-primary mb-2">
+                  Рейтинг от
+                </label>
+                <Select value={filters.rating} onValueChange={(value) => setFilters(prev => ({ ...prev, rating: value }))}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Любой" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">Любой</SelectItem>
+                    <SelectItem value="4.5">4.5+</SelectItem>
+                    <SelectItem value="4.7">4.7+</SelectItem>
+                    <SelectItem value="4.8">4.8+</SelectItem>
+                    <SelectItem value="4.9">4.9+</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-                          <FormField
-                            control={form.control}
-                            name="realtorAge"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Возраст</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                  <FormControl>
-                                    <SelectTrigger>
-                                      <SelectValue placeholder="Выберите возраст" />
-                                    </SelectTrigger>
-                                  </FormControl>
-                                  <SelectContent>
-                                    <SelectItem value="young">До 30 лет</SelectItem>
-                                    <SelectItem value="middle">30-45 лет</SelectItem>
-                                    <SelectItem value="senior">45+ лет</SelectItem>
-                                    <SelectItem value="any">Не важно</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
+              <div>
+                <label className="block text-sm font-medium text-text-primary mb-2">
+                  Доступность
+                </label>
+                <Select value={filters.availability} onValueChange={(value) => setFilters(prev => ({ ...prev, availability: value }))}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Любая" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">Любая</SelectItem>
+                    <SelectItem value="Свободен">Свободен</SelectItem>
+                    <SelectItem value="Занят">Занят</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
 
-                          <FormField
-                            control={form.control}
-                            name="realtorExperience"
-                            render={({ field }) => (
-                              <FormItem>
-                                <FormLabel>Опыт работы</FormLabel>
-                                <Select onValueChange={field.onChange} defaultValue={field.value}>
-                                  <FormControl>
-                                    <SelectTrigger>
-                                      <SelectValue placeholder="Выберите опыт" />
-                                    </SelectTrigger>
-                                  </FormControl>
-                                  <SelectContent>
-                                    <SelectItem value="junior">До 2 лет</SelectItem>
-                                    <SelectItem value="middle">2-5 лет</SelectItem>
-                                    <SelectItem value="senior">5-10 лет</SelectItem>
-                                    <SelectItem value="expert">Более 10 лет</SelectItem>
-                                  </SelectContent>
-                                </Select>
-                                <FormMessage />
-                              </FormItem>
-                            )}
-                          />
-                        </div>
-                      </div>
+            <div className="text-center">
+              <Button 
+                onClick={handleSearch}
+                className="bg-accent-orange text-white hover:bg-orange-600 px-8 py-3 text-lg"
+                size="lg"
+              >
+                <Search className="h-5 w-5 mr-2" />
+                Найти специалистов
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
 
-                      {/* Services */}
-                      <div className="space-y-4">
-                        <h3 className="text-lg font-semibold text-text-primary">
-                          Необходимые услуги
-                        </h3>
-                        
-                        <FormField
-                          control={form.control}
-                          name="realtorServices"
-                          render={() => (
-                            <FormItem>
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                {services.map((service) => (
-                                  <FormField
-                                    key={service}
-                                    control={form.control}
-                                    name="realtorServices"
-                                    render={({ field }) => {
-                                      return (
-                                        <FormItem
-                                          key={service}
-                                          className="flex flex-row items-start space-x-3 space-y-0"
-                                        >
-                                          <FormControl>
-                                            <Checkbox
-                                              checked={field.value?.includes(service)}
-                                              onCheckedChange={(checked) => {
-                                                return checked
-                                                  ? field.onChange([...field.value, service])
-                                                  : field.onChange(
-                                                      field.value?.filter(
-                                                        (value) => value !== service
-                                                      )
-                                                    )
-                                              }}
-                                            />
-                                          </FormControl>
-                                          <FormLabel className="text-sm font-normal">
-                                            {service}
-                                          </FormLabel>
-                                        </FormItem>
-                                      )
-                                    }}
-                                  />
-                                ))}
-                              </div>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
-                      <Button
-                        type="submit"
-                        disabled={mutation.isPending}
-                        className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 text-lg font-semibold"
-                      >
-                        <Phone className="w-4 h-4 mr-2" />
-                        {mutation.isPending ? "Отправляем заявку..." : "Найти риэлтора"}
-                      </Button>
-                    </form>
-                  </Form>
-                </CardContent>
-              </Card>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="py-16 bg-neutral-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center text-text-primary mb-12">
-              Почему персональный подбор риэлтора эффективнее?
+        {/* Search Results */}
+        {searchResults.length > 0 && (
+          <div className="mb-12">
+            <h2 className="text-3xl font-bold text-text-primary mb-8 text-center">
+              Подходящие специалисты ({searchResults.length})
             </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <Card>
-                <CardContent className="p-6">
-                  <Users className="w-12 h-12 text-orange-500 mb-4" />
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
-                    Учет личных предпочтений
-                  </h3>
-                  <p className="text-text-secondary">
-                    Мы подбираем риэлтора, с которым вам будет комфортно работать, 
-                    учитывая ваши пожелания по полу, возрасту и стилю общения
-                  </p>
-                </CardContent>
-              </Card>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {searchResults.map((realtor) => (
+                <Card key={realtor.id} className="overflow-hidden hover:shadow-xl transition-shadow">
+                  <CardContent className="p-6">
+                    <div className="flex items-center space-x-4 mb-4">
+                      <img
+                        src={realtor.photo}
+                        alt={realtor.name}
+                        className="w-16 h-16 rounded-full object-cover"
+                      />
+                      <div>
+                        <h3 className="text-xl font-semibold text-text-primary">{realtor.name}</h3>
+                        <div className="flex items-center space-x-2">
+                          <div className="flex items-center">
+                            {Array.from({ length: 5 }).map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`h-4 w-4 ${
+                                  i < Math.floor(realtor.rating)
+                                    ? "text-yellow-400 fill-current"
+                                    : "text-gray-300"
+                                }`}
+                              />
+                            ))}
+                          </div>
+                          <span className="text-sm text-text-secondary">{realtor.rating}</span>
+                        </div>
+                      </div>
+                    </div>
 
-              <Card>
-                <CardContent className="p-6">
-                  <Award className="w-12 h-12 text-orange-500 mb-4" />
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
-                    Специализация по услугам
-                  </h3>
-                  <p className="text-text-secondary">
-                    Риэлтор будет специализироваться именно на тех услугах, 
-                    которые вам нужны, что гарантирует высокое качество работы
-                  </p>
-                </CardContent>
-              </Card>
+                    <div className="space-y-3 mb-4">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-text-secondary">Опыт:</span>
+                        <Badge variant="secondary">{realtor.experience}</Badge>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-text-secondary">Сделок:</span>
+                        <span className="text-sm font-medium">{realtor.completedDeals}</span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-text-secondary">Статус:</span>
+                        <Badge 
+                          variant={realtor.availability === "Свободен" ? "default" : "secondary"}
+                          className={realtor.availability === "Свободен" ? "bg-green-100 text-green-700" : ""}
+                        >
+                          {realtor.availability}
+                        </Badge>
+                      </div>
+                    </div>
 
-              <Card>
-                <CardContent className="p-6">
-                  <Clock className="w-12 h-12 text-orange-500 mb-4" />
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
-                    Экономия времени
-                  </h3>
-                  <p className="text-text-secondary">
-                    Не нужно тратить время на поиск и собеседования - 
-                    мы сразу предоставим подходящего специалиста
-                  </p>
-                </CardContent>
-              </Card>
+                    <div className="mb-4">
+                      <p className="text-sm text-text-secondary mb-2">Специализация:</p>
+                      <div className="flex flex-wrap gap-1">
+                        {realtor.specialization.map((spec, index) => (
+                          <Badge key={index} variant="outline" className="text-xs">
+                            {spec}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
 
-              <Card>
-                <CardContent className="p-6">
-                  <CheckCircle className="w-12 h-12 text-orange-500 mb-4" />
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
-                    Гарантия результата
-                  </h3>
-                  <p className="text-text-secondary">
-                    Если риэлтор вам не подойдет, мы бесплатно подберем другого 
-                    специалиста в соответствии с вашими требованиями
-                  </p>
-                </CardContent>
-              </Card>
+                    <p className="text-sm text-text-secondary mb-4">{realtor.description}</p>
+
+                    <div className="flex space-x-2">
+                      <Button
+                        onClick={() => handleSelectRealtor(realtor)}
+                        className="flex-1 bg-accent-orange text-white hover:bg-orange-600"
+                        size="sm"
+                      >
+                        <User className="h-4 w-4 mr-1" />
+                        Выбрать
+                      </Button>
+                      <Button variant="outline" size="sm">
+                        <Phone className="h-4 w-4" />
+                      </Button>
+                      {realtor.telegram && (
+                        <Button variant="outline" size="sm">
+                          <Send className="h-4 w-4" />
+                        </Button>
+                      )}
+                      {realtor.whatsapp && (
+                        <Button variant="outline" size="sm">
+                          <MessageCircle className="h-4 w-4" />
+                        </Button>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
             </div>
           </div>
-        </div>
-      </section>
+        )}
+
+        {/* Selected Realtor Form */}
+        {selectedRealtor && showForm && (
+          <Card className="max-w-2xl mx-auto">
+            <CardHeader>
+              <CardTitle className="text-center text-2xl">
+                Связаться со специалистом
+              </CardTitle>
+              <div className="flex items-center justify-center space-x-4">
+                <img
+                  src={selectedRealtor.photo}
+                  alt={selectedRealtor.name}
+                  className="w-16 h-16 rounded-full object-cover"
+                />
+                <div>
+                  <h3 className="text-xl font-semibold">{selectedRealtor.name}</h3>
+                  <p className="text-text-secondary">{selectedRealtor.specialization.join(", ")}</p>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <ConsultationForm
+                defaultService={`Консультация с ${selectedRealtor.name}`}
+              />
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Call to Action */}
+        {!showForm && (
+          <div className="text-center py-16">
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
+              Не нашли подходящего специалиста?
+            </h2>
+            <p className="text-text-secondary mb-8 max-w-2xl mx-auto">
+              Оставьте заявку, и мы подберем для вас идеального риэлтора под ваши требования
+            </p>
+            <ConsultationForm defaultService="Подбор специалиста" />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

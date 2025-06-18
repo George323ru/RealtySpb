@@ -37,50 +37,36 @@ const propertyTypes = [
 
 export default function SearchForm({ className, onSearch }: SearchFormProps) {
   const [, setLocation] = useLocation();
-  const [action, setAction] = useState("Купить");
+  // Removed action state since this form is only for purchasing
   const [propertyType, setPropertyType] = useState("");
   const [district, setDistrict] = useState("");
   const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
 
   const handleSearch = () => {
-    const filters = { action, propertyType, district, priceFrom, priceTo };
+    const filters = { action: "Купить", propertyType, district, priceFrom, priceTo };
     
     if (onSearch) {
       onSearch(filters);
     } else {
-      // Navigate to appropriate page with filters
+      // Navigate to buy page with filters
       const searchParams = new URLSearchParams();
-      if (propertyType) searchParams.set('type', propertyType);
+      if (propertyType) searchParams.set('propertyType', propertyType);
       if (district) searchParams.set('district', district);
       if (priceFrom) searchParams.set('priceFrom', priceFrom);
       if (priceTo) searchParams.set('priceTo', priceTo);
       
       const query = searchParams.toString();
-      const path = action === "Купить" ? "/buy" : action === "Продать" ? "/sell" : "/rent";
-      setLocation(`${path}${query ? `?${query}` : ''}`);
+      setLocation(`/buy${query ? `?${query}` : ''}`);
     }
   };
 
   return (
     <div className={`bg-white rounded-2xl shadow-2xl p-6 lg:p-8 ${className || ''}`}>
-      <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-6 space-y-4 lg:space-y-0 mb-6">
-        {/* Action Buttons */}
-        <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-          {["Купить", "Продать", "Сдать"].map((actionType) => (
-            <Button
-              key={actionType}
-              onClick={() => setAction(actionType)}
-              variant={action === actionType ? "default" : "outline"}
-              className={action === actionType 
-                ? "bg-accent-orange text-white hover:bg-orange-600" 
-                : "border-neutral-300 hover:border-accent-orange"
-              }
-            >
-              {actionType}
-            </Button>
-          ))}
-        </div>
+      <div className="mb-6">
+        <h3 className="text-xl font-semibold text-text-primary text-center mb-4">
+          Найти недвижимость для покупки
+        </h3>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">

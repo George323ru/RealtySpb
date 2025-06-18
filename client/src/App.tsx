@@ -17,7 +17,6 @@ import PropertyDetail from "@/pages/PropertyDetail";
 import Services from "@/pages/Services";
 import ServiceDetail from "@/pages/ServiceDetail";
 import About from "@/pages/About";
-import Team from "@/pages/Team";
 import Reviews from "@/pages/Reviews";
 import Blog from "@/pages/Blog";
 import BlogPost from "@/pages/BlogPost";
@@ -41,7 +40,7 @@ function Router() {
       <Route path="/services/:id" component={ServiceDetail} />
       <Route path="/land" component={Land} />
       <Route path="/about" component={About} />
-      <Route path="/team" component={Team} />
+      <Route path="/team" component={RealtorConstructor} />
       <Route path="/reviews" component={Reviews} />
       <Route path="/blog" component={Blog} />
       <Route path="/blog/:slug" component={BlogPost} />
