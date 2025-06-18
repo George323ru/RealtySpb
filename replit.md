@@ -119,6 +119,10 @@ Changelog:
 - June 18, 2025. Deleted obsolete LandServices.tsx and LandSelection.tsx files - now unified under single /land route
 - June 18, 2025. Navigation redesigned to horizontal layout with always-visible menu items instead of dropdown menus
 - June 18, 2025. Simplified navigation structure with 12 main sections displayed as compact horizontal buttons
+- June 18, 2025. Improved text readability by making colors darker (text-primary: 10%, text-secondary: 25%)
+- June 18, 2025. Enhanced property carousel with navigation buttons, scroll indicators, and smooth scrolling
+- June 18, 2025. Fixed CTA section text readability with black text on orange background
+- June 18, 2025. Redesigned search form to compact horizontal layout in Yandex style with visual separators
 ```
 
 ## User Preferences

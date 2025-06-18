@@ -71,21 +71,13 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
   };
 
   return (
-    <div className={`bg-white rounded-2xl shadow-2xl p-6 lg:p-8 ${className || ''}`}>
-      <div className="mb-6">
-        <h3 className="text-xl font-semibold text-text-primary text-center mb-4">
-          Найти недвижимость для покупки
-        </h3>
-      </div>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <div>
-          <label className="block text-sm font-medium text-text-primary mb-2">
-            Тип недвижимости
-          </label>
+    <div className={`bg-white rounded-xl shadow-lg border border-neutral-200 ${className || ''}`}>
+      {/* Compact Search Bar */}
+      <div className="flex items-center gap-2 p-3">
+        <div className="flex-1 flex items-center gap-2">
           <Select value={propertyType} onValueChange={setPropertyType}>
-            <SelectTrigger>
-              <SelectValue placeholder="Выберите тип" />
+            <SelectTrigger className="w-[140px] h-10 border-none bg-neutral-50 text-sm">
+              <SelectValue placeholder="Тип" />
             </SelectTrigger>
             <SelectContent>
               {propertyTypes.map((type) => (
@@ -95,15 +87,12 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
               ))}
             </SelectContent>
           </Select>
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-text-primary mb-2">
-            Район
-          </label>
+          
+          <div className="w-px h-6 bg-neutral-200"></div>
+          
           <Select value={district} onValueChange={setDistrict}>
-            <SelectTrigger>
-              <SelectValue placeholder="Выберите район" />
+            <SelectTrigger className="w-[130px] h-10 border-none bg-neutral-50 text-sm">
+              <SelectValue placeholder="Район" />
             </SelectTrigger>
             <SelectContent>
               {districts.map((districtName) => (
@@ -113,46 +102,34 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
               ))}
             </SelectContent>
           </Select>
-        </div>
-        
-        <div>
-          <label className="block text-sm font-medium text-text-primary mb-2">
-            Цена от
-          </label>
+          
+          <div className="w-px h-6 bg-neutral-200"></div>
+          
           <Input
             type="text"
-            placeholder="От 3 000 000 ₽"
+            placeholder="От"
             value={priceFrom}
             onChange={(e) => setPriceFrom(e.target.value)}
+            className="w-[90px] h-10 border-none bg-neutral-50 text-sm text-center"
+          />
+          
+          <span className="text-neutral-400 text-sm">—</span>
+          
+          <Input
+            type="text"
+            placeholder="До"
+            value={priceTo}
+            onChange={(e) => setPriceTo(e.target.value)}
+            className="w-[90px] h-10 border-none bg-neutral-50 text-sm text-center"
           />
         </div>
         
-        <div>
-          <label className="block text-sm font-medium text-text-primary mb-2">
-            Цена до
-          </label>
-          <Input
-            type="text"
-            placeholder="До 15 000 000 ₽"
-            value={priceTo}
-            onChange={(e) => setPriceTo(e.target.value)}
-          />
-        </div>
-      </div>
-      
-      <div className="flex flex-col sm:flex-row gap-4">
         <Button
           onClick={handleSearch}
-          className="flex-1 bg-accent-orange text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-orange-600"
+          className="bg-accent-orange text-white px-6 h-10 rounded-lg font-medium hover:bg-orange-600 flex items-center gap-2"
         >
-          <Search className="mr-2 w-5 h-5" />
-          Найти недвижимость
-        </Button>
-        <Button
-          variant="outline"
-          className="sm:w-auto border-2 border-accent-orange text-accent-orange py-4 px-6 rounded-lg font-semibold text-lg hover:bg-accent-orange hover:text-white"
-        >
-          Расширенный поиск
+          <Search className="w-4 h-4" />
+          Найти
         </Button>
       </div>
     </div>
