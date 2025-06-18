@@ -1,3 +1,4 @@
+import { useState, useCallback } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -6,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import SearchForm from "@/components/search-form";
 import PropertyCard from "@/components/property-card";
 import ConsultationForm from "@/components/consultation-form";
+import useEmblaCarousel from 'embla-carousel-react';
 import { 
   Home as HomeIcon, 
   DollarSign, 
@@ -17,9 +19,75 @@ import {
   Building,
   MapPin,
   Scale,
-  Handshake
+  Handshake,
+  ChevronLeft,
+  ChevronRight
 } from "lucide-react";
 import type { Property, NewBuilding, Service, TeamMember } from "@shared/schema";
+
+// Property Carousel Component
+function PropertyCarousel({ properties }: { properties: Property[] }) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    align: 'start',
+    skipSnaps: false,
+    dragFree: true,
+  });
+  const [canScrollPrev, setCanScrollPrev] = useState(false);
+  const [canScrollNext, setCanScrollNext] = useState(false);
+
+  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
+  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+  }, [emblaApi]);
+
+  useState(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on('select', onSelect);
+    emblaApi.on('reInit', onSelect);
+    return () => emblaApi && emblaApi.destroy();
+  }, [emblaApi, onSelect]);
+
+  return (
+    <div className="relative">
+      <div className="overflow-hidden" ref={emblaRef}>
+        <div className="flex gap-6">
+          {properties.slice(0, 8).map((property) => (
+            <div key={property.id} className="flex-none w-80 lg:w-96">
+              <PropertyCard property={property} />
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      {canScrollPrev && (
+        <Button
+          variant="outline"
+          size="icon"
+          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm shadow-lg z-10"
+          onClick={scrollPrev}
+        >
+          <ChevronLeft className="h-4 w-4" />
+        </Button>
+      )}
+      
+      {canScrollNext && (
+        <Button
+          variant="outline"
+          size="icon"
+          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 backdrop-blur-sm shadow-lg z-10"
+          onClick={scrollNext}
+        >
+          <ChevronRight className="h-4 w-4" />
+        </Button>
+      )}
+    </div>
+  );
+}
 
 export default function Home() {
   const { data: properties = [] } = useQuery<Property[]>({
@@ -169,29 +237,27 @@ export default function Home() {
       {/* Featured Properties */}
       <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-12">
-            <div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-                Рекомендуемые объекты
-              </h2>
-              <p className="text-lg text-text-secondary">
-                Тщательно отобранная недвижимость с лучшим соотношением цена-качество
-              </p>
-            </div>
-            <div className="mt-6 lg:mt-0">
-              <Link href="/buy">
-                <Button variant="ghost" className="text-accent-orange font-medium hover:underline">
-                  Смотреть все объекты
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-            </div>
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              Рекомендуемые объекты
+            </h2>
+            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+              Тщательно отобранная недвижимость с лучшим соотношением цена-качество
+            </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {properties.slice(0, 3).map((property) => (
-              <PropertyCard key={property.id} property={property} />
-            ))}
+          {/* Property Carousel */}
+          <div className="relative mb-8">
+            <PropertyCarousel properties={properties || []} />
+          </div>
+          
+          {/* CTA Button */}
+          <div className="text-center">
+            <Link href="/buy">
+              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 text-lg">
+                Смотреть все объекты →
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
