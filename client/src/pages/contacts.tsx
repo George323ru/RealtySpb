@@ -24,8 +24,9 @@ import {
 } from "lucide-react";
 import { z } from "zod";
 
-const contactFormSchema = insertLeadSchema.extend({
-  serviceType: z.string().min(1, "Выберите тип обращения"),
+const contactFormSchema = z.object({
+  name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
+  phone: z.string().min(10, "Введите корректный номер телефона"),
 });
 
 type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -39,15 +40,16 @@ export default function Contacts() {
     defaultValues: {
       name: "",
       phone: "",
-      email: "",
-      serviceType: "",
-      message: "",
     },
   });
 
   const mutation = useMutation({
     mutationFn: async (data: ContactFormData) => {
-      return apiRequest("POST", "/api/contact", data);
+      return apiRequest("POST", "/api/leads", {
+        ...data,
+        serviceType: "консультация",
+        source: "contacts-page",
+      });
     },
     onSuccess: () => {
       setIsSubmitted(true);

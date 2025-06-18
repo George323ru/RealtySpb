@@ -26,12 +26,9 @@ import {
   Award
 } from "lucide-react";
 
-const sellFormSchema = insertLeadSchema.extend({
-  serviceType: z.literal("продать"),
-  propertyType: z.string().min(1, "Выберите тип недвижимости"),
-  address: z.string().min(1, "Укажите адрес"),
-  area: z.string().min(1, "Укажите площадь"),
-  condition: z.string().min(1, "Укажите состояние"),
+const sellFormSchema = z.object({
+  name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
+  phone: z.string().min(10, "Введите корректный номер телефона"),
 });
 
 type SellFormData = z.infer<typeof sellFormSchema>;
@@ -45,9 +42,6 @@ export default function Sell() {
     defaultValues: {
       name: "",
       phone: "",
-      email: "",
-      serviceType: "продать",
-      propertyType: "",
       address: "",
       area: "",
       condition: "",

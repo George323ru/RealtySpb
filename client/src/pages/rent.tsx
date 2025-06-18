@@ -25,11 +25,9 @@ import {
   Star
 } from "lucide-react";
 
-const rentFormSchema = insertLeadSchema.extend({
-  serviceType: z.literal("сдать"),
-  propertyType: z.string().min(1, "Выберите тип недвижимости"),
-  address: z.string().min(1, "Укажите адрес"),
-  desiredRent: z.string().min(1, "Укажите желаемую стоимость аренды"),
+const rentFormSchema = z.object({
+  name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
+  phone: z.string().min(10, "Введите корректный номер телефона"),
 });
 
 type RentFormData = z.infer<typeof rentFormSchema>;
@@ -43,11 +41,6 @@ export default function Rent() {
     defaultValues: {
       name: "",
       phone: "",
-      email: "",
-      serviceType: "сдать",
-      propertyType: "",
-      address: "",
-      desiredRent: "",
       message: "",
     },
   });
