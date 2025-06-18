@@ -155,3 +155,16 @@ export const SERVICE_TYPES = [
   "Консультация риэлтора",
   "Оценка недвижимости"
 ];
+
+export const CONTACT_INFO = {
+  phone: PHONE_NUMBER,
+  email: EMAIL,
+  workingHours: WORKING_HOURS,
+  telegram: TELEGRAM,
+  whatsapp: WHATSAPP,
+  vk: VK,
+  instagram: INSTAGRAM,
+  address: COMPANY_ADDRESS,
+  companyName: COMPANY_NAME,
+  tagline: COMPANY_TAGLINE
+};
