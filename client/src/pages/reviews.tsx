@@ -398,7 +398,7 @@ export default function Reviews() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Тип услуги</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
+                              <Select onValueChange={field.onChange} defaultValue={field.value || "продажа"}>
                                 <FormControl>
                                   <SelectTrigger>
                                     <SelectValue placeholder="Выберите услугу" />
@@ -423,7 +423,7 @@ export default function Reviews() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Тип недвижимости</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
+                              <Select onValueChange={field.onChange} defaultValue={field.value || "квартира"}>
                                 <FormControl>
                                   <SelectTrigger>
                                     <SelectValue placeholder="Выберите тип" />

@@ -14,7 +14,7 @@ import type { SearchFilters } from "@/lib/types";
 export default function Commercial() {
   const [location] = useLocation();
   const [viewMode, setViewMode] = useState<"grid" | "list" | "map">("grid");
-  const [commercialType, setCommercialType] = useState<string>("");
+  const [commercialType, setCommercialType] = useState<string>("all");
   
   // Parse URL search params to get initial filters
   const urlParams = new URLSearchParams(location.split('?')[1] || '');
