@@ -158,7 +158,11 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-0.5 flex-wrap">
+          <div className="flex items-center space-x-0.5 overflow-x-auto" style={{ 
+            maxWidth: 'calc(100vw - 200px)',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}>
             {mainNavigation.map((item) => {
               const IconComponent = item.icon === 'TrendingUp' ? TrendingUp :
                                  item.icon === 'Key' ? Key :
@@ -173,7 +177,7 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "flex items-center px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 whitespace-nowrap hover:scale-105",
+                      "flex items-center px-1.5 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap",
                       location === item.href
                         ? "text-white bg-accent-orange shadow-lg"
                         : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
@@ -238,7 +242,7 @@ export default function Header() {
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "flex items-center px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 whitespace-nowrap hover:scale-105",
+                    "flex items-center px-1.5 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap",
                     location === item.href
                       ? "text-white bg-accent-orange shadow-lg"
                       : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
@@ -251,8 +255,8 @@ export default function Header() {
             })}
           </div>
 
-          {/* Desktop Cart Button */}
-          <div className="hidden lg:flex items-center">
+          {/* Cart Button */}
+          <div className="flex items-center">
             <Link href="/cart" className="relative">
               <Button variant="outline" size="sm" className="relative rounded-lg border-neutral-300 hover:border-accent-orange hover:text-accent-orange transition-colors">
                 <ShoppingCart className="h-4 w-4" />

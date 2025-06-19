@@ -84,6 +84,16 @@
   --radius: 0.5rem;
 }
 
+/* Hide scrollbar for navigation */
+.overflow-x-auto::-webkit-scrollbar {
+  display: none;
+}
+
+.overflow-x-auto {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @layer base {
   * {
     @apply border-border;
