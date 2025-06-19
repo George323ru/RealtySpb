@@ -17,7 +17,8 @@ interface SearchFormProps {
 export default function SearchForm({ onSearch, defaultCategory, compact = false }: SearchFormProps) {
   const [action, setAction] = useState("buy");
   const [filters, setFilters] = useState<PropertySearchFilters>({
-    propertyType: defaultCategory
+    propertyType: defaultCategory || "all",
+    district: "all"
   });
 
   const handleSearch = () => {
@@ -43,6 +44,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
                   <SelectValue placeholder="Выберите тип" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="all">Все типы</SelectItem>
                   {PROPERTY_TYPES.map((type) => (
                     <SelectItem key={type.value} value={type.value}>
                       {type.label}
@@ -59,6 +61,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
                   <SelectValue placeholder="Выберите район" />
                 </SelectTrigger>
                 <SelectContent>
+                  <SelectItem value="all">Все районы</SelectItem>
                   {DISTRICTS.map((district) => (
                     <SelectItem key={district} value={district}>
                       {district}

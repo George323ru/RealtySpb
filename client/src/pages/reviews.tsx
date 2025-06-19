@@ -43,8 +43,8 @@ export default function Reviews() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [filterRating, setFilterRating] = useState<string>("");
-  const [filterService, setFilterService] = useState<string>("");
+  const [filterRating, setFilterRating] = useState<string>("all");
+  const [filterService, setFilterService] = useState<string>("all");
 
   const { data: reviews = [], isLoading } = useQuery<Review[]>({
     queryKey: ["/api/reviews"],
