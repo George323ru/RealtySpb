@@ -254,7 +254,7 @@ export default function ServiceLanding() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-accent-orange to-orange-600 text-white py-20">
+      <section className="bg-gradient-to-r from-accent-orange to-orange-600 text-text-primary py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-6">
@@ -265,11 +265,11 @@ export default function ServiceLanding() {
             <p className="text-lg mb-8 max-w-3xl mx-auto">{serviceData.description}</p>
             
             <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <Badge variant="outline" className="bg-white/10 text-white border-white/30 text-lg px-4 py-2">
+              <Badge variant="outline" className="bg-white/10 text-text-primary border-white/30 text-lg px-4 py-2">
                 <Clock className="w-5 h-5 mr-2" />
                 {serviceData.duration}
               </Badge>
-              <Badge variant="outline" className="bg-white/10 text-white border-white/30 text-lg px-4 py-2">
+              <Badge variant="outline" className="bg-white/10 text-text-primary border-white/30 text-lg px-4 py-2">
                 <Award className="w-5 h-5 mr-2" />
                 {serviceData.price}
               </Badge>
@@ -312,7 +312,7 @@ export default function ServiceLanding() {
             <div className="space-y-6">
               {serviceData.process.map((step, index) => (
                 <div key={index} className="flex items-center space-x-4 p-4 rounded-lg bg-gray-50">
-                  <div className="w-10 h-10 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold">
+                  <div className="w-10 h-10 bg-accent-orange text-text-primary rounded-full flex items-center justify-center font-bold">
                     {index + 1}
                   </div>
                   <p className="text-lg text-text-primary font-medium">{step}</p>
@@ -324,7 +324,7 @@ export default function ServiceLanding() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-gray-900 text-white">
+      <section className="py-16 bg-neutral-100 text-text-primary">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-3 gap-8 text-center">

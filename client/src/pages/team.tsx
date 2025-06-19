@@ -152,14 +152,14 @@ export default function Team() {
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-indigo-900 to-purple-800 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Наша{" "}
               <span className="text-yandex-yellow">команда</span>
@@ -263,7 +263,7 @@ export default function Team() {
       {/* Join Team CTA */}
       <section className="py-16 bg-gradient-to-r from-indigo-600 to-purple-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Хотите присоединиться к нашей команде?
             </h2>
@@ -276,7 +276,7 @@ export default function Team() {
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-indigo-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-text-primary hover:bg-white hover:text-indigo-600 px-8 py-3 text-lg font-semibold"
               >
                 Узнать о вакансиях
               </Button>

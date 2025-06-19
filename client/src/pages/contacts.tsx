@@ -156,14 +156,14 @@ export default function Contacts() {
       />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-teal-900 to-blue-800 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Свяжитесь{" "}
               <span className="text-yandex-yellow">с нами</span>
@@ -254,7 +254,7 @@ export default function Contacts() {
                           <Button
                             type="submit"
                             disabled={mutation.isPending}
-                            className="w-full bg-teal-500 hover:bg-teal-600 text-white py-4 text-lg font-semibold"
+                            className="w-full bg-teal-500 hover:bg-teal-600 text-text-primary py-4 text-lg font-semibold"
                           >
                             {mutation.isPending ? "Отправляем..." : "Отправить сообщение"}
                           </Button>
@@ -441,7 +441,7 @@ export default function Contacts() {
       {/* Quick Contact CTA */}
       <section className="py-16 bg-gradient-to-r from-teal-600 to-blue-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Нужна срочная консультация?
             </h2>
@@ -458,7 +458,7 @@ export default function Contacts() {
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-teal-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-text-primary hover:bg-white hover:text-teal-600 px-8 py-3 text-lg font-semibold"
                 onClick={() => window.open('https://wa.me/78121234567', '_blank')}
               >
                 <MessageCircle className="w-5 h-5 mr-2" />

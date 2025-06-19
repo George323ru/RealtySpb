@@ -50,14 +50,14 @@ export default function Blog() {
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-purple-900 to-indigo-800 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Блог о{" "}
               <span className="text-yandex-yellow">недвижимости</span>
@@ -104,7 +104,7 @@ export default function Blog() {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-4 left-4">
-                      <Badge className="bg-accent-orange text-white">
+                      <Badge className="bg-accent-orange text-text-primary">
                         {featuredPost.category}
                       </Badge>
                     </div>
@@ -125,7 +125,7 @@ export default function Blog() {
                       </div>
                     </div>
                     <Link href={`/blog/${featuredPost.slug}`}>
-                      <Button className="bg-accent-orange hover:bg-orange-600 text-white">
+                      <Button className="bg-accent-orange hover:bg-orange-600 text-text-primary">
                         Читать статью
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
@@ -218,7 +218,7 @@ export default function Blog() {
                           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         <div className="absolute top-4 left-4">
-                          <Badge className="bg-accent-orange text-white">
+                          <Badge className="bg-accent-orange text-text-primary">
                             {post.category}
                           </Badge>
                         </div>
@@ -312,7 +312,7 @@ export default function Blog() {
       {/* Newsletter */}
       <section className="py-16 bg-gradient-to-r from-purple-600 to-indigo-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Подписаться на обновления
             </h2>

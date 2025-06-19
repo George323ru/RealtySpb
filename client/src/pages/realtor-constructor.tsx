@@ -138,14 +138,14 @@ export default function RealtorConstructor() {
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-blue-900 to-indigo-800 py-16">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
               Подберите{" "}
               <span className="text-yandex-yellow">идеального</span>{" "}
@@ -170,7 +170,7 @@ export default function RealtorConstructor() {
                   {/* Step 1: Gender */}
                   <div className="mb-8">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-8 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                      <div className="w-8 h-8 bg-accent-orange text-text-primary rounded-full flex items-center justify-center font-bold text-sm">1</div>
                       <h3 className="text-xl font-semibold text-text-primary">Пол специалиста</h3>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
@@ -195,7 +195,7 @@ export default function RealtorConstructor() {
                   {/* Step 2: Experience */}
                   <div className="mb-8">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-8 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                      <div className="w-8 h-8 bg-accent-orange text-text-primary rounded-full flex items-center justify-center font-bold text-sm">2</div>
                       <h3 className="text-xl font-semibold text-text-primary">Опыт работы</h3>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -219,7 +219,7 @@ export default function RealtorConstructor() {
                   {/* Step 3: Services */}
                   <div className="mb-8">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-8 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                      <div className="w-8 h-8 bg-accent-orange text-text-primary rounded-full flex items-center justify-center font-bold text-sm">3</div>
                       <h3 className="text-xl font-semibold text-text-primary">Тип сделки</h3>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -247,7 +247,7 @@ export default function RealtorConstructor() {
                   <div className="text-center pt-4">
                     <Button 
                       onClick={handleSearch}
-                      className="bg-gradient-to-r from-accent-orange to-orange-600 text-white px-12 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 text-lg"
+                      className="bg-gradient-to-r from-accent-orange to-orange-600 text-text-primary px-12 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 text-lg"
                     >
                       Найти специалиста
                       <ArrowRight className="ml-2 w-5 h-5" />
@@ -308,7 +308,7 @@ export default function RealtorConstructor() {
                               ))}
                             </div>
 
-                            <Button className="bg-accent-orange text-white hover:bg-orange-600 w-full rounded-lg font-medium">
+                            <Button className="bg-accent-orange text-text-primary hover:bg-orange-600 w-full rounded-lg font-medium">
                               <Phone className="w-4 h-4 mr-2" />
                               Связаться со специалистом
                             </Button>
@@ -346,10 +346,10 @@ export default function RealtorConstructor() {
       <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-6">
               Не нашли подходящего специалиста?
             </h2>
-            <p className="text-xl text-white mb-8 opacity-90">
+            <p className="text-xl text-text-primary mb-8 opacity-90">
               Оставьте заявку и мы подберем эксперта под ваши требования в течение часа
             </p>
             

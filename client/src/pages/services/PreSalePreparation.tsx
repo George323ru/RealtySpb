@@ -85,7 +85,7 @@ export default function PreSalePreparation() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-text-primary py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -100,7 +100,7 @@ export default function PreSalePreparation() {
               <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Получить оценку
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
                 Примеры работ
               </Button>
             </div>
@@ -183,7 +183,7 @@ export default function PreSalePreparation() {
                   <p className="text-text-secondary mb-4">
                     {service.description}
                   </p>
-                  <Badge className="bg-accent-orange text-white">
+                  <Badge className="bg-accent-orange text-text-primary">
                     {service.price}
                   </Badge>
                 </CardContent>
@@ -233,7 +233,7 @@ export default function PreSalePreparation() {
           <div className="max-w-4xl mx-auto">
             {process.map((item, index) => (
               <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                <div className="flex-shrink-0 w-16 h-16 bg-accent-orange text-text-primary rounded-full flex items-center justify-center font-bold text-lg mr-6">
                   {item.step}
                 </div>
                 <div className="flex-grow">
@@ -285,14 +285,14 @@ export default function PreSalePreparation() {
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-sm">Уборка</span>
                   </div>
-                  <Button className="w-full mt-6 bg-accent-orange text-white hover:bg-orange-600">
+                  <Button className="w-full mt-6 bg-accent-orange text-text-primary hover:bg-orange-600">
                     Выбрать
                   </Button>
                 </CardContent>
               </Card>
 
               <Card className="border-accent-orange border-2 relative">
-                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent-orange text-white">
+                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent-orange text-text-primary">
                   Популярный
                 </Badge>
                 <CardHeader>
@@ -315,7 +315,7 @@ export default function PreSalePreparation() {
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-sm">Базовый стейджинг</span>
                   </div>
-                  <Button className="w-full mt-6 bg-accent-orange text-white hover:bg-orange-600">
+                  <Button className="w-full mt-6 bg-accent-orange text-text-primary hover:bg-orange-600">
                     Выбрать
                   </Button>
                 </CardContent>
@@ -342,7 +342,7 @@ export default function PreSalePreparation() {
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-sm">3D-тур</span>
                   </div>
-                  <Button className="w-full mt-6 bg-accent-orange text-white hover:bg-orange-600">
+                  <Button className="w-full mt-6 bg-accent-orange text-text-primary hover:bg-orange-600">
                     Выбрать
                   </Button>
                 </CardContent>
@@ -353,7 +353,7 @@ export default function PreSalePreparation() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-500 text-white">
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-500 text-text-primary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">

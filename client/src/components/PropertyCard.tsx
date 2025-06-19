@@ -65,7 +65,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-4 left-4">
-          <Badge className={`${getCategoryColor(property.propertyType)} text-white font-medium px-3 py-1 rounded-md`}>
+          <Badge className={`${getCategoryColor(property.propertyType)} text-text-primary font-medium px-3 py-1 rounded-md`}>
             {getPropertyTypeLabel(property.propertyType)}
           </Badge>
         </div>

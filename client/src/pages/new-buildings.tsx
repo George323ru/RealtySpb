@@ -206,7 +206,7 @@ export default function NewBuildings() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-blue-500 to-blue-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Нужна помощь в выборе новостройки?
             </h2>
@@ -219,7 +219,7 @@ export default function NewBuildings() {
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-text-primary hover:bg-white hover:text-blue-600 px-8 py-3 text-lg font-semibold"
               >
                 Подобрать квартиру
               </Button>

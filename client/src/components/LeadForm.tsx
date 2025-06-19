@@ -115,7 +115,7 @@ export default function LeadForm({
 
               <Button 
                 type="submit" 
-                className="w-full bg-accent-orange text-white hover:bg-accent-orange/90"
+                className="w-full bg-accent-orange text-text-primary hover:bg-accent-orange/90"
                 disabled={createLeadMutation.isPending}
               >
                 {createLeadMutation.isPending ? "Отправка..." : "Отправить заявку"}
@@ -172,7 +172,7 @@ export default function LeadForm({
 
             <Button 
               type="submit" 
-              className="w-full bg-accent-orange text-white py-4 hover:bg-accent-orange/90 text-lg"
+              className="w-full bg-accent-orange text-text-primary py-4 hover:bg-accent-orange/90 text-lg"
               disabled={createLeadMutation.isPending}
             >
               {createLeadMutation.isPending ? "Отправка..." : "Получить консультацию"}

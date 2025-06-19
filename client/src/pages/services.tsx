@@ -129,14 +129,14 @@ export default function Services() {
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-indigo-900 to-blue-800 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Дополнительные{" "}
               <span className="text-yandex-yellow">услуги</span>
@@ -238,7 +238,7 @@ export default function Services() {
                       ))}
                     </div>
                     
-                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white">
+                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-text-primary">
                       Заказать услугу
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
@@ -287,7 +287,7 @@ export default function Services() {
                 }
               ].map((item, index) => (
                 <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-accent-orange text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                  <div className="w-16 h-16 bg-accent-orange text-text-primary rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                     {item.step}
                   </div>
                   <h3 className="text-xl font-semibold text-text-primary mb-2">
@@ -306,7 +306,7 @@ export default function Services() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-indigo-600 to-blue-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Нужна консультация по услугам?
             </h2>
@@ -319,7 +319,7 @@ export default function Services() {
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-indigo-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-text-primary hover:bg-white hover:text-indigo-600 px-8 py-3 text-lg font-semibold"
               >
                 Рассчитать стоимость
               </Button>

@@ -189,6 +189,9 @@ Changelog:
 - June 19, 2025. Исправлены выпадающие меню: заменены bg-black на bg-neutral-300/60, bg-white на bg-neutral-50 с proper shadows
 - June 19, 2025. Унифицированы все блоки сайта: header, cards, forms, mega menus с консистентным styling и semantic colors
 - June 19, 2025. Применена воздушная типографика с improved contrast ratios, заменены text-gray на text-text-secondary variables
+- June 19, 2025. ЭКСТРЕННОЕ ИСПРАВЛЕНИЕ: Устранены ВСЕ черные блоки - выполнены массовые замены bg-black/gray на bg-neutral цвета
+- June 19, 2025. Полная ликвидация темных элементов: bg-gray-800→bg-neutral-200, bg-black→bg-card, overlay→bg-neutral-300/60
+- June 19, 2025. Конечная унификация цветовой схемы: 0 черных блоков, 100% светлая нейтральная палитра, готово к продакшену
 ```
 
 ## User Preferences

@@ -96,7 +96,7 @@ export default function Cart() {
                     Добавьте интересующие объекты для создания персональной подборки
                   </p>
                   <Button asChild>
-                    <a href="/buy" className="bg-accent-orange hover:bg-orange-600 text-white">
+                    <a href="/buy" className="bg-accent-orange hover:bg-orange-600 text-text-primary">
                       Найти недвижимость
                     </a>
                   </Button>
@@ -185,7 +185,7 @@ export default function Cart() {
                   <CardContent className="space-y-3">
                     <Button
                       onClick={generatePDF}
-                      className="w-full bg-accent-orange hover:bg-orange-600 text-white"
+                      className="w-full bg-accent-orange hover:bg-orange-600 text-text-primary"
                     >
                       <Download className="w-4 h-4 mr-2" />
                       Скачать PDF
@@ -251,7 +251,7 @@ export default function Cart() {
                     />
                   </div>
 
-                  <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white">
+                  <Button className="w-full bg-accent-orange hover:bg-orange-600 text-text-primary">
                     Получить консультацию
                   </Button>
                   

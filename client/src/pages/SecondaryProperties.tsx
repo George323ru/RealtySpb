@@ -79,7 +79,7 @@ export default function SecondaryProperties() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-emerald-600 to-teal-700 text-white py-16">
+      <section className="bg-gradient-to-r from-emerald-600 to-teal-700 text-text-primary py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6">
@@ -305,7 +305,7 @@ export default function SecondaryProperties() {
 
                   <Button
                     onClick={handleSearch}
-                    className="w-full bg-accent-orange hover:bg-orange-600 text-white"
+                    className="w-full bg-accent-orange hover:bg-orange-600 text-text-primary"
                   >
                     <Search className="w-4 h-4 mr-2" />
                     Применить фильтры

@@ -54,7 +54,7 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
           {member.telegram && (
             <a
               href={`https://t.me/${member.telegram.replace('@', '')}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-text-primary transition-colors"
             >
               <i className="fab fa-telegram text-sm"></i>
             </a>
@@ -62,7 +62,7 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
           {member.whatsapp && (
             <a
               href={`https://wa.me/${member.whatsapp.replace('+', '')}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-text-primary transition-colors"
             >
               <i className="fab fa-whatsapp text-sm"></i>
             </a>
@@ -70,7 +70,7 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
           {member.phone && (
             <a
               href={`tel:${member.phone}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-text-primary transition-colors"
             >
               <i className="fas fa-phone text-sm"></i>
             </a>
@@ -78,7 +78,7 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
           {member.email && (
             <a
               href={`mailto:${member.email}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-text-primary transition-colors"
             >
               <i className="fas fa-envelope text-sm"></i>
             </a>

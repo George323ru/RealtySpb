@@ -90,7 +90,7 @@ export default function Commercial() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-white py-16">
+      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-text-primary py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Building2 className="w-16 h-16 mx-auto mb-6 opacity-90" />
@@ -376,7 +376,7 @@ export default function Commercial() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-white">
+      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-text-primary">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">
             Ищете выгодные инвестиции?
@@ -388,7 +388,7 @@ export default function Commercial() {
             <Button size="lg" variant="secondary" className="bg-white text-purple-600 hover:bg-gray-100">
               Подобрать объект
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
+            <Button size="lg" variant="outline" className="border-white text-text-primary hover:bg-white hover:text-purple-600">
               Рассчитать доходность
             </Button>
           </div>

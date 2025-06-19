@@ -130,7 +130,7 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
               Точные условия уточняйте у своего менеджера.
             </div>
             
-            <Button className="w-full mt-3 bg-accent-orange hover:bg-accent-orange/90 text-white">
+            <Button className="w-full mt-3 bg-accent-orange hover:bg-accent-orange/90 text-text-primary">
               Получить консультацию
             </Button>
           </div>
@@ -303,10 +303,10 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
             </div>
 
             <div className="space-y-3">
-              <Button className="w-full bg-accent-orange hover:bg-accent-orange/90 text-white font-semibold py-3 text-lg">
+              <Button className="w-full bg-accent-orange hover:bg-accent-orange/90 text-text-primary font-semibold py-3 text-lg">
                 Получить консультацию по ипотеке
               </Button>
-              <Button variant="outline" className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-white py-3 text-lg">
+              <Button variant="outline" className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-text-primary py-3 text-lg">
                 Подобрать лучшие предложения
               </Button>
             </div>

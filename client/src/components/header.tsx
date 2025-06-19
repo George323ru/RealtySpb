@@ -134,7 +134,7 @@ export default function Header() {
                 <a href="https://t.me/realtorvspb" className="w-6 h-6 bg-primary text-black rounded flex items-center justify-center hover:bg-primary/90 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
                   <span className="text-xs">Т</span>
                 </a>
-                <a href="https://wa.me/79211234567" className="w-6 h-6 bg-accent-orange text-white rounded flex items-center justify-center hover:bg-accent-orange/90 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <a href="https://wa.me/79211234567" className="w-6 h-6 bg-accent-orange text-text-primary rounded flex items-center justify-center hover:bg-accent-orange/90 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                   <span className="text-xs">W</span>
                 </a>
               </div>
@@ -179,7 +179,7 @@ export default function Header() {
                     className={cn(
                       "flex items-center px-1.5 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap",
                       location === item.href
-                        ? "text-white bg-accent-orange shadow-lg"
+                        ? "text-text-primary bg-accent-orange shadow-lg"
                         : "text-text-primary hover:text-accent-orange hover:bg-accent-orange/10"
                     )}
                   >
@@ -244,7 +244,7 @@ export default function Header() {
                   className={cn(
                     "flex items-center px-1.5 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap",
                     location === item.href
-                      ? "text-white bg-accent-orange shadow-lg"
+                      ? "text-text-primary bg-accent-orange shadow-lg"
                       : "text-text-primary hover:text-accent-orange hover:bg-neutral-100"
                   )}
                 >
@@ -261,7 +261,7 @@ export default function Header() {
               <Button variant="outline" size="sm" className="relative rounded-lg border-neutral-300 hover:border-accent-orange hover:text-accent-orange transition-colors">
                 <ShoppingCart className="h-4 w-4" />
                 {getTotalItems() > 0 && (
-                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-accent-orange text-white text-xs">
+                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-accent-orange text-text-primary text-xs">
                     {getTotalItems()}
                   </Badge>
                 )}
@@ -324,7 +324,7 @@ export default function Header() {
 
         {/* Mobile Submenus */}
         {activeSubmenu === 'buy' && (
-          <div className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setActiveSubmenu(null)}>
+          <div className="lg:hidden fixed inset-0 bg-neutral-300/60 z-50" onClick={() => setActiveSubmenu(null)}>
             <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-text-primary">Купить недвижимость</h3>
@@ -355,7 +355,7 @@ export default function Header() {
         )}
 
         {activeSubmenu === 'services' && (
-          <div className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setActiveSubmenu(null)}>
+          <div className="lg:hidden fixed inset-0 bg-neutral-300/60 z-50" onClick={() => setActiveSubmenu(null)}>
             <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-text-primary">Услуги</h3>

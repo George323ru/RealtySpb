@@ -161,7 +161,7 @@ export default function NewBuildingDetail() {
                     Назад к списку
                   </Button>
                 </Link>
-                <Badge className={`${statusInfo.color} text-white`}>
+                <Badge className={`${statusInfo.color} text-text-primary`}>
                   {statusInfo.label}
                 </Badge>
               </div>
@@ -252,7 +252,7 @@ export default function NewBuildingDetail() {
                   </button>
                   
                   <div className="absolute bottom-4 left-1/2 -translate-x-1/2">
-                    <div className="bg-black/50 text-white px-3 py-1 rounded-full text-sm">
+                    <div className="bg-card/50 text-text-primary px-3 py-1 rounded-full text-sm">
                       {currentImageIndex + 1} / {allImages.length}
                     </div>
                   </div>

@@ -307,7 +307,7 @@ export default function BlogPostPage() {
               </Card>
 
               {/* CTA */}
-              <Card className="bg-gradient-to-br from-accent-orange to-orange-600 text-white">
+              <Card className="bg-gradient-to-br from-accent-orange to-orange-600 text-text-primary">
                 <CardContent className="p-6 text-center">
                   <h3 className="font-semibold mb-2">Нужна консультация?</h3>
                   <p className="text-sm opacity-90 mb-4">

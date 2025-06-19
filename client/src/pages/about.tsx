@@ -117,7 +117,7 @@ export default function About() {
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/realtor-constructor">
-                <Button className="bg-accent-orange text-white hover:bg-orange-600 px-8 py-3">
+                <Button className="bg-accent-orange text-text-primary hover:bg-orange-600 px-8 py-3">
                   Подобрать специалиста
                 </Button>
               </Link>
@@ -242,7 +242,7 @@ export default function About() {
             
             <div className="text-center mt-12">
               <Link href="/realtor-constructor">
-                <Button className="bg-accent-orange text-white hover:bg-orange-600 px-8 py-4 text-lg">
+                <Button className="bg-accent-orange text-text-primary hover:bg-orange-600 px-8 py-4 text-lg">
                   Подобрать вашего специалиста
                 </Button>
               </Link>
@@ -273,7 +273,7 @@ export default function About() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h2 className="text-4xl font-bold mb-6">Готовы начать работу с нами?</h2>
             <p className="text-xl mb-8 opacity-90">
               Получите профессиональную консультацию и подберите идеального специалиста для ваших задач
@@ -285,7 +285,7 @@ export default function About() {
                 </Button>
               </Link>
               <Link href="/contacts">
-                <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-accent-orange px-8 py-4 text-lg">
+                <Button variant="outline" className="border-2 border-white text-text-primary hover:bg-white hover:text-accent-orange px-8 py-4 text-lg">
                   Связаться с нами
                 </Button>
               </Link>

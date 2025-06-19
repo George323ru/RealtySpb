@@ -43,7 +43,7 @@ export default function NewBuildings() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-text-primary py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -58,7 +58,7 @@ export default function NewBuildings() {
               <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Подобрать квартиру
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
                 Ипотечные программы
               </Button>
             </div>
@@ -211,8 +211,8 @@ export default function NewBuildings() {
                         <Badge 
                           className={`mr-3 ${
                             building.readiness === "Сдан" 
-                              ? "bg-green-500 text-white" 
-                              : "bg-blue-500 text-white"
+                              ? "bg-green-500 text-text-primary" 
+                              : "bg-blue-500 text-text-primary"
                           }`}
                         >
                           {building.readiness === "Сдан" ? "Готово" : `Сдача в ${building.completionDate}`}
@@ -265,7 +265,7 @@ export default function NewBuildings() {
                         </div>
                       )}
                       
-                      <Button className="w-full bg-blue-500 text-white hover:bg-blue-600">
+                      <Button className="w-full bg-blue-500 text-text-primary hover:bg-blue-600">
                         Посмотреть планировки
                       </Button>
                     </CardContent>
@@ -282,7 +282,7 @@ export default function NewBuildings() {
               <p className="text-text-secondary mb-8">
                 Попробуйте изменить фильтры или обратитесь к нашим специалистам
               </p>
-              <Button className="bg-accent-orange text-white hover:bg-orange-600">
+              <Button className="bg-accent-orange text-text-primary hover:bg-orange-600">
                 Связаться с экспертом
               </Button>
             </div>
@@ -343,7 +343,7 @@ export default function NewBuildings() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-500 text-white">
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-500 text-text-primary">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl lg:text-4xl font-bold mb-6">
             Не знаете, какую новостройку выбрать?
@@ -356,7 +356,7 @@ export default function NewBuildings() {
             <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
               Получить консультацию
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
+            <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
               Каталог планировок
             </Button>
           </div>

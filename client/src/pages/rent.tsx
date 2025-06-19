@@ -121,14 +121,14 @@ export default function Rent() {
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-purple-900 to-purple-700 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Сдать квартиру в аренду СПб{" "}
               <span className="text-yandex-yellow">выгодно</span>
@@ -213,7 +213,7 @@ export default function Rent() {
                       <Button
                         type="submit"
                         disabled={mutation.isPending}
-                        className="w-full bg-purple-500 hover:bg-purple-600 text-white py-4 text-lg font-semibold"
+                        className="w-full bg-purple-500 hover:bg-purple-600 text-text-primary py-4 text-lg font-semibold"
                       >
                         {mutation.isPending ? "Отправляем..." : "Найти арендаторов"}
                       </Button>
@@ -293,7 +293,7 @@ export default function Rent() {
             </div>
 
             <div className="text-center mt-12">
-              <Button className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-3 text-lg font-semibold">
+              <Button className="bg-purple-500 hover:bg-purple-600 text-text-primary px-8 py-3 text-lg font-semibold">
                 Начать сотрудничество
               </Button>
             </div>
@@ -304,7 +304,7 @@ export default function Rent() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-purple-500 to-purple-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center text-white">
+          <div className="max-w-3xl mx-auto text-center text-text-primary">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Готовы сдать недвижимость в аренду?
             </h2>
@@ -317,7 +317,7 @@ export default function Rent() {
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-white hover:bg-white hover:text-purple-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-text-primary hover:bg-white hover:text-purple-600 px-8 py-3 text-lg font-semibold"
               >
                 Задать вопрос
               </Button>

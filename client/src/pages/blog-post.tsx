@@ -151,7 +151,7 @@ export default function BlogPostPage() {
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-4 left-4">
-                <Badge className="bg-accent-orange text-white">
+                <Badge className="bg-accent-orange text-text-primary">
                   {post.category}
                 </Badge>
               </div>
@@ -309,7 +309,7 @@ export default function BlogPostPage() {
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent-orange to-orange-600 rounded-full flex items-center justify-center">
-                      <User className="w-8 h-8 text-white" />
+                      <User className="w-8 h-8 text-text-primary" />
                     </div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-text-primary mb-2">Об авторе: {post.author}</h3>
@@ -338,7 +338,7 @@ export default function BlogPostPage() {
                         className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute top-2 left-2">
-                        <Badge className="bg-accent-orange text-white text-xs">
+                        <Badge className="bg-accent-orange text-text-primary text-xs">
                           {relatedPost.category}
                         </Badge>
                       </div>

@@ -33,7 +33,7 @@ export default function TeamMemberCard({ member }: TeamMemberProps) {
           {member.telegram && (
             <a
               href={`https://t.me/${member.telegram}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-text-primary transition-colors"
             >
               <MessageCircle className="w-4 h-4" />
             </a>
@@ -41,7 +41,7 @@ export default function TeamMemberCard({ member }: TeamMemberProps) {
           {member.phone && (
             <a
               href={`tel:${member.phone}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-text-primary transition-colors"
             >
               <Phone className="w-4 h-4" />
             </a>

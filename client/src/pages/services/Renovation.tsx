@@ -98,7 +98,7 @@ export default function Renovation() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-green-600 to-green-500 text-white py-16">
+      <section className="bg-gradient-to-r from-green-600 to-green-500 text-text-primary py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -113,7 +113,7 @@ export default function Renovation() {
               <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Рассчитать стоимость
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-green-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-green-600 px-8 py-4 text-lg">
                 Портфолио работ
               </Button>
             </div>
@@ -146,7 +146,7 @@ export default function Renovation() {
                   <p className="text-text-secondary mb-4">
                     {service.description}
                   </p>
-                  <Badge className="bg-green-500 text-white">
+                  <Badge className="bg-green-500 text-text-primary">
                     {service.price}
                   </Badge>
                 </CardContent>
@@ -173,7 +173,7 @@ export default function Renovation() {
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <CardTitle className="text-xl">{type.title}</CardTitle>
-                  <Badge className="bg-green-500 text-white w-fit">
+                  <Badge className="bg-green-500 text-text-primary w-fit">
                     {type.price}
                   </Badge>
                 </CardHeader>
@@ -187,7 +187,7 @@ export default function Renovation() {
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-green-500 text-white hover:bg-green-600">
+                  <Button className="w-full bg-green-500 text-text-primary hover:bg-green-600">
                     Заказать ремонт
                   </Button>
                 </CardContent>
@@ -212,7 +212,7 @@ export default function Renovation() {
           <div className="max-w-4xl mx-auto">
             {process.map((item, index) => (
               <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                <div className="flex-shrink-0 w-16 h-16 bg-green-500 text-text-primary rounded-full flex items-center justify-center font-bold text-lg mr-6">
                   {item.step}
                 </div>
                 <div className="flex-grow">
@@ -301,7 +301,7 @@ export default function Renovation() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-green-600 to-green-500 text-white">
+      <section className="py-16 bg-gradient-to-r from-green-600 to-green-500 text-text-primary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">

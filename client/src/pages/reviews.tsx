@@ -132,14 +132,14 @@ export default function Reviews() {
       />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-emerald-900 to-green-800 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Отзывы{" "}
               <span className="text-yandex-yellow">клиентов</span>
@@ -285,7 +285,7 @@ export default function Reviews() {
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center">
                           <div className="w-12 h-12 bg-gradient-to-br from-accent-orange to-orange-600 rounded-full flex items-center justify-center mr-4">
-                            <User className="w-6 h-6 text-white" />
+                            <User className="w-6 h-6 text-text-primary" />
                           </div>
                           <div>
                             <h3 className="font-semibold text-text-primary">{review.clientName}</h3>
@@ -463,7 +463,7 @@ export default function Reviews() {
                       <Button
                         type="submit"
                         disabled={mutation.isPending}
-                        className="w-full bg-green-500 hover:bg-green-600 text-white py-4 text-lg font-semibold"
+                        className="w-full bg-green-500 hover:bg-green-600 text-text-primary py-4 text-lg font-semibold"
                       >
                         {mutation.isPending ? "Отправляем..." : "Отправить отзыв"}
                       </Button>

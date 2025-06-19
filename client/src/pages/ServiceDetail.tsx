@@ -246,7 +246,7 @@ export default function ServiceDetail() {
               <CardContent>
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-text-primary font-bold text-sm">
                       1
                     </div>
                     <div>
@@ -258,7 +258,7 @@ export default function ServiceDetail() {
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-text-primary font-bold text-sm">
                       2
                     </div>
                     <div>
@@ -270,7 +270,7 @@ export default function ServiceDetail() {
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-text-primary font-bold text-sm">
                       3
                     </div>
                     <div>
@@ -282,7 +282,7 @@ export default function ServiceDetail() {
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold text-sm">
+                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-text-primary font-bold text-sm">
                       4
                     </div>
                     <div>

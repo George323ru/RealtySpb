@@ -85,7 +85,7 @@ export default function DesignProject() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-white py-16">
+      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-text-primary py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -100,7 +100,7 @@ export default function DesignProject() {
               <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Заказать дизайн-проект
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-purple-600 px-8 py-4 text-lg">
                 Посмотреть портфолио
               </Button>
             </div>
@@ -133,7 +133,7 @@ export default function DesignProject() {
                   <p className="text-text-secondary mb-4">
                     {service.description}
                   </p>
-                  <Badge className="bg-purple-500 text-white">
+                  <Badge className="bg-purple-500 text-text-primary">
                     {service.price}
                   </Badge>
                 </CardContent>
@@ -190,7 +190,7 @@ export default function DesignProject() {
           <div className="max-w-4xl mx-auto">
             {process.map((item, index) => (
               <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                <div className="flex-shrink-0 w-16 h-16 bg-purple-500 text-text-primary rounded-full flex items-center justify-center font-bold text-lg mr-6">
                   {item.step}
                 </div>
                 <div className="flex-grow">
@@ -263,14 +263,14 @@ export default function DesignProject() {
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span className="text-sm">Подбор материалов</span>
                 </div>
-                <Button className="w-full mt-6 bg-purple-500 text-white hover:bg-purple-600">
+                <Button className="w-full mt-6 bg-purple-500 text-text-primary hover:bg-purple-600">
                   Заказать
                 </Button>
               </CardContent>
             </Card>
 
             <Card className="border-purple-500 border-2 relative">
-              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white">
+              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500 text-text-primary">
                 Популярный
               </Badge>
               <CardHeader>
@@ -293,7 +293,7 @@ export default function DesignProject() {
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span className="text-sm">3D визуализация</span>
                 </div>
-                <Button className="w-full mt-6 bg-purple-500 text-white hover:bg-purple-600">
+                <Button className="w-full mt-6 bg-purple-500 text-text-primary hover:bg-purple-600">
                   Заказать
                 </Button>
               </CardContent>
@@ -320,7 +320,7 @@ export default function DesignProject() {
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span className="text-sm">Корректировки проекта</span>
                 </div>
-                <Button className="w-full mt-6 bg-purple-500 text-white hover:bg-purple-600">
+                <Button className="w-full mt-6 bg-purple-500 text-text-primary hover:bg-purple-600">
                   Заказать
                 </Button>
               </CardContent>
@@ -330,7 +330,7 @@ export default function DesignProject() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-white">
+      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-text-primary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">

@@ -101,7 +101,7 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-text-primary py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -116,7 +116,7 @@ export default function Contact() {
               <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Позвонить сейчас
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
                 Написать в WhatsApp
               </Button>
             </div>
@@ -153,7 +153,7 @@ export default function Contact() {
                     {method.value}
                   </div>
                   <a href={method.action}>
-                    <Button className="bg-accent-orange text-white hover:bg-orange-600 w-full">
+                    <Button className="bg-accent-orange text-text-primary hover:bg-orange-600 w-full">
                       Связаться
                     </Button>
                   </a>
@@ -242,7 +242,7 @@ export default function Contact() {
                   </div>
 
                   <div className="pt-4">
-                    <Button className="w-full bg-accent-orange text-white hover:bg-orange-600">
+                    <Button className="w-full bg-accent-orange text-text-primary hover:bg-orange-600">
                       <Navigation className="w-4 h-4 mr-2" />
                       Построить маршрут
                     </Button>
@@ -352,7 +352,7 @@ export default function Contact() {
               <p className="text-text-secondary mb-4">
                 Не нашли ответ на свой вопрос?
               </p>
-              <Button className="bg-accent-orange text-white hover:bg-orange-600">
+              <Button className="bg-accent-orange text-text-primary hover:bg-orange-600">
                 Задать вопрос эксперту
               </Button>
             </div>
@@ -361,7 +361,7 @@ export default function Contact() {
       </section>
 
       {/* Emergency Contact */}
-      <section className="py-16 bg-gradient-to-r from-red-600 to-red-500 text-white">
+      <section className="py-16 bg-gradient-to-r from-red-600 to-red-500 text-text-primary">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">
             Срочная консультация
@@ -378,7 +378,7 @@ export default function Contact() {
               </Button>
             </a>
             <a href={`https://wa.me/${CONTACT_INFO.socialMedia.whatsapp.replace(/\D/g, '')}`}>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-red-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-red-600 px-8 py-4 text-lg">
                 <MessageCircle className="w-5 h-5 mr-2" />
                 WhatsApp
               </Button>

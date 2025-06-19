@@ -145,18 +145,18 @@ export default function PropertyDetail() {
                     <>
                       <button
                         onClick={prevImage}
-                        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70"
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-neutral-300/60 text-text-primary p-2 rounded-full hover:bg-opacity-70"
                       >
                         <ChevronLeft className="w-6 h-6" />
                       </button>
                       <button
                         onClick={nextImage}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-70"
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-neutral-300/60 text-text-primary p-2 rounded-full hover:bg-opacity-70"
                       >
                         <ChevronRight className="w-6 h-6" />
                       </button>
                       
-                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-3 py-1 rounded">
+                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-neutral-300/60 text-text-primary px-3 py-1 rounded">
                         {currentImageIndex + 1} / {property.images.length}
                       </div>
                     </>
@@ -165,8 +165,8 @@ export default function PropertyDetail() {
                   <div className="absolute top-4 left-4">
                     <Badge className={
                       property.buildingType === "новостройка" 
-                        ? "bg-green-500 text-white" 
-                        : "bg-blue-500 text-white"
+                        ? "bg-green-500 text-text-primary" 
+                        : "bg-blue-500 text-text-primary"
                     }>
                       {property.buildingType === "новостройка" ? "Новостройка" : "Вторичка"}
                     </Badge>
@@ -317,7 +317,7 @@ export default function PropertyDetail() {
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-3">
-                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white">
+                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-text-primary">
                       <Phone className="w-4 h-4 mr-2" />
                       Позвонить сейчас
                     </Button>

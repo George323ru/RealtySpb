@@ -17,11 +17,11 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
   const getBadgeVariant = (buildingType: string) => {
     switch (buildingType) {
       case "новостройка":
-        return "bg-green-500 text-white";
+        return "bg-green-500 text-text-primary";
       case "вторичка":
-        return "bg-blue-500 text-white";
+        return "bg-blue-500 text-text-primary";
       default:
-        return "bg-purple-500 text-white";
+        return "bg-purple-500 text-text-primary";
     }
   };
 
@@ -75,7 +75,7 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
         </div>
         
         <Link href={`/property/${property.id}`} className="mt-auto">
-          <Button className="w-full bg-accent-orange text-white hover:bg-accent-orange/90">
+          <Button className="w-full bg-accent-orange text-text-primary hover:bg-accent-orange/90">
             Подробнее
           </Button>
         </Link>

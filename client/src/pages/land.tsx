@@ -308,7 +308,7 @@ export default function LandPage() {
               { step: "4", title: "Сопровождение", desc: "Помогаем с покупкой и оформлением" }
             ].map((item, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                <div className="w-16 h-16 bg-green-600 text-text-primary rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                   {item.step}
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
@@ -322,7 +322,7 @@ export default function LandPage() {
       {/* Contact Form */}
       <section className="py-16 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl p-8 text-white text-center">
+          <div className="bg-gradient-to-r from-green-600 to-blue-600 rounded-2xl p-8 text-text-primary text-center">
             <h2 className="text-3xl font-bold mb-4">
               Готовы найти свой участок?
             </h2>

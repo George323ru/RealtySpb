@@ -70,7 +70,7 @@ export default function AllServices() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-white py-16">
+      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-text-primary py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -85,7 +85,7 @@ export default function AllServices() {
               <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Получить консультацию
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-purple-600 px-8 py-4 text-lg">
                 Рассчитать стоимость
               </Button>
             </div>
@@ -170,7 +170,7 @@ export default function AllServices() {
                             <Link href={service.slug === 'buy' ? '/buy' : service.slug === 'sell' ? '/sell' : '/rent'}>
                               <Button 
                                 variant="outline" 
-                                className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-white group-hover:bg-accent-orange group-hover:text-white transition-colors"
+                                className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-text-primary group-hover:bg-accent-orange group-hover:text-text-primary transition-colors"
                               >
                                 Подробнее
                                 <ArrowRight className="ml-2 w-4 h-4" />
@@ -221,7 +221,7 @@ export default function AllServices() {
                           <Link href={`/services/${service.slug}`}>
                             <Button 
                               variant="outline" 
-                              className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-white group-hover:bg-accent-orange group-hover:text-white transition-colors"
+                              className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-text-primary group-hover:bg-accent-orange group-hover:text-text-primary transition-colors"
                             >
                               Подробнее
                               <ArrowRight className="ml-2 w-4 h-4" />
@@ -275,7 +275,7 @@ export default function AllServices() {
                 }
               ].map((step, index) => (
                 <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-accent-orange text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                  <div className="w-16 h-16 bg-accent-orange text-text-primary rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                     {step.number}
                   </div>
                   <h3 className="text-lg font-semibold text-text-primary mb-2">
@@ -292,7 +292,7 @@ export default function AllServices() {
       </section>
 
       {/* Service Request */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-white">
+      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-text-primary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">

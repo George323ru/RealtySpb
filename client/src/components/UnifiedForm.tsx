@@ -163,7 +163,7 @@ export default function UnifiedForm({
             <Button
               type="submit"
               disabled={mutation.isPending}
-              className="w-full bg-accent-orange hover:bg-accent-orange/90 text-white py-4 text-lg font-semibold"
+              className="w-full bg-accent-orange hover:bg-accent-orange/90 text-text-primary py-4 text-lg font-semibold"
             >
               <Phone className="w-4 h-4 mr-2" />
               {mutation.isPending ? "Отправляем..." : buttonText}

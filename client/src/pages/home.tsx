@@ -130,7 +130,7 @@ export default function Home() {
         aria-label="Главная страница риэлтора в Санкт-Петербурге"
       >
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
+          <div className="max-w-4xl mx-auto text-center text-text-primary">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Риэлтор в СПб - Купить недвижимость{" "}
               <span className="text-yandex-yellow">Санкт-Петербурге</span>
@@ -161,7 +161,7 @@ export default function Home() {
               <Card key={index} className={`group bg-gradient-to-br ${action.color} hover:shadow-xl transition-all duration-300 cursor-pointer h-full`}>
                 <CardContent className="p-8 text-center h-full flex flex-col">
                   <div className={`w-16 h-16 ${action.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
-                    <action.icon className="text-white text-2xl w-8 h-8" />
+                    <action.icon className="text-text-primary text-2xl w-8 h-8" />
                     </div>
                   <h3 className="text-xl font-bold text-text-primary mb-3">{action.title}</h3>
                   <p className="text-text-secondary mb-6 flex-1">{action.description}</p>
@@ -171,7 +171,7 @@ export default function Home() {
                     ))}
                     </div>
                   <Link href={action.link} className="mt-auto">
-                    <Button className={`w-full ${action.buttonColor} text-white font-medium`}>
+                    <Button className={`w-full ${action.buttonColor} text-text-primary font-medium`}>
                       {action.title === "Хочу купить" ? "Начать поиск" :
                        action.title === "Хочу продать" ? "Оценить квартиру" :
                        action.title === "Хочу сдать" ? "Сдать в аренду" : "Все услуги"}
@@ -201,7 +201,7 @@ export default function Home() {
             {/* Navigation Buttons */}
             <button 
               id="scroll-left"
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-white transition-all duration-300 border border-neutral-200"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-text-primary transition-all duration-300 border border-neutral-200"
               onClick={() => {
                 const container = document.getElementById('properties-scroll');
                 if (container) container.scrollBy({ left: -400, behavior: 'smooth' });
@@ -212,7 +212,7 @@ export default function Home() {
             
             <button 
               id="scroll-right"
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-white transition-all duration-300 border border-neutral-200"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-text-primary transition-all duration-300 border border-neutral-200"
               onClick={() => {
                 const container = document.getElementById('properties-scroll');
                 if (container) container.scrollBy({ left: 400, behavior: 'smooth' });
@@ -252,7 +252,7 @@ export default function Home() {
           {/* CTA Button */}
           <div className="text-center">
             <Link href="/buy">
-              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90 text-lg">
+              <Button className="bg-accent-orange text-text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90 text-lg">
                 Смотреть все объекты →
               </Button>
             </Link>
@@ -280,7 +280,7 @@ export default function Home() {
           
           <div className="text-center mt-12">
             <Link href="/new-buildings">
-              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90">
+              <Button className="bg-accent-orange text-text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90">
                 Все новостройки СПб
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
@@ -408,7 +408,7 @@ export default function Home() {
             
             <div className="text-center">
               <Link href="/realtor-constructor">
-                <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90 text-lg">
+                <Button className="bg-accent-orange text-text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90 text-lg">
                   Подобрать специалиста
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>

@@ -56,7 +56,7 @@ export default function PromotionBanner({ promotions, category = "all", classNam
     <div className={`relative overflow-hidden rounded-2xl ${className}`}>
       {/* Main Promotion */}
       <div 
-        className="relative p-8 text-white"
+        className="relative p-8 text-text-primary"
         style={{ backgroundColor: mainPromotion.backgroundColor }}
       >
         {/* Background Pattern */}
@@ -72,7 +72,7 @@ export default function PromotionBanner({ promotions, category = "all", classNam
               <div className="flex items-center mb-3">
                 {getDiscountIcon(mainPromotion.discountType)}
                 <Badge 
-                  className="ml-3 bg-neutral-50/20 text-white border-neutral-50/30"
+                  className="ml-3 bg-neutral-50/20 text-text-primary border-neutral-50/30"
                   style={{ color: mainPromotion.textColor }}
                 >
                   Акция

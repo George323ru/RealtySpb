@@ -43,7 +43,7 @@ export default function PropertyDetail() {
           <p className="text-text-secondary mb-8">
             Возможно, объект был продан или снят с продажи
           </p>
-          <Button className="bg-accent-orange text-white hover:bg-orange-600">
+          <Button className="bg-accent-orange text-text-primary hover:bg-orange-600">
             Вернуться к поиску
           </Button>
         </div>
@@ -102,7 +102,7 @@ export default function PropertyDetail() {
                 className="w-full h-96 lg:h-[500px] object-cover rounded-lg"
               />
               <div className="absolute top-4 left-4">
-                <Badge className="bg-accent-orange text-white">
+                <Badge className="bg-accent-orange text-text-primary">
                   {getCategoryLabel(property.category)}
                 </Badge>
               </div>
@@ -145,7 +145,7 @@ export default function PropertyDetail() {
               ))}
               {property.images.length > 4 && (
                 <div className="w-full h-24 lg:h-32 bg-neutral-200 rounded flex items-center justify-center cursor-pointer hover:bg-neutral-300 transition-colors">
-                  <span className="text-white text-sm">
+                  <span className="text-text-secondary text-sm">
                     +{property.images.length - 4} фото
                   </span>
                 </div>
@@ -374,11 +374,11 @@ export default function PropertyDetail() {
                     </div>
                     
                     <div className="space-y-3">
-                      <Button className="w-full bg-accent-orange text-white hover:bg-orange-600">
+                      <Button className="w-full bg-accent-orange text-text-primary hover:bg-orange-600">
                         <Phone className="w-4 h-4 mr-2" />
                         Позвонить
                       </Button>
-                      <Button variant="outline" className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-white">
+                      <Button variant="outline" className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-text-primary">
                         Написать в WhatsApp
                       </Button>
                     </div>

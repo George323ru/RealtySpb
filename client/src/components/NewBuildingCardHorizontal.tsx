@@ -129,7 +129,7 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
             {/* Плашка статуса/сдачи */}
             <div className="absolute top-4 left-4">
               {statusInfo.label === 'Сдан' ? (
-                <Badge className="bg-green-500 text-white font-medium px-3 py-1.5 text-sm">
+                <Badge className="bg-green-500 text-text-primary font-medium px-3 py-1.5 text-sm">
                   Сдан
                 </Badge>
               ) : building.completionYear ? (
@@ -138,7 +138,7 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
                   Сдача: {building.completionYear}
                 </Badge>
               ) : (
-                <Badge className={`${statusInfo.color} text-white font-medium px-3 py-1.5 text-sm`}>
+                <Badge className={`${statusInfo.color} text-text-primary font-medium px-3 py-1.5 text-sm`}>
                   {statusInfo.label}
                 </Badge>
               )}

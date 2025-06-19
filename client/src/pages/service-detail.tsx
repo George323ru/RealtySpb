@@ -129,7 +129,7 @@ export default function ServiceDetail() {
                       <CardTitle className="text-3xl mb-2">{service.name}</CardTitle>
                       <p className="text-lg text-text-secondary">{service.shortDescription}</p>
                     </div>
-                    <Badge className="bg-accent-orange text-white text-lg px-4 py-2">
+                    <Badge className="bg-accent-orange text-text-primary text-lg px-4 py-2">
                       {service.price}
                     </Badge>
                   </div>
@@ -187,7 +187,7 @@ export default function ServiceDetail() {
                     <div className="space-y-4">
                       {details.stages.map((stage, index) => (
                         <div key={index} className="flex items-start">
-                          <div className="w-8 h-8 bg-accent-orange text-white rounded-full flex items-center justify-center text-sm font-semibold mr-4 flex-shrink-0 mt-1">
+                          <div className="w-8 h-8 bg-accent-orange text-text-primary rounded-full flex items-center justify-center text-sm font-semibold mr-4 flex-shrink-0 mt-1">
                             {index + 1}
                           </div>
                           <p className="text-text-secondary">{stage}</p>
@@ -289,7 +289,7 @@ export default function ServiceDetail() {
                 <CardContent className="p-6">
                   <h3 className="font-semibold text-text-primary mb-4">Нужна консультация?</h3>
                   <div className="space-y-3">
-                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white">
+                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-text-primary">
                       <Phone className="w-4 h-4 mr-2" />
                       Позвонить сейчас
                     </Button>

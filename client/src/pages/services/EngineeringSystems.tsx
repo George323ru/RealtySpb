@@ -121,7 +121,7 @@ export default function EngineeringSystems() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-cyan-600 to-cyan-500 text-white py-16">
+      <section className="bg-gradient-to-r from-cyan-600 to-cyan-500 text-text-primary py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -136,7 +136,7 @@ export default function EngineeringSystems() {
               <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Заказать проект
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-cyan-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-cyan-600 px-8 py-4 text-lg">
                 Примеры работ
               </Button>
             </div>
@@ -164,7 +164,7 @@ export default function EngineeringSystems() {
                     {system.icon}
                     <CardTitle className="text-lg">{system.title}</CardTitle>
                   </div>
-                  <Badge className="bg-cyan-500 text-white w-fit">
+                  <Badge className="bg-cyan-500 text-text-primary w-fit">
                     {system.price}
                   </Badge>
                 </CardHeader>
@@ -178,7 +178,7 @@ export default function EngineeringSystems() {
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-cyan-500 text-white hover:bg-cyan-600">
+                  <Button className="w-full bg-cyan-500 text-text-primary hover:bg-cyan-600">
                     Узнать подробнее
                   </Button>
                 </CardContent>
@@ -217,7 +217,7 @@ export default function EngineeringSystems() {
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-cyan-500 text-white hover:bg-cyan-600">
+                  <Button className="w-full bg-cyan-500 text-text-primary hover:bg-cyan-600">
                     Заказать проект
                   </Button>
                 </CardContent>
@@ -242,7 +242,7 @@ export default function EngineeringSystems() {
           <div className="max-w-4xl mx-auto">
             {process.map((item, index) => (
               <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                <div className="flex-shrink-0 w-16 h-16 bg-cyan-500 text-text-primary rounded-full flex items-center justify-center font-bold text-lg mr-6">
                   {item.step}
                 </div>
                 <div className="flex-grow">
@@ -343,7 +343,7 @@ export default function EngineeringSystems() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white">
+      <section className="py-16 bg-gradient-to-r from-cyan-600 to-cyan-500 text-text-primary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
