@@ -71,12 +71,12 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
   };
 
   return (
-    <div className={`bg-background rounded-xl shadow-lg border border ${className || ''}`}>
+    <div className={`bg-white rounded-xl shadow-lg border border-neutral-200 ${className || ''}`}>
       {/* Compact Search Bar */}
       <div className="flex items-center gap-2 p-3">
         <div className="flex-1 flex items-center gap-2">
           <Select value={propertyType} onValueChange={setPropertyType}>
-            <SelectTrigger className="w-[140px] h-10 border-none bg-background text-sm">
+            <SelectTrigger className="w-[140px] h-10 border-none bg-neutral-50 text-sm">
               <SelectValue placeholder="Тип" />
             </SelectTrigger>
             <SelectContent>
@@ -88,10 +88,10 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
             </SelectContent>
           </Select>
           
-          <div className="w-px h-6 bg-muted"></div>
+          <div className="w-px h-6 bg-neutral-200"></div>
           
           <Select value={district} onValueChange={setDistrict}>
-            <SelectTrigger className="w-[130px] h-10 border-none bg-background text-sm">
+            <SelectTrigger className="w-[130px] h-10 border-none bg-neutral-50 text-sm">
               <SelectValue placeholder="Район" />
             </SelectTrigger>
             <SelectContent>
@@ -103,14 +103,14 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
             </SelectContent>
           </Select>
           
-          <div className="w-px h-6 bg-muted"></div>
+          <div className="w-px h-6 bg-neutral-200"></div>
           
           <Input
             type="text"
             placeholder="От"
             value={priceFrom}
             onChange={(e) => setPriceFrom(e.target.value)}
-            className="w-[90px] h-10 border-none bg-background text-sm text-center"
+            className="w-[90px] h-10 border-none bg-neutral-50 text-sm text-center"
           />
           
           <span className="text-neutral-400 text-sm">—</span>
@@ -120,7 +120,7 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
             placeholder="До"
             value={priceTo}
             onChange={(e) => setPriceTo(e.target.value)}
-            className="w-[90px] h-10 border-none bg-background text-sm text-center"
+            className="w-[90px] h-10 border-none bg-neutral-50 text-sm text-center"
           />
         </div>
         

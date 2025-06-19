@@ -90,11 +90,11 @@ export default function UnifiedForm({
     return (
       <Card className={className}>
         <CardContent className="p-8 text-center">
-          <CheckCircle className="w-16 h-16 mx-auto text-accent mb-4" />
-          <h3 className="text-2xl font-bold text-foreground mb-2">
+          <CheckCircle className="w-16 h-16 mx-auto text-green-500 mb-4" />
+          <h3 className="text-2xl font-bold text-text-primary mb-2">
             {successTitle}
           </h3>
-          <p className="text-muted-foreground mb-4">
+          <p className="text-text-secondary mb-4">
             {successMessage}
           </p>
           <Button
@@ -113,7 +113,7 @@ export default function UnifiedForm({
       <CardHeader>
         <CardTitle className="text-center">{title}</CardTitle>
         {description && (
-          <p className="text-center text-muted-foreground">{description}</p>
+          <p className="text-center text-text-secondary">{description}</p>
         )}
       </CardHeader>
       <CardContent className="p-8">
@@ -163,7 +163,7 @@ export default function UnifiedForm({
             <Button
               type="submit"
               disabled={mutation.isPending}
-              className="w-full bg-accent hover:bg-accent/90 text-foreground py-4 text-lg font-semibold"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 text-lg font-semibold"
             >
               <Phone className="w-4 h-4 mr-2" />
               {mutation.isPending ? "Отправляем..." : buttonText}

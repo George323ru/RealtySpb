@@ -118,17 +118,17 @@ export default function Rent() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-purple-900 to-purple-700 py-20">
-        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-foreground">
+          <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Сдать квартиру в аренду СПб{" "}
               <span className="text-yandex-yellow">выгодно</span>
@@ -154,10 +154,10 @@ export default function Rent() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Подать объект в аренду
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Заполните форму и мы найдем арендаторов для вашей недвижимости
               </p>
             </div>
@@ -165,10 +165,10 @@ export default function Rent() {
             {isSubmitted ? (
               <Card className="p-12 text-center">
                 <div className="text-purple-500 text-5xl mb-4">✓</div>
-                <h3 className="text-2xl font-bold text-foreground mb-2">
+                <h3 className="text-2xl font-bold text-text-primary mb-2">
                   Заявка принята!
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-text-secondary">
                   Наш специалист свяжется с вами для обсуждения деталей сдачи в аренду.
                 </p>
               </Card>
@@ -213,7 +213,7 @@ export default function Rent() {
                       <Button
                         type="submit"
                         disabled={mutation.isPending}
-                        className="w-full bg-purple-500 hover:bg-purple-600 text-foreground py-4 text-lg font-semibold"
+                        className="w-full bg-purple-500 hover:bg-purple-600 text-white py-4 text-lg font-semibold"
                       >
                         {mutation.isPending ? "Отправляем..." : "Найти арендаторов"}
                       </Button>
@@ -227,13 +227,13 @@ export default function Rent() {
       </section>
 
       {/* Services */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Наши услуги по аренде
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
               Полный спектр услуг для успешной сдачи недвижимости в аренду
             </p>
           </div>
@@ -247,17 +247,17 @@ export default function Rent() {
                       <service.icon className="w-6 h-6 text-purple-500" />
                     </div>
                     <div>
-                      <h3 className="text-xl font-semibold text-foreground mb-2">
+                      <h3 className="text-xl font-semibold text-text-primary mb-2">
                         {service.title}
                       </h3>
-                      <p className="text-muted-foreground mb-4">
+                      <p className="text-text-secondary mb-4">
                         {service.description}
                       </p>
                     </div>
                   </div>
                   <ul className="space-y-2">
                     {service.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-muted-foreground">
+                      <li key={idx} className="flex items-center text-sm text-text-secondary">
                         <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
                         {feature}
                       </li>
@@ -275,25 +275,25 @@ export default function Rent() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Преимущества работы с нами
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Почему более 2000 арендодателей доверяют нам свою недвижимость
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {advantages.map((advantage, index) => (
-                <div key={index} className="flex items-center p-4 bg-background rounded-lg">
+                <div key={index} className="flex items-center p-4 bg-neutral-50 rounded-lg">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                  <span className="text-foreground">{advantage}</span>
+                  <span className="text-text-primary">{advantage}</span>
                 </div>
               ))}
             </div>
 
             <div className="text-center mt-12">
-              <Button className="bg-purple-500 hover:bg-purple-600 text-foreground px-8 py-3 text-lg font-semibold">
+              <Button className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-3 text-lg font-semibold">
                 Начать сотрудничество
               </Button>
             </div>
@@ -304,7 +304,7 @@ export default function Rent() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-purple-500 to-purple-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center text-foreground">
+          <div className="max-w-3xl mx-auto text-center text-white">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Готовы сдать недвижимость в аренду?
             </h2>
@@ -312,12 +312,12 @@ export default function Rent() {
               Получите консультацию и узнайте, сколько вы можете заработать на аренде
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-white text-purple-600 hover:bg-secondary px-8 py-3 text-lg font-semibold">
+              <Button className="bg-white text-purple-600 hover:bg-neutral-100 px-8 py-3 text-lg font-semibold">
                 Рассчитать доходность
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-foreground hover:bg-white hover:text-purple-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-white hover:bg-white hover:text-purple-600 px-8 py-3 text-lg font-semibold"
               >
                 Задать вопрос
               </Button>

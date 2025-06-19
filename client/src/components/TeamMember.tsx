@@ -20,7 +20,7 @@ export default function TeamMemberCard({ member }: TeamMemberProps) {
         </div>
         
         <h3 className="text-xl font-semibold text-primary mb-2">{member.name}</h3>
-        <p className="text-accent font-medium mb-2">{member.position}</p>
+        <p className="text-accent-orange font-medium mb-2">{member.position}</p>
         <p className="text-sm text-secondary mb-4">{member.experience}</p>
         
         {member.specialization && (
@@ -33,7 +33,7 @@ export default function TeamMemberCard({ member }: TeamMemberProps) {
           {member.telegram && (
             <a
               href={`https://t.me/${member.telegram}`}
-              className="w-8 h-8 bg-muted rounded-full flex items-center justify-center hover:bg-accent hover:text-foreground transition-colors"
+              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
             >
               <MessageCircle className="w-4 h-4" />
             </a>
@@ -41,7 +41,7 @@ export default function TeamMemberCard({ member }: TeamMemberProps) {
           {member.phone && (
             <a
               href={`tel:${member.phone}`}
-              className="w-8 h-8 bg-muted rounded-full flex items-center justify-center hover:bg-accent hover:text-foreground transition-colors"
+              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
             >
               <Phone className="w-4 h-4" />
             </a>

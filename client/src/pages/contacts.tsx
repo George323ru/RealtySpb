@@ -148,7 +148,7 @@ export default function Contacts() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Микроразметка Schema.org */}
       <script
         type="application/ld+json"
@@ -156,14 +156,14 @@ export default function Contacts() {
       />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-teal-900 to-blue-800 py-20">
-        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-foreground">
+          <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Свяжитесь{" "}
               <span className="text-yandex-yellow">с нами</span>
@@ -200,17 +200,17 @@ export default function Contacts() {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               {/* Contact Form */}
               <div>
-                <h2 className="text-3xl font-bold text-foreground mb-6">
+                <h2 className="text-3xl font-bold text-text-primary mb-6">
                   Написать нам
                 </h2>
                 
                 {isSubmitted ? (
                   <Card className="p-8 text-center">
                     <div className="text-green-500 text-5xl mb-4">✓</div>
-                    <h3 className="text-2xl font-bold text-foreground mb-2">
+                    <h3 className="text-2xl font-bold text-text-primary mb-2">
                       Сообщение отправлено!
                     </h3>
-                    <p className="text-muted-foreground">
+                    <p className="text-text-secondary">
                       Мы свяжемся с вами в ближайшее время.
                     </p>
                   </Card>
@@ -254,7 +254,7 @@ export default function Contacts() {
                           <Button
                             type="submit"
                             disabled={mutation.isPending}
-                            className="w-full bg-teal-500 hover:bg-teal-600 text-foreground py-4 text-lg font-semibold"
+                            className="w-full bg-teal-500 hover:bg-teal-600 text-white py-4 text-lg font-semibold"
                           >
                             {mutation.isPending ? "Отправляем..." : "Отправить сообщение"}
                           </Button>
@@ -267,7 +267,7 @@ export default function Contacts() {
 
               {/* Office Info */}
               <div>
-                <h2 className="text-3xl font-bold text-foreground mb-6">
+                <h2 className="text-3xl font-bold text-text-primary mb-6">
                   Наш офис
                 </h2>
                 
@@ -277,17 +277,17 @@ export default function Contacts() {
                       <div className="flex items-start">
                         <MapPin className="w-6 h-6 text-teal-500 mr-4 mt-1 flex-shrink-0" />
                         <div>
-                          <div className="font-semibold text-foreground mb-1">Адрес</div>
-                          <div className="text-muted-foreground">{officeInfo.address}</div>
-                          <div className="text-muted-foreground text-sm">{officeInfo.building}</div>
+                          <div className="font-semibold text-text-primary mb-1">Адрес</div>
+                          <div className="text-text-secondary">{officeInfo.address}</div>
+                          <div className="text-text-secondary text-sm">{officeInfo.building}</div>
                         </div>
                       </div>
 
                       <div className="flex items-start">
                         <Phone className="w-6 h-6 text-teal-500 mr-4 mt-1 flex-shrink-0" />
                         <div>
-                          <div className="font-semibold text-foreground mb-1">Телефон</div>
-                          <a href={`tel:${officeInfo.phone}`} className="text-muted-foreground hover:text-teal-500">
+                          <div className="font-semibold text-text-primary mb-1">Телефон</div>
+                          <a href={`tel:${officeInfo.phone}`} className="text-text-secondary hover:text-teal-500">
                             {officeInfo.phone}
                           </a>
                         </div>
@@ -296,8 +296,8 @@ export default function Contacts() {
                       <div className="flex items-start">
                         <Mail className="w-6 h-6 text-teal-500 mr-4 mt-1 flex-shrink-0" />
                         <div>
-                          <div className="font-semibold text-foreground mb-1">Email</div>
-                          <a href={`mailto:${officeInfo.email}`} className="text-muted-foreground hover:text-teal-500">
+                          <div className="font-semibold text-text-primary mb-1">Email</div>
+                          <a href={`mailto:${officeInfo.email}`} className="text-text-secondary hover:text-teal-500">
                             {officeInfo.email}
                           </a>
                         </div>
@@ -306,27 +306,27 @@ export default function Contacts() {
                       <div className="flex items-start">
                         <Clock className="w-6 h-6 text-teal-500 mr-4 mt-1 flex-shrink-0" />
                         <div>
-                          <div className="font-semibold text-foreground mb-1">Режим работы</div>
-                          <div className="text-muted-foreground">{officeInfo.workHours}</div>
-                          <div className="text-muted-foreground text-sm">Без выходных</div>
+                          <div className="font-semibold text-text-primary mb-1">Режим работы</div>
+                          <div className="text-text-secondary">{officeInfo.workHours}</div>
+                          <div className="text-text-secondary text-sm">Без выходных</div>
                         </div>
                       </div>
 
                       <div className="flex items-start">
                         <Bus className="w-6 h-6 text-teal-500 mr-4 mt-1 flex-shrink-0" />
                         <div>
-                          <div className="font-semibold text-foreground mb-1">Как добраться</div>
-                          <div className="text-muted-foreground">{officeInfo.metro}</div>
-                          <div className="text-muted-foreground text-sm">5 минут пешком от метро</div>
+                          <div className="font-semibold text-text-primary mb-1">Как добраться</div>
+                          <div className="text-text-secondary">{officeInfo.metro}</div>
+                          <div className="text-text-secondary text-sm">5 минут пешком от метро</div>
                         </div>
                       </div>
 
                       <div className="flex items-start">
                         <Car className="w-6 h-6 text-teal-500 mr-4 mt-1 flex-shrink-0" />
                         <div>
-                          <div className="font-semibold text-foreground mb-1">Парковка</div>
-                          <div className="text-muted-foreground">{officeInfo.parking}</div>
-                          <div className="text-muted-foreground text-sm">Первые 2 часа бесплатно</div>
+                          <div className="font-semibold text-text-primary mb-1">Парковка</div>
+                          <div className="text-text-secondary">{officeInfo.parking}</div>
+                          <div className="text-text-secondary text-sm">Первые 2 часа бесплатно</div>
                         </div>
                       </div>
                     </div>
@@ -346,7 +346,7 @@ export default function Contacts() {
                           href={social.link}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className={`flex flex-col items-center p-4 rounded-lg border-2 border hover:border-current transition-colors ${social.color}`}
+                          className={`flex flex-col items-center p-4 rounded-lg border-2 border-neutral-200 hover:border-current transition-colors ${social.color}`}
                         >
                           <social.icon className="w-8 h-8 mb-2" />
                           <span className="text-sm font-medium">{social.name}</span>
@@ -362,14 +362,14 @@ export default function Contacts() {
       </section>
 
       {/* Departments */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Отделы и специалисты
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Свяжитесь напрямую с нужным отделом для быстрого решения вопроса
               </p>
             </div>
@@ -381,22 +381,22 @@ export default function Contacts() {
                     <div className="flex items-start">
                       <Building className="w-8 h-8 text-teal-500 mr-4 mt-1 flex-shrink-0" />
                       <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-foreground mb-2">
+                        <h3 className="text-lg font-semibold text-text-primary mb-2">
                           {dept.name}
                         </h3>
-                        <p className="text-muted-foreground text-sm mb-4">
+                        <p className="text-text-secondary text-sm mb-4">
                           {dept.description}
                         </p>
                         <div className="space-y-2">
                           <div className="flex items-center">
                             <Phone className="w-4 h-4 text-teal-500 mr-2" />
-                            <a href={`tel:${dept.phone}`} className="text-muted-foreground hover:text-teal-500 text-sm">
+                            <a href={`tel:${dept.phone}`} className="text-text-secondary hover:text-teal-500 text-sm">
                               {dept.phone}
                             </a>
                           </div>
                           <div className="flex items-center">
                             <Mail className="w-4 h-4 text-teal-500 mr-2" />
-                            <a href={`mailto:${dept.email}`} className="text-muted-foreground hover:text-teal-500 text-sm">
+                            <a href={`mailto:${dept.email}`} className="text-text-secondary hover:text-teal-500 text-sm">
                               {dept.email}
                             </a>
                           </div>
@@ -416,17 +416,17 @@ export default function Contacts() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Как нас найти
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Мы находимся в самом центре Санкт-Петербурга
               </p>
             </div>
 
             <Card className="overflow-hidden">
-              <div className="h-96 bg-muted flex items-center justify-center">
-                <div className="text-center text-muted-foreground">
+              <div className="h-96 bg-neutral-200 flex items-center justify-center">
+                <div className="text-center text-text-secondary">
                   <MapPin className="w-16 h-16 mx-auto mb-4 opacity-50" />
                   <h3 className="text-lg font-semibold mb-2">Интерактивная карта</h3>
                   <p className="mb-4">{officeInfo.address}</p>
@@ -441,7 +441,7 @@ export default function Contacts() {
       {/* Quick Contact CTA */}
       <section className="py-16 bg-gradient-to-r from-teal-600 to-blue-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-foreground">
+          <div className="max-w-4xl mx-auto text-center text-white">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Нужна срочная консультация?
             </h2>
@@ -450,7 +450,7 @@ export default function Contacts() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
-                className="bg-white text-teal-600 hover:bg-secondary px-8 py-3 text-lg font-semibold"
+                className="bg-white text-teal-600 hover:bg-neutral-100 px-8 py-3 text-lg font-semibold"
                 onClick={() => window.location.href = `tel:${officeInfo.phone}`}
               >
                 <Phone className="w-5 h-5 mr-2" />
@@ -458,7 +458,7 @@ export default function Contacts() {
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-foreground hover:bg-white hover:text-teal-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-white hover:bg-white hover:text-teal-600 px-8 py-3 text-lg font-semibold"
                 onClick={() => window.open('https://wa.me/78121234567', '_blank')}
               >
                 <MessageCircle className="w-5 h-5 mr-2" />

@@ -124,7 +124,7 @@ export default function Reviews() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Микроразметка Schema.org для отзывов */}
       <script
         type="application/ld+json"
@@ -132,14 +132,14 @@ export default function Reviews() {
       />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-emerald-900 to-green-800 py-20">
-        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-foreground">
+          <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Отзывы{" "}
               <span className="text-yandex-yellow">клиентов</span>
@@ -176,7 +176,7 @@ export default function Reviews() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Распределение оценок
               </h2>
             </div>
@@ -191,14 +191,14 @@ export default function Reviews() {
                         <Star className="w-4 h-4 text-yellow-400 fill-current" />
                       </div>
                       <div className="flex-1 mx-4">
-                        <div className="bg-muted rounded-full h-2">
+                        <div className="bg-neutral-200 rounded-full h-2">
                           <div 
                             className="bg-yellow-400 h-2 rounded-full" 
                             style={{ width: `${item.percentage}%` }}
                           ></div>
                         </div>
                       </div>
-                      <span className="text-sm text-muted-foreground w-12">
+                      <span className="text-sm text-text-secondary w-12">
                         {item.count}
                       </span>
                     </div>
@@ -211,11 +211,11 @@ export default function Reviews() {
       </section>
 
       {/* Reviews List */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4 lg:mb-0">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4 lg:mb-0">
                 Все отзывы
               </h2>
               
@@ -256,24 +256,24 @@ export default function Reviews() {
                   <Card key={i} className="animate-pulse">
                     <CardContent className="p-6">
                       <div className="flex items-center mb-4">
-                        <div className="w-12 h-12 bg-muted rounded-full mr-4"></div>
+                        <div className="w-12 h-12 bg-neutral-200 rounded-full mr-4"></div>
                         <div className="flex-1">
-                          <div className="h-4 bg-muted rounded mb-2"></div>
-                          <div className="h-3 bg-muted rounded w-1/2"></div>
+                          <div className="h-4 bg-neutral-200 rounded mb-2"></div>
+                          <div className="h-3 bg-neutral-200 rounded w-1/2"></div>
                         </div>
                       </div>
-                      <div className="h-20 bg-muted rounded"></div>
+                      <div className="h-20 bg-neutral-200 rounded"></div>
                     </CardContent>
                   </Card>
                 ))}
               </div>
             ) : filteredReviews.length === 0 ? (
               <Card className="p-12 text-center">
-                <Filter className="w-12 h-12 mx-auto mb-4 opacity-50 text-muted-foreground" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">
+                <Filter className="w-12 h-12 mx-auto mb-4 opacity-50 text-text-secondary" />
+                <h3 className="text-lg font-semibold text-text-primary mb-2">
                   Отзывы не найдены
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-text-secondary">
                   Попробуйте изменить фильтры поиска
                 </p>
               </Card>
@@ -285,13 +285,13 @@ export default function Reviews() {
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center">
                           <div className="w-12 h-12 bg-gradient-to-br from-accent-orange to-orange-600 rounded-full flex items-center justify-center mr-4">
-                            <User className="w-6 h-6 text-foreground" />
+                            <User className="w-6 h-6 text-white" />
                           </div>
                           <div>
-                            <h3 className="font-semibold text-foreground">{review.clientName}</h3>
+                            <h3 className="font-semibold text-text-primary">{review.clientName}</h3>
                             <div className="flex items-center space-x-2">
                               {renderStars(review.rating, "sm")}
-                              <span className="text-sm text-muted-foreground">
+                              <span className="text-sm text-text-secondary">
                                 {new Date(review.createdAt).toLocaleDateString('ru-RU')}
                               </span>
                             </div>
@@ -300,7 +300,7 @@ export default function Reviews() {
                         <Quote className="w-6 h-6 text-neutral-300" />
                       </div>
                       
-                      <p className="text-muted-foreground leading-relaxed mb-4">
+                      <p className="text-text-secondary leading-relaxed mb-4">
                         {review.review}
                       </p>
                       
@@ -326,10 +326,10 @@ export default function Reviews() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Оставить отзыв
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Поделитесь своим опытом работы с нашей компанией
               </p>
             </div>
@@ -337,10 +337,10 @@ export default function Reviews() {
             {isSubmitted ? (
               <Card className="p-12 text-center">
                 <div className="text-green-500 text-5xl mb-4">✓</div>
-                <h3 className="text-2xl font-bold text-foreground mb-2">
+                <h3 className="text-2xl font-bold text-text-primary mb-2">
                   Спасибо за отзыв!
                 </h3>
-                <p className="text-muted-foreground">
+                <p className="text-text-secondary">
                   Ваш отзыв будет опубликован после модерации.
                 </p>
               </Card>
@@ -463,7 +463,7 @@ export default function Reviews() {
                       <Button
                         type="submit"
                         disabled={mutation.isPending}
-                        className="w-full bg-green-500 hover:bg-green-600 text-foreground py-4 text-lg font-semibold"
+                        className="w-full bg-green-500 hover:bg-green-600 text-white py-4 text-lg font-semibold"
                       >
                         {mutation.isPending ? "Отправляем..." : "Отправить отзыв"}
                       </Button>

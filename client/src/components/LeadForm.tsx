@@ -115,7 +115,7 @@ export default function LeadForm({
 
               <Button 
                 type="submit" 
-                className="w-full bg-accent text-foreground hover:bg-accent/90"
+                className="w-full bg-accent-orange text-white hover:bg-orange-600"
                 disabled={createLeadMutation.isPending}
               >
                 {createLeadMutation.isPending ? "Отправка..." : "Отправить заявку"}
@@ -130,10 +130,10 @@ export default function LeadForm({
   return (
     <Card className="max-w-2xl mx-auto">
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl lg:text-3xl font-bold text-foreground">
+        <CardTitle className="text-2xl lg:text-3xl font-bold text-text-primary">
           {title}
         </CardTitle>
-        <p className="text-muted-foreground">{description}</p>
+        <p className="text-text-secondary">{description}</p>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -172,17 +172,17 @@ export default function LeadForm({
 
             <Button 
               type="submit" 
-              className="w-full bg-accent text-foreground py-4 hover:bg-accent/90 text-lg"
+              className="w-full bg-accent-orange text-white py-4 hover:bg-orange-600 text-lg"
               disabled={createLeadMutation.isPending}
             >
               {createLeadMutation.isPending ? "Отправка..." : "Получить консультацию"}
             </Button>
 
-            <p className="text-sm text-muted-foreground text-center">
+            <p className="text-sm text-text-secondary text-center">
               Нажимая кнопку, вы соглашаетесь с{" "}
               <a 
                 href="/privacy-policy" 
-                className="text-accent hover:underline"
+                className="text-accent-orange hover:underline"
                 rel="noopener"
               >
                 политикой конфиденциальности

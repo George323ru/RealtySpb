@@ -171,33 +171,6 @@ Changelog:
 - June 19, 2025. Stage 5: Structural logic audit completed - fixed all broken links, created privacy policy page, ensured navigation consistency across all 37+ pages
 - June 19, 2025. Eliminated placeholder href="#" links, validated all routes in App.tsx, established proper link hierarchy and breadcrumb consistency
 - June 19, 2025. Technical metrics optimized for Lighthouse ≥90: performance (lazy loading, WebP), accessibility (aria-labels, focus states), best practices (security headers)
-- June 19, 2025. Stage 6: Final automatic normalization completed - CSS refactored with unified design system, component optimization, comprehensive SEO infrastructure
-- June 19, 2025. Production-ready PWA implementation with manifest.json, theme colors, geographic targeting, and accessibility compliance (4.5:1 contrast, focus states)
-- June 19, 2025. Performance analysis shows 41,422 lines of optimized code across 150+ components with 8,923 bytes CSS using CSS variables and unified utility classes
-- June 19, 2025. Complete technical audit validation - all 37+ pages functional, navigation consistent, Schema.org structured data, security headers implemented
-- June 19, 2025. Enterprise-grade optimization standards achieved - dark mode support, reduced motion accessibility, print styles, high contrast mode support
-- June 19, 2025. Final structural and functional audit completed - fixed all color inconsistencies, replaced hardcoded colors with unified design system variables
-- June 19, 2025. Functional validation of all interactive elements - corrected 48+ broken button hover states, fixed placeholder links, ensured proper navigation
-- June 19, 2025. Created missing landing pages (terms.tsx) and verified all route functionality across 39+ pages with consistent CTA elements
-- June 19, 2025. Complete color palette normalization - eliminated all bg-blue/green/red variants, standardized to primary/accent-orange/destructive system
-- June 19, 2025. All conversion buttons now use consistent hover:bg-accent-orange/90 pattern for unified user experience and brand consistency
-- June 19, 2025. Валидация поведения и взаимодействий завершена - universal interactive system с автоматическими hover-эффектами для всех кликабельных элементов
-- June 19, 2025. Исправлены проблемы контрастности text-muted-foreground → text-text-secondary, добавлена система z-index управления и предотвращения overflow
-- June 19, 2025. Внедрена accessibility-compliant интерактивность: минимальные touch-target 44x44px, focus-visible состояния, плавные анимации
-- June 19, 2025. Создана универсальная система селекторов для button, [role="button"], .btn, a[href] с исключениями через .no-interaction класс
-- June 19, 2025. UX/UI унификация завершена - устранены все темные блоки, применена цветовая схема 60/30/10 с нейтральной базой
-- June 19, 2025. Исправлены выпадающие меню: заменены bg-black на bg-neutral-300/60, bg-white на bg-neutral-50 с proper shadows
-- June 19, 2025. Унифицированы все блоки сайта: header, cards, forms, mega menus с консистентным styling и semantic colors
-- June 19, 2025. Применена воздушная типографика с improved contrast ratios, заменены text-gray на text-text-secondary variables
-- June 19, 2025. ЭКСТРЕННОЕ ИСПРАВЛЕНИЕ: Устранены ВСЕ черные блоки - выполнены массовые замены bg-black/gray на bg-neutral цвета
-- June 19, 2025. Полная ликвидация темных элементов: bg-gray-800→bg-neutral-200, bg-black→bg-card, overlay→bg-neutral-300/60
-- June 19, 2025. Конечная унификация цветовой схемы: 0 черных блоков, 100% светлая нейтральная палитра, готово к продакшену
-- June 19, 2025. ФИНАЛЬНОЕ РЕШЕНИЕ проблемы черных блоков: исправлены CSS variables в :root, отключен dark mode, массовые замены hsl(0,0%,0%) выполнены
-- June 19, 2025. Все источники темных элементов устранены: --primary-foreground, --ring, --yandex-black заменены на светлые значения
-- June 19, 2025. Принудительный light mode: даже при системной темной теме сайт остается светлым с нейтральной палитрой 60/30/10
-- June 19, 2025. Упрощение цветовой схемы: убраны лишние цвета, возврат к простым белым блокам с тенью на светлом фоне
-- June 19, 2025. Контрастность шрифтов улучшена: --foreground: hsl(0,0%,9%) для четкой читаемости на всех фонах
-- June 19, 2025. Массовые замены цветов: text-text-* → text-foreground, bg-neutral-* → bg-card/secondary/muted, убраны сложные переменные
 ```
 
 ## User Preferences

@@ -126,17 +126,17 @@ export default function Services() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-indigo-900 to-blue-800 py-20">
-        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-foreground">
+          <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Дополнительные{" "}
               <span className="text-yandex-yellow">услуги</span>
@@ -168,10 +168,10 @@ export default function Services() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Основные направления
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-lg text-text-secondary max-w-2xl mx-auto">
                 Выберите категорию услуг, которая вас интересует
               </p>
             </div>
@@ -181,13 +181,13 @@ export default function Services() {
                 <Card key={index} className={`${category.color} hover:shadow-lg transition-all duration-300 cursor-pointer h-full`}>
                   <CardContent className="p-8 text-center h-full flex flex-col">
                     <div className="text-4xl mb-4">{category.icon}</div>
-                    <h3 className="text-xl font-semibold text-foreground mb-3">
+                    <h3 className="text-xl font-semibold text-text-primary mb-3">
                       {category.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm mb-4 flex-1">
+                    <p className="text-text-secondary text-sm mb-4 flex-1">
                       {category.description}
                     </p>
-                    <Button variant="ghost" className="text-accent font-medium mt-auto">
+                    <Button variant="ghost" className="text-accent-orange font-medium mt-auto">
                       Подробнее →
                     </Button>
                   </CardContent>
@@ -199,14 +199,14 @@ export default function Services() {
       </section>
 
       {/* All Services */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Все наши услуги
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Комплексные решения для всех ваших потребностей в области недвижимости
               </p>
             </div>
@@ -217,7 +217,7 @@ export default function Services() {
                   <CardHeader className="pb-4">
                     <div className="flex items-start justify-between mb-2">
                       <div className="text-3xl">{service.icon}</div>
-                      <Badge variant="outline" className="text-accent border-accent-orange">
+                      <Badge variant="outline" className="text-accent-orange border-accent-orange">
                         {service.price}
                       </Badge>
                     </div>
@@ -225,7 +225,7 @@ export default function Services() {
                   </CardHeader>
                   
                   <CardContent>
-                    <p className="text-muted-foreground mb-4 text-sm">
+                    <p className="text-text-secondary mb-4 text-sm">
                       {service.description}
                     </p>
                     
@@ -233,12 +233,12 @@ export default function Services() {
                       {service.features.map((feature, idx) => (
                         <div key={idx} className="flex items-center text-sm">
                           <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                          <span className="text-muted-foreground">{feature}</span>
+                          <span className="text-text-secondary">{feature}</span>
                         </div>
                       ))}
                     </div>
                     
-                    <Button className="w-full bg-accent hover:bg-orange-600 text-foreground">
+                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white">
                       Заказать услугу
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
@@ -255,10 +255,10 @@ export default function Services() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Как мы работаем
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Простой и понятный процесс оказания услуг
               </p>
             </div>
@@ -287,13 +287,13 @@ export default function Services() {
                 }
               ].map((item, index) => (
                 <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-accent text-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                  <div className="w-16 h-16 bg-accent-orange text-white rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                     {item.step}
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-text-secondary text-sm">
                     {item.description}
                   </p>
                 </div>
@@ -306,7 +306,7 @@ export default function Services() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-indigo-600 to-blue-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-foreground">
+          <div className="max-w-4xl mx-auto text-center text-white">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Нужна консультация по услугам?
             </h2>
@@ -314,12 +314,12 @@ export default function Services() {
               Наши специалисты помогут выбрать оптимальное решение для ваших задач
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-white text-indigo-600 hover:bg-secondary px-8 py-3 text-lg font-semibold">
+              <Button className="bg-white text-indigo-600 hover:bg-neutral-100 px-8 py-3 text-lg font-semibold">
                 Получить консультацию
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-foreground hover:bg-white hover:text-indigo-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-white hover:bg-white hover:text-indigo-600 px-8 py-3 text-lg font-semibold"
               >
                 Рассчитать стоимость
               </Button>

@@ -17,11 +17,11 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
   const getBadgeVariant = (buildingType: string) => {
     switch (buildingType) {
       case "новостройка":
-        return "bg-green-500 text-foreground";
+        return "bg-green-500 text-white";
       case "вторичка":
-        return "bg-blue-500 text-foreground";
+        return "bg-blue-500 text-white";
       default:
-        return "bg-purple-500 text-foreground";
+        return "bg-purple-500 text-white";
     }
   };
 
@@ -41,32 +41,32 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
           </Badge>
         </div>
         <button className="absolute top-4 right-4 w-8 h-8 bg-white bg-opacity-80 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all">
-          <Heart className="w-4 h-4 text-muted-foreground" />
+          <Heart className="w-4 h-4 text-text-secondary" />
         </button>
       </div>
       
       <CardContent className="p-6 flex flex-col flex-1">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-2xl font-bold text-foreground">
+          <span className="text-2xl font-bold text-text-primary">
             {formatPrice(property.price)}
           </span>
           {property.pricePerMeter && (
-            <span className="text-sm text-muted-foreground">
+            <span className="text-sm text-text-secondary">
               {formatPricePerMeter(property.pricePerMeter)}
             </span>
           )}
         </div>
         
-        <h3 className="text-lg font-semibold text-foreground mb-2 line-clamp-2">
+        <h3 className="text-lg font-semibold text-text-primary mb-2 line-clamp-2">
           {property.title}
         </h3>
         
-        <p className="text-muted-foreground mb-4 flex items-center flex-1">
-          <MapPin className="w-4 h-4 mr-1 text-accent" />
+        <p className="text-text-secondary mb-4 flex items-center flex-1">
+          <MapPin className="w-4 h-4 mr-1 text-accent-orange" />
           {property.district}, {property.address}
         </p>
         
-        <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+        <div className="flex items-center justify-between text-sm text-text-secondary mb-4">
           {property.rooms && <span>{formatRooms(property.rooms)}</span>}
           {property.floor && property.totalFloors && (
             <span>{formatFloor(property.floor, property.totalFloors)}</span>
@@ -75,7 +75,7 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
         </div>
         
         <Link href={`/property/${property.id}`} className="mt-auto">
-          <Button className="w-full bg-accent text-foreground hover:bg-accent/90">
+          <Button className="w-full bg-accent-orange text-white hover:bg-orange-600">
             Подробнее
           </Button>
         </Link>

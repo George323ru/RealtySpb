@@ -91,7 +91,7 @@ export default function OptimizedImage({
       {/* Placeholder/Loading state */}
       {!isLoaded && (
         <div 
-          className="absolute inset-0 bg-muted animate-pulse flex items-center justify-center"
+          className="absolute inset-0 bg-neutral-200 animate-pulse flex items-center justify-center"
           style={{ aspectRatio: width && height ? `${width}/${height}` : 'auto' }}
         >
           <svg 

@@ -102,7 +102,7 @@ export default function ServiceDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background py-8">
+      <div className="min-h-screen bg-neutral-50 py-8">
         <div className="container mx-auto px-4">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-64 mb-6"></div>
@@ -128,7 +128,7 @@ export default function ServiceDetail() {
 
   if (error || !service) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
         <Card className="w-full max-w-md mx-4">
           <CardContent className="pt-6 text-center">
             <div className="text-gray-400 mb-4">
@@ -139,7 +139,7 @@ export default function ServiceDetail() {
               Возможно, услуга была удалена или перемещена
             </p>
             <Link href="/services">
-              <Button className="bg-accent hover:bg-orange-600">
+              <Button className="bg-accent-orange hover:bg-orange-600">
                 Вернуться к услугам
               </Button>
             </Link>
@@ -152,13 +152,13 @@ export default function ServiceDetail() {
   const colorClasses = getColorClasses(service.color);
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-secondary mb-6">
-          <Link href="/" className="hover:text-accent">Главная</Link>
+          <Link href="/" className="hover:text-accent-orange">Главная</Link>
           <span>/</span>
-          <Link href="/services" className="hover:text-accent">Услуги</Link>
+          <Link href="/services" className="hover:text-accent-orange">Услуги</Link>
           <span>/</span>
           <span className="text-primary">{service.name}</span>
         </nav>
@@ -189,13 +189,13 @@ export default function ServiceDetail() {
                     <div className="flex items-center space-x-6 mt-6">
                       {service.price && (
                         <div className="flex items-center space-x-2">
-                          <DollarSign className="w-5 h-5 text-accent" />
+                          <DollarSign className="w-5 h-5 text-accent-orange" />
                           <span className="font-semibold">{service.price}</span>
                         </div>
                       )}
                       {service.duration && (
                         <div className="flex items-center space-x-2">
-                          <Clock className="w-5 h-5 text-accent" />
+                          <Clock className="w-5 h-5 text-accent-orange" />
                           <span className="font-semibold">{service.duration}</span>
                         </div>
                       )}
@@ -246,7 +246,7 @@ export default function ServiceDetail() {
               <CardContent>
                 <div className="space-y-6">
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-foreground font-bold text-sm">
+                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold text-sm">
                       1
                     </div>
                     <div>
@@ -258,7 +258,7 @@ export default function ServiceDetail() {
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-foreground font-bold text-sm">
+                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold text-sm">
                       2
                     </div>
                     <div>
@@ -270,7 +270,7 @@ export default function ServiceDetail() {
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-foreground font-bold text-sm">
+                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold text-sm">
                       3
                     </div>
                     <div>
@@ -282,7 +282,7 @@ export default function ServiceDetail() {
                   </div>
                   
                   <div className="flex items-start space-x-4">
-                    <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center text-foreground font-bold text-sm">
+                    <div className="w-8 h-8 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold text-sm">
                       4
                     </div>
                     <div>
@@ -317,7 +317,7 @@ export default function ServiceDetail() {
 
                 <div className="space-y-3 mb-6">
                   <Button 
-                    className="w-full bg-accent hover:bg-orange-600"
+                    className="w-full bg-accent-orange hover:bg-orange-600"
                     onClick={() => setShowContactForm(true)}
                   >
                     <MessageCircle className="w-4 h-4 mr-2" />
@@ -421,7 +421,7 @@ export default function ServiceDetail() {
 
                     <Button
                       type="submit"
-                      className="w-full bg-accent hover:bg-orange-600"
+                      className="w-full bg-accent-orange hover:bg-orange-600"
                       disabled={contactMutation.isPending}
                     >
                       {contactMutation.isPending ? "Отправка..." : "Отправить заявку"}

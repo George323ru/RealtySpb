@@ -99,9 +99,9 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-foreground py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -113,10 +113,10 @@ export default function Contact() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-primary text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+              <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Позвонить сейчас
               </Button>
-              <Button variant="outline" className="border-white text-foreground hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
                 Написать в WhatsApp
               </Button>
             </div>
@@ -128,10 +128,10 @@ export default function Contact() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Выберите удобный способ связи
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               Отвечаем быстро в любое удобное для вас время
             </p>
           </div>
@@ -143,17 +143,17 @@ export default function Contact() {
                   <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform">
                     {method.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">
                     {method.title}
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-text-secondary mb-4">
                     {method.description}
                   </p>
-                  <div className="font-medium text-accent mb-4">
+                  <div className="font-medium text-accent-orange mb-4">
                     {method.value}
                   </div>
                   <a href={method.action}>
-                    <Button className="bg-accent text-foreground hover:bg-orange-600 w-full">
+                    <Button className="bg-accent-orange text-white hover:bg-orange-600 w-full">
                       Связаться
                     </Button>
                   </a>
@@ -165,7 +165,7 @@ export default function Contact() {
       </section>
 
       {/* Contact Form and Office Info */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
@@ -178,7 +178,7 @@ export default function Contact() {
 
             {/* Office Information */}
             <div>
-              <h2 className="text-3xl font-bold text-foreground mb-8">
+              <h2 className="text-3xl font-bold text-text-primary mb-8">
                 Наши офисы
               </h2>
 
@@ -206,43 +206,43 @@ export default function Contact() {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+                    <MapPin className="w-5 h-5 text-accent-orange mt-1 flex-shrink-0" />
                     <div>
-                      <div className="font-medium text-foreground">Адрес</div>
-                      <div className="text-muted-foreground">{currentOffice.address}</div>
+                      <div className="font-medium text-text-primary">Адрес</div>
+                      <div className="text-text-secondary">{currentOffice.address}</div>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Phone className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+                    <Phone className="w-5 h-5 text-accent-orange mt-1 flex-shrink-0" />
                     <div>
-                      <div className="font-medium text-foreground">Телефон</div>
-                      <a href={`tel:${currentOffice.phone}`} className="text-accent hover:underline">
+                      <div className="font-medium text-text-primary">Телефон</div>
+                      <a href={`tel:${currentOffice.phone}`} className="text-accent-orange hover:underline">
                         {currentOffice.phone}
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Mail className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+                    <Mail className="w-5 h-5 text-accent-orange mt-1 flex-shrink-0" />
                     <div>
-                      <div className="font-medium text-foreground">Email</div>
-                      <a href={`mailto:${currentOffice.email}`} className="text-accent hover:underline">
+                      <div className="font-medium text-text-primary">Email</div>
+                      <a href={`mailto:${currentOffice.email}`} className="text-accent-orange hover:underline">
                         {currentOffice.email}
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
-                    <Clock className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+                    <Clock className="w-5 h-5 text-accent-orange mt-1 flex-shrink-0" />
                     <div>
-                      <div className="font-medium text-foreground">Часы работы</div>
-                      <div className="text-muted-foreground">{currentOffice.hours}</div>
+                      <div className="font-medium text-text-primary">Часы работы</div>
+                      <div className="text-text-secondary">{currentOffice.hours}</div>
                     </div>
                   </div>
 
                   <div className="pt-4">
-                    <Button className="w-full bg-accent text-foreground hover:bg-orange-600">
+                    <Button className="w-full bg-accent-orange text-white hover:bg-orange-600">
                       <Navigation className="w-4 h-4 mr-2" />
                       Построить маршрут
                     </Button>
@@ -258,10 +258,10 @@ export default function Contact() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
               Как нас найти
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               Мы находимся в центре города, удобно добираться на любом транспорте
             </p>
           </div>
@@ -269,11 +269,11 @@ export default function Contact() {
           {/* Map Placeholder */}
           <div className="bg-gray-200 rounded-2xl h-96 flex items-center justify-center mb-8">
             <div className="text-center">
-              <MapPin className="w-16 h-16 text-accent mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-foreground mb-2">
+              <MapPin className="w-16 h-16 text-accent-orange mx-auto mb-4" />
+              <h3 className="text-xl font-semibold text-text-primary mb-2">
                 Интерактивная карта
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-text-secondary">
                 Карта с точным расположением наших офисов
               </p>
             </div>
@@ -286,8 +286,8 @@ export default function Contact() {
                 <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <i className="fas fa-subway text-blue-500 text-xl"></i>
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Метро</h3>
-                <p className="text-muted-foreground">
+                <h3 className="font-semibold text-text-primary mb-2">Метро</h3>
+                <p className="text-text-secondary">
                   Невский проспект (2 мин пешком)
                 </p>
               </CardContent>
@@ -298,8 +298,8 @@ export default function Contact() {
                 <div className="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <i className="fas fa-bus text-green-500 text-xl"></i>
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Автобус</h3>
-                <p className="text-muted-foreground">
+                <h3 className="font-semibold text-text-primary mb-2">Автобус</h3>
+                <p className="text-text-secondary">
                   Остановки: 7, 24, 191 маршруты
                 </p>
               </CardContent>
@@ -310,8 +310,8 @@ export default function Contact() {
                 <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <i className="fas fa-car text-purple-500 text-xl"></i>
                 </div>
-                <h3 className="font-semibold text-foreground mb-2">Парковка</h3>
-                <p className="text-muted-foreground">
+                <h3 className="font-semibold text-text-primary mb-2">Парковка</h3>
+                <p className="text-text-secondary">
                   Подземная парковка в здании
                 </p>
               </CardContent>
@@ -321,14 +321,14 @@ export default function Contact() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl font-bold text-text-primary mb-4">
                 Часто задаваемые вопросы
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Ответы на популярные вопросы наших клиентов
               </p>
             </div>
@@ -337,10 +337,10 @@ export default function Contact() {
               {faqItems.map((item, index) => (
                 <Card key={index}>
                   <CardContent className="p-6">
-                    <h3 className="text-lg font-semibold text-foreground mb-3">
+                    <h3 className="text-lg font-semibold text-text-primary mb-3">
                       {item.question}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed">
+                    <p className="text-text-secondary leading-relaxed">
                       {item.answer}
                     </p>
                   </CardContent>
@@ -349,10 +349,10 @@ export default function Contact() {
             </div>
 
             <div className="text-center mt-12">
-              <p className="text-muted-foreground mb-4">
+              <p className="text-text-secondary mb-4">
                 Не нашли ответ на свой вопрос?
               </p>
-              <Button className="bg-accent text-foreground hover:bg-orange-600">
+              <Button className="bg-accent-orange text-white hover:bg-orange-600">
                 Задать вопрос эксперту
               </Button>
             </div>
@@ -361,7 +361,7 @@ export default function Contact() {
       </section>
 
       {/* Emergency Contact */}
-      <section className="py-16 bg-gradient-to-r from-red-600 to-red-500 text-foreground">
+      <section className="py-16 bg-gradient-to-r from-red-600 to-red-500 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">
             Срочная консультация
@@ -378,7 +378,7 @@ export default function Contact() {
               </Button>
             </a>
             <a href={`https://wa.me/${CONTACT_INFO.socialMedia.whatsapp.replace(/\D/g, '')}`}>
-              <Button variant="outline" className="border-white text-foreground hover:bg-white hover:text-red-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-red-600 px-8 py-4 text-lg">
                 <MessageCircle className="w-5 h-5 mr-2" />
                 WhatsApp
               </Button>

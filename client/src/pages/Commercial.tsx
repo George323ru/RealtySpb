@@ -88,9 +88,9 @@ export default function Commercial() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-foreground py-16">
+      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <Building2 className="w-16 h-16 mx-auto mb-6 opacity-90" />
@@ -122,10 +122,10 @@ export default function Commercial() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
               Типы коммерческой недвижимости
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               Выберите подходящий тип объекта для вашего бизнеса или инвестиций
             </p>
           </div>
@@ -139,10 +139,10 @@ export default function Commercial() {
                     <div className="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                       <IconComponent className="w-8 h-8 text-purple-600" />
                     </div>
-                    <h3 className="text-lg font-semibold text-foreground mb-2">
+                    <h3 className="text-lg font-semibold text-text-primary mb-2">
                       {type.title}
                     </h3>
-                    <p className="text-muted-foreground text-sm">{type.description}</p>
+                    <p className="text-text-secondary text-sm">{type.description}</p>
                   </CardContent>
                 </Card>
               );
@@ -152,14 +152,14 @@ export default function Commercial() {
       </section>
 
       {/* Search Section */}
-      <section className="bg-secondary border-b border py-8">
+      <section className="bg-neutral-100 border-b border-neutral-200 py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-3xl font-bold text-foreground mb-2">
+              <h2 className="text-3xl font-bold text-text-primary mb-2">
                 Поиск коммерческой недвижимости
               </h2>
-              <p className="text-muted-foreground">
+              <p className="text-text-secondary">
                 {isLoading ? "Загрузка..." : `Найдено ${properties.length} объектов`}
               </p>
             </div>
@@ -213,18 +213,18 @@ export default function Commercial() {
           ) : properties.length === 0 ? (
             <div className="text-center py-16">
               <div className="max-w-md mx-auto">
-                <div className="w-16 h-16 bg-muted rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-neutral-200 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Building2 className="w-8 h-8 text-neutral-400" />
                 </div>
-                <h3 className="text-xl font-semibold text-foreground mb-2">
+                <h3 className="text-xl font-semibold text-text-primary mb-2">
                   Объекты не найдены
                 </h3>
-                <p className="text-muted-foreground mb-6">
+                <p className="text-text-secondary mb-6">
                   Попробуйте изменить параметры поиска или расширить критерии.
                 </p>
                 <Button
                   onClick={() => setFilters({ propertyType: "commercial" })}
-                  className="bg-accent hover:bg-orange-600"
+                  className="bg-accent-orange hover:bg-orange-600"
                 >
                   Сбросить фильтры
                 </Button>
@@ -251,16 +251,16 @@ export default function Commercial() {
                     <CardContent className="md:w-2/3 p-6">
                       <div className="flex justify-between items-start mb-4">
                         <div>
-                          <h3 className="text-xl font-semibold text-foreground mb-2">
+                          <h3 className="text-xl font-semibold text-text-primary mb-2">
                             {property.title}
                           </h3>
-                          <p className="text-muted-foreground mb-2">{property.address}</p>
-                          <p className="text-sm text-muted-foreground">
+                          <p className="text-text-secondary mb-2">{property.address}</p>
+                          <p className="text-sm text-text-secondary">
                             {property.area} м², {property.floor}/{property.totalFloors} этаж
                           </p>
                         </div>
                         <div className="text-right">
-                          <div className="text-2xl font-bold text-foreground">
+                          <div className="text-2xl font-bold text-text-primary">
                             {new Intl.NumberFormat("ru-RU", {
                               style: "currency",
                               currency: "RUB",
@@ -268,7 +268,7 @@ export default function Commercial() {
                             }).format(property.price)}
                           </div>
                           {property.pricePerMeter && (
-                            <div className="text-sm text-muted-foreground">
+                            <div className="text-sm text-text-secondary">
                               {new Intl.NumberFormat("ru-RU", {
                                 style: "currency",
                                 currency: "RUB",
@@ -290,7 +290,7 @@ export default function Commercial() {
                       )}
                       
                       <div className="flex space-x-2">
-                        <Button asChild className="bg-accent hover:bg-orange-600">
+                        <Button asChild className="bg-accent-orange hover:bg-orange-600">
                           <a href={`/property/${property.id}`}>Подробнее</a>
                         </Button>
                         <Button variant="outline">В избранное</Button>
@@ -301,12 +301,12 @@ export default function Commercial() {
               ))}
             </div>
           ) : (
-            <div className="bg-white rounded-lg border border p-8 text-center">
+            <div className="bg-white rounded-lg border border-neutral-200 p-8 text-center">
               <Map className="w-16 h-16 text-neutral-400 mx-auto mb-4" />
-              <h3 className="text-xl font-semibold text-foreground mb-2">
+              <h3 className="text-xl font-semibold text-text-primary mb-2">
                 Карта в разработке
               </h3>
-              <p className="text-muted-foreground">
+              <p className="text-text-secondary">
                 Функция просмотра объектов на карте будет добавлена в ближайшее время.
               </p>
             </div>
@@ -318,10 +318,10 @@ export default function Commercial() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
               Инвестиционная привлекательность
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               Доходность и преимущества различных типов коммерческой недвижимости
             </p>
           </div>
@@ -330,16 +330,16 @@ export default function Commercial() {
             {investmentBenefits.map((benefit, index) => (
               <Card key={index} className="hover-lift">
                 <CardContent className="p-6 text-center">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">
                     {benefit.title}
                   </h3>
                   <div className="text-3xl font-bold text-purple-600 mb-4">
                     {benefit.yield}
                   </div>
-                  <p className="text-sm text-muted-foreground mb-4">годовых</p>
+                  <p className="text-sm text-text-secondary mb-4">годовых</p>
                   <ul className="space-y-2">
                     {benefit.features.map((feature, i) => (
-                      <li key={i} className="flex items-center justify-center text-sm text-muted-foreground">
+                      <li key={i} className="flex items-center justify-center text-sm text-text-secondary">
                         <CheckCircle className="w-4 h-4 text-purple-500 mr-2 shrink-0" />
                         {feature}
                       </li>
@@ -353,13 +353,13 @@ export default function Commercial() {
       </section>
 
       {/* Advantages */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl font-bold text-text-primary mb-4">
               Преимущества коммерческой недвижимости
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               Почему стоит инвестировать в коммерческую недвижимость
             </p>
           </div>
@@ -368,7 +368,7 @@ export default function Commercial() {
             {advantages.map((advantage, index) => (
               <div key={index} className="flex items-start space-x-3">
                 <CheckCircle className="w-6 h-6 text-purple-500 shrink-0 mt-1" />
-                <span className="text-foreground">{advantage}</span>
+                <span className="text-text-primary">{advantage}</span>
               </div>
             ))}
           </div>
@@ -376,7 +376,7 @@ export default function Commercial() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-foreground">
+      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-white">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">
             Ищете выгодные инвестиции?
@@ -388,7 +388,7 @@ export default function Commercial() {
             <Button size="lg" variant="secondary" className="bg-white text-purple-600 hover:bg-gray-100">
               Подобрать объект
             </Button>
-            <Button size="lg" variant="outline" className="border-white text-foreground hover:bg-white hover:text-purple-600">
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600">
               Рассчитать доходность
             </Button>
           </div>

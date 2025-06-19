@@ -56,7 +56,7 @@ export default function PromotionBanner({ promotions, category = "all", classNam
     <div className={`relative overflow-hidden rounded-2xl ${className}`}>
       {/* Main Promotion */}
       <div 
-        className="relative p-8 text-foreground"
+        className="relative p-8 text-white"
         style={{ backgroundColor: mainPromotion.backgroundColor }}
       >
         {/* Background Pattern */}
@@ -72,7 +72,7 @@ export default function PromotionBanner({ promotions, category = "all", classNam
               <div className="flex items-center mb-3">
                 {getDiscountIcon(mainPromotion.discountType)}
                 <Badge 
-                  className="ml-3 bg-background/20 text-foreground border-neutral-50/30"
+                  className="ml-3 bg-white/20 text-white border-white/30"
                   style={{ color: mainPromotion.textColor }}
                 >
                   Акция
@@ -108,7 +108,7 @@ export default function PromotionBanner({ promotions, category = "all", classNam
               )}
 
               <Button 
-                className="bg-card text-foreground hover:bg-secondary font-semibold px-8 py-3 text-lg"
+                className="bg-white text-gray-900 hover:bg-gray-100 font-semibold px-8 py-3 text-lg"
                 size="lg"
               >
                 {mainPromotion.buttonText}
@@ -118,7 +118,7 @@ export default function PromotionBanner({ promotions, category = "all", classNam
             {mainPromotion.discountValue && (
               <div className="hidden lg:block">
                 <div className="text-right">
-                  <div className="bg-background/20 rounded-2xl p-6 backdrop-blur-sm">
+                  <div className="bg-white/20 rounded-2xl p-6 backdrop-blur-sm">
                     <div className="text-6xl font-black mb-2" style={{ color: mainPromotion.textColor }}>
                       {mainPromotion.discountValue}
                     </div>
@@ -144,7 +144,7 @@ export default function PromotionBanner({ promotions, category = "all", classNam
               <Badge 
                 key={promo.id} 
                 variant="outline" 
-                className="whitespace-nowrap bg-card hover:bg-secondary cursor-pointer"
+                className="whitespace-nowrap bg-white hover:bg-gray-50 cursor-pointer"
               >
                 {promo.discountValue} — {promo.title}
               </Badge>

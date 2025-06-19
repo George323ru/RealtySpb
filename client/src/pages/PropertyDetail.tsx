@@ -23,10 +23,10 @@ export default function PropertyDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-accent-orange mx-auto mb-4"></div>
-          <p className="text-muted-foreground">Загрузка информации об объекте...</p>
+          <p className="text-text-secondary">Загрузка информации об объекте...</p>
         </div>
       </div>
     );
@@ -34,16 +34,16 @@ export default function PropertyDetail() {
 
   if (error || !property) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
         <div className="text-center">
           <div className="text-6xl mb-4">🏠</div>
-          <h1 className="text-3xl font-bold text-foreground mb-4">
+          <h1 className="text-3xl font-bold text-text-primary mb-4">
             Объект не найден
           </h1>
-          <p className="text-muted-foreground mb-8">
+          <p className="text-text-secondary mb-8">
             Возможно, объект был продан или снят с продажи
           </p>
-          <Button className="bg-accent text-foreground hover:bg-orange-600">
+          <Button className="bg-accent-orange text-white hover:bg-orange-600">
             Вернуться к поиску
           </Button>
         </div>
@@ -89,9 +89,9 @@ export default function PropertyDetail() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Image Gallery */}
-      <section className="bg-card">
+      <section className="bg-black">
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
             {/* Main Image */}
@@ -102,7 +102,7 @@ export default function PropertyDetail() {
                 className="w-full h-96 lg:h-[500px] object-cover rounded-lg"
               />
               <div className="absolute top-4 left-4">
-                <Badge className="bg-accent text-foreground">
+                <Badge className="bg-accent-orange text-white">
                   {getCategoryLabel(property.category)}
                 </Badge>
               </div>
@@ -144,8 +144,8 @@ export default function PropertyDetail() {
                 />
               ))}
               {property.images.length > 4 && (
-                <div className="w-full h-24 lg:h-32 bg-muted rounded flex items-center justify-center cursor-pointer hover:bg-muted transition-colors">
-                  <span className="text-muted-foreground text-sm">
+                <div className="w-full h-24 lg:h-32 bg-gray-800 rounded flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors">
+                  <span className="text-white text-sm">
                     +{property.images.length - 4} фото
                   </span>
                 </div>
@@ -162,11 +162,11 @@ export default function PropertyDetail() {
             {/* Main Info */}
             <div className="lg:col-span-2">
               <div className="mb-6">
-                <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+                <h1 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                   {property.title}
                 </h1>
-                <p className="text-muted-foreground flex items-center text-lg">
-                  <MapPin className="w-5 h-5 mr-2 text-accent" />
+                <p className="text-text-secondary flex items-center text-lg">
+                  <MapPin className="w-5 h-5 mr-2 text-accent-orange" />
                   {property.address}
                 </p>
               </div>
@@ -174,40 +174,40 @@ export default function PropertyDetail() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
                 <Card>
                   <CardContent className="p-4 text-center">
-                    <div className="text-2xl font-bold text-accent">
+                    <div className="text-2xl font-bold text-accent-orange">
                       {formatPrice(property.price)} ₽
                     </div>
-                    <div className="text-sm text-muted-foreground">Цена</div>
+                    <div className="text-sm text-text-secondary">Цена</div>
                   </CardContent>
                 </Card>
 
                 {property.pricePerMeter && (
                   <Card>
                     <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold text-foreground">
+                      <div className="text-2xl font-bold text-text-primary">
                         {formatPricePerMeter(property.pricePerMeter)} ₽
                       </div>
-                      <div className="text-sm text-muted-foreground">За м²</div>
+                      <div className="text-sm text-text-secondary">За м²</div>
                     </CardContent>
                   </Card>
                 )}
 
                 <Card>
                   <CardContent className="p-4 text-center">
-                    <div className="text-2xl font-bold text-foreground">
+                    <div className="text-2xl font-bold text-text-primary">
                       {parseFloat(property.area)}
                     </div>
-                    <div className="text-sm text-muted-foreground">м²</div>
+                    <div className="text-sm text-text-secondary">м²</div>
                   </CardContent>
                 </Card>
 
                 {property.rooms && (
                   <Card>
                     <CardContent className="p-4 text-center">
-                      <div className="text-2xl font-bold text-foreground">
+                      <div className="text-2xl font-bold text-text-primary">
                         {property.rooms}
                       </div>
-                      <div className="text-sm text-muted-foreground">комнат</div>
+                      <div className="text-sm text-text-secondary">комнат</div>
                     </CardContent>
                   </Card>
                 )}
@@ -224,16 +224,16 @@ export default function PropertyDetail() {
                 <TabsContent value="description" className="mt-6">
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold text-foreground mb-4">
+                      <h3 className="text-xl font-semibold text-text-primary mb-4">
                         Описание объекта
                       </h3>
-                      <p className="text-muted-foreground leading-relaxed">
+                      <p className="text-text-secondary leading-relaxed">
                         {property.description}
                       </p>
                       
                       {property.features.length > 0 && (
                         <div className="mt-6">
-                          <h4 className="font-semibold text-foreground mb-3">
+                          <h4 className="font-semibold text-text-primary mb-3">
                             Особенности:
                           </h4>
                           <div className="flex flex-wrap gap-2">
@@ -252,36 +252,36 @@ export default function PropertyDetail() {
                 <TabsContent value="details" className="mt-6">
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold text-foreground mb-4">
+                      <h3 className="text-xl font-semibold text-text-primary mb-4">
                         Технические характеристики
                       </h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div className="flex justify-between py-2 border-b border">
-                          <span className="text-muted-foreground">Тип недвижимости:</span>
+                        <div className="flex justify-between py-2 border-b border-neutral-200">
+                          <span className="text-text-secondary">Тип недвижимости:</span>
                           <span className="font-medium">{getPropertyTypeLabel(property.propertyType)}</span>
                         </div>
-                        <div className="flex justify-between py-2 border-b border">
-                          <span className="text-muted-foreground">Категория:</span>
+                        <div className="flex justify-between py-2 border-b border-neutral-200">
+                          <span className="text-text-secondary">Категория:</span>
                           <span className="font-medium">{getCategoryLabel(property.category)}</span>
                         </div>
-                        <div className="flex justify-between py-2 border-b border">
-                          <span className="text-muted-foreground">Общая площадь:</span>
+                        <div className="flex justify-between py-2 border-b border-neutral-200">
+                          <span className="text-text-secondary">Общая площадь:</span>
                           <span className="font-medium">{parseFloat(property.area)} м²</span>
                         </div>
                         {property.rooms && (
-                          <div className="flex justify-between py-2 border-b border">
-                            <span className="text-muted-foreground">Количество комнат:</span>
+                          <div className="flex justify-between py-2 border-b border-neutral-200">
+                            <span className="text-text-secondary">Количество комнат:</span>
                             <span className="font-medium">{property.rooms}</span>
                           </div>
                         )}
                         {property.floor && property.totalFloors && (
-                          <div className="flex justify-between py-2 border-b border">
-                            <span className="text-muted-foreground">Этаж:</span>
+                          <div className="flex justify-between py-2 border-b border-neutral-200">
+                            <span className="text-text-secondary">Этаж:</span>
                             <span className="font-medium">{property.floor} из {property.totalFloors}</span>
                           </div>
                         )}
-                        <div className="flex justify-between py-2 border-b border">
-                          <span className="text-muted-foreground">Район:</span>
+                        <div className="flex justify-between py-2 border-b border-neutral-200">
+                          <span className="text-text-secondary">Район:</span>
                           <span className="font-medium">{property.district}</span>
                         </div>
                       </div>
@@ -292,16 +292,16 @@ export default function PropertyDetail() {
                 <TabsContent value="amenities" className="mt-6">
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold text-foreground mb-4">
+                      <h3 className="text-xl font-semibold text-text-primary mb-4">
                         Удобства и инфраструктура
                       </h3>
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                         {amenities.map((amenity, index) => (
-                          <div key={index} className="flex items-center gap-3 p-3 bg-secondary rounded-lg">
-                            <div className="text-accent">
+                          <div key={index} className="flex items-center gap-3 p-3 bg-neutral-100 rounded-lg">
+                            <div className="text-accent-orange">
                               {amenity.icon}
                             </div>
-                            <span className="text-sm font-medium text-foreground">
+                            <span className="text-sm font-medium text-text-primary">
                               {amenity.label}
                             </span>
                           </div>
@@ -314,30 +314,30 @@ export default function PropertyDetail() {
                 <TabsContent value="location" className="mt-6">
                   <Card>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold text-foreground mb-4">
+                      <h3 className="text-xl font-semibold text-text-primary mb-4">
                         Расположение и транспорт
                       </h3>
                       <div className="bg-gray-200 h-64 rounded-lg flex items-center justify-center mb-4">
                         <div className="text-center">
-                          <MapPin className="w-12 h-12 text-accent mx-auto mb-2" />
-                          <p className="text-muted-foreground">Интерактивная карта</p>
+                          <MapPin className="w-12 h-12 text-accent-orange mx-auto mb-2" />
+                          <p className="text-text-secondary">Интерактивная карта</p>
                         </div>
                       </div>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div className="text-center p-4 bg-secondary rounded-lg">
+                        <div className="text-center p-4 bg-neutral-100 rounded-lg">
                           <i className="fas fa-subway text-2xl text-blue-500 mb-2"></i>
-                          <div className="font-medium text-foreground">Метро</div>
-                          <div className="text-sm text-muted-foreground">5 мин пешком</div>
+                          <div className="font-medium text-text-primary">Метро</div>
+                          <div className="text-sm text-text-secondary">5 мин пешком</div>
                         </div>
-                        <div className="text-center p-4 bg-secondary rounded-lg">
+                        <div className="text-center p-4 bg-neutral-100 rounded-lg">
                           <i className="fas fa-bus text-2xl text-green-500 mb-2"></i>
-                          <div className="font-medium text-foreground">Автобус</div>
-                          <div className="text-sm text-muted-foreground">2 мин до остановки</div>
+                          <div className="font-medium text-text-primary">Автобус</div>
+                          <div className="text-sm text-text-secondary">2 мин до остановки</div>
                         </div>
-                        <div className="text-center p-4 bg-secondary rounded-lg">
+                        <div className="text-center p-4 bg-neutral-100 rounded-lg">
                           <i className="fas fa-car text-2xl text-purple-500 mb-2"></i>
-                          <div className="font-medium text-foreground">Парковка</div>
-                          <div className="text-sm text-muted-foreground">Во дворе</div>
+                          <div className="font-medium text-text-primary">Парковка</div>
+                          <div className="text-sm text-text-secondary">Во дворе</div>
                         </div>
                       </div>
                     </CardContent>
@@ -368,17 +368,17 @@ export default function PropertyDetail() {
                         className="w-12 h-12 rounded-full object-cover"
                       />
                       <div>
-                        <div className="font-medium text-foreground">Анна Петрова</div>
-                        <div className="text-sm text-muted-foreground">Эксперт по жилой недвижимости</div>
+                        <div className="font-medium text-text-primary">Анна Петрова</div>
+                        <div className="text-sm text-text-secondary">Эксперт по жилой недвижимости</div>
                       </div>
                     </div>
                     
                     <div className="space-y-3">
-                      <Button className="w-full bg-accent text-foreground hover:bg-orange-600">
+                      <Button className="w-full bg-accent-orange text-white hover:bg-orange-600">
                         <Phone className="w-4 h-4 mr-2" />
                         Позвонить
                       </Button>
-                      <Button variant="outline" className="w-full border-accent-orange text-accent hover:bg-accent hover:text-foreground">
+                      <Button variant="outline" className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-white">
                         Написать в WhatsApp
                       </Button>
                     </div>
@@ -387,10 +387,10 @@ export default function PropertyDetail() {
 
                 <Card>
                   <CardContent className="p-6">
-                    <h3 className="font-semibold text-foreground mb-4">
+                    <h3 className="font-semibold text-text-primary mb-4">
                       Нужна помощь?
                     </h3>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
+                    <ul className="space-y-2 text-sm text-text-secondary">
                       <li>• Организуем показ в удобное время</li>
                       <li>• Проведем юридическую проверку</li>
                       <li>• Поможем с оформлением ипотеки</li>
@@ -405,10 +405,10 @@ export default function PropertyDetail() {
       </section>
 
       {/* Similar Properties */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-foreground mb-8">
+            <h2 className="text-3xl font-bold text-text-primary mb-8">
               Похожие объекты
             </h2>
             
@@ -416,7 +416,7 @@ export default function PropertyDetail() {
               {/* Similar properties would be loaded here */}
               <div className="text-center py-16 col-span-full">
                 <Home className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                <p className="text-muted-foreground">
+                <p className="text-text-secondary">
                   Похожие объекты загружаются...
                 </p>
               </div>

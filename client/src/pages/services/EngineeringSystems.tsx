@@ -119,9 +119,9 @@ export default function EngineeringSystems() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-cyan-600 to-cyan-500 text-foreground py-16">
+      <section className="bg-gradient-to-r from-cyan-600 to-cyan-500 text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -133,10 +133,10 @@ export default function EngineeringSystems() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-primary text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+              <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Заказать проект
               </Button>
-              <Button variant="outline" className="border-white text-foreground hover:bg-white hover:text-cyan-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-cyan-600 px-8 py-4 text-lg">
                 Примеры работ
               </Button>
             </div>
@@ -148,10 +148,10 @@ export default function EngineeringSystems() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Инженерные системы
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               Полный комплекс инженерных коммуникаций
             </p>
           </div>
@@ -164,21 +164,21 @@ export default function EngineeringSystems() {
                     {system.icon}
                     <CardTitle className="text-lg">{system.title}</CardTitle>
                   </div>
-                  <Badge className="bg-cyan-500 text-foreground w-fit">
+                  <Badge className="bg-cyan-500 text-white w-fit">
                     {system.price}
                   </Badge>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-muted-foreground">{system.description}</p>
+                  <p className="text-text-secondary">{system.description}</p>
                   <div className="space-y-2">
                     {system.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-cyan-500" />
-                        <span className="text-sm text-foreground">{feature}</span>
+                        <span className="text-sm text-text-primary">{feature}</span>
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-cyan-500 text-foreground hover:bg-cyan-600">
+                  <Button className="w-full bg-cyan-500 text-white hover:bg-cyan-600">
                     Узнать подробнее
                   </Button>
                 </CardContent>
@@ -189,13 +189,13 @@ export default function EngineeringSystems() {
       </section>
 
       {/* Object Types */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Типы объектов
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               Проектируем инженерные системы для любых зданий
             </p>
           </div>
@@ -208,16 +208,16 @@ export default function EngineeringSystems() {
                   <Badge variant="outline">{type.complexity} сложность</Badge>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-muted-foreground">{type.description}</p>
+                  <p className="text-text-secondary">{type.description}</p>
                   <div className="space-y-2">
                     {type.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-cyan-500" />
-                        <span className="text-sm text-foreground">{feature}</span>
+                        <span className="text-sm text-text-primary">{feature}</span>
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-cyan-500 text-foreground hover:bg-cyan-600">
+                  <Button className="w-full bg-cyan-500 text-white hover:bg-cyan-600">
                     Заказать проект
                   </Button>
                 </CardContent>
@@ -231,10 +231,10 @@ export default function EngineeringSystems() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Этапы работы
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               От проекта до запуска систем в эксплуатацию
             </p>
           </div>
@@ -242,14 +242,14 @@ export default function EngineeringSystems() {
           <div className="max-w-4xl mx-auto">
             {process.map((item, index) => (
               <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-cyan-500 text-foreground rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                <div className="flex-shrink-0 w-16 h-16 bg-cyan-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                   {item.step}
                 </div>
                 <div className="flex-grow">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground">
+                  <p className="text-text-secondary">
                     {item.description}
                   </p>
                 </div>
@@ -260,11 +260,11 @@ export default function EngineeringSystems() {
       </section>
 
       {/* Benefits */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Наши преимущества
               </h2>
             </div>
@@ -273,7 +273,7 @@ export default function EngineeringSystems() {
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <CheckCircle className="w-6 h-6 text-cyan-500 flex-shrink-0" />
-                  <span className="text-foreground font-medium">{benefit}</span>
+                  <span className="text-text-primary font-medium">{benefit}</span>
                 </div>
               ))}
             </div>
@@ -285,7 +285,7 @@ export default function EngineeringSystems() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Современные технологии
             </h2>
           </div>
@@ -294,10 +294,10 @@ export default function EngineeringSystems() {
             <Card className="text-center">
               <CardContent className="p-6">
                 <Wifi className="w-12 h-12 text-cyan-500 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">
+                <h3 className="text-lg font-semibold text-text-primary mb-2">
                   IoT технологии
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-text-secondary">
                   Интернет вещей для умного управления
                 </p>
               </CardContent>
@@ -306,10 +306,10 @@ export default function EngineeringSystems() {
             <Card className="text-center">
               <CardContent className="p-6">
                 <Wind className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">
+                <h3 className="text-lg font-semibold text-text-primary mb-2">
                   Энергосбережение
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-text-secondary">
                   Современные энергоэффективные решения
                 </p>
               </CardContent>
@@ -318,10 +318,10 @@ export default function EngineeringSystems() {
             <Card className="text-center">
               <CardContent className="p-6">
                 <Shield className="w-12 h-12 text-orange-500 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">
+                <h3 className="text-lg font-semibold text-text-primary mb-2">
                   Безопасность
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-text-secondary">
                   Комплексные системы защиты
                 </p>
               </CardContent>
@@ -330,10 +330,10 @@ export default function EngineeringSystems() {
             <Card className="text-center">
               <CardContent className="p-6">
                 <Zap className="w-12 h-12 text-yellow-500 mx-auto mb-4" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">
+                <h3 className="text-lg font-semibold text-text-primary mb-2">
                   Автоматизация
                 </h3>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-text-secondary">
                   Полная автоматизация систем
                 </p>
               </CardContent>
@@ -343,7 +343,7 @@ export default function EngineeringSystems() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-cyan-600 to-cyan-500 text-foreground">
+      <section className="py-16 bg-gradient-to-r from-cyan-600 to-cyan-500 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">

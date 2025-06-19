@@ -69,17 +69,17 @@ export default function BlogPostPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-neutral-50">
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-4xl mx-auto">
             <div className="animate-pulse">
-              <div className="h-8 bg-muted rounded mb-8 w-1/4"></div>
-              <div className="h-64 bg-muted rounded mb-8"></div>
-              <div className="h-6 bg-muted rounded mb-4"></div>
-              <div className="h-4 bg-muted rounded mb-8 w-1/2"></div>
+              <div className="h-8 bg-neutral-200 rounded mb-8 w-1/4"></div>
+              <div className="h-64 bg-neutral-200 rounded mb-8"></div>
+              <div className="h-6 bg-neutral-200 rounded mb-4"></div>
+              <div className="h-4 bg-neutral-200 rounded mb-8 w-1/2"></div>
               <div className="space-y-3">
                 {Array.from({ length: 10 }).map((_, i) => (
-                  <div key={i} className="h-4 bg-muted rounded"></div>
+                  <div key={i} className="h-4 bg-neutral-200 rounded"></div>
                 ))}
               </div>
             </div>
@@ -91,12 +91,12 @@ export default function BlogPostPage() {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
+      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
         <Card className="p-8 text-center">
-          <h2 className="text-2xl font-bold text-foreground mb-2">
+          <h2 className="text-2xl font-bold text-text-primary mb-2">
             Статья не найдена
           </h2>
-          <p className="text-muted-foreground mb-4">
+          <p className="text-text-secondary mb-4">
             Возможно, статья была удалена или перемещена
           </p>
           <Link href="/blog">
@@ -115,17 +115,17 @@ export default function BlogPostPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Breadcrumb */}
-      <div className="bg-white border-b border">
+      <div className="bg-white border-b border-neutral-200">
         <div className="container mx-auto px-4 py-4">
           <div className="max-w-4xl mx-auto">
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
-              <Link href="/" className="hover:text-accent">Главная</Link>
+            <div className="flex items-center space-x-2 text-sm text-text-secondary">
+              <Link href="/" className="hover:text-accent-orange">Главная</Link>
               <span>/</span>
-              <Link href="/blog" className="hover:text-accent">Блог</Link>
+              <Link href="/blog" className="hover:text-accent-orange">Блог</Link>
               <span>/</span>
-              <span className="text-foreground">{post.category}</span>
+              <span className="text-text-primary">{post.category}</span>
             </div>
           </div>
         </div>
@@ -151,7 +151,7 @@ export default function BlogPostPage() {
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-4 left-4">
-                <Badge className="bg-accent text-foreground">
+                <Badge className="bg-accent-orange text-white">
                   {post.category}
                 </Badge>
               </div>
@@ -161,11 +161,11 @@ export default function BlogPostPage() {
             <div className="p-8">
               {/* Title and Meta */}
               <div className="mb-8">
-                <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
+                <h1 className="text-3xl md:text-4xl font-bold text-text-primary mb-4 leading-tight">
                   {post.title}
                 </h1>
                 
-                <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-6">
+                <div className="flex flex-wrap items-center gap-4 text-sm text-text-secondary mb-6">
                   <div className="flex items-center">
                     <User className="w-4 h-4 mr-2" />
                     <span>{post.author}</span>
@@ -194,7 +194,7 @@ export default function BlogPostPage() {
 
                 {/* Share Buttons */}
                 <div className="flex items-center space-x-4">
-                  <span className="text-sm font-medium text-foreground">Поделиться:</span>
+                  <span className="text-sm font-medium text-text-primary">Поделиться:</span>
                   <Button
                     size="sm"
                     variant="outline"
@@ -237,15 +237,15 @@ export default function BlogPostPage() {
               <Separator className="my-8" />
 
               {/* Table of Contents */}
-              <Card className="mb-8 bg-background">
+              <Card className="mb-8 bg-neutral-50">
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-foreground mb-4">Содержание статьи</h3>
+                  <h3 className="font-semibold text-text-primary mb-4">Содержание статьи</h3>
                   <ul className="space-y-2">
                     {tableOfContents.map((item, index) => (
                       <li key={index}>
                         <a 
                           href={`#${item.id}`}
-                          className="text-muted-foreground hover:text-accent transition-colors text-sm"
+                          className="text-text-secondary hover:text-accent-orange transition-colors text-sm"
                         >
                           {index + 1}. {item.title}
                         </a>
@@ -256,22 +256,22 @@ export default function BlogPostPage() {
               </Card>
 
               {/* Article Excerpt */}
-              <div className="text-lg text-muted-foreground leading-relaxed mb-8 p-6 bg-background rounded-lg border-l-4 border-accent-orange">
+              <div className="text-lg text-text-secondary leading-relaxed mb-8 p-6 bg-neutral-50 rounded-lg border-l-4 border-accent-orange">
                 {post.excerpt}
               </div>
 
               {/* Article Content */}
               <div className="prose prose-lg max-w-none">
                 <div id="introduction" className="mb-8">
-                  <h2 className="text-2xl font-bold text-foreground mb-4">Введение</h2>
-                  <p className="text-muted-foreground leading-relaxed mb-4">
+                  <h2 className="text-2xl font-bold text-text-primary mb-4">Введение</h2>
+                  <p className="text-text-secondary leading-relaxed mb-4">
                     {post.content.split('\n')[0] || "Основной контент статьи будет отображен здесь. Это введение к теме, которая рассматривается в данной статье."}
                   </p>
                 </div>
 
                 <div id="main-points" className="mb-8">
-                  <h2 className="text-2xl font-bold text-foreground mb-4">Основные моменты</h2>
-                  <div className="text-muted-foreground leading-relaxed space-y-4">
+                  <h2 className="text-2xl font-bold text-text-primary mb-4">Основные моменты</h2>
+                  <div className="text-text-secondary leading-relaxed space-y-4">
                     {post.content.split('\n').slice(1, 4).map((paragraph, index) => (
                       <p key={index}>{paragraph || `Здесь представлен основной контент статьи "${post.title}". Эта часть содержит детальное рассмотрение темы с практическими примерами и рекомендациями.`}</p>
                     ))}
@@ -279,14 +279,14 @@ export default function BlogPostPage() {
                 </div>
 
                 <div id="tips" className="mb-8">
-                  <h2 className="text-2xl font-bold text-foreground mb-4">Полезные советы</h2>
+                  <h2 className="text-2xl font-bold text-text-primary mb-4">Полезные советы</h2>
                   <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-lg mb-6">
                     <h3 className="font-semibold text-blue-800 mb-2">💡 Совет эксперта</h3>
                     <p className="text-blue-700">
                       При работе с недвижимостью всегда обращайтесь к проверенным специалистам и тщательно изучайте все документы.
                     </p>
                   </div>
-                  <ul className="list-disc list-inside space-y-2 text-muted-foreground">
+                  <ul className="list-disc list-inside space-y-2 text-text-secondary">
                     <li>Всегда проверяйте юридическую чистоту объекта</li>
                     <li>Изучайте рынок и сравнивайте цены</li>
                     <li>Обращайтесь к профессиональным риэлторам</li>
@@ -295,8 +295,8 @@ export default function BlogPostPage() {
                 </div>
 
                 <div id="conclusion" className="mb-8">
-                  <h2 className="text-2xl font-bold text-foreground mb-4">Заключение</h2>
-                  <p className="text-muted-foreground leading-relaxed">
+                  <h2 className="text-2xl font-bold text-text-primary mb-4">Заключение</h2>
+                  <p className="text-text-secondary leading-relaxed">
                     {post.content.split('\n').slice(-1)[0] || `В заключение можно сказать, что тема "${post.title}" требует внимательного изучения и профессионального подхода. Следуйте рекомендациям экспертов и не стесняйтесь обращаться за консультацией.`}
                   </p>
                 </div>
@@ -309,11 +309,11 @@ export default function BlogPostPage() {
                 <CardContent className="p-6">
                   <div className="flex items-start space-x-4">
                     <div className="w-16 h-16 bg-gradient-to-br from-accent-orange to-orange-600 rounded-full flex items-center justify-center">
-                      <User className="w-8 h-8 text-foreground" />
+                      <User className="w-8 h-8 text-white" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold text-foreground mb-2">Об авторе: {post.author}</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed">
+                      <h3 className="font-semibold text-text-primary mb-2">Об авторе: {post.author}</h3>
+                      <p className="text-text-secondary text-sm leading-relaxed">
                         Эксперт по недвижимости с многолетним опытом работы на рынке Санкт-Петербурга. 
                         Специализируется на консультировании клиентов по вопросам покупки, продажи и аренды недвижимости.
                       </p>
@@ -327,7 +327,7 @@ export default function BlogPostPage() {
           {/* Related Posts */}
           {relatedPosts.length > 0 && (
             <section className="mt-16">
-              <h2 className="text-2xl font-bold text-foreground mb-8">Похожие статьи</h2>
+              <h2 className="text-2xl font-bold text-text-primary mb-8">Похожие статьи</h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedPosts.map((relatedPost) => (
                   <Card key={relatedPost.id} className="group hover:shadow-lg transition-shadow">
@@ -338,21 +338,21 @@ export default function BlogPostPage() {
                         className="w-full h-32 object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute top-2 left-2">
-                        <Badge className="bg-accent text-foreground text-xs">
+                        <Badge className="bg-accent-orange text-white text-xs">
                           {relatedPost.category}
                         </Badge>
                       </div>
                     </div>
                     
                     <CardContent className="p-4">
-                      <h3 className="font-semibold text-foreground mb-2 line-clamp-2 text-sm">
+                      <h3 className="font-semibold text-text-primary mb-2 line-clamp-2 text-sm">
                         {relatedPost.title}
                       </h3>
-                      <p className="text-muted-foreground text-xs mb-3 line-clamp-2">
+                      <p className="text-text-secondary text-xs mb-3 line-clamp-2">
                         {relatedPost.excerpt}
                       </p>
                       <Link href={`/blog/${relatedPost.slug}`}>
-                        <Button variant="ghost" size="sm" className="text-accent hover:text-orange-600 p-0">
+                        <Button variant="ghost" size="sm" className="text-accent-orange hover:text-orange-600 p-0">
                           Читать →
                         </Button>
                       </Link>

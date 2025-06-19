@@ -70,10 +70,10 @@ export default function ConsultationForm({ className, defaultService }: Consulta
     return (
       <div className={`card-unified p-lg text-center animate-scale-in ${className || ''}`}>
         <div className="text-green-500 text-5xl mb-4">✓</div>
-        <h3 className="text-2xl font-bold text-foreground mb-2">
+        <h3 className="text-2xl font-bold text-text-primary mb-2">
           Заявка отправлена!
         </h3>
-        <p className="text-muted-foreground">
+        <p className="text-text-secondary">
           Наш специалист свяжется с вами в течение 15 минут.
         </p>
       </div>
@@ -125,11 +125,11 @@ export default function ConsultationForm({ className, defaultService }: Consulta
             {mutation.isPending ? "Отправляем..." : "Получить консультацию"}
           </Button>
 
-          <p className="text-sm text-muted-foreground text-center">
+          <p className="text-sm text-text-secondary text-center">
             Нажимая кнопку, вы соглашаетесь с{" "}
             <a 
               href="/privacy-policy" 
-              className="text-accent hover:underline"
+              className="text-accent-orange hover:underline"
               rel="noopener"
             >
               политикой конфиденциальности

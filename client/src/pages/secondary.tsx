@@ -75,17 +75,17 @@ export default function Secondary() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-amber-900 to-orange-800 py-20">
-        <div className="absolute inset-0 bg-card bg-opacity-40"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920')"}}
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-foreground">
+          <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Вторичная недвижимость{" "}
               <span className="text-yandex-yellow">Санкт-Петербурга</span>
@@ -113,12 +113,12 @@ export default function Secondary() {
       </section>
 
       {/* Filters */}
-      <section className="bg-white border-b border">
+      <section className="bg-white border-b border-neutral-200">
         <div className="container mx-auto px-4 py-6">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-6 gap-4">
               <div className="relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary w-4 h-4" />
                 <Input
                   placeholder="Поиск по адресу..."
                   className="pl-10"
@@ -177,7 +177,7 @@ export default function Secondary() {
           <div className="max-w-6xl mx-auto">
             {/* Sort Options */}
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8">
-              <h2 className="text-2xl font-bold text-foreground mb-4 sm:mb-0">
+              <h2 className="text-2xl font-bold text-text-primary mb-4 sm:mb-0">
                 Найдено {properties.length} объектов
               </h2>
               <Select defaultValue="price-desc">
@@ -199,22 +199,22 @@ export default function Secondary() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <Card key={i} className="animate-pulse">
-                    <div className="h-64 bg-muted rounded-t-lg"></div>
+                    <div className="h-64 bg-neutral-200 rounded-t-lg"></div>
                     <CardContent className="p-6">
-                      <div className="h-4 bg-muted rounded mb-2"></div>
-                      <div className="h-4 bg-muted rounded mb-4 w-3/4"></div>
-                      <div className="h-8 bg-muted rounded"></div>
+                      <div className="h-4 bg-neutral-200 rounded mb-2"></div>
+                      <div className="h-4 bg-neutral-200 rounded mb-4 w-3/4"></div>
+                      <div className="h-8 bg-neutral-200 rounded"></div>
                     </CardContent>
                   </Card>
                 ))}
               </div>
             ) : properties.length === 0 ? (
               <Card className="p-12 text-center">
-                <Filter className="w-12 h-12 mx-auto mb-4 opacity-50 text-muted-foreground" />
-                <h3 className="text-lg font-semibold text-foreground mb-2">
+                <Filter className="w-12 h-12 mx-auto mb-4 opacity-50 text-text-secondary" />
+                <h3 className="text-lg font-semibold text-text-primary mb-2">
                   Объекты не найдены
                 </h3>
-                <p className="text-muted-foreground mb-4">
+                <p className="text-text-secondary mb-4">
                   Попробуйте изменить параметры поиска
                 </p>
                 <Button onClick={clearFilters} variant="outline">
@@ -246,10 +246,10 @@ export default function Secondary() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Преимущества вторичной недвижимости
               </h2>
-              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-lg text-text-secondary max-w-2xl mx-auto">
                 Почему стоит рассматривать готовые квартиры при покупке жилья
               </p>
             </div>
@@ -260,10 +260,10 @@ export default function Secondary() {
                   <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <advantage.icon className="w-8 h-8 text-amber-600" />
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-3">
+                  <h3 className="text-lg font-semibold text-text-primary mb-3">
                     {advantage.title}
                   </h3>
-                  <p className="text-muted-foreground text-sm">
+                  <p className="text-text-secondary text-sm">
                     {advantage.description}
                   </p>
                 </Card>
@@ -274,14 +274,14 @@ export default function Secondary() {
       </section>
 
       {/* Popular Districts */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Популярные районы
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Самые востребованные районы для покупки вторичной недвижимости
               </p>
             </div>
@@ -296,18 +296,18 @@ export default function Secondary() {
                 { name: "Невский", count: "978", avgPrice: "7,600,000" }
               ].map((district, index) => (
                 <Card key={index} className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">
                     {district.name} район
                   </h3>
-                  <div className="flex justify-between text-sm text-muted-foreground mb-2">
+                  <div className="flex justify-between text-sm text-text-secondary mb-2">
                     <span>Объектов:</span>
                     <span className="font-medium">{district.count}</span>
                   </div>
-                  <div className="flex justify-between text-sm text-muted-foreground">
+                  <div className="flex justify-between text-sm text-text-secondary">
                     <span>Средняя цена:</span>
                     <span className="font-medium">{parseInt(district.avgPrice).toLocaleString('ru-RU')} ₽</span>
                   </div>
-                  <Button variant="ghost" className="w-full mt-4 text-accent">
+                  <Button variant="ghost" className="w-full mt-4 text-accent-orange">
                     Смотреть объекты →
                   </Button>
                 </Card>
@@ -320,7 +320,7 @@ export default function Secondary() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-amber-600 to-orange-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-foreground">
+          <div className="max-w-4xl mx-auto text-center text-white">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Не нашли подходящий вариант?
             </h2>
@@ -328,12 +328,12 @@ export default function Secondary() {
               Наши специалисты помогут найти идеальную квартиру с учетом всех ваших пожеланий
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-white text-amber-600 hover:bg-secondary px-8 py-3 text-lg font-semibold">
+              <Button className="bg-white text-amber-600 hover:bg-neutral-100 px-8 py-3 text-lg font-semibold">
                 Подобрать квартиру
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-foreground hover:bg-white hover:text-amber-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-white hover:bg-white hover:text-amber-600 px-8 py-3 text-lg font-semibold"
               >
                 Получить консультацию
               </Button>

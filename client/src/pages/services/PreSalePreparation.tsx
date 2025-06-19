@@ -83,9 +83,9 @@ export default function PreSalePreparation() {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-foreground py-16">
+      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -97,10 +97,10 @@ export default function PreSalePreparation() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-primary text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+              <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Получить оценку
               </Button>
-              <Button variant="outline" className="border-white text-foreground hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
                 Примеры работ
               </Button>
             </div>
@@ -112,10 +112,10 @@ export default function PreSalePreparation() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Разница очевидна
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               Сравните результаты продажи с подготовкой и без неё
             </p>
           </div>
@@ -132,7 +132,7 @@ export default function PreSalePreparation() {
                   {comparison.points.map((point, pointIndex) => (
                     <div key={pointIndex} className="flex items-center gap-3">
                       <div className={`w-2 h-2 rounded-full ${index === 0 ? 'bg-red-500' : 'bg-green-500'}`}></div>
-                      <span className="text-foreground">{point}</span>
+                      <span className="text-text-primary">{point}</span>
                     </div>
                   ))}
                 </CardContent>
@@ -143,13 +143,13 @@ export default function PreSalePreparation() {
           <div className="text-center mt-12">
             <Card className="inline-block">
               <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-foreground mb-4">
+                <h3 className="text-2xl font-bold text-text-primary mb-4">
                   Увеличение прибыли
                 </h3>
                 <div className="text-4xl font-bold text-green-500 mb-2">
                   +2-3 млн ₽
                 </div>
-                <p className="text-muted-foreground">
+                <p className="text-text-secondary">
                   Средняя дополнительная прибыль от продажи 3-комнатной квартиры после подготовки
                 </p>
               </CardContent>
@@ -159,13 +159,13 @@ export default function PreSalePreparation() {
       </section>
 
       {/* Services */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Что включает подготовка
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               Комплекс услуг для максимального повышения привлекательности объекта
             </p>
           </div>
@@ -177,13 +177,13 @@ export default function PreSalePreparation() {
                   <div className="flex justify-center mb-4">
                     {service.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-3">
+                  <h3 className="text-lg font-semibold text-text-primary mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-text-secondary mb-4">
                     {service.description}
                   </p>
-                  <Badge className="bg-accent text-foreground">
+                  <Badge className="bg-accent-orange text-white">
                     {service.price}
                   </Badge>
                 </CardContent>
@@ -198,10 +198,10 @@ export default function PreSalePreparation() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Преимущества подготовки
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Почему стоит инвестировать в предпродажную подготовку
               </p>
             </div>
@@ -210,7 +210,7 @@ export default function PreSalePreparation() {
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
-                  <span className="text-foreground font-medium">{benefit}</span>
+                  <span className="text-text-primary font-medium">{benefit}</span>
                 </div>
               ))}
             </div>
@@ -219,13 +219,13 @@ export default function PreSalePreparation() {
       </section>
 
       {/* Process */}
-      <section className="py-16 bg-secondary">
+      <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Этапы работы
             </h2>
-            <p className="text-lg text-muted-foreground">
+            <p className="text-lg text-text-secondary">
               Как проходит процесс предпродажной подготовки
             </p>
           </div>
@@ -233,14 +233,14 @@ export default function PreSalePreparation() {
           <div className="max-w-4xl mx-auto">
             {process.map((item, index) => (
               <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-accent text-foreground rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                <div className="flex-shrink-0 w-16 h-16 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
                   {item.step}
                 </div>
                 <div className="flex-grow">
-                  <h3 className="text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-xl font-semibold text-text-primary mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-muted-foreground">
+                  <p className="text-text-secondary">
                     {item.description}
                   </p>
                 </div>
@@ -255,10 +255,10 @@ export default function PreSalePreparation() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
                 Стоимость услуг
               </h2>
-              <p className="text-lg text-muted-foreground">
+              <p className="text-lg text-text-secondary">
                 Прозрачное ценообразование без скрытых платежей
               </p>
             </div>
@@ -268,8 +268,8 @@ export default function PreSalePreparation() {
                 <CardHeader>
                   <CardTitle className="text-center">Базовый</CardTitle>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-accent">от 50 000 ₽</div>
-                    <div className="text-sm text-muted-foreground">для 1-2 комнатных</div>
+                    <div className="text-3xl font-bold text-accent-orange">от 50 000 ₽</div>
+                    <div className="text-sm text-text-secondary">для 1-2 комнатных</div>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -285,21 +285,21 @@ export default function PreSalePreparation() {
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-sm">Уборка</span>
                   </div>
-                  <Button className="w-full mt-6 bg-accent text-foreground hover:bg-orange-600">
+                  <Button className="w-full mt-6 bg-accent-orange text-white hover:bg-orange-600">
                     Выбрать
                   </Button>
                 </CardContent>
               </Card>
 
               <Card className="border-accent-orange border-2 relative">
-                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent text-foreground">
+                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent-orange text-white">
                   Популярный
                 </Badge>
                 <CardHeader>
                   <CardTitle className="text-center">Стандартный</CardTitle>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-accent">от 120 000 ₽</div>
-                    <div className="text-sm text-muted-foreground">для 3-4 комнатных</div>
+                    <div className="text-3xl font-bold text-accent-orange">от 120 000 ₽</div>
+                    <div className="text-sm text-text-secondary">для 3-4 комнатных</div>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -315,7 +315,7 @@ export default function PreSalePreparation() {
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-sm">Базовый стейджинг</span>
                   </div>
-                  <Button className="w-full mt-6 bg-accent text-foreground hover:bg-orange-600">
+                  <Button className="w-full mt-6 bg-accent-orange text-white hover:bg-orange-600">
                     Выбрать
                   </Button>
                 </CardContent>
@@ -325,8 +325,8 @@ export default function PreSalePreparation() {
                 <CardHeader>
                   <CardTitle className="text-center">Премиум</CardTitle>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-accent">от 250 000 ₽</div>
-                    <div className="text-sm text-muted-foreground">любая площадь</div>
+                    <div className="text-3xl font-bold text-accent-orange">от 250 000 ₽</div>
+                    <div className="text-sm text-text-secondary">любая площадь</div>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -342,7 +342,7 @@ export default function PreSalePreparation() {
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-sm">3D-тур</span>
                   </div>
-                  <Button className="w-full mt-6 bg-accent text-foreground hover:bg-orange-600">
+                  <Button className="w-full mt-6 bg-accent-orange text-white hover:bg-orange-600">
                     Выбрать
                   </Button>
                 </CardContent>
@@ -353,7 +353,7 @@ export default function PreSalePreparation() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-500 text-foreground">
+      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-500 text-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">

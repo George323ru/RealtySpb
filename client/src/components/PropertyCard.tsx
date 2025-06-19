@@ -43,14 +43,14 @@ export default function PropertyCard({ property }: PropertyCardProps) {
 
   const getCategoryColor = (propertyType: string) => {
     const colors = {
-      apartment: "bg-primary",
-      house: "bg-accent", 
-      commercial: "bg-accent",
-      land: "bg-primary",
-      garage: "bg-background0",
-      parking: "bg-accent"
+      apartment: "bg-blue-500",
+      house: "bg-green-500", 
+      commercial: "bg-accent-orange",
+      land: "bg-yellow-500",
+      garage: "bg-gray-500",
+      parking: "bg-purple-500"
     };
-    return colors[propertyType as keyof typeof colors] || "bg-background0";
+    return colors[propertyType as keyof typeof colors] || "bg-gray-500";
   };
 
   return (
@@ -65,7 +65,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-4 left-4">
-          <Badge className={`${getCategoryColor(property.propertyType)} text-foreground font-medium px-3 py-1 rounded-md`}>
+          <Badge className={`${getCategoryColor(property.propertyType)} text-white font-medium px-3 py-1 rounded-md`}>
             {getPropertyTypeLabel(property.propertyType)}
           </Badge>
         </div>
@@ -73,7 +73,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="w-10 h-10 bg-card/90 backdrop-blur-sm hover:bg-card text-muted-foreground hover:text-warning-red min-h-[44px] min-w-[44px]"
+            className="w-10 h-10 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 hover:text-red-500 min-h-[44px] min-w-[44px]"
           >
             <Heart className="w-4 h-4" />
           </Button>
@@ -81,23 +81,23 @@ export default function PropertyCard({ property }: PropertyCardProps) {
       </div>
       <CardContent className="p-lg">
         <div className="flex items-center justify-between mb-3">
-          <span className="text-2xl font-bold text-foreground">
+          <span className="text-2xl font-bold text-text-primary">
             {formatPrice(property.price)} ₽
           </span>
           {property.pricePerMeter && (
-            <span className="text-sm text-muted-foreground">
+            <span className="text-sm text-text-secondary">
               {formatPricePerMeter(property.pricePerMeter)} ₽/м²
             </span>
           )}
         </div>
-        <h3 className="text-lg font-semibold text-foreground mb-2 line-clamp-2">
+        <h3 className="text-lg font-semibold text-text-primary mb-2 line-clamp-2">
           {property.title}
         </h3>
-        <p className="text-muted-foreground mb-4 flex items-center">
-          <MapPin className="w-4 h-4 mr-1 text-accent" />
+        <p className="text-text-secondary mb-4 flex items-center">
+          <MapPin className="w-4 h-4 mr-1 text-accent-orange" />
           {property.address}
         </p>
-        <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
+        <div className="flex items-center justify-between text-sm text-text-secondary mb-4">
           <span>{property.rooms ? `${property.rooms} комнат` : getPropertyTypeLabel(property.propertyType)}</span>
           {property.floor && property.totalFloors && (
             <span>{property.floor}/{property.totalFloors} этаж</span>

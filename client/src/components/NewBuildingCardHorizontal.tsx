@@ -12,7 +12,7 @@ interface NewBuildingCardProps {
 
 // Статусы готовности на основе readiness
 const getStatusInfo = (readiness: string | null) => {
-  if (!readiness) return { label: 'В продаже', color: 'bg-accent' };
+  if (!readiness) return { label: 'В продаже', color: 'bg-accent-orange' };
   
   switch (readiness.toLowerCase()) {
     case 'готов':
@@ -29,7 +29,7 @@ const getStatusInfo = (readiness: string | null) => {
     case 'проект':
       return { label: 'Проект', color: 'bg-purple-500' };
     default:
-      return { label: readiness, color: 'bg-accent' };
+      return { label: readiness, color: 'bg-accent-orange' };
   }
 };
 
@@ -60,35 +60,35 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
           {/* Левая часть - Информация */}
           <div className="w-1/2 p-lg flex flex-col justify-between">
             <div className="space-y-3">
-              <h3 className="text-lg font-semibold text-foreground group-hover:text-accent transition-[var(--transition-fast)] leading-tight">
+              <h3 className="text-lg font-semibold text-text-primary group-hover:text-accent-orange transition-[var(--transition-fast)] leading-tight">
                 {building.name}
               </h3>
               
               <div className="space-y-2">
-                <div className="flex items-start text-muted-foreground">
-                  <MapPin className="w-4 h-4 mr-2 text-accent shrink-0 mt-0.5" />
+                <div className="flex items-start text-text-secondary">
+                  <MapPin className="w-4 h-4 mr-2 text-accent-orange shrink-0 mt-0.5" />
                   <span className="text-sm leading-tight">{building.location}</span>
                 </div>
                 
-                <div className="flex items-center text-muted-foreground">
-                  <Building className="w-4 h-4 mr-2 text-accent shrink-0" />
+                <div className="flex items-center text-text-secondary">
+                  <Building className="w-4 h-4 mr-2 text-accent-orange shrink-0" />
                   <span className="text-sm">{building.developer}</span>
                 </div>
                 
                 {building.totalFlats && (
-                  <div className="flex items-center text-muted-foreground">
-                    <Home className="w-4 h-4 mr-2 text-accent shrink-0" />
+                  <div className="flex items-center text-text-secondary">
+                    <Home className="w-4 h-4 mr-2 text-accent-orange shrink-0" />
                     <span className="text-sm">{building.totalFlats} квартир</span>
                   </div>
                 )}
               </div>
 
               <div className="space-y-1">
-                <div className="text-xl font-bold text-accent">
+                <div className="text-xl font-bold text-accent-orange">
                   от {formatPrice(building.priceFrom)}
                 </div>
                 {building.pricePerMeter && (
-                  <div className="text-sm text-muted-foreground">
+                  <div className="text-sm text-text-secondary">
                     {formatPrice(building.pricePerMeter)}/м²
                   </div>
                 )}
@@ -129,7 +129,7 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
             {/* Плашка статуса/сдачи */}
             <div className="absolute top-4 left-4">
               {statusInfo.label === 'Сдан' ? (
-                <Badge className="bg-green-500 text-foreground font-medium px-3 py-1.5 text-sm">
+                <Badge className="bg-green-500 text-white font-medium px-3 py-1.5 text-sm">
                   Сдан
                 </Badge>
               ) : building.completionYear ? (
@@ -138,19 +138,19 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
                   Сдача: {building.completionYear}
                 </Badge>
               ) : (
-                <Badge className={`${statusInfo.color} text-foreground font-medium px-3 py-1.5 text-sm`}>
+                <Badge className={`${statusInfo.color} text-white font-medium px-3 py-1.5 text-sm`}>
                   {statusInfo.label}
                 </Badge>
               )}
             </div>
             
             {/* Overlay при hover */}
-            <div className="absolute inset-0 bg-muted/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             {/* Индикатор количества фото */}
             {building.images && building.images.length > 1 && (
               <div className="absolute bottom-4 right-4">
-                <div className="bg-muted/80 text-foreground px-3 py-1.5 rounded-md text-sm flex items-center">
+                <div className="bg-black/80 text-white px-3 py-1.5 rounded-md text-sm flex items-center">
                   <Building className="w-3 h-3 mr-1.5" />
                   {building.images.length} фото
                 </div>

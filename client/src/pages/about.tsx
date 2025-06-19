@@ -107,22 +107,22 @@ export default function About() {
       <section className="bg-gradient-to-br from-blue-50 to-indigo-100 py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl font-bold text-foreground mb-6">
+            <h1 className="text-5xl font-bold text-text-primary mb-6">
               Риэлтор в СПб - О компании недвижимости
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed">
+            <p className="text-xl text-text-secondary mb-8 leading-relaxed">
               Мы — ведущее агентство недвижимости Санкт-Петербурга с 15-летним опытом. 
               Помогаем клиентам принимать правильные решения в сфере недвижимости, 
               обеспечивая надежность, профессионализм и индивидуальный подход.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/realtor-constructor">
-                <Button className="bg-accent text-foreground hover:bg-orange-600 px-8 py-3">
+                <Button className="bg-accent-orange text-white hover:bg-orange-600 px-8 py-3">
                   Подобрать специалиста
                 </Button>
               </Link>
               <Link href="/contacts">
-                <Button variant="outline" className="border-2 border-accent-orange text-accent hover:bg-orange-50 px-8 py-3">
+                <Button variant="outline" className="border-2 border-accent-orange text-accent-orange hover:bg-orange-50 px-8 py-3">
                   Связаться с нами
                 </Button>
               </Link>
@@ -138,11 +138,11 @@ export default function About() {
             {stats.map((stat, index) => (
               <Card key={index} className="text-center p-8 hover:shadow-lg transition-shadow">
                 <CardContent className="space-y-4">
-                  <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center mx-auto">
-                    <stat.icon className="w-8 h-8 text-accent" />
+                  <div className="w-16 h-16 bg-accent-orange/10 rounded-full flex items-center justify-center mx-auto">
+                    <stat.icon className="w-8 h-8 text-accent-orange" />
                   </div>
-                  <h3 className="text-3xl font-bold text-foreground">{stat.value}</h3>
-                  <p className="text-muted-foreground">{stat.label}</p>
+                  <h3 className="text-3xl font-bold text-text-primary">{stat.value}</h3>
+                  <p className="text-text-secondary">{stat.label}</p>
                 </CardContent>
               </Card>
             ))}
@@ -155,8 +155,8 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-foreground mb-6">Наша миссия и ценности</h2>
-              <p className="text-xl text-muted-foreground">
+              <h2 className="text-4xl font-bold text-text-primary mb-6">Наша миссия и ценности</h2>
+              <p className="text-xl text-text-secondary">
                 Мы создаем доверительные отношения с клиентами, предоставляя экспертные услуги 
                 и персональный подход к решению любых задач в сфере недвижимости.
               </p>
@@ -169,8 +169,8 @@ export default function About() {
                     <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
                       <value.icon className="w-8 h-8 text-blue-600" />
                     </div>
-                    <h3 className="text-2xl font-bold text-foreground">{value.title}</h3>
-                    <p className="text-muted-foreground">{value.description}</p>
+                    <h3 className="text-2xl font-bold text-text-primary">{value.title}</h3>
+                    <p className="text-text-secondary">{value.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -183,8 +183,8 @@ export default function About() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-foreground mb-6">Наши услуги</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-text-primary mb-6">Наши услуги</h2>
+            <p className="text-xl text-text-secondary max-w-3xl mx-auto">
               Предоставляем полный спектр услуг по недвижимости — 
               от консультаций до полного сопровождения сложных сделок.
             </p>
@@ -195,14 +195,14 @@ export default function About() {
               <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
                 <CardContent className="space-y-6">
                   <div>
-                    <h3 className="text-2xl font-bold text-foreground mb-3">{service.title}</h3>
-                    <p className="text-muted-foreground mb-6">{service.description}</p>
+                    <h3 className="text-2xl font-bold text-text-primary mb-3">{service.title}</h3>
+                    <p className="text-text-secondary mb-6">{service.description}</p>
                   </div>
                   <div className="space-y-3">
                     {service.features.map((feature, idx) => (
                       <div key={idx} className="flex items-center">
                         <CheckCircle className="w-5 h-5 text-green-500 mr-3" />
-                        <span className="text-muted-foreground">{feature}</span>
+                        <span className="text-text-secondary">{feature}</span>
                       </div>
                     ))}
                   </div>
@@ -218,8 +218,8 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-16">
-              <h2 className="text-4xl font-bold text-foreground mb-6">Структура команды</h2>
-              <p className="text-xl text-muted-foreground">
+              <h2 className="text-4xl font-bold text-text-primary mb-6">Структура команды</h2>
+              <p className="text-xl text-text-secondary">
                 Профессиональная команда из 50+ специалистов с многолетним опытом
               </p>
             </div>
@@ -229,12 +229,12 @@ export default function About() {
                 <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
                   <CardContent className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <h3 className="text-xl font-bold text-foreground">{member.role}</h3>
-                      <Badge variant="secondary" className="bg-accent/10 text-accent">
+                      <h3 className="text-xl font-bold text-text-primary">{member.role}</h3>
+                      <Badge variant="secondary" className="bg-accent-orange/10 text-accent-orange">
                         {member.experience}
                       </Badge>
                     </div>
-                    <p className="text-muted-foreground">{member.description}</p>
+                    <p className="text-text-secondary">{member.description}</p>
                   </CardContent>
                 </Card>
               ))}
@@ -242,7 +242,7 @@ export default function About() {
             
             <div className="text-center mt-12">
               <Link href="/realtor-constructor">
-                <Button className="bg-accent text-foreground hover:bg-orange-600 px-8 py-4 text-lg">
+                <Button className="bg-accent-orange text-white hover:bg-orange-600 px-8 py-4 text-lg">
                   Подобрать вашего специалиста
                 </Button>
               </Link>
@@ -255,13 +255,13 @@ export default function About() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl font-bold text-foreground mb-12">Наши достижения</h2>
+            <h2 className="text-4xl font-bold text-text-primary mb-12">Наши достижения</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {achievements.map((achievement, index) => (
                 <Card key={index} className="p-6 hover:shadow-lg transition-shadow">
                   <CardContent className="flex items-center space-x-4">
-                    <Award className="w-8 h-8 text-accent flex-shrink-0" />
-                    <span className="text-foreground font-medium">{achievement}</span>
+                    <Award className="w-8 h-8 text-accent-orange flex-shrink-0" />
+                    <span className="text-text-primary font-medium">{achievement}</span>
                   </CardContent>
                 </Card>
               ))}
@@ -273,19 +273,19 @@ export default function About() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-foreground">
+          <div className="max-w-4xl mx-auto text-center text-white">
             <h2 className="text-4xl font-bold mb-6">Готовы начать работу с нами?</h2>
             <p className="text-xl mb-8 opacity-90">
               Получите профессиональную консультацию и подберите идеального специалиста для ваших задач
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/realtor-constructor">
-                <Button className="bg-white text-accent hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
+                <Button className="bg-white text-accent-orange hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
                   Подобрать специалиста
                 </Button>
               </Link>
               <Link href="/contacts">
-                <Button variant="outline" className="border-2 border-white text-foreground hover:bg-white hover:text-accent px-8 py-4 text-lg">
+                <Button variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-accent-orange px-8 py-4 text-lg">
                   Связаться с нами
                 </Button>
               </Link>
