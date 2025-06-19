@@ -34,7 +34,7 @@ export default function Buy() {
   // Фильтрация свойств на клиенте
   const properties = allProperties.filter((property) => {
     // Фильтр по типу недвижимости
-    if (filters.propertyType && property.propertyType) {
+    if (filters.propertyType && filters.propertyType !== 'all' && property.propertyType) {
       const propertyTypeMap: { [key: string]: string[] } = {
         "apartment": ["Квартира", "квартира"],
         "house": ["Дом", "дом", "Коттедж", "коттедж"],
@@ -60,7 +60,7 @@ export default function Buy() {
     }
 
     // Фильтр по району
-    if (filters.district && property.address) {
+    if (filters.district && filters.district !== 'all' && property.address) {
       if (!property.address.toLowerCase().includes(filters.district.toLowerCase())) {
         return false;
       }
@@ -82,7 +82,7 @@ export default function Buy() {
     }
 
     // Фильтр по количеству комнат
-    if (filters.rooms && property.rooms) {
+    if (filters.rooms && filters.rooms !== 'all' && property.rooms) {
       if (filters.rooms === "5" && property.rooms < 5) {
         return false;
       } else if (filters.rooms !== "5" && property.rooms !== parseInt(filters.rooms)) {
@@ -91,7 +91,7 @@ export default function Buy() {
     }
 
     // Фильтр по типу здания
-    if (filters.buildingType && property.buildingType) {
+    if (filters.buildingType && filters.buildingType !== 'all' && property.buildingType) {
       if (!property.buildingType.toLowerCase().includes(filters.buildingType.toLowerCase())) {
         return false;
       }
@@ -273,6 +273,7 @@ export default function Buy() {
                           <SelectValue placeholder="Выберите" />
                         </SelectTrigger>
                         <SelectContent>
+                          <SelectItem value="all">Все варианты</SelectItem>
                           {roomOptions.map((option) => (
                             <SelectItem key={option.value} value={option.value}>
                               {option.label}
