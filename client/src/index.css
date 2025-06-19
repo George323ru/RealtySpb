@@ -41,6 +41,18 @@ img {
   height: auto;
 }
 
+/* Mobile bottom navigation spacing */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: 80px; /* Space for mobile bottom navigation */
+  }
+  
+  /* Ensure conversion elements are above mobile menu */
+  .conversion-section {
+    margin-bottom: 100px;
+  }
+}
+
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(20, 14.3%, 4.1%);

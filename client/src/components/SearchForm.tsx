@@ -128,11 +128,12 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        {/* Mobile-first responsive grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6">
           <div>
-            <Label htmlFor="property-type">Тип недвижимости</Label>
+            <Label htmlFor="property-type" className="text-sm mb-1 block">Тип недвижимости</Label>
             <Select value={filters.propertyType} onValueChange={(value) => updateFilter("propertyType", value)}>
-              <SelectTrigger>
+              <SelectTrigger className="h-10">
                 <SelectValue placeholder="Квартира" />
               </SelectTrigger>
               <SelectContent>
@@ -146,9 +147,9 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
           </div>
           
           <div>
-            <Label htmlFor="district">Район</Label>
+            <Label htmlFor="district" className="text-sm mb-1 block">Район</Label>
             <Select value={filters.district} onValueChange={(value) => updateFilter("district", value)}>
-              <SelectTrigger>
+              <SelectTrigger className="h-10">
                 <SelectValue placeholder="Центральный" />
               </SelectTrigger>
               <SelectContent>
@@ -162,34 +163,34 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
           </div>
           
           <div>
-            <Label htmlFor="price-from">Цена от</Label>
+            <Label htmlFor="price-from" className="text-sm mb-1 block">Цена от</Label>
             <Input
               type="number"
-              placeholder="От 3 000 000 ₽"
+              placeholder="3 000 000"
               value={filters.priceFrom || ""}
               onChange={(e) => updateFilter("priceFrom", e.target.value ? Number(e.target.value) : undefined)}
-              className="focus-orange"
+              className="focus-orange h-10 text-sm"
             />
           </div>
           
           <div>
-            <Label htmlFor="price-to">Цена до</Label>
+            <Label htmlFor="price-to" className="text-sm mb-1 block">Цена до</Label>
             <Input
               type="number"
-              placeholder="До 15 000 000 ₽"
+              placeholder="15 000 000"
               value={filters.priceTo || ""}
               onChange={(e) => updateFilter("priceTo", e.target.value ? Number(e.target.value) : undefined)}
-              className="focus-orange"
+              className="focus-orange h-10 text-sm"
             />
           </div>
         </div>
         
-        <div className="flex flex-col sm:flex-row gap-4">
-          <Button onClick={handleSearch} className="flex-1 bg-accent-orange text-white py-4 px-6 text-lg hover:bg-orange-600">
-            <Search className="w-5 h-5 mr-2" />
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Button onClick={handleSearch} className="flex-1 bg-accent-orange text-white py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg hover:bg-orange-600">
+            <Search className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             Найти недвижимость
           </Button>
-          <Button variant="outline" className="sm:w-auto py-4 px-6 text-lg border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-white">
+          <Button variant="outline" className="sm:w-auto py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-white">
             Расширенный поиск
           </Button>
         </div>

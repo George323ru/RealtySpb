@@ -157,8 +157,8 @@ export default function Header() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-0.5 overflow-x-auto" style={{ 
+          {/* Desktop and Mobile Navigation */}
+          <div className="flex items-center space-x-0.5 overflow-x-auto lg:flex" style={{ 
             maxWidth: 'calc(100vw - 200px)',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none'
@@ -255,8 +255,8 @@ export default function Header() {
             })}
           </div>
 
-          {/* Cart Button */}
-          <div className="hidden lg:flex items-center">
+          {/* Cart Button - Always visible */}
+          <div className="flex items-center">
             <Link href="/cart" className="relative">
               <Button variant="outline" size="sm" className="relative rounded-lg border-neutral-300 hover:border-accent-orange hover:text-accent-orange transition-colors">
                 <ShoppingCart className="h-4 w-4" />

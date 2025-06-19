@@ -416,7 +416,7 @@ export default function Home() {
       </section>
 
       {/* Conversion CTA */}
-      <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600">
+      <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600 conversion-section">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-black">
