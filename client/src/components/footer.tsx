@@ -14,10 +14,10 @@ export default function Footer() {
               </div>
               <div>
                 <div className="text-xl font-bold">СПБ Недвижимость</div>
-                <div className="text-sm text-gray-400">Профессиональные услуги</div>
+                <div className="text-sm text-text-secondary">Профессиональные услуги</div>
               </div>
             </div>
-            <p className="text-gray-300 mb-6">
+            <p className="text-text-secondary mb-6">
               Лидирующее агентство недвижимости в Санкт-Петербурге. Более 15 лет помогаем клиентам решать вопросы с недвижимостью.
             </p>
             <div className="flex space-x-4">

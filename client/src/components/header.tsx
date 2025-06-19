@@ -245,7 +245,7 @@ export default function Header() {
                     "flex items-center px-1.5 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap",
                     location === item.href
                       ? "text-white bg-accent-orange shadow-lg"
-                      : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
+                      : "text-text-primary hover:text-accent-orange hover:bg-neutral-100"
                   )}
                 >
                   <IconComponent className="w-3 h-3 mr-1" />
@@ -328,24 +328,24 @@ export default function Header() {
             <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-text-primary">Купить недвижимость</h3>
-                <button onClick={() => setActiveSubmenu(null)} className="text-gray-400 hover:text-gray-600" aria-label="Закрыть меню покупки недвижимости">
+                <button onClick={() => setActiveSubmenu(null)} className="text-text-secondary hover:text-text-primary" aria-label="Закрыть меню покупки недвижимости">
                   <X className="w-6 h-6" />
                 </button>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <Link href="/new-buildings" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                <Link href="/new-buildings" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-100 rounded-lg hover:bg-neutral-200 transition-colors">
                   <Building2 className="w-8 h-8 mb-2 text-accent-orange" />
                   <span className="text-sm font-medium text-text-primary text-center">Новостройки</span>
                 </Link>
-                <Link href="/secondary" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                <Link href="/secondary" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-100 rounded-lg hover:bg-neutral-200 transition-colors">
                   <Store className="w-8 h-8 mb-2 text-accent-orange" />
                   <span className="text-sm font-medium text-text-primary text-center">Вторичное жилье</span>
                 </Link>
-                <Link href="/buy" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                <Link href="/buy" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-100 rounded-lg hover:bg-neutral-200 transition-colors">
                   <Warehouse className="w-8 h-8 mb-2 text-accent-orange" />
                   <span className="text-sm font-medium text-text-primary text-center">Коммерческая</span>
                 </Link>
-                <Link href="/land" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                <Link href="/land" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-100 rounded-lg hover:bg-neutral-200 transition-colors">
                   <Factory className="w-8 h-8 mb-2 text-accent-orange" />
                   <span className="text-sm font-medium text-text-primary text-center">Земля</span>
                 </Link>

@@ -73,7 +73,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           <Button
             variant="ghost"
             size="icon"
-            className="w-10 h-10 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 hover:text-red-500 min-h-[44px] min-w-[44px]"
+            className="w-10 h-10 bg-card/90 backdrop-blur-sm hover:bg-card text-text-secondary hover:text-warning-red min-h-[44px] min-w-[44px]"
           >
             <Heart className="w-4 h-4" />
           </Button>
