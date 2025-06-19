@@ -180,7 +180,7 @@ export default function Header() {
                       "flex items-center px-1.5 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap",
                       location === item.href
                         ? "text-white bg-accent-orange shadow-lg"
-                        : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
+                        : "text-text-primary hover:text-accent-orange hover:bg-accent-orange/10"
                     )}
                   >
                     {IconComponent && <IconComponent className="w-4 h-4 mr-2" />}

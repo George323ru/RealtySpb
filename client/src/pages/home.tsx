@@ -69,7 +69,7 @@ export default function Home() {
       icon: HomeIcon,
       color: "from-blue-50 to-blue-100 border-blue-200",
       iconBg: "bg-blue-500",
-      buttonColor: "bg-blue-500 hover:bg-blue-600",
+      buttonColor: "bg-primary hover:bg-primary/90",
       link: "/buy"
     },
     {
@@ -79,7 +79,7 @@ export default function Home() {
       icon: DollarSign,
       color: "from-green-50 to-green-100 border-green-200",
       iconBg: "bg-green-500",
-      buttonColor: "bg-green-500 hover:bg-green-600",
+      buttonColor: "bg-accent-orange hover:bg-accent-orange/90",
       link: "/sell"
     },
     {
@@ -99,7 +99,7 @@ export default function Home() {
       icon: Wrench,
       color: "from-orange-50 to-orange-100 border-orange-200",
       iconBg: "bg-accent-orange",
-      buttonColor: "bg-accent-orange hover:bg-orange-600",
+      buttonColor: "bg-accent-orange hover:bg-accent-orange/90",
       link: "/services"
     }
   ];
