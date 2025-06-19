@@ -11,7 +11,7 @@ interface SearchFormProps {
 }
 
 interface SearchFilters {
-  action: string;
+  dealType: string;
   propertyType: string;
   district: string;
   priceFrom: string;
@@ -53,13 +53,14 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
   const [priceTo, setPriceTo] = useState("");
 
   const handleSearch = () => {
-    const filters = { action: "Купить", propertyType, district, priceFrom, priceTo };
+    const filters = { dealType: "buy", propertyType, district, priceFrom, priceTo };
     
     if (onSearch) {
       onSearch(filters);
     } else {
       // Navigate to buy page with filters
       const searchParams = new URLSearchParams();
+      searchParams.set('dealType', 'buy');
       if (propertyType) searchParams.set('propertyType', propertyType);
       if (district) searchParams.set('district', district);
       if (priceFrom) searchParams.set('priceFrom', priceFrom);

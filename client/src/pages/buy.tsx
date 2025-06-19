@@ -26,9 +26,78 @@ export default function Buy() {
 
   const [showFilters, setShowFilters] = useState(false);
 
-  const { data: properties = [], isLoading } = useQuery<Property[]>({
-    queryKey: ["/api/properties", filters],
+  const { data: allProperties = [], isLoading } = useQuery<Property[]>({
+    queryKey: ["/api/properties"],
     enabled: true,
+  });
+
+  // Фильтрация свойств на клиенте
+  const properties = allProperties.filter((property) => {
+    // Фильтр по типу недвижимости
+    if (filters.propertyType && property.propertyType) {
+      const propertyTypeMap: { [key: string]: string[] } = {
+        "apartment": ["Квартира", "квартира"],
+        "house": ["Дом", "дом", "Коттедж", "коттедж"],
+        "office": ["Офис", "офис", "Офисное помещение"],
+        "retail": ["Торговое помещение", "Магазин"],
+        "warehouse": ["Склад", "склад"],
+        "production": ["Производственное помещение"],
+        "restaurant": ["Ресторан", "Кафе"],
+        "hotel": ["Гостиница", "Отель"],
+        "medical": ["Медицинский центр", "Клиника"],
+        "beauty": ["Салон красоты", "Парикмахерская"],
+        "fitness": ["Спортзал", "Фитнес"],
+        "auto": ["Автосервис", "СТО"],
+        "land": ["Земля", "Участок", "Земельный участок"],
+        "garage": ["Гараж", "гараж"],
+        "parking": ["Машиноместо", "Парковка"]
+      };
+      
+      const allowedTypes = propertyTypeMap[filters.propertyType] || [];
+      if (!allowedTypes.some(type => property.propertyType.toLowerCase().includes(type.toLowerCase()))) {
+        return false;
+      }
+    }
+
+    // Фильтр по району
+    if (filters.district && property.address) {
+      if (!property.address.toLowerCase().includes(filters.district.toLowerCase())) {
+        return false;
+      }
+    }
+
+    // Фильтр по цене
+    if (filters.priceFrom && property.price) {
+      const priceFrom = parseInt(filters.priceFrom.replace(/\D/g, ''));
+      if (property.price < priceFrom) {
+        return false;
+      }
+    }
+
+    if (filters.priceTo && property.price) {
+      const priceTo = parseInt(filters.priceTo.replace(/\D/g, ''));
+      if (property.price > priceTo) {
+        return false;
+      }
+    }
+
+    // Фильтр по количеству комнат
+    if (filters.rooms && property.rooms) {
+      if (filters.rooms === "5" && property.rooms < 5) {
+        return false;
+      } else if (filters.rooms !== "5" && property.rooms !== parseInt(filters.rooms)) {
+        return false;
+      }
+    }
+
+    // Фильтр по типу здания
+    if (filters.buildingType && property.buildingType) {
+      if (!property.buildingType.toLowerCase().includes(filters.buildingType.toLowerCase())) {
+        return false;
+      }
+    }
+
+    return true;
   });
 
   const propertyTypes = [
