@@ -122,8 +122,8 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <main>
-      {/* Hero Section */}
-      <section 
+        {/* Hero Section */}
+        <section 
         className="relative min-h-screen flex items-center"
         style={heroStyle}
         role="banner"
@@ -142,10 +142,10 @@ export default function Home() {
             <SearchForm className="max-w-5xl mx-auto mt-12" />
           </div>
         </div>
-      </section>
+        </section>
 
-      {/* Quick Actions */}
-      <section className="py-16 bg-white">
+        {/* Quick Actions */}
+        <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
@@ -184,8 +184,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Properties */}
-      <section className="py-16 bg-neutral-100">
+        {/* Featured Properties */}
+        <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
@@ -260,8 +260,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* New Buildings */}
-      <section className="py-16 bg-white">
+        {/* New Buildings */}
+        <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
@@ -289,8 +289,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section className="py-16 bg-neutral-100">
+        {/* Services Overview */}
+        <section className="py-16 bg-neutral-100">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
@@ -324,8 +324,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Mortgage Calculator Section */}
-      <section className="py-16 bg-white">
+        {/* Mortgage Calculator Section */}
+        <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -361,8 +361,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="py-16 bg-white">
+        {/* Team Section */}
+        <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
@@ -418,8 +418,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Conversion CTA */}
-      <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600 conversion-section">
+        {/* Conversion CTA */}
+        <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600 conversion-section">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-black">
