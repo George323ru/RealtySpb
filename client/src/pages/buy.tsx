@@ -95,7 +95,7 @@ export default function Buy() {
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-6xl mx-auto">
             <h1 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              {getPageTitle()}
+              Купить недвижимость в СПб - {getPageTitle()}
             </h1>
             <p className="text-lg text-text-secondary">
               {properties.length} объектов в каталоге

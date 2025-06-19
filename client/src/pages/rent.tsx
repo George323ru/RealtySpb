@@ -130,7 +130,7 @@ export default function Rent() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Сдайте недвижимость{" "}
+              Сдать квартиру в аренду СПб{" "}
               <span className="text-yandex-yellow">выгодно</span>
             </h1>
             <p className="text-xl lg:text-2xl mb-8 font-light opacity-90">
