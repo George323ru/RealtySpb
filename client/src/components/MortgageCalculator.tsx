@@ -126,8 +126,12 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
               <span className="text-sm font-medium text-red-600">{formatNumber(overpayment)} ₽</span>
             </div>
             <div className="text-xs text-orange-600 mt-2 pt-2 border-t border-neutral-200">
-              ⚠️ Предварительный расчет. Точные условия уточняйте в банке
+              ⚠️ Предварительный расчет. Точные условия уточняйте у своего менеджера
             </div>
+            
+            <Button className="w-full mt-3 bg-accent-orange hover:bg-orange-600 text-white">
+              Получить консультацию
+            </Button>
           </div>
         </CardContent>
       </Card>
@@ -297,9 +301,14 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
               </div>
             </div>
 
-            <Button className="w-full bg-yandex-yellow hover:bg-yellow-500 text-yandex-black font-semibold py-3 text-lg">
-              Подобрать лучшие предложения
-            </Button>
+            <div className="space-y-3">
+              <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white font-semibold py-3 text-lg">
+                Получить консультацию по ипотеке
+              </Button>
+              <Button variant="outline" className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-white py-3 text-lg">
+                Подобрать лучшие предложения
+              </Button>
+            </div>
             
             <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
               <div className="flex items-start gap-2">
@@ -309,7 +318,7 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
                     Предварительный расчет
                   </p>
                   <p className="text-xs text-orange-700">
-                    Расчет носит справочный характер. Итоговые условия зависят от банка, вашей кредитной истории и других факторов. Для получения точной информации обратитесь в банк.
+                    Расчет носит справочный характер. Итоговые условия зависят от банка, вашей кредитной истории и других факторов. Для получения точной информации обратитесь к своему менеджеру.
                   </p>
                 </div>
               </div>
