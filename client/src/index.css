@@ -152,6 +152,39 @@ a:not(.no-hover):hover {
   outline-offset: 2px;
 }
 
+/* Universal Interactive Element Enhancement */
+button:not(.no-interaction),
+[role="button"]:not(.no-interaction),
+.btn:not(.no-interaction),
+a[href]:not(.no-interaction) {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  min-height: 44px;
+  min-width: 44px;
+}
+
+button:hover:not(.no-interaction),
+[role="button"]:hover:not(.no-interaction),
+.btn:hover:not(.no-interaction),
+a[href]:hover:not(.no-interaction) {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Prevent Layout Shift */
+.prevent-overflow {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  flex-shrink: 1;
+}
+
+/* Z-index Management */
+.z-modal { z-index: 1000; }
+.z-dropdown { z-index: 900; }
+.z-fixed { z-index: 800; }
+.z-nav { z-index: 700; }
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
