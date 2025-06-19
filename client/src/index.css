@@ -54,6 +54,35 @@ img {
 }
 
 :root {
+  /* 8px-based spacing system */
+  --spacing-xs: 4px;   /* 0.5 units */
+  --spacing-sm: 8px;   /* 1 unit */
+  --spacing-md: 16px;  /* 2 units */
+  --spacing-lg: 24px;  /* 3 units */
+  --spacing-xl: 32px;  /* 4 units */
+  --spacing-2xl: 48px; /* 6 units */
+  --spacing-3xl: 64px; /* 8 units */
+  
+  /* Unified border radius system */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius: var(--radius-md);
+  
+  /* Shadow system */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.15);
+  --shadow-hover: 0 6px 12px rgba(0, 0, 0, 0.15);
+  
+  /* Animation timing */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 200ms ease-out;
+  --transition-slow: 300ms ease-out;
+  
+  /* Core color system */
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(20, 14.3%, 4.1%);
   --muted: hsl(60, 4.8%, 95.9%);
@@ -73,7 +102,6 @@ img {
   --destructive: hsl(0, 84.2%, 60.2%);
   --destructive-foreground: hsl(60, 9.1%, 97.8%);
   --ring: hsl(20, 14.3%, 4.1%);
-  --radius: 0.5rem;
   
   /* Color scheme 60/30/10 */
   /* 60% - Neutral base colors */
@@ -104,12 +132,13 @@ img {
   --text-muted: hsl(210, 8%, 45%);
 }
 
-/* Typography improvements for accessibility */
+/* Unified typography system */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
   font-size: 16px;
   line-height: 1.6;
   color: var(--text-primary);
+  font-weight: 400;
 }
 
 /* Improved heading hierarchy */
@@ -168,10 +197,38 @@ h4 {
   }
 }
 
-/* Minimum touch target size (48x48px) */
+/* Unified interactive element styles */
+* {
+  scroll-behavior: smooth;
+}
+
+/* Minimum touch target size (48x48px) with unified styling */
 button, .btn, a[role="button"], input[type="submit"] {
   min-height: 48px;
   min-width: 48px;
+  border-radius: var(--radius-md);
+  transition: var(--transition-normal);
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}
+
+/* Unified button states */
+button:hover, .btn:hover, a[role="button"]:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-hover);
+}
+
+button:active, .btn:active, a[role="button"]:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+button:disabled, .btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 /* Focus states for accessibility */
@@ -182,7 +239,52 @@ select:focus,
 a:focus {
   outline: 2px solid var(--accent-orange);
   outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
+
+/* Input field consistency */
+input, textarea, select {
+  min-height: 48px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  padding: var(--spacing-md);
+  font-size: 16px;
+  transition: var(--transition-fast);
+  background: var(--background);
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 0 3px rgba(255, 133, 27, 0.1);
+}
+
+/* Card component consistency */
+.card-unified {
+  background: var(--card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  transition: var(--transition-normal);
+  overflow: hidden;
+}
+
+.card-unified:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* Unified spacing classes based on 8px grid */
+.space-xs { margin: var(--spacing-xs); }
+.space-sm { margin: var(--spacing-sm); }
+.space-md { margin: var(--spacing-md); }
+.space-lg { margin: var(--spacing-lg); }
+.space-xl { margin: var(--spacing-xl); }
+
+.p-xs { padding: var(--spacing-xs); }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.p-xl { padding: var(--spacing-xl); }
 
 /* Hide scrollbars for horizontal scroll */
 .scrollbar-hide {
@@ -304,32 +406,92 @@ a:focus {
     border-color: var(--neutral-300);
   }
 
-  /* Enhanced button contrast */
-  .btn-enhanced-contrast {
-    background-color: hsl(45, 100%, 50%);
-    color: hsl(0, 0%, 0%);
+  /* Unified button variants */
+  .btn-primary {
+    background-color: var(--accent-orange);
+    color: white;
     font-weight: 600;
-    border: 2px solid hsl(0, 0%, 0%);
-    transition: all 0.2s ease;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    transition: var(--transition-normal);
   }
 
-  .btn-enhanced-contrast:hover {
-    background-color: hsl(45, 100%, 45%);
+  .btn-primary:hover {
+    background-color: var(--accent-orange-dark);
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-hover);
   }
 
-  .btn-accent-enhanced {
-    background-color: hsl(20, 90%, 48%);
-    color: hsl(0, 0%, 100%);
-    font-weight: 600;
-    border: 2px solid hsl(20, 90%, 38%);
-    transition: all 0.2s ease;
+  .btn-secondary {
+    background-color: var(--secondary);
+    color: var(--secondary-foreground);
+    font-weight: 500;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    transition: var(--transition-normal);
   }
 
-  .btn-accent-enhanced:hover {
-    background-color: hsl(20, 90%, 43%);
+  .btn-secondary:hover {
+    background-color: var(--muted);
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    color: var(--accent-orange);
+    font-weight: 500;
+    padding: var(--spacing-md) var(--spacing-xl);
+    border: 2px solid var(--accent-orange);
+    border-radius: var(--radius-md);
+    transition: var(--transition-normal);
+  }
+
+  .btn-outline:hover {
+    background-color: var(--accent-orange);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn var(--transition-normal) ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp var(--transition-normal) ease-out;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn var(--transition-fast) ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes scaleIn {
+    from { 
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to { 
+      opacity: 1;
+      transform: scale(1);
+    }
   }
 }
