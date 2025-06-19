@@ -29,7 +29,7 @@ export default function Header() {
   ];
 
 
-  const navigation = [
+  const mainNavigation = [
     {
       name: "Купить",
       href: "/buy",
@@ -101,10 +101,13 @@ export default function Header() {
           }
         ]
       }
-    },
+    }
+  ];
+
+  const secondaryNavigation = [
     { name: "Команда", href: "/team", icon: "Users" },
-    { name: "О нас", href: "/about", icon: "BookOpen" },
-    { name: "Отзывы", href: "/reviews", icon: "Users" },
+    { name: "О нас", href: "/about", icon: "Info" },
+    { name: "Отзывы", href: "/reviews", icon: "Star" },
     { name: "Блог", href: "/blog", icon: "BookOpen" },
     { name: "Контакты", href: "/contacts", icon: "Phone" },
   ];
@@ -155,20 +158,22 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center space-x-1">
-            {navigation.map((item) => {
+          <div className="hidden lg:flex items-center space-x-0.5 flex-wrap">
+            {mainNavigation.map((item) => {
               const IconComponent = item.icon === 'TrendingUp' ? TrendingUp :
                                  item.icon === 'Key' ? Key :
                                  item.icon === 'Users' ? Users :
                                  item.icon === 'BookOpen' ? BookOpen :
-                                 item.icon === 'Phone' ? Phone : null;
+                                 item.icon === 'Phone' ? Phone : 
+                                 item.icon === 'ShoppingCart' ? ShoppingCart :
+                                 item.icon === 'Grid3X3' ? Grid3X3 : Home;
               
               return (
                 <div key={item.name} className="relative group">
                   <Link
                     href={item.href}
                     className={cn(
-                      "flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-all duration-200 whitespace-nowrap hover:scale-105",
+                      "flex items-center px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 whitespace-nowrap hover:scale-105",
                       location === item.href
                         ? "text-white bg-accent-orange shadow-lg"
                         : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
