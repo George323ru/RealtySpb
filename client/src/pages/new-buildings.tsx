@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Building, Calendar, ArrowRight, Search, Filter } from "lucide-react";
 import { formatPrice } from "@/lib/utils";
-import NewBuildingCard from "@/components/new-building-card";
+import NewBuildingCardHorizontal from "@/components/NewBuildingCardHorizontal";
 import type { NewBuilding } from "@shared/schema";
 
 export default function NewBuildings() {
@@ -130,9 +130,9 @@ export default function NewBuildings() {
                 </p>
               </Card>
             ) : (
-              <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              <div className="space-y-6">
                 {buildings.map((building) => (
-                  <NewBuildingCard key={building.id} building={building} />
+                  <NewBuildingCardHorizontal key={building.id} building={building} />
                 ))}
               </div>
             )}
