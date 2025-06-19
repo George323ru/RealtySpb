@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Mail, Clock, Home, ChevronDown, ShoppingCart, TrendingUp, Key, Users, BookOpen, Building2, Store, Warehouse, Factory, Menu, X } from "lucide-react";
+import { Phone, Mail, Clock, Home, ChevronDown, ShoppingCart, TrendingUp, Key, Users, BookOpen, Building2, Store, Warehouse, Factory } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/components/CartProvider";
 
@@ -215,9 +215,8 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Mobile Menu */}
-          <div className="lg:hidden flex items-center space-x-3">
-            {/* Mobile Cart Button */}
+          {/* Mobile Cart Button */}
+          <div className="lg:hidden">
             <Link href="/cart" className="relative">
               <Button variant="outline" size="sm" className="relative rounded-lg border-neutral-300 hover:border-accent-orange hover:text-accent-orange transition-colors">
                 <ShoppingCart className="h-4 w-4" />
@@ -228,68 +227,71 @@ export default function Header() {
                 )}
               </Button>
             </Link>
-            
-            {/* Hamburger Menu Button */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 border-neutral-300 hover:border-accent-orange hover:text-accent-orange transition-colors"
-            >
-              {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-            </Button>
           </div>
 
         </nav>
 
-        {/* Mobile Menu Overlay */}
-        {mobileMenuOpen && (
-          <div className="lg:hidden absolute top-full left-0 right-0 bg-white shadow-lg border-t border-neutral-200 z-50">
-            <div className="container mx-auto px-4 py-6">
-              <div className="space-y-4">
-                {navigation.map((item) => (
-                  <div key={item.name}>
-                    <Link
-                      href={item.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={cn(
-                        "block px-4 py-3 text-lg font-medium rounded-lg transition-colors",
-                        location === item.href
-                          ? "text-white bg-accent-orange"
-                          : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
-                      )}
-                    >
-                      {item.name}
-                    </Link>
-                    
-                    {/* Mobile Submenu for megaMenu items */}
-                    {item.megaMenu && (
-                      <div className="ml-4 mt-2 space-y-2">
-                        {item.megaMenu.sections.map((section) => (
-                          <div key={section.title}>
-                            <h4 className="text-sm font-semibold text-text-secondary uppercase tracking-wide mb-2">
-                              {section.title}
-                            </h4>
-                            {section.links.map((link) => (
-                              <Link
-                                key={link.name}
-                                href={link.href}
-                                onClick={() => setMobileMenuOpen(false)}
-                                className="block px-3 py-2 text-base text-text-primary hover:text-accent-orange hover:bg-orange-50 rounded transition-colors"
-                              >
-                                {link.name}
-                              </Link>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
+        {/* Mobile Horizontal Navigation */}
+        <div className="lg:hidden bg-white border-t border-neutral-200">
+          <div className="overflow-x-auto scrollbar-hide">
+            <div className="flex px-4 py-3 space-x-2 min-w-max">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
+                    location === item.href
+                      ? "bg-accent-orange text-white shadow-lg"
+                      : "bg-neutral-100 text-text-primary hover:bg-orange-50 hover:text-accent-orange"
+                  )}
+                >
+                  <span>{item.name}</span>
+                </Link>
+              ))}
+              
+              {/* Additional quick links for mobile */}
+              <Link
+                href="/new-buildings"
+                className={cn(
+                  "flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
+                  location === "/new-buildings"
+                    ? "bg-accent-orange text-white shadow-lg"
+                    : "bg-neutral-100 text-text-primary hover:bg-orange-50 hover:text-accent-orange"
+                )}
+              >
+                <Building2 className="w-4 h-4 mr-2" />
+                Новостройки
+              </Link>
+              
+              <Link
+                href="/team"
+                className={cn(
+                  "flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
+                  location === "/team"
+                    ? "bg-accent-orange text-white shadow-lg"
+                    : "bg-neutral-100 text-text-primary hover:bg-orange-50 hover:text-accent-orange"
+                )}
+              >
+                <Users className="w-4 h-4 mr-2" />
+                Команда
+              </Link>
+              
+              <Link
+                href="/blog"
+                className={cn(
+                  "flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
+                  location === "/blog"
+                    ? "bg-accent-orange text-white shadow-lg"
+                    : "bg-neutral-100 text-text-primary hover:bg-orange-50 hover:text-accent-orange"
+                )}
+              >
+                <BookOpen className="w-4 h-4 mr-2" />
+                Блог
+              </Link>
             </div>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );

@@ -99,7 +99,7 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
             <div className="flex gap-2">
               <Link href={`/new-buildings/${building.id}`}>
                 <Button size="sm" className="bg-accent-orange hover:bg-orange-600 text-white h-8 text-sm">
-                  Подробнее
+                  Подробнее →
                 </Button>
               </Link>
               <Link href={`/new-buildings/${building.id}?tab=layouts`}>

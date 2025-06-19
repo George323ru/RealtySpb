@@ -126,7 +126,8 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
               <span className="text-sm font-medium text-red-600">{formatNumber(overpayment)} ₽</span>
             </div>
             <div className="text-xs text-orange-600 mt-2 pt-2 border-t border-neutral-200">
-              ⚠️ Предварительный расчет. Точные условия уточняйте у своего менеджера
+              ⚠️ Предварительный расчет.<br />
+              Точные условия уточняйте у своего менеджера.
             </div>
             
             <Button className="w-full mt-3 bg-accent-orange hover:bg-orange-600 text-white">

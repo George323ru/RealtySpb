@@ -136,6 +136,12 @@ Changelog:
 - June 19, 2025. Enhanced mortgage calculator with configurable interest rate field (3-25% range) and updated calculation formula
 - June 19, 2025. Updated warning text in mortgage calculator to reference "своего менеджера" instead of "банке" for personalization
 - June 19, 2025. Added conversion buttons to both compact and full mortgage calculator versions for lead generation
+- June 19, 2025. New building cards redesigned with horizontal layout - photos now occupy half the card space with proportional sizing
+- June 19, 2025. Simplified status badges to single badge per card - either "Сдача: [date]" or "Сдан" status
+- June 19, 2025. Added functional "Подробнее" and "Планировки" buttons for navigation to detailed building pages
+- June 19, 2025. Created comprehensive building detail pages with photo carousels and tabbed content (description, layouts, infrastructure, documents)
+- June 19, 2025. Improved typography on building cards - larger titles (text-xl), better contrast, removed duplicate completion year information
+- June 19, 2025. Fixed mortgage calculator warning text formatting - moved "Точные условия уточняйте у своего менеджера" to separate line
 ```
 
 ## User Preferences
