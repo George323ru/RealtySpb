@@ -146,6 +146,7 @@ Changelog:
 - June 19, 2025. Enhanced new building cards with increased height (280px) and improved button visibility - "Подробнее →" buttons now always visible with better spacing and styling
 - June 19, 2025. Redesigned mobile navigation to compact 4x3 grid layout - all sections visible without scrolling, includes modal submenus for "Купить" и "Услуги" with bottom sheet design
 - June 19, 2025. Replaced large grid navigation with floating action button in bottom-right corner - opens compact bottom sheet menu to save screen space
+- June 19, 2025. Created fixed bottom navigation bar with 10 main sections in 2 rows (5x2 grid) - all menu items always visible, compact design with small icons and text
 ```
 
 ## User Preferences
