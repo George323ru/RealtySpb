@@ -18,6 +18,9 @@ import type { Review } from "@shared/schema";
 
 const reviewFormSchema = insertReviewSchema.extend({
   rating: z.number().min(1, "Выберите оценку").max(5),
+}).omit({ serviceType: true, propertyType: true }).extend({
+  serviceType: z.string().min(1, "Выберите тип услуги"),
+  propertyType: z.string().min(1, "Выберите тип недвижимости"),
 });
 
 type ReviewFormData = z.infer<typeof reviewFormSchema>;
@@ -376,7 +379,7 @@ export default function Reviews() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Тип услуги</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value || undefined}>
+                              <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
                                 <FormControl>
                                   <SelectTrigger>
                                     <SelectValue placeholder="Выберите услугу" />
@@ -401,7 +404,7 @@ export default function Reviews() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Тип недвижимости</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
                                 <FormControl>
                                   <SelectTrigger>
                                     <SelectValue placeholder="Выберите тип" />
