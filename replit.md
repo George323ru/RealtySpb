@@ -142,6 +142,8 @@ Changelog:
 - June 19, 2025. Created comprehensive building detail pages with photo carousels and tabbed content (description, layouts, infrastructure, documents)
 - June 19, 2025. Improved typography on building cards - larger titles (text-xl), better contrast, removed duplicate completion year information
 - June 19, 2025. Fixed mortgage calculator warning text formatting - moved "Точные условия уточняйте у своего менеджера" to separate line
+- June 19, 2025. Replaced hamburger menu with creative horizontal scrollable navigation for mobile devices - features rounded buttons with icons for intuitive access to all sections
+- June 19, 2025. Enhanced new building cards with increased height (280px) and improved button visibility - "Подробнее →" buttons now always visible with better spacing and styling
 ```
 
 ## User Preferences

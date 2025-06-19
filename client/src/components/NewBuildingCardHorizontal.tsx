@@ -55,17 +55,17 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white group border border-gray-200">
       <CardContent className="p-0">
-        <div className="flex h-56">
+        <div className="flex min-h-[280px]">
           {/* Левая часть - Информация */}
           <div className="w-1/2 p-6 flex flex-col justify-between">
-            <div>
+            <div className="flex-1">
               <div className="mb-3">
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-accent-orange transition-colors leading-tight mb-2">
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-accent-orange transition-colors leading-tight">
                   {building.name}
                 </h3>
               </div>
               
-              <div className="space-y-3 mb-4">
+              <div className="space-y-2 mb-4">
                 <div className="flex items-center text-gray-700">
                   <MapPin className="w-4 h-4 mr-2 text-gray-500 shrink-0" />
                   <span className="text-sm truncate">{building.location}</span>
@@ -84,7 +84,7 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
                 )}
               </div>
 
-              <div className="mb-4">
+              <div>
                 <div className="text-xl font-bold text-accent-orange">
                   от {formatPrice(building.priceFrom)}
                 </div>
@@ -96,14 +96,14 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
               </div>
             </div>
             
-            <div className="flex gap-2">
+            <div className="flex gap-2 mt-4">
               <Link href={`/new-buildings/${building.id}`}>
-                <Button size="sm" className="bg-accent-orange hover:bg-orange-600 text-white h-8 text-sm">
+                <Button size="sm" className="bg-accent-orange hover:bg-orange-600 text-white h-9 text-sm font-medium px-4">
                   Подробнее →
                 </Button>
               </Link>
               <Link href={`/new-buildings/${building.id}?tab=layouts`}>
-                <Button size="sm" variant="outline" className="border-gray-300 hover:border-accent-orange hover:text-accent-orange h-8 text-sm">
+                <Button size="sm" variant="outline" className="border-gray-300 hover:border-accent-orange hover:text-accent-orange h-9 text-sm px-4">
                   Планировки
                 </Button>
               </Link>
