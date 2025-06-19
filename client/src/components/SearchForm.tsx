@@ -25,7 +25,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
   };
 
   const updateFilter = (key: keyof PropertySearchFilters, value: string | number | undefined) => {
-    setFilters(prev => ({
+    setFilters((prev: PropertySearchFilters) => ({
       ...prev,
       [key]: value
     }));

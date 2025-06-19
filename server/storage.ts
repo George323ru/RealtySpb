@@ -731,9 +731,17 @@ export class MemStorage implements IStorage {
   async createProperty(property: InsertProperty): Promise<Property> {
     const id = this.currentId++;
     const newProperty: Property = { 
-      ...property, 
+      ...property,
       id, 
-      createdAt: new Date() 
+      createdAt: new Date(),
+      pricePerMeter: property.pricePerMeter ?? null,
+      rooms: property.rooms ?? null,
+      floor: property.floor ?? null,
+      totalFloors: property.totalFloors ?? null,
+      buildingType: property.buildingType ?? null,
+      features: property.features ?? null,
+      images: property.images ?? [],
+      isActive: property.isActive ?? true
     };
     this.properties.set(id, newProperty);
     return newProperty;
@@ -753,7 +761,14 @@ export class MemStorage implements IStorage {
     const newBuilding: NewBuilding = { 
       ...building, 
       id, 
-      createdAt: new Date() 
+      createdAt: new Date(),
+      completionYear: building.completionYear ?? null,
+      pricePerMeter: building.pricePerMeter ?? null,
+      totalFlats: building.totalFlats ?? null,
+      readiness: building.readiness ?? null,
+      images: building.images ?? [],
+      features: building.features ?? null,
+      isActive: building.isActive ?? true
     };
     this.newBuildings.set(id, newBuilding);
     return newBuilding;
@@ -773,7 +788,10 @@ export class MemStorage implements IStorage {
     const newService: Service = { 
       ...service, 
       id, 
-      createdAt: new Date() 
+      createdAt: new Date(),
+      price: service.price ?? null,
+      features: service.features ?? null,
+      isActive: service.isActive ?? true
     };
     this.services.set(id, newService);
     return newService;
@@ -790,7 +808,15 @@ export class MemStorage implements IStorage {
 
   async createTeamMember(member: InsertTeamMember): Promise<TeamMember> {
     const id = this.currentId++;
-    const newMember: TeamMember = { ...member, id };
+    const newMember: TeamMember = { 
+      ...member, 
+      id,
+      isActive: member.isActive ?? true,
+      phone: member.phone ?? null,
+      telegram: member.telegram ?? null,
+      whatsapp: member.whatsapp ?? null,
+      specialization: member.specialization ?? null
+    };
     this.teamMembers.set(id, newMember);
     return newMember;
   }
@@ -807,7 +833,11 @@ export class MemStorage implements IStorage {
       id, 
       status: "new",
       source: "website",
-      createdAt: new Date() 
+      createdAt: new Date(),
+      email: lead.email ?? null,
+      propertyType: lead.propertyType ?? null,
+      message: lead.message ?? null,
+      budget: lead.budget ?? null
     };
     this.leads.set(id, newLead);
     return newLead;
