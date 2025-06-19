@@ -19,9 +19,11 @@ interface PropertySearch {
   dealType?: string;
   propertyType?: string;
   district?: string;
-  priceFrom?: string;
-  priceTo?: string;
-  rooms?: string;
+  priceFrom?: number;
+  priceTo?: number;
+  areaFrom?: number;
+  areaTo?: number;
+  rooms?: number;
   isNew?: boolean;
 }
 
@@ -229,7 +231,7 @@ export default function SecondaryProperties() {
                     <div className="grid grid-cols-2 gap-2">
                       <Input
                         placeholder="От"
-                        value={searchParams.priceFrom ? formatPrice(String(searchParams.priceFrom)) : ''}
+                        value={searchParams.priceFrom ? formatPrice(searchParams.priceFrom.toString()) : ''}
                         onChange={(e) => {
                           const value = e.target.value.replace(/\s/g, '');
                           setSearchParams({
@@ -240,7 +242,7 @@ export default function SecondaryProperties() {
                       />
                       <Input
                         placeholder="До"
-                        value={searchParams.priceTo ? formatPrice(String(searchParams.priceTo)) : ''}
+                        value={searchParams.priceTo ? formatPrice(searchParams.priceTo.toString()) : ''}
                         onChange={(e) => {
                           const value = e.target.value.replace(/\s/g, '');
                           setSearchParams({
@@ -259,7 +261,7 @@ export default function SecondaryProperties() {
                     <div className="grid grid-cols-2 gap-2">
                       <Input
                         placeholder="От"
-                        value={searchParams.areaFrom || ''}
+                        value={searchParams.areaFrom?.toString() || ''}
                         onChange={(e) => setSearchParams({
                           ...searchParams,
                           areaFrom: e.target.value ? parseInt(e.target.value) : undefined
@@ -267,7 +269,7 @@ export default function SecondaryProperties() {
                       />
                       <Input
                         placeholder="До"
-                        value={searchParams.areaTo || ''}
+                        value={searchParams.areaTo?.toString() || ''}
                         onChange={(e) => setSearchParams({
                           ...searchParams,
                           areaTo: e.target.value ? parseInt(e.target.value) : undefined

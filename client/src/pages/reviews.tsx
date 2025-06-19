@@ -204,7 +204,7 @@ export default function Reviews() {
                     <SelectValue placeholder="Оценка" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Все оценки</SelectItem>
+                    <SelectItem value="all">Все оценки</SelectItem>
                     <SelectItem value="5">5 звезд</SelectItem>
                     <SelectItem value="4">4 звезды</SelectItem>
                     <SelectItem value="3">3 звезды</SelectItem>
@@ -218,7 +218,7 @@ export default function Reviews() {
                     <SelectValue placeholder="Тип услуги" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Все услуги</SelectItem>
+                    <SelectItem value="all">Все услуги</SelectItem>
                     <SelectItem value="продажа">Продажа</SelectItem>
                     <SelectItem value="покупка">Покупка</SelectItem>
                     <SelectItem value="аренда">Аренда</SelectItem>
@@ -376,7 +376,7 @@ export default function Reviews() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Тип услуги</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value}>
+                              <Select onValueChange={field.onChange} defaultValue={field.value || undefined}>
                                 <FormControl>
                                   <SelectTrigger>
                                     <SelectValue placeholder="Выберите услугу" />
