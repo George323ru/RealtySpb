@@ -144,6 +144,7 @@ Changelog:
 - June 19, 2025. Fixed mortgage calculator warning text formatting - moved "Точные условия уточняйте у своего менеджера" to separate line
 - June 19, 2025. Replaced hamburger menu with creative horizontal scrollable navigation for mobile devices - features rounded buttons with icons for intuitive access to all sections
 - June 19, 2025. Enhanced new building cards with increased height (280px) and improved button visibility - "Подробнее →" buttons now always visible with better spacing and styling
+- June 19, 2025. Redesigned mobile navigation to compact 4x3 grid layout - all sections visible without scrolling, includes modal submenus for "Купить" and "Услуги" with bottom sheet design
 ```
 
 ## User Preferences

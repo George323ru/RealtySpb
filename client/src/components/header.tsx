@@ -1,14 +1,32 @@
 
+import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Phone, Mail, Clock, Home, ChevronDown, ShoppingCart, TrendingUp, Key, Users, BookOpen, Building2, Store, Warehouse, Factory } from "lucide-react";
+import { Phone, Mail, Clock, Home, ChevronDown, ShoppingCart, TrendingUp, Key, Users, BookOpen, Building2, Store, Warehouse, Factory, Grid3X3, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useCart } from "@/components/CartProvider";
 
 export default function Header() {
   const [location] = useLocation();
   const { getTotalItems } = useCart();
+  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+
+  // Services data for mobile submenu
+  const services = [
+    { name: "Предпродажная подготовка", href: "/services/pre-sale-preparation", icon: "🏠" },
+    { name: "Оценка недвижимости", href: "/services/property-valuation", icon: "💰" },
+    { name: "Юридическое сопровождение", href: "/services/legal-support", icon: "⚖️" },
+    { name: "Ипотечное консультирование", href: "/services/mortgage-consulting", icon: "🏦" },
+    { name: "Инвестиционные консультации", href: "/services/investment-consulting", icon: "📈" },
+    { name: "Сопровождение сделок", href: "/services/transaction-support", icon: "🤝" },
+    { name: "Управление недвижимостью", href: "/services/property-management", icon: "🔧" },
+    { name: "Коммерческая недвижимость", href: "/services/commercial-real-estate", icon: "🏢" },
+    { name: "Арендные консультации", href: "/services/rental-consulting", icon: "🔑" },
+    { name: "Налоговое планирование", href: "/services/tax-planning", icon: "📊" },
+    { name: "Страхование недвижимости", href: "/services/property-insurance", icon: "🛡️" },
+    { name: "Земля", href: "/land", icon: "🌱" }
+  ];
 
 
   const navigation = [
@@ -231,67 +249,175 @@ export default function Header() {
 
         </nav>
 
-        {/* Mobile Horizontal Navigation */}
+        {/* Mobile Grid Navigation */}
         <div className="lg:hidden bg-white border-t border-neutral-200">
-          <div className="overflow-x-auto scrollbar-hide">
-            <div className="flex px-4 py-3 space-x-2 min-w-max">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={cn(
-                    "flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
-                    location === item.href
-                      ? "bg-accent-orange text-white shadow-lg"
-                      : "bg-neutral-100 text-text-primary hover:bg-orange-50 hover:text-accent-orange"
-                  )}
-                >
-                  <span>{item.name}</span>
-                </Link>
-              ))}
-              
-              {/* Additional quick links for mobile */}
-              <Link
-                href="/new-buildings"
-                className={cn(
-                  "flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
-                  location === "/new-buildings"
-                    ? "bg-accent-orange text-white shadow-lg"
-                    : "bg-neutral-100 text-text-primary hover:bg-orange-50 hover:text-accent-orange"
-                )}
-              >
-                <Building2 className="w-4 h-4 mr-2" />
-                Новостройки
-              </Link>
-              
-              <Link
-                href="/team"
-                className={cn(
-                  "flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
-                  location === "/team"
-                    ? "bg-accent-orange text-white shadow-lg"
-                    : "bg-neutral-100 text-text-primary hover:bg-orange-50 hover:text-accent-orange"
-                )}
-              >
-                <Users className="w-4 h-4 mr-2" />
-                Команда
-              </Link>
-              
-              <Link
-                href="/blog"
-                className={cn(
-                  "flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 whitespace-nowrap",
-                  location === "/blog"
-                    ? "bg-accent-orange text-white shadow-lg"
-                    : "bg-neutral-100 text-text-primary hover:bg-orange-50 hover:text-accent-orange"
-                )}
-              >
-                <BookOpen className="w-4 h-4 mr-2" />
-                Блог
-              </Link>
-            </div>
+          <div className="grid grid-cols-4 gap-2 p-3">
+            {/* Row 1 */}
+            <Link href="/" className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+              location === "/" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+            )}>
+              <Home className="w-5 h-5 mb-1" />
+              <span className="text-xs">Главная</span>
+            </Link>
+            
+            <button 
+              onClick={() => setActiveSubmenu(activeSubmenu === 'buy' ? null : 'buy')}
+              className={cn(
+                "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+                activeSubmenu === 'buy' ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+              )}
+            >
+              <ShoppingCart className="w-5 h-5 mb-1" />
+              <span className="text-xs">Купить</span>
+            </button>
+            
+            <Link href="/sell" className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+              location === "/sell" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+            )}>
+              <TrendingUp className="w-5 h-5 mb-1" />
+              <span className="text-xs">Продать</span>
+            </Link>
+            
+            <Link href="/rent" className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+              location === "/rent" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+            )}>
+              <Key className="w-5 h-5 mb-1" />
+              <span className="text-xs">Аренда</span>
+            </Link>
+
+            {/* Row 2 */}
+            <Link href="/new-buildings" className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+              location === "/new-buildings" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+            )}>
+              <Building2 className="w-5 h-5 mb-1" />
+              <span className="text-xs">Новое</span>
+            </Link>
+            
+            <Link href="/secondary" className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+              location === "/secondary" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+            )}>
+              <Store className="w-5 h-5 mb-1" />
+              <span className="text-xs">Вторичка</span>
+            </Link>
+            
+            <button 
+              onClick={() => setActiveSubmenu(activeSubmenu === 'services' ? null : 'services')}
+              className={cn(
+                "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+                activeSubmenu === 'services' ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+              )}
+            >
+              <Grid3X3 className="w-5 h-5 mb-1" />
+              <span className="text-xs">Услуги</span>
+            </button>
+            
+            <Link href="/team" className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+              location === "/team" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+            )}>
+              <Users className="w-5 h-5 mb-1" />
+              <span className="text-xs">Команда</span>
+            </Link>
+
+            {/* Row 3 */}
+            <Link href="/about" className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+              location === "/about" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+            )}>
+              <BookOpen className="w-5 h-5 mb-1" />
+              <span className="text-xs">О нас</span>
+            </Link>
+            
+            <Link href="/reviews" className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+              location === "/reviews" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+            )}>
+              <Users className="w-5 h-5 mb-1" />
+              <span className="text-xs">Отзывы</span>
+            </Link>
+            
+            <Link href="/blog" className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+              location === "/blog" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+            )}>
+              <BookOpen className="w-5 h-5 mb-1" />
+              <span className="text-xs">Блог</span>
+            </Link>
+            
+            <Link href="/contacts" className={cn(
+              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
+              location === "/contacts" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
+            )}>
+              <Phone className="w-5 h-5 mb-1" />
+              <span className="text-xs">Контакты</span>
+            </Link>
           </div>
         </div>
+
+        {/* Mobile Submenus */}
+        {activeSubmenu === 'buy' && (
+          <div className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setActiveSubmenu(null)}>
+            <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-text-primary">Купить недвижимость</h3>
+                <button onClick={() => setActiveSubmenu(null)} className="text-gray-400 hover:text-gray-600">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <Link href="/new-buildings" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <Building2 className="w-8 h-8 mb-2 text-accent-orange" />
+                  <span className="text-sm font-medium text-text-primary text-center">Новостройки</span>
+                </Link>
+                <Link href="/secondary" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <Store className="w-8 h-8 mb-2 text-accent-orange" />
+                  <span className="text-sm font-medium text-text-primary text-center">Вторичное жилье</span>
+                </Link>
+                <Link href="/buy" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <Warehouse className="w-8 h-8 mb-2 text-accent-orange" />
+                  <span className="text-sm font-medium text-text-primary text-center">Коммерческая</span>
+                </Link>
+                <Link href="/land" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <Factory className="w-8 h-8 mb-2 text-accent-orange" />
+                  <span className="text-sm font-medium text-text-primary text-center">Земля</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeSubmenu === 'services' && (
+          <div className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setActiveSubmenu(null)}>
+            <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-text-primary">Услуги</h3>
+                <button onClick={() => setActiveSubmenu(null)} className="text-gray-400 hover:text-gray-600">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                {services.map((service) => (
+                  <Link 
+                    key={service.href} 
+                    href={service.href} 
+                    onClick={() => setActiveSubmenu(null)} 
+                    className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors"
+                  >
+                    <div className="w-8 h-8 mb-2 text-accent-orange flex items-center justify-center">
+                      <span className="text-lg">{service.icon}</span>
+                    </div>
+                    <span className="text-xs font-medium text-text-primary text-center leading-tight">{service.name}</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </header>
   );
