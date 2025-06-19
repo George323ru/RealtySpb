@@ -29,6 +29,7 @@ import Land from "@/pages/land";
 import Calculator from "@/pages/calculator";
 import ServiceLanding from "@/pages/services/service-landing";
 import PrivacyPolicy from "@/pages/privacy-policy";
+import Terms from "@/pages/terms";
 
 function Router() {
   return (
@@ -55,6 +56,7 @@ function Router() {
       <Route path="/cart" component={Cart} />
       <Route path="/calculator" component={Calculator} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/terms" component={Terms} />
       <Route component={NotFound} />
     </Switch>
   );

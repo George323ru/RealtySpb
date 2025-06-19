@@ -252,7 +252,7 @@ export default function Home() {
           {/* CTA Button */}
           <div className="text-center">
             <Link href="/buy">
-              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 text-lg">
+              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90 text-lg">
                 Смотреть все объекты →
               </Button>
             </Link>
@@ -280,7 +280,7 @@ export default function Home() {
           
           <div className="text-center mt-12">
             <Link href="/new-buildings">
-              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600">
+              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90">
                 Все новостройки СПб
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
@@ -408,7 +408,7 @@ export default function Home() {
             
             <div className="text-center">
               <Link href="/realtor-constructor">
-                <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 text-lg">
+                <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90 text-lg">
                   Подобрать специалиста
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
