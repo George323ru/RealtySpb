@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -9,7 +9,7 @@ import { useCart } from "@/components/CartProvider";
 export default function Header() {
   const [location] = useLocation();
   const { getTotalItems } = useCart();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
 
   const navigation = [
     {
