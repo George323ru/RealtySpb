@@ -224,6 +224,31 @@ export default function Header() {
                 </div>
               );
             })}
+            
+            {/* Secondary Navigation */}
+            {secondaryNavigation.map((item) => {
+              const IconComponent = item.icon === 'Users' ? Users :
+                                 item.icon === 'Info' ? BookOpen :
+                                 item.icon === 'Star' ? Users :
+                                 item.icon === 'BookOpen' ? BookOpen :
+                                 item.icon === 'Phone' ? Phone : Home;
+              
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={cn(
+                    "flex items-center px-2 py-1.5 text-xs font-medium rounded-lg transition-all duration-200 whitespace-nowrap hover:scale-105",
+                    location === item.href
+                      ? "text-white bg-accent-orange shadow-lg"
+                      : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
+                  )}
+                >
+                  <IconComponent className="w-3 h-3 mr-1" />
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Desktop Cart Button */}
