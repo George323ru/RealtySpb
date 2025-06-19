@@ -26,6 +26,20 @@ const reviewFormSchema = insertReviewSchema.extend({
 type ReviewFormData = z.infer<typeof reviewFormSchema>;
 
 export default function Reviews() {
+  // Schema.org микроразметка для отзывов
+  const reviewsSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Риэлтор в СПб",
+    "url": "https://realtorvspb.ru",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "156",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  };
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -111,6 +125,11 @@ export default function Reviews() {
 
   return (
     <div className="min-h-screen bg-neutral-50">
+      {/* Микроразметка Schema.org для отзывов */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewsSchema) }}
+      />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-emerald-900 to-green-800 py-20">
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>

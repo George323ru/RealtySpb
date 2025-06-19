@@ -121,10 +121,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      <main>
       {/* Hero Section */}
       <section 
         className="relative min-h-screen flex items-center"
         style={heroStyle}
+        role="banner"
+        aria-label="Главная страница риэлтора в Санкт-Петербурге"
       >
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
@@ -430,6 +433,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </main>
     </div>
   );
 }

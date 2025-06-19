@@ -32,6 +32,23 @@ const contactFormSchema = z.object({
 type ContactFormData = z.infer<typeof contactFormSchema>;
 
 export default function Contacts() {
+  // Schema.org микроразметка для контактной информации
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Риэлтор в СПб",
+    "url": "https://realtorvspb.ru",
+    "telephone": "+7 (812) 123-45-67",
+    "email": "info@realtorvspb.ru",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Невский проспект, 15, БЦ \"Северная Столица\", 5 этаж",
+      "addressLocality": "Санкт-Петербург",
+      "addressCountry": "RU"
+    },
+    "openingHours": "Mo-Su 09:00-21:00",
+    "areaServed": "Санкт-Петербург"
+  };
   const { toast } = useToast();
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -132,6 +149,11 @@ export default function Contacts() {
 
   return (
     <div className="min-h-screen bg-neutral-50">
+      {/* Микроразметка Schema.org */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-teal-900 to-blue-800 py-20">
         <div className="absolute inset-0 bg-black bg-opacity-40"></div>

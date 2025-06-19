@@ -328,7 +328,7 @@ export default function Header() {
             <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-text-primary">Купить недвижимость</h3>
-                <button onClick={() => setActiveSubmenu(null)} className="text-gray-400 hover:text-gray-600">
+                <button onClick={() => setActiveSubmenu(null)} className="text-gray-400 hover:text-gray-600" aria-label="Закрыть меню покупки недвижимости">
                   <X className="w-6 h-6" />
                 </button>
               </div>
