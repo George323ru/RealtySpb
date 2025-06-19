@@ -10,13 +10,13 @@ interface PropertyCardProps {
 }
 
 export default function PropertyCard({ property }: PropertyCardProps) {
-  const formatPrice = (price: string) => {
-    return new Intl.NumberFormat("ru-RU").format(parseFloat(price));
+  const formatPrice = (price: number) => {
+    return new Intl.NumberFormat("ru-RU").format(price);
   };
 
-  const formatPricePerMeter = (price: string | null) => {
+  const formatPricePerMeter = (price: number | null) => {
     if (!price) return "";
-    return new Intl.NumberFormat("ru-RU").format(parseFloat(price));
+    return new Intl.NumberFormat("ru-RU").format(price);
   };
 
   const getPropertyTypeLabel = (type: string) => {
@@ -40,17 +40,20 @@ export default function PropertyCard({ property }: PropertyCardProps) {
     return categories[category as keyof typeof categories] || category;
   };
 
-  const getCategoryColor = (category: string) => {
+  const getCategoryColor = (propertyType: string) => {
     const colors = {
-      new_building: "bg-green-500",
-      secondary: "bg-blue-500",
-      rental: "bg-purple-500"
+      apartment: "bg-blue-500",
+      house: "bg-green-500", 
+      commercial: "bg-accent-orange",
+      land: "bg-yellow-500",
+      garage: "bg-gray-500",
+      parking: "bg-purple-500"
     };
-    return colors[category as keyof typeof colors] || "bg-gray-500";
+    return colors[propertyType as keyof typeof colors] || "bg-gray-500";
   };
 
   return (
-    <Card className="property-card overflow-hidden">
+    <Card className="card-unified group animate-fade-in">
       <div className="relative">
         <img
           src={property.images[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3"}
@@ -58,17 +61,21 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           className="w-full h-64 object-cover"
         />
         <div className="absolute top-4 left-4">
-          <Badge className={`${getCategoryColor(property.category)} text-white`}>
-            {getCategoryLabel(property.category)}
+          <Badge className={`${getCategoryColor(property.propertyType)} text-white font-medium px-3 py-1 rounded-md`}>
+            {getPropertyTypeLabel(property.propertyType)}
           </Badge>
         </div>
         <div className="absolute top-4 right-4">
-          <button className="w-8 h-8 bg-white bg-opacity-80 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all">
-            <Heart className="w-4 h-4 text-gray-600" />
-          </button>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="w-10 h-10 bg-white/90 backdrop-blur-sm hover:bg-white text-gray-600 hover:text-red-500 min-h-[44px] min-w-[44px]"
+          >
+            <Heart className="w-4 h-4" />
+          </Button>
         </div>
       </div>
-      <CardContent className="p-6">
+      <CardContent className="p-lg">
         <div className="flex items-center justify-between mb-3">
           <span className="text-2xl font-bold text-text-primary">
             {formatPrice(property.price)} ₽
@@ -94,7 +101,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
           <span>{parseFloat(property.area)} м²</span>
         </div>
         <Link href={`/property/${property.id}`}>
-          <Button className="w-full bg-accent-orange text-white hover:bg-orange-600">
+          <Button className="w-full" size="default">
             Подробнее
           </Button>
         </Link>
