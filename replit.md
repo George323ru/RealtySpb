@@ -148,6 +148,7 @@ Changelog:
 - June 19, 2025. Replaced large grid navigation with floating action button in bottom-right corner - opens compact bottom sheet menu to save screen space
 - June 19, 2025. Created fixed bottom navigation bar with 10 main sections in 2 rows (5x2 grid) - all menu items always visible, compact design with small icons and text
 - June 19, 2025. Unified navigation design - removed "Еще" button, moved all sections to main 5x2 grid, made service dropdown menu match "Купить" style with simple list layout instead of icon cards
+- June 19, 2025. Optimized mobile navigation - moved Команда, О нас, Отзывы, Блог, Контакты to desktop header menu, simplified mobile bottom bar to single row with 5 core functions (Главная, Купить, Продать, Аренда, Услуги)
 ```
 
 ## User Preferences

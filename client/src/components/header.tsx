@@ -102,7 +102,9 @@ export default function Header() {
         ]
       }
     },
-    { name: "Специалисты", href: "/realtor-constructor", icon: "Users" },
+    { name: "Команда", href: "/team", icon: "Users" },
+    { name: "О нас", href: "/about", icon: "BookOpen" },
+    { name: "Отзывы", href: "/reviews", icon: "Users" },
     { name: "Блог", href: "/blog", icon: "BookOpen" },
     { name: "Контакты", href: "/contacts", icon: "Phone" },
   ];
@@ -251,94 +253,52 @@ export default function Header() {
 
         {/* Mobile Bottom Navigation Bar */}
         <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 shadow-lg">
-          <div className="grid grid-cols-5 gap-1 py-2 px-2">
-            {/* First row */}
+          <div className="flex items-center justify-around py-2 px-1">
             <Link href="/" className={cn(
-              "flex flex-col items-center justify-center p-1 rounded-lg transition-all duration-200 min-w-0",
+              "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
               location === "/" ? "text-accent-orange" : "text-gray-600"
             )}>
-              <Home className="w-4 h-4 mb-0.5" />
+              <Home className="w-5 h-5 mb-0.5" />
               <span className="text-xs font-medium">Главная</span>
             </Link>
             
             <button 
               onClick={() => setActiveSubmenu(activeSubmenu === 'buy' ? null : 'buy')}
               className={cn(
-                "flex flex-col items-center justify-center p-1 rounded-lg transition-all duration-200 min-w-0",
+                "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
                 activeSubmenu === 'buy' ? "text-accent-orange" : "text-gray-600"
               )}
             >
-              <ShoppingCart className="w-4 h-4 mb-0.5" />
+              <ShoppingCart className="w-5 h-5 mb-0.5" />
               <span className="text-xs font-medium">Купить</span>
             </button>
             
             <Link href="/sell" className={cn(
-              "flex flex-col items-center justify-center p-1 rounded-lg transition-all duration-200 min-w-0",
+              "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
               location === "/sell" ? "text-accent-orange" : "text-gray-600"
             )}>
-              <TrendingUp className="w-4 h-4 mb-0.5" />
+              <TrendingUp className="w-5 h-5 mb-0.5" />
               <span className="text-xs font-medium">Продать</span>
             </Link>
             
             <Link href="/rent" className={cn(
-              "flex flex-col items-center justify-center p-1 rounded-lg transition-all duration-200 min-w-0",
+              "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
               location === "/rent" ? "text-accent-orange" : "text-gray-600"
             )}>
-              <Key className="w-4 h-4 mb-0.5" />
+              <Key className="w-5 h-5 mb-0.5" />
               <span className="text-xs font-medium">Аренда</span>
             </Link>
             
             <button 
               onClick={() => setActiveSubmenu(activeSubmenu === 'services' ? null : 'services')}
               className={cn(
-                "flex flex-col items-center justify-center p-1 rounded-lg transition-all duration-200 min-w-0",
+                "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
                 activeSubmenu === 'services' ? "text-accent-orange" : "text-gray-600"
               )}
             >
-              <Grid3X3 className="w-4 h-4 mb-0.5" />
+              <Grid3X3 className="w-5 h-5 mb-0.5" />
               <span className="text-xs font-medium">Услуги</span>
             </button>
-            
-            {/* Second row */}
-            <Link href="/team" className={cn(
-              "flex flex-col items-center justify-center p-1 rounded-lg transition-all duration-200 min-w-0",
-              location === "/team" ? "text-accent-orange" : "text-gray-600"
-            )}>
-              <Users className="w-4 h-4 mb-0.5" />
-              <span className="text-xs font-medium">Команда</span>
-            </Link>
-            
-            <Link href="/about" className={cn(
-              "flex flex-col items-center justify-center p-1 rounded-lg transition-all duration-200 min-w-0",
-              location === "/about" ? "text-accent-orange" : "text-gray-600"
-            )}>
-              <BookOpen className="w-4 h-4 mb-0.5" />
-              <span className="text-xs font-medium">О нас</span>
-            </Link>
-            
-            <Link href="/reviews" className={cn(
-              "flex flex-col items-center justify-center p-1 rounded-lg transition-all duration-200 min-w-0",
-              location === "/reviews" ? "text-accent-orange" : "text-gray-600"
-            )}>
-              <Users className="w-4 h-4 mb-0.5" />
-              <span className="text-xs font-medium">Отзывы</span>
-            </Link>
-            
-            <Link href="/blog" className={cn(
-              "flex flex-col items-center justify-center p-1 rounded-lg transition-all duration-200 min-w-0",
-              location === "/blog" ? "text-accent-orange" : "text-gray-600"
-            )}>
-              <BookOpen className="w-4 h-4 mb-0.5" />
-              <span className="text-xs font-medium">Блог</span>
-            </Link>
-            
-            <Link href="/contacts" className={cn(
-              "flex flex-col items-center justify-center p-1 rounded-lg transition-all duration-200 min-w-0",
-              location === "/contacts" ? "text-accent-orange" : "text-gray-600"
-            )}>
-              <Phone className="w-4 h-4 mb-0.5" />
-              <span className="text-xs font-medium">Контакты</span>
-            </Link>
           </div>
         </div>
 
