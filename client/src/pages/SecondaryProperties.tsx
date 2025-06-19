@@ -13,7 +13,17 @@ import {
 } from "@/components/ui/select";
 import PropertyCard from "@/components/PropertyCard";
 import { Search, SlidersHorizontal, Home, Clock, Shield, DollarSign } from "lucide-react";
-import type { Property, PropertySearch } from "@shared/schema";
+import type { Property } from "@shared/schema";
+
+interface PropertySearch {
+  dealType?: string;
+  propertyType?: string;
+  district?: string;
+  priceFrom?: string;
+  priceTo?: string;
+  rooms?: string;
+  isNew?: boolean;
+}
 
 const districts = [
   "Центральный", "Василеостровский", "Выборгский", "Калининский",
@@ -180,7 +190,7 @@ export default function SecondaryProperties() {
                         <SelectValue placeholder="Любой тип" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Любой тип</SelectItem>
+                        <SelectItem value="any">Любой тип</SelectItem>
                         {propertyTypes.map((type) => (
                           <SelectItem key={type.value} value={type.value}>
                             {type.label}
@@ -202,7 +212,7 @@ export default function SecondaryProperties() {
                         <SelectValue placeholder="Любой район" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Любой район</SelectItem>
+                        <SelectItem value="any">Любой район</SelectItem>
                         {districts.map((district) => (
                           <SelectItem key={district} value={district}>
                             {district}
@@ -281,7 +291,7 @@ export default function SecondaryProperties() {
                         <SelectValue placeholder="Любое" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">Любое количество</SelectItem>
+                        <SelectItem value="any">Любое количество</SelectItem>
                         <SelectItem value="1">1 комната</SelectItem>
                         <SelectItem value="2">2 комнаты</SelectItem>
                         <SelectItem value="3">3 комнаты</SelectItem>

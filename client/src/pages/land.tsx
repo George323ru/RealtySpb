@@ -132,7 +132,7 @@ export default function LandPage() {
                     <SelectValue placeholder="Любая" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Любая</SelectItem>
+                    <SelectItem value="any">Любая</SelectItem>
                     <SelectItem value="6">до 6 соток</SelectItem>
                     <SelectItem value="10">6-10 соток</SelectItem>
                     <SelectItem value="15">10-15 соток</SelectItem>
@@ -149,7 +149,7 @@ export default function LandPage() {
                     <SelectValue placeholder="Любой" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Любой</SelectItem>
+                    <SelectItem value="any">Любой</SelectItem>
                     <SelectItem value="Всеволожский">Всеволожский</SelectItem>
                     <SelectItem value="Гатчинский">Гатчинский</SelectItem>
                     <SelectItem value="Ломоносовский">Ломоносовский</SelectItem>
@@ -165,7 +165,7 @@ export default function LandPage() {
                     <SelectValue placeholder="Любые" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Любые</SelectItem>
+                    <SelectItem value="any">Любые</SelectItem>
                     <SelectItem value="full">Все коммуникации</SelectItem>
                     <SelectItem value="partial">Частично</SelectItem>
                     <SelectItem value="none">Без коммуникаций</SelectItem>

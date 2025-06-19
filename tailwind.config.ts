@@ -28,6 +28,10 @@ export default {
         secondary: {
           DEFAULT: "var(--secondary)",
           foreground: "var(--secondary-foreground)",
+          50: "var(--secondary-50)",
+          100: "var(--secondary-100)",
+          200: "var(--secondary-200)",
+          300: "var(--secondary-300)",
         },
         muted: {
           DEFAULT: "var(--muted)",
@@ -76,12 +80,6 @@ export default {
           300: "var(--neutral-300)",
           400: "var(--neutral-400)",
           500: "var(--neutral-500)",
-        },
-        secondary: {
-          50: "var(--secondary-50)",
-          100: "var(--secondary-100)",
-          200: "var(--secondary-200)",
-          300: "var(--secondary-300)",
         },
       },
       keyframes: {
