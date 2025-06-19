@@ -91,7 +91,7 @@ export default function PropertyDetail() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Image Gallery */}
-      <section className="bg-black">
+      <section className="bg-card">
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
             {/* Main Image */}
@@ -144,7 +144,7 @@ export default function PropertyDetail() {
                 />
               ))}
               {property.images.length > 4 && (
-                <div className="w-full h-24 lg:h-32 bg-gray-800 rounded flex items-center justify-center cursor-pointer hover:bg-gray-700 transition-colors">
+                <div className="w-full h-24 lg:h-32 bg-neutral-200 rounded flex items-center justify-center cursor-pointer hover:bg-neutral-300 transition-colors">
                   <span className="text-white text-sm">
                     +{property.images.length - 4} фото
                   </span>

@@ -150,7 +150,7 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
             {/* Индикатор количества фото */}
             {building.images && building.images.length > 1 && (
               <div className="absolute bottom-4 right-4">
-                <div className="bg-black/80 text-white px-3 py-1.5 rounded-md text-sm flex items-center">
+                <div className="bg-neutral-300/80 text-text-primary px-3 py-1.5 rounded-md text-sm flex items-center">
                   <Building className="w-3 h-3 mr-1.5" />
                   {building.images.length} фото
                 </div>
