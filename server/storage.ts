@@ -854,7 +854,9 @@ export class MemStorage implements IStorage {
       ...review, 
       id, 
       isPublished: false,
-      createdAt: new Date() 
+      createdAt: new Date(),
+      propertyType: review.propertyType ?? null,
+      serviceType: review.serviceType ?? null
     };
     this.reviews.set(id, newReview);
     return newReview;
@@ -875,7 +877,10 @@ export class MemStorage implements IStorage {
       ...post, 
       id, 
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
+      image: post.image ?? null,
+      tags: post.tags ?? null,
+      isPublished: post.isPublished ?? true
     };
     this.blogPosts.set(id, newPost);
     return newPost;
@@ -901,7 +906,14 @@ export class MemStorage implements IStorage {
     const newPromotion: Promotion = { 
       ...promotion, 
       id, 
-      createdAt: new Date() 
+      createdAt: new Date(),
+      isActive: promotion.isActive ?? true,
+      buttonText: promotion.buttonText ?? "Подробнее",
+      discountValue: promotion.discountValue ?? null,
+      validUntil: promotion.validUntil ?? null,
+      priority: promotion.priority ?? 0,
+      backgroundColor: promotion.backgroundColor ?? "#f59e0b",
+      textColor: promotion.textColor ?? "#000000"
     };
     this.promotions.set(id, newPromotion);
     return newPromotion;
@@ -957,7 +969,7 @@ export class DatabaseStorage implements IStorage {
     }
 
     if (conditions.length > 0) {
-      query = query.where(and(...conditions));
+      return await query.where(and(...conditions));
     }
 
     return await query;
