@@ -153,33 +153,35 @@ export default function Header() {
                   >
                     {IconComponent && <IconComponent className="w-4 h-4 mr-2" />}
                     {item.name}
-                    {(item.dropdown || item.megaMenu) && <ChevronDown className="ml-1 w-3 h-3" />}
+                    {item.megaMenu && <ChevronDown className="ml-1 w-3 h-3" />}
                   </Link>
                   
-                  {/* Mega Menu for "Купить" */}
+                  {/* Mega Menu for "Купить" and "Услуги" */}
                   {item.megaMenu && (
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-xl mt-2 py-6 w-[600px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-neutral-200">
-                      <div className="px-6">
-                        <div className="grid grid-cols-3 gap-6">
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-2xl mt-3 py-8 w-[720px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-neutral-100">
+                      <div className="px-8">
+                        <div className="grid grid-cols-3 gap-8">
                           {item.megaMenu.sections.map((section, idx) => (
-                            <div key={idx}>
-                              <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">
+                            <div key={idx} className="space-y-1">
+                              <h4 className="font-bold text-text-primary mb-4 text-sm uppercase tracking-wider text-neutral-800 border-b border-neutral-100 pb-2">
                                 {section.title}
                               </h4>
-                              <div className="space-y-2">
+                              <div className="space-y-1">
                                 {section.links.map((link) => (
                                   <Link
                                     key={link.name}
                                     href={link.href}
                                     className="block group/item"
                                   >
-                                    <div className="px-3 py-2 rounded-lg hover:bg-orange-50 transition-colors">
-                                      <div className="font-medium text-text-primary group-hover/item:text-accent-orange text-sm">
+                                    <div className="px-3 py-2.5 rounded-lg hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 transition-all duration-200 border border-transparent hover:border-orange-100">
+                                      <div className="font-medium text-text-primary group-hover/item:text-accent-orange text-sm leading-tight">
                                         {link.name}
                                       </div>
-                                      <div className="text-xs text-text-secondary mt-1">
-                                        {link.desc}
-                                      </div>
+                                      {(link as any).desc && (
+                                        <div className="text-xs text-text-secondary mt-1 leading-relaxed">
+                                          {(link as any).desc}
+                                        </div>
+                                      )}
                                     </div>
                                   </Link>
                                 ))}
@@ -190,23 +192,7 @@ export default function Header() {
                       </div>
                     </div>
                   )}
-                  
-                  {/* Regular Dropdown */}
-                  {item.dropdown && (
-                    <div className="absolute top-full left-0 bg-white shadow-xl rounded-lg mt-2 py-3 w-64 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50 border border-neutral-200">
-                      <div className="px-2">
-                        {item.dropdown.map((dropdownItem) => (
-                          <Link
-                            key={dropdownItem.name}
-                            href={dropdownItem.href}
-                            className="block px-3 py-2 text-sm text-text-secondary hover:text-accent-orange hover:bg-orange-50 rounded-lg transition-colors"
-                          >
-                            {dropdownItem.name}
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+
                 </div>
               );
             })}
