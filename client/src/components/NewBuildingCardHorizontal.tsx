@@ -59,39 +59,27 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
           {/* Левая часть - Информация */}
           <div className="w-1/2 p-6 flex flex-col justify-between">
             <div>
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="text-lg font-bold text-gray-900 group-hover:text-accent-orange transition-colors leading-tight">
+              <div className="mb-3">
+                <h3 className="text-xl font-bold text-gray-900 group-hover:text-accent-orange transition-colors leading-tight mb-2">
                   {building.name}
                 </h3>
-                <Badge 
-                  className={`${statusInfo.color} text-white font-medium px-2 py-1 text-xs ml-2 shrink-0`}
-                >
-                  {statusInfo.label}
-                </Badge>
               </div>
               
-              <div className="space-y-2 mb-4">
-                <div className="flex items-center text-sm text-gray-600">
-                  <MapPin className="w-4 h-4 mr-2 text-gray-400 shrink-0" />
-                  <span className="truncate">{building.location}</span>
+              <div className="space-y-3 mb-4">
+                <div className="flex items-center text-gray-700">
+                  <MapPin className="w-4 h-4 mr-2 text-gray-500 shrink-0" />
+                  <span className="text-sm truncate">{building.location}</span>
                 </div>
                 
-                <div className="flex items-center text-sm text-gray-600">
-                  <Building className="w-4 h-4 mr-2 text-gray-400 shrink-0" />
-                  <span>Застройщик: {building.developer}</span>
+                <div className="flex items-center text-gray-700">
+                  <Building className="w-4 h-4 mr-2 text-gray-500 shrink-0" />
+                  <span className="text-sm">{building.developer}</span>
                 </div>
-                
-                {building.completionYear && (
-                  <div className="flex items-center text-sm text-gray-600">
-                    <Calendar className="w-4 h-4 mr-2 text-gray-400 shrink-0" />
-                    <span>Сдача: {building.completionYear}</span>
-                  </div>
-                )}
                 
                 {building.totalFlats && (
-                  <div className="flex items-center text-sm text-gray-600">
-                    <Home className="w-4 h-4 mr-2 text-gray-400 shrink-0" />
-                    <span>{building.totalFlats} квартир</span>
+                  <div className="flex items-center text-gray-700">
+                    <Home className="w-4 h-4 mr-2 text-gray-500 shrink-0" />
+                    <span className="text-sm">{building.totalFlats} квартир</span>
                   </div>
                 )}
               </div>
@@ -114,9 +102,11 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
                   Подробнее
                 </Button>
               </Link>
-              <Button size="sm" variant="outline" className="border-gray-300 hover:border-accent-orange hover:text-accent-orange h-8 text-sm">
-                Планировки
-              </Button>
+              <Link href={`/new-buildings/${building.id}?tab=layouts`}>
+                <Button size="sm" variant="outline" className="border-gray-300 hover:border-accent-orange hover:text-accent-orange h-8 text-sm">
+                  Планировки
+                </Button>
+              </Link>
             </div>
           </div>
           
@@ -130,21 +120,22 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
               />
             </Link>
             
-            {/* Плашка с временем сдачи */}
-            {building.completionYear && (
-              <div className="absolute top-4 left-4">
+            {/* Плашка статуса/сдачи */}
+            <div className="absolute top-4 left-4">
+              {statusInfo.label === 'Сдан' ? (
+                <Badge className="bg-green-500 text-white font-medium px-3 py-1">
+                  Сдан
+                </Badge>
+              ) : building.completionYear ? (
                 <Badge className="bg-white/90 text-gray-900 font-medium px-3 py-1">
                   <Calendar className="w-3 h-3 mr-1" />
                   Сдача: {building.completionYear}
                 </Badge>
-              </div>
-            )}
-            
-            {/* Статус готовности */}
-            <div className="absolute top-4 right-4">
-              <Badge className={`${statusInfo.color} text-white font-medium px-3 py-1`}>
-                {statusInfo.label}
-              </Badge>
+              ) : (
+                <Badge className={`${statusInfo.color} text-white font-medium px-3 py-1`}>
+                  {statusInfo.label}
+                </Badge>
+              )}
             </div>
             
             {/* Overlay при hover */}
