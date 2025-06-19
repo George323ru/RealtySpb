@@ -969,10 +969,10 @@ export class DatabaseStorage implements IStorage {
     }
 
     if (conditions.length > 0) {
-      return await query.where(and(...conditions));
+      return await db.select().from(properties).where(and(...conditions));
     }
 
-    return await query;
+    return await db.select().from(properties);
   }
 
   async getProperty(id: number): Promise<Property | undefined> {
@@ -1081,18 +1081,19 @@ export class DatabaseStorage implements IStorage {
   }
 
   async getPromotions(category?: string): Promise<Promotion[]> {
-    let query = db.select().from(promotions).where(eq(promotions.isActive, true));
+    let results: Promotion[];
     
     if (category && category !== "all") {
-      query = query.where(
+      results = await db.select().from(promotions).where(
         and(
           eq(promotions.isActive, true),
           or(eq(promotions.category, category), eq(promotions.category, "all"))
         )
       );
+    } else {
+      results = await db.select().from(promotions).where(eq(promotions.isActive, true));
     }
     
-    const results = await query;
     return results.sort((a, b) => b.priority - a.priority);
   }
 
