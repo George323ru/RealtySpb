@@ -16,12 +16,12 @@ export default function Buy() {
   const searchParams = new URLSearchParams(location.split('?')[1] || '');
 
   const [filters, setFilters] = useState({
-    propertyType: searchParams.get('propertyType') || searchParams.get('type') || '',
-    district: searchParams.get('district') || '',
+    propertyType: searchParams.get('propertyType') || searchParams.get('type') || 'all',
+    district: searchParams.get('district') || 'all',
     priceFrom: searchParams.get('priceFrom') || '',
     priceTo: searchParams.get('priceTo') || '',
-    buildingType: searchParams.get('buildingType') || '',
-    rooms: searchParams.get('rooms') || '',
+    buildingType: searchParams.get('buildingType') || 'all',
+    rooms: searchParams.get('rooms') || 'all',
   });
 
   const [showFilters, setShowFilters] = useState(false);
@@ -207,6 +207,7 @@ export default function Buy() {
                         <SelectValue placeholder="Выберите тип" />
                       </SelectTrigger>
                       <SelectContent>
+                        <SelectItem value="all">Все типы</SelectItem>
                         {propertyTypes.map((type) => (
                           <SelectItem key={type.value} value={type.value}>
                             {type.label}
@@ -229,6 +230,7 @@ export default function Buy() {
                         <SelectValue placeholder="Выберите район" />
                       </SelectTrigger>
                       <SelectContent>
+                        <SelectItem value="all">Все районы</SelectItem>
                         {districts.map((district) => (
                           <SelectItem key={district} value={district}>
                             {district}

@@ -47,8 +47,8 @@ const propertyTypes = [
 export default function SearchForm({ className, onSearch }: SearchFormProps) {
   const [, setLocation] = useLocation();
   // Removed action state since this form is only for purchasing
-  const [propertyType, setPropertyType] = useState("");
-  const [district, setDistrict] = useState("");
+  const [propertyType, setPropertyType] = useState("all");
+  const [district, setDistrict] = useState("all");
   const [priceFrom, setPriceFrom] = useState("");
   const [priceTo, setPriceTo] = useState("");
 
@@ -61,7 +61,7 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
       // Navigate to buy page with filters
       const searchParams = new URLSearchParams();
       searchParams.set('dealType', 'buy');
-      if (propertyType) searchParams.set('propertyType', propertyType);
+      if (propertyType && propertyType !== 'all') searchParams.set('propertyType', propertyType);
       if (district && district !== 'all') searchParams.set('district', district);
       if (priceFrom) searchParams.set('priceFrom', priceFrom);
       if (priceTo) searchParams.set('priceTo', priceTo);
@@ -81,6 +81,7 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
               <SelectValue placeholder="Тип" />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="all">Все типы</SelectItem>
               {propertyTypes.map((type) => (
                 <SelectItem key={type.value} value={type.value}>
                   {type.label}
