@@ -90,7 +90,7 @@ export default function UnifiedForm({
     return (
       <Card className={className}>
         <CardContent className="p-8 text-center">
-          <CheckCircle className="w-16 h-16 mx-auto text-green-500 mb-4" />
+          <CheckCircle className="w-16 h-16 mx-auto text-accent-orange mb-4" />
           <h3 className="text-2xl font-bold text-text-primary mb-2">
             {successTitle}
           </h3>

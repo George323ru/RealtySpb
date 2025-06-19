@@ -43,14 +43,14 @@ export default function PropertyCard({ property }: PropertyCardProps) {
 
   const getCategoryColor = (propertyType: string) => {
     const colors = {
-      apartment: "bg-blue-500",
-      house: "bg-green-500", 
+      apartment: "bg-primary",
+      house: "bg-accent-orange", 
       commercial: "bg-accent-orange",
-      land: "bg-yellow-500",
-      garage: "bg-gray-500",
-      parking: "bg-purple-500"
+      land: "bg-primary",
+      garage: "bg-neutral-500",
+      parking: "bg-accent"
     };
-    return colors[propertyType as keyof typeof colors] || "bg-gray-500";
+    return colors[propertyType as keyof typeof colors] || "bg-neutral-500";
   };
 
   return (

@@ -15,8 +15,8 @@ export default function NewBuildingCard({ building, className = "" }: NewBuildin
   return (
     <Card className={`bg-white hover:shadow-lg transition-shadow border border-neutral-200 ${className}`}>
       <CardContent className="p-6">
-        <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
-          <Building className="w-6 h-6 text-blue-600" />
+        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+          <Building className="w-6 h-6 text-primary" />
         </div>
         
         <h3 className="font-semibold text-text-primary mb-2">{building.name}</h3>

@@ -75,7 +75,7 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
         </div>
         
         <Link href={`/property/${property.id}`} className="mt-auto">
-          <Button className="w-full bg-accent-orange text-white hover:bg-orange-600">
+          <Button className="w-full bg-accent-orange text-white hover:bg-accent-orange/90">
             Подробнее
           </Button>
         </Link>
