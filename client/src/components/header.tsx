@@ -144,7 +144,7 @@ export default function Header() {
       </div>
 
       {/* Main Navigation */}
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 mobile-nav-safe">
         <nav className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center">
@@ -158,7 +158,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="flex items-center space-x-0.5 overflow-x-auto" style={{ 
+          <div className="hidden lg:flex items-center space-x-0.5 overflow-x-auto" style={{ 
             maxWidth: 'calc(100vw - 200px)',
             scrollbarWidth: 'none',
             msOverflowStyle: 'none'
@@ -256,21 +256,7 @@ export default function Header() {
           </div>
 
           {/* Cart Button */}
-          <div className="flex items-center">
-            <Link href="/cart" className="relative">
-              <Button variant="outline" size="sm" className="relative rounded-lg border-neutral-300 hover:border-accent-orange hover:text-accent-orange transition-colors">
-                <ShoppingCart className="h-4 w-4" />
-                {getTotalItems() > 0 && (
-                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-accent-orange text-white text-xs">
-                    {getTotalItems()}
-                  </Badge>
-                )}
-              </Button>
-            </Link>
-          </div>
-
-          {/* Mobile Cart Button */}
-          <div className="lg:hidden">
+          <div className="hidden lg:flex items-center">
             <Link href="/cart" className="relative">
               <Button variant="outline" size="sm" className="relative rounded-lg border-neutral-300 hover:border-accent-orange hover:text-accent-orange transition-colors">
                 <ShoppingCart className="h-4 w-4" />
@@ -286,8 +272,8 @@ export default function Header() {
         </nav>
 
         {/* Mobile Bottom Navigation Bar */}
-        <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 shadow-lg">
-          <div className="flex items-center justify-around py-2 px-1">
+        <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 shadow-lg mobile-nav-safe">
+          <div className="flex items-center justify-around py-2 px-1 max-w-full">
             <Link href="/" className={cn(
               "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
               location === "/" ? "text-accent-orange" : "text-gray-600"

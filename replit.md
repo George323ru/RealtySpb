@@ -152,6 +152,8 @@ Changelog:
 - June 19, 2025. Made navigation visible on all screen sizes with horizontal scroll - all secondary sections now accessible in top menu across desktop and mobile devices with hidden scrollbar for clean appearance
 - June 19, 2025. Simplified new building cards to single "Подробнее" button - removed "Планировки" button, ensured proper navigation to building detail pages with automatic scroll to top on page load
 - June 19, 2025. Standardized new building card height to 200px - made all cards uniform size with compact design, reduced padding and font sizes for better space utilization
+- June 19, 2025. Fixed critical mobile responsiveness issues - added proper viewport meta tags with user-scalable=no, prevented content overflow with CSS constraints, removed duplicate navigation elements
+- June 19, 2025. Enhanced mobile CSS safety - added overflow-x hidden to html/body, box-sizing border-box, container max-width constraints, mobile-nav-safe class for proper viewport handling
 ```
 
 ## User Preferences
