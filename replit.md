@@ -185,6 +185,10 @@ Changelog:
 - June 19, 2025. Исправлены проблемы контрастности text-muted-foreground → text-text-secondary, добавлена система z-index управления и предотвращения overflow
 - June 19, 2025. Внедрена accessibility-compliant интерактивность: минимальные touch-target 44x44px, focus-visible состояния, плавные анимации
 - June 19, 2025. Создана универсальная система селекторов для button, [role="button"], .btn, a[href] с исключениями через .no-interaction класс
+- June 19, 2025. UX/UI унификация завершена - устранены все темные блоки, применена цветовая схема 60/30/10 с нейтральной базой
+- June 19, 2025. Исправлены выпадающие меню: заменены bg-black на bg-neutral-300/60, bg-white на bg-neutral-50 с proper shadows
+- June 19, 2025. Унифицированы все блоки сайта: header, cards, forms, mega menus с консистентным styling и semantic colors
+- June 19, 2025. Применена воздушная типографика с improved contrast ratios, заменены text-gray на text-text-secondary variables
 ```
 
 ## User Preferences
