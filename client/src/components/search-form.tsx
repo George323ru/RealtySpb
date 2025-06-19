@@ -62,7 +62,7 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
       const searchParams = new URLSearchParams();
       searchParams.set('dealType', 'buy');
       if (propertyType) searchParams.set('propertyType', propertyType);
-      if (district) searchParams.set('district', district);
+      if (district && district !== 'all') searchParams.set('district', district);
       if (priceFrom) searchParams.set('priceFrom', priceFrom);
       if (priceTo) searchParams.set('priceTo', priceTo);
       
@@ -96,6 +96,7 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
               <SelectValue placeholder="Район" />
             </SelectTrigger>
             <SelectContent>
+              <SelectItem value="all">Все районы</SelectItem>
               {districts.map((districtName) => (
                 <SelectItem key={districtName} value={districtName}>
                   {districtName}

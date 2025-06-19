@@ -345,9 +345,9 @@ export default function Home() {
                           <p className="text-2xl font-bold text-accent-orange">
                             {(building.priceFrom / 1000000).toFixed(1)} млн ₽
                           </p>
-                          {building.pricePerSqm && (
+                          {building.pricePerMeter && (
                             <p className="text-sm text-text-secondary">
-                              {(building.pricePerSqm / 1000).toFixed(0)} тыс ₽/м²
+                              {(building.pricePerMeter / 1000).toFixed(0)} тыс ₽/м²
                             </p>
                           )}
                         </div>
