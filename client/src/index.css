@@ -123,6 +123,35 @@ img {
   animation: scaleIn var(--transition-fast) ease-out;
 }
 
+/* Enhanced Interactive Feedback */
+.interactive-element {
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.interactive-element:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.interactive-element:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Link Improvements */
+a:not(.no-hover):hover {
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+/* Focus States for Accessibility */
+.focus-visible:focus-visible {
+  outline: 2px solid var(--accent-orange);
+  outline-offset: 2px;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
