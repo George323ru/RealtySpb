@@ -126,7 +126,8 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
         
         <Button
           onClick={handleSearch}
-          className="bg-accent-orange text-white px-6 h-10 rounded-lg font-medium hover:bg-orange-600 flex items-center gap-2"
+          className="px-6 h-10 flex items-center gap-2"
+          size="sm"
         >
           <Search className="w-4 h-4" />
           Найти

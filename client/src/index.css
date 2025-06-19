@@ -273,6 +273,12 @@ input:focus, textarea:focus, select:focus {
   transform: translateY(-2px);
 }
 
+/* Ensure no conflicting styles */
+.card-unified.group:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
 /* Unified spacing classes based on 8px grid */
 .space-xs { margin: var(--spacing-xs); }
 .space-sm { margin: var(--spacing-sm); }
@@ -493,5 +499,50 @@ input:focus, textarea:focus, select:focus {
       opacity: 1;
       transform: scale(1);
     }
+  }
+
+  /* Unified hover states for all interactive elements */
+  .hover-lift {
+    transition: var(--transition-normal);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Remove any conflicting button styles and ensure consistency */
+  .btn-primary:disabled,
+  .btn-secondary:disabled,
+  .btn-outline:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Ensure all forms use consistent spacing and styling */
+  .form-unified {
+    background: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    padding: var(--spacing-lg);
+  }
+
+  .form-unified .space-y-6 > * + * {
+    margin-top: var(--spacing-lg);
+  }
+
+  .form-unified .space-y-4 > * + * {
+    margin-top: var(--spacing-md);
+  }
+
+  .form-unified .space-y-3 > * + * {
+    margin-top: var(--spacing-md);
+  }
+
+  .form-unified .space-y-2 > * + * {
+    margin-top: var(--spacing-sm);
   }
 }

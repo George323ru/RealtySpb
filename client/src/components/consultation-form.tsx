@@ -68,7 +68,7 @@ export default function ConsultationForm({ className, defaultService }: Consulta
 
   if (isSubmitted) {
     return (
-      <div className={`bg-white rounded-2xl p-8 text-center ${className || ''}`}>
+      <div className={`card-unified p-lg text-center animate-scale-in ${className || ''}`}>
         <div className="text-green-500 text-5xl mb-4">✓</div>
         <h3 className="text-2xl font-bold text-text-primary mb-2">
           Заявка отправлена!
@@ -81,7 +81,7 @@ export default function ConsultationForm({ className, defaultService }: Consulta
   }
 
   return (
-    <div className={`bg-white rounded-2xl p-8 ${className || ''}`}>
+    <div className={`card-unified p-lg animate-fade-in ${className || ''}`}>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -119,7 +119,8 @@ export default function ConsultationForm({ className, defaultService }: Consulta
           <Button
             type="submit"
             disabled={mutation.isPending}
-            className="w-full bg-accent-orange text-white py-4 px-6 rounded-lg font-semibold text-lg hover:bg-orange-600"
+            className="w-full py-4 px-6 text-lg"
+            size="lg"
           >
             {mutation.isPending ? "Отправляем..." : "Получить консультацию"}
           </Button>
