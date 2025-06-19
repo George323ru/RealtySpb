@@ -14,7 +14,7 @@ import type { Property } from "@shared/schema";
 export default function Buy() {
   const [location] = useLocation();
   const searchParams = new URLSearchParams(location.split('?')[1] || '');
-  
+
   const [filters, setFilters] = useState({
     propertyType: searchParams.get('propertyType') || searchParams.get('type') || '',
     district: searchParams.get('district') || '',
@@ -52,7 +52,7 @@ export default function Buy() {
         "garage": ["Гараж", "гараж"],
         "parking": ["Машиноместо", "Парковка"]
       };
-      
+
       const allowedTypes = propertyTypeMap[filters.propertyType] || [];
       if (!allowedTypes.some(type => property.propertyType.toLowerCase().includes(type.toLowerCase()))) {
         return false;
@@ -192,7 +192,7 @@ export default function Buy() {
                     </Button>
                   </div>
                 </CardHeader>
-                
+
                 <CardContent className={`space-y-6 ${showFilters ? 'block' : 'hidden lg:block'}`}>
                   {/* Property Type */}
                   <div>
@@ -258,7 +258,7 @@ export default function Buy() {
                   </div>
 
                   {/* Rooms */}
-                  {filters.propertyType === 'квартира' && (
+                  {filters.propertyType === 'apartment' && (
                     <div>
                       <label className="block text-sm font-medium text-text-primary mb-2">
                         Количество комнат
