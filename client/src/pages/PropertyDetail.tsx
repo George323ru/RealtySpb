@@ -103,7 +103,7 @@ export default function PropertyDetail() {
               />
               <div className="absolute top-4 left-4">
                 <Badge className="bg-accent-orange text-white">
-                  {property.propertyType}
+                  {getCategoryLabel(property.category)}
                 </Badge>
               </div>
               <div className="absolute top-4 right-4 flex gap-2">

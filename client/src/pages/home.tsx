@@ -4,7 +4,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import SearchForm from "@/components/SearchForm";
+import SearchForm from "@/components/search-form";
 import PropertyCard from "@/components/property-card";
 import NewBuildingCardHorizontal from "@/components/NewBuildingCardHorizontal";
 import ConsultationForm from "@/components/consultation-form";
@@ -138,7 +138,7 @@ export default function Home() {
             <p className="text-xl lg:text-2xl mb-8 font-light opacity-90">
               Профессиональные услуги по покупке, продаже и аренде недвижимости. Более 15 лет на рынке СПб.
             </p>
-
+            
             <SearchForm className="max-w-5xl mx-auto mt-12" />
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function Home() {
               Выберите подходящий вариант и мы поможем решить вашу задачу быстро и профессионально
             </p>
             </div>
-
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {quickActions.map((action, index) => (
               <Card key={index} className={`group bg-gradient-to-br ${action.color} hover:shadow-xl transition-all duration-300 cursor-pointer h-full`}>
@@ -195,7 +195,7 @@ export default function Home() {
               Тщательно отобранная недвижимость с лучшим соотношением цена-качество
             </p>
             </div>
-
+          
           {/* Property Carousel */}
           <div className="relative mb-8">
             {/* Navigation Buttons */}
@@ -209,7 +209,7 @@ export default function Home() {
             >
               <ChevronLeft className="w-6 h-6 text-gray-700" />
             </button>
-
+            
             <button 
               id="scroll-right"
               className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-white transition-all duration-300 border border-neutral-200"
@@ -233,7 +233,7 @@ export default function Home() {
                 ))}
                 </div>
               </div>
-
+            
             {/* Scroll Indicators */}
             <div className="flex justify-center mt-6 gap-3">
               {Array.from({ length: Math.ceil(properties.length / 3) }).map((_, index) => (
@@ -248,7 +248,7 @@ export default function Home() {
               ))}
               </div>
             </div>
-
+          
           {/* CTA Button */}
           <div className="text-center">
             <Link href="/buy">
@@ -271,115 +271,18 @@ export default function Home() {
               Лучшие жилые комплексы от проверенных застройщиков с государственной гарантией
             </p>
             </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-            {newBuildings.slice(0, 6).map((building) => {
-              const getDefaultImage = () => {
-                const defaultImages = [
-                  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&crop=building",
-                  "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop&crop=building",
-                  "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=300&fit=crop&crop=building",
-                  "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=400&h=300&fit=crop&crop=building"
-                ];
-                return defaultImages[building.id % defaultImages.length];
-              };
-
-              const getStatusInfo = (readiness: string | null) => {
-                if (!readiness) return { label: 'В продаже', color: 'bg-accent-orange' };
-
-                switch (readiness.toLowerCase()) {
-                  case 'готов':
-                  case 'сдан':
-                    return { label: 'Сдан', color: 'bg-green-500' };
-                  case 'отделка':
-                  case 'чистовая отделка':
-                    return { label: 'Отделка', color: 'bg-blue-500' };
-                  case 'строительство':
-                  case 'строится':
-                    return { label: 'Строится', color: 'bg-orange-500' };
-                  case 'фундамент':
-                    return { label: 'Фундамент', color: 'bg-gray-500' };
-                  case 'проект':
-                    return { label: 'Проект', color: 'bg-purple-500' };
-                  default:
-                    return { label: readiness, color: 'bg-accent-orange' };
-                }
-              };
-
-              const statusInfo = getStatusInfo(building.readiness);
-
-              return (
-                <Card key={building.id} className="group bg-white hover:shadow-xl transition-all duration-300 overflow-hidden border border-neutral-200">
-                  <div className="relative">
-                    <img
-                      src={building.images?.[0] || getDefaultImage()}
-                      alt={building.name}
-                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <Badge className={`absolute top-4 right-4 ${statusInfo.color} text-white border-0`}>
-                      {statusInfo.label}
-                    </Badge>
-                  </div>
-
-                  <CardContent className="p-6">
-                    <div className="space-y-4">
-                      <div>
-                        <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-accent-orange transition-colors">
-                          {building.name}
-                        </h3>
-
-                        <div className="flex items-start text-text-secondary mb-2">
-                          <MapPin className="w-4 h-4 mr-2 text-accent-orange shrink-0 mt-0.5" />
-                          <span className="text-sm">{building.location}</span>
-                        </div>
-
-                        <div className="flex items-center text-text-secondary mb-3">
-                          <Building className="w-4 h-4 mr-2 text-accent-orange shrink-0" />
-                          <span className="text-sm">{building.developer}</span>
-                        </div>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-xs text-text-secondary mb-1">от</p>
-                          <p className="text-2xl font-bold text-accent-orange">
-                            {(building.priceFrom / 1000000).toFixed(1)} млн ₽
-                          </p>
-                          {building.pricePerMeter && (
-                            <p className="text-sm text-text-secondary">
-                              {(building.pricePerMeter / 1000).toFixed(0)} тыс ₽/м²
-                            </p>
-                          )}
-                        </div>
-
-                        {building.totalFlats && (
-                          <div className="text-right">
-                            <div className="flex items-center text-text-secondary">
-                              <HomeIcon className="w-4 h-4 mr-1" />
-                              <span className="text-sm">{building.totalFlats} квартир</span>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-
-                      <Link href={`/new-buildings/${building.id}`} className="block">
-                        <Button className="w-full bg-accent-orange text-white hover:bg-orange-600 transition-colors font-semibold py-3">
-                          Подробнее о ЖК
-                          <ArrowRight className="ml-2 w-4 h-4" />
-                        </Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
-              );
-            })}
+          
+          <div className="space-y-6">
+            {newBuildings.slice(0, 3).map((building) => (
+              <NewBuildingCardHorizontal key={building.id} building={building} />
+            ))}
             </div>
-
+          
           <div className="text-center mt-12">
             <Link href="/new-buildings">
-              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 text-lg">
+              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600">
                 Все новостройки СПб
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
             </div>
@@ -397,7 +300,7 @@ export default function Home() {
               Полный спектр услуг для работы с недвижимостью — от дизайна до юридического сопровождения
             </p>
             </div>
-
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {additionalServices.map((service, index) => (
               <Card key={index} className="bg-white hover:shadow-lg transition-shadow border border-neutral-200">
@@ -449,7 +352,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-
+              
               <div className="flex justify-center">
                 <MortgageCalculator compact={true} />
                 </div>
@@ -469,7 +372,7 @@ export default function Home() {
               Ответьте на несколько вопросов, и мы найдем риэлтора с нужным опытом и специализацией
             </p>
             </div>
-
+          
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
               <Card className="bg-white hover:shadow-lg transition-shadow text-center border border-neutral-200">
@@ -481,7 +384,7 @@ export default function Home() {
                   <p className="text-text-secondary">Только проверенные эксперты с опытом от 3 лет</p>
                 </CardContent>
               </Card>
-
+              
               <Card className="bg-white hover:shadow-lg transition-shadow text-center border border-neutral-200">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -491,7 +394,7 @@ export default function Home() {
                   <p className="text-text-secondary">Учитываем ваши требования и тип сделки</p>
                 </CardContent>
               </Card>
-
+              
               <Card className="bg-white hover:shadow-lg transition-shadow text-center border border-neutral-200">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -502,7 +405,7 @@ export default function Home() {
                 </CardContent>
               </Card>
               </div>
-
+            
             <div className="text-center">
               <Link href="/realtor-constructor">
                 <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 text-lg">
@@ -525,7 +428,7 @@ export default function Home() {
             <p className="text-xl mb-8 text-black">
               Оставьте заявку и наш специалист свяжется с вами в течение 15 минут для решения вашего вопроса
             </p>
-
+            
             <ConsultationForm className="max-w-2xl mx-auto" />
             </div>
           </div>

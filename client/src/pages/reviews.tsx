@@ -43,8 +43,8 @@ export default function Reviews() {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [filterRating, setFilterRating] = useState<string>("all");
-  const [filterService, setFilterService] = useState<string>("all");
+  const [filterRating, setFilterRating] = useState<string>("");
+  const [filterService, setFilterService] = useState<string>("");
 
   const { data: reviews = [], isLoading } = useQuery<Review[]>({
     queryKey: ["/api/reviews"],
@@ -398,7 +398,7 @@ export default function Reviews() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Тип услуги</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value || "продажа"}>
+                              <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
                                 <FormControl>
                                   <SelectTrigger>
                                     <SelectValue placeholder="Выберите услугу" />
@@ -423,7 +423,7 @@ export default function Reviews() {
                           render={({ field }) => (
                             <FormItem>
                               <FormLabel>Тип недвижимости</FormLabel>
-                              <Select onValueChange={field.onChange} defaultValue={field.value || "квартира"}>
+                              <Select onValueChange={field.onChange} defaultValue={field.value || ""}>
                                 <FormControl>
                                   <SelectTrigger>
                                     <SelectValue placeholder="Выберите тип" />

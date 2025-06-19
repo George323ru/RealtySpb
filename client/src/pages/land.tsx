@@ -144,12 +144,12 @@ export default function LandPage() {
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Район</label>
-                <Select value={filters.location || 'all'} onValueChange={(value) => handleFilterChange('location', value)}>
+                <Select value={filters.location || ''} onValueChange={(value) => handleFilterChange('location', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Любой" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">Любой</SelectItem>
+                    <SelectItem value="any">Любой</SelectItem>
                     <SelectItem value="Всеволожский">Всеволожский</SelectItem>
                     <SelectItem value="Гатчинский">Гатчинский</SelectItem>
                     <SelectItem value="Ломоносовский">Ломоносовский</SelectItem>
@@ -160,12 +160,12 @@ export default function LandPage() {
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Коммуникации</label>
-                <Select value={filters.utilities || 'all'} onValueChange={(value) => handleFilterChange('utilities', value)}>
+                <Select value={filters.utilities || ''} onValueChange={(value) => handleFilterChange('utilities', value)}>
                   <SelectTrigger>
                     <SelectValue placeholder="Любые" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="all">Любые</SelectItem>
+                    <SelectItem value="any">Любые</SelectItem>
                     <SelectItem value="full">Все коммуникации</SelectItem>
                     <SelectItem value="partial">Частично</SelectItem>
                     <SelectItem value="none">Без коммуникаций</SelectItem>

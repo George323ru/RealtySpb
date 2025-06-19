@@ -9,24 +9,19 @@ import { DISTRICTS, PROPERTY_TYPES, PROPERTY_CATEGORIES } from "@/lib/constants"
 import type { PropertySearchFilters } from "@shared/schema";
 
 interface SearchFormProps {
-  onSearch?: (filters: PropertySearchFilters) => void;
+  onSearch: (filters: PropertySearchFilters) => void;
   defaultCategory?: string;
   compact?: boolean;
-  className?: string;
-  initialFilters?: any;
 }
 
-export default function SearchForm({ onSearch, defaultCategory, compact = false, className, initialFilters }: SearchFormProps) {
+export default function SearchForm({ onSearch, defaultCategory, compact = false }: SearchFormProps) {
   const [action, setAction] = useState("buy");
   const [filters, setFilters] = useState<PropertySearchFilters>({
-    propertyType: defaultCategory || "all",
-    district: "all"
+    propertyType: defaultCategory
   });
 
   const handleSearch = () => {
-    if (onSearch) {
-      onSearch(filters);
-    }
+    onSearch(filters);
   };
 
   const updateFilter = (key: keyof PropertySearchFilters, value: string | number | undefined) => {
@@ -48,7 +43,6 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
                   <SelectValue placeholder="Выберите тип" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Все типы</SelectItem>
                   {PROPERTY_TYPES.map((type) => (
                     <SelectItem key={type.value} value={type.value}>
                       {type.label}
@@ -65,7 +59,6 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
                   <SelectValue placeholder="Выберите район" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Все районы</SelectItem>
                   {DISTRICTS.map((district) => (
                     <SelectItem key={district} value={district}>
                       {district}
@@ -80,7 +73,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
               <Input
                 type="number"
                 placeholder="3 000 000"
-                value={filters.priceFrom || "0"}
+                value={filters.priceFrom || ""}
                 onChange={(e) => updateFilter("priceFrom", e.target.value ? Number(e.target.value) : undefined)}
               />
             </div>
@@ -90,7 +83,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
               <Input
                 type="number"
                 placeholder="15 000 000"
-                value={filters.priceTo || "0"}
+                value={filters.priceTo || ""}
                 onChange={(e) => updateFilter("priceTo", e.target.value ? Number(e.target.value) : undefined)}
               />
             </div>
@@ -174,7 +167,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
             <Input
               type="number"
               placeholder="3 000 000"
-              value={filters.priceFrom || "0"}
+              value={filters.priceFrom || ""}
               onChange={(e) => updateFilter("priceFrom", e.target.value ? Number(e.target.value) : undefined)}
               className="focus-orange h-10 text-sm"
             />
@@ -185,7 +178,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
             <Input
               type="number"
               placeholder="15 000 000"
-              value={filters.priceTo || "0"}
+              value={filters.priceTo || ""}
               onChange={(e) => updateFilter("priceTo", e.target.value ? Number(e.target.value) : undefined)}
               className="focus-orange h-10 text-sm"
             />

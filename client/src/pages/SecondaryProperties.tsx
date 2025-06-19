@@ -185,7 +185,7 @@ export default function SecondaryProperties() {
                       Тип недвижимости
                     </Label>
                     <Select
-                      value={searchParams.propertyType || 'any'}
+                      value={searchParams.propertyType || ''}
                       onValueChange={(value) => setSearchParams({...searchParams, propertyType: value})}
                     >
                       <SelectTrigger>
@@ -207,7 +207,7 @@ export default function SecondaryProperties() {
                       Район
                     </Label>
                     <Select
-                      value={searchParams.district || 'any'}
+                      value={searchParams.district || ''}
                       onValueChange={(value) => setSearchParams({...searchParams, district: value})}
                     >
                       <SelectTrigger>
