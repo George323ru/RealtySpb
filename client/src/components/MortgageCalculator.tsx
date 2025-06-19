@@ -92,6 +92,19 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
           </div>
 
           <div>
+            <Label className="text-sm font-medium">Процентная ставка: {rate}%</Label>
+            <Slider
+              value={[rate]}
+              onValueChange={(value) => setRate(value[0])}
+              min={3}
+              max={25}
+              step={0.1}
+              className="mt-2"
+            />
+            <div className="text-xs text-text-secondary mt-1">Среднерыночная ставка: 12-18%</div>
+          </div>
+
+          <div>
             <Label className="text-sm font-medium">Срок кредита: {term} лет</Label>
             <Slider
               value={[term]}
@@ -111,6 +124,9 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
             <div className="flex justify-between items-center">
               <span className="text-sm text-text-secondary">Переплата</span>
               <span className="text-sm font-medium text-red-600">{formatNumber(overpayment)} ₽</span>
+            </div>
+            <div className="text-xs text-orange-600 mt-2 pt-2 border-t border-neutral-200">
+              ⚠️ Предварительный расчет. Точные условия уточняйте в банке
             </div>
           </div>
         </CardContent>
@@ -181,6 +197,25 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
               <div className="flex justify-between text-sm text-text-secondary mt-1">
                 <span>10% ({formatNumber(Math.round(price * 0.1))} ₽)</span>
                 <span>90% ({formatNumber(Math.round(price * 0.9))} ₽)</span>
+              </div>
+            </div>
+
+            <div>
+              <Label className="text-base font-medium">Процентная ставка — {rate}%</Label>
+              <Slider
+                value={[rate]}
+                onValueChange={(value) => setRate(value[0])}
+                min={3}
+                max={25}
+                step={0.1}
+                className="mt-3"
+              />
+              <div className="flex justify-between text-sm text-text-secondary mt-1">
+                <span>3%</span>
+                <span>25%</span>
+              </div>
+              <div className="text-sm text-blue-600 mt-2">
+                Среднерыночная ставка: 12-18%
               </div>
             </div>
 
@@ -266,9 +301,19 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
               Подобрать лучшие предложения
             </Button>
             
-            <p className="text-sm text-text-secondary text-center">
-              Расчет носит справочный характер. Итоговые условия зависят от банка и вашей кредитной истории.
-            </p>
+            <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
+              <div className="flex items-start gap-2">
+                <span className="text-orange-600 text-lg">⚠️</span>
+                <div>
+                  <p className="text-sm font-medium text-orange-800 mb-1">
+                    Предварительный расчет
+                  </p>
+                  <p className="text-xs text-orange-700">
+                    Расчет носит справочный характер. Итоговые условия зависят от банка, вашей кредитной истории и других факторов. Для получения точной информации обратитесь в банк.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </CardContent>
