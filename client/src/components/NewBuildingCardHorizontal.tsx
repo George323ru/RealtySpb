@@ -53,30 +53,30 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
   };
 
   return (
-    <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white group border border-gray-200">
+    <Card className="card-unified group animate-fade-in">
       <CardContent className="p-0">
         <div className="flex h-[200px]">
           {/* Левая часть - Информация */}
-          <div className="w-1/2 p-6 flex flex-col justify-between">
+          <div className="w-1/2 p-lg flex flex-col justify-between">
             <div className="space-y-3">
-              <h3 className="text-xl font-bold text-gray-900 group-hover:text-accent-orange transition-colors leading-tight">
+              <h3 className="text-lg font-semibold text-text-primary group-hover:text-accent-orange transition-[var(--transition-fast)] leading-tight">
                 {building.name}
               </h3>
               
               <div className="space-y-2">
-                <div className="flex items-start text-gray-600">
-                  <MapPin className="w-4 h-4 mr-2 text-gray-500 shrink-0 mt-0.5" />
+                <div className="flex items-start text-text-secondary">
+                  <MapPin className="w-4 h-4 mr-2 text-accent-orange shrink-0 mt-0.5" />
                   <span className="text-sm leading-tight">{building.location}</span>
                 </div>
                 
-                <div className="flex items-center text-gray-600">
-                  <Building className="w-4 h-4 mr-2 text-gray-500 shrink-0" />
+                <div className="flex items-center text-text-secondary">
+                  <Building className="w-4 h-4 mr-2 text-accent-orange shrink-0" />
                   <span className="text-sm">{building.developer}</span>
                 </div>
                 
                 {building.totalFlats && (
-                  <div className="flex items-center text-gray-600">
-                    <Home className="w-4 h-4 mr-2 text-gray-500 shrink-0" />
+                  <div className="flex items-center text-text-secondary">
+                    <Home className="w-4 h-4 mr-2 text-accent-orange shrink-0" />
                     <span className="text-sm">{building.totalFlats} квартир</span>
                   </div>
                 )}
@@ -87,7 +87,7 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
                   от {formatPrice(building.priceFrom)}
                 </div>
                 {building.pricePerMeter && (
-                  <div className="text-sm text-gray-500">
+                  <div className="text-sm text-text-secondary">
                     {formatPrice(building.pricePerMeter)}/м²
                   </div>
                 )}
@@ -98,7 +98,7 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
               <Link href={`/new-buildings/${building.id}`}>
                 <Button 
                   size="sm" 
-                  className="bg-accent-orange hover:bg-orange-600 text-white h-9 text-sm font-medium px-4"
+                  className="w-full"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
                   Подробнее →
