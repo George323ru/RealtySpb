@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link, useParams } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,6 +19,11 @@ export default function NewBuildingDetail() {
   const { id } = useParams();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedLayout, setSelectedLayout] = useState(0);
+
+  // Прокрутка к верху страницы при загрузке
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   const { data: building, isLoading } = useQuery<NewBuilding>({
     queryKey: [`/api/new-buildings/${id}`],

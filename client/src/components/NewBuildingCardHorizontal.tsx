@@ -96,15 +96,14 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
               </div>
             </div>
             
-            <div className="flex gap-2 mt-4">
+            <div className="mt-4">
               <Link href={`/new-buildings/${building.id}`}>
-                <Button size="sm" className="bg-accent-orange hover:bg-orange-600 text-white h-9 text-sm font-medium px-4">
+                <Button 
+                  size="sm" 
+                  className="bg-accent-orange hover:bg-orange-600 text-white h-9 text-sm font-medium px-4"
+                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                >
                   Подробнее →
-                </Button>
-              </Link>
-              <Link href={`/new-buildings/${building.id}?tab=layouts`}>
-                <Button size="sm" variant="outline" className="border-gray-300 hover:border-accent-orange hover:text-accent-orange h-9 text-sm px-4">
-                  Планировки
                 </Button>
               </Link>
             </div>
@@ -117,6 +116,7 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
                 src={getMainImage()} 
                 alt={building.name}
                 className="w-full h-full object-cover cursor-pointer"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               />
             </Link>
             
