@@ -55,9 +55,9 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white group border border-gray-200">
       <CardContent className="p-0">
-        <div className="flex h-44">
+        <div className="flex h-56">
           {/* Левая часть - Информация */}
-          <div className="flex-1 p-5 flex flex-col justify-between">
+          <div className="w-1/2 p-6 flex flex-col justify-between">
             <div>
               <div className="flex items-start justify-between mb-3">
                 <h3 className="text-lg font-bold text-gray-900 group-hover:text-accent-orange transition-colors leading-tight">
@@ -121,19 +121,38 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
           </div>
           
           {/* Правая часть - Фото */}
-          <div className="relative w-56 h-44 shrink-0">
-            <img 
-              src={getMainImage()} 
-              alt={building.name}
-              className="w-full h-full object-cover"
-            />
+          <div className="relative w-1/2 shrink-0">
+            <Link href={`/new-buildings/${building.id}`}>
+              <img 
+                src={getMainImage()} 
+                alt={building.name}
+                className="w-full h-full object-cover cursor-pointer"
+              />
+            </Link>
+            
+            {/* Плашка с временем сдачи */}
+            {building.completionYear && (
+              <div className="absolute top-4 left-4">
+                <Badge className="bg-white/90 text-gray-900 font-medium px-3 py-1">
+                  <Calendar className="w-3 h-3 mr-1" />
+                  Сдача: {building.completionYear}
+                </Badge>
+              </div>
+            )}
+            
+            {/* Статус готовности */}
+            <div className="absolute top-4 right-4">
+              <Badge className={`${statusInfo.color} text-white font-medium px-3 py-1`}>
+                {statusInfo.label}
+              </Badge>
+            </div>
             
             {/* Overlay при hover */}
             <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             {/* Индикатор количества фото */}
             {building.images && building.images.length > 1 && (
-              <div className="absolute bottom-3 right-3">
+              <div className="absolute bottom-4 right-4">
                 <div className="bg-black/70 text-white px-2 py-1 rounded text-xs flex items-center">
                   <Building className="w-3 h-3 mr-1" />
                   {building.images.length} фото

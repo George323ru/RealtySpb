@@ -12,6 +12,7 @@ import Buy from "@/pages/buy";
 import Sell from "@/pages/sell";
 import Rent from "@/pages/rent";
 import NewBuildings from "@/pages/new-buildings";
+import NewBuildingDetail from "@/pages/new-building-detail";
 import Secondary from "@/pages/secondary";
 import PropertyDetail from "@/pages/property-detail";
 import Services from "@/pages/services";
@@ -36,6 +37,7 @@ function Router() {
       <Route path="/sell" component={Sell} />
       <Route path="/rent" component={Rent} />
       <Route path="/new-buildings" component={NewBuildings} />
+      <Route path="/new-buildings/:id" component={NewBuildingDetail} />
       <Route path="/secondary" component={Secondary} />
       <Route path="/property/:id" component={PropertyDetail} />
       <Route path="/services" component={Services} />
