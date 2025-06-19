@@ -4,7 +4,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import SearchForm from "@/components/search-form";
+import SearchForm from "@/components/SearchForm";
 import PropertyCard from "@/components/property-card";
 import NewBuildingCardHorizontal from "@/components/NewBuildingCardHorizontal";
 import ConsultationForm from "@/components/consultation-form";

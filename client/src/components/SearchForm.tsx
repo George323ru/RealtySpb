@@ -76,7 +76,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
               <Input
                 type="number"
                 placeholder="3 000 000"
-                value={filters.priceFrom || ""}
+                value={filters.priceFrom || "0"}
                 onChange={(e) => updateFilter("priceFrom", e.target.value ? Number(e.target.value) : undefined)}
               />
             </div>
@@ -86,7 +86,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
               <Input
                 type="number"
                 placeholder="15 000 000"
-                value={filters.priceTo || ""}
+                value={filters.priceTo || "0"}
                 onChange={(e) => updateFilter("priceTo", e.target.value ? Number(e.target.value) : undefined)}
               />
             </div>
@@ -170,7 +170,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
             <Input
               type="number"
               placeholder="3 000 000"
-              value={filters.priceFrom || ""}
+              value={filters.priceFrom || "0"}
               onChange={(e) => updateFilter("priceFrom", e.target.value ? Number(e.target.value) : undefined)}
               className="focus-orange h-10 text-sm"
             />
@@ -181,7 +181,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
             <Input
               type="number"
               placeholder="15 000 000"
-              value={filters.priceTo || ""}
+              value={filters.priceTo || "0"}
               onChange={(e) => updateFilter("priceTo", e.target.value ? Number(e.target.value) : undefined)}
               className="focus-orange h-10 text-sm"
             />
