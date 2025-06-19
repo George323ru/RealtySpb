@@ -151,6 +151,7 @@ Changelog:
 - June 19, 2025. Optimized mobile navigation - moved Команда, О нас, Отзывы, Блог, Контакты to desktop header menu, simplified mobile bottom bar to single row with 5 core functions (Главная, Купить, Продать, Аренда, Услуги)
 - June 19, 2025. Made navigation visible on all screen sizes with horizontal scroll - all secondary sections now accessible in top menu across desktop and mobile devices with hidden scrollbar for clean appearance
 - June 19, 2025. Simplified new building cards to single "Подробнее" button - removed "Планировки" button, ensured proper navigation to building detail pages with automatic scroll to top on page load
+- June 19, 2025. Standardized new building card height to 200px - made all cards uniform size with compact design, reduced padding and font sizes for better space utilization
 ```
 
 ## User Preferences

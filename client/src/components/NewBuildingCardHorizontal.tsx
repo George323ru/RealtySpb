@@ -55,52 +55,50 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 bg-white group border border-gray-200">
       <CardContent className="p-0">
-        <div className="flex min-h-[280px]">
+        <div className="flex h-[200px]">
           {/* Левая часть - Информация */}
-          <div className="w-1/2 p-6 flex flex-col justify-between">
-            <div className="flex-1">
-              <div className="mb-3">
-                <h3 className="text-xl font-bold text-gray-900 group-hover:text-accent-orange transition-colors leading-tight">
-                  {building.name}
-                </h3>
-              </div>
+          <div className="w-1/2 p-4 flex flex-col justify-between">
+            <div>
+              <h3 className="text-lg font-bold text-gray-900 group-hover:text-accent-orange transition-colors leading-tight mb-2">
+                {building.name}
+              </h3>
               
-              <div className="space-y-2 mb-4">
+              <div className="space-y-1 mb-3">
                 <div className="flex items-center text-gray-700">
-                  <MapPin className="w-4 h-4 mr-2 text-gray-500 shrink-0" />
-                  <span className="text-sm truncate">{building.location}</span>
+                  <MapPin className="w-3 h-3 mr-2 text-gray-500 shrink-0" />
+                  <span className="text-xs truncate">{building.location}</span>
                 </div>
                 
                 <div className="flex items-center text-gray-700">
-                  <Building className="w-4 h-4 mr-2 text-gray-500 shrink-0" />
-                  <span className="text-sm">{building.developer}</span>
+                  <Building className="w-3 h-3 mr-2 text-gray-500 shrink-0" />
+                  <span className="text-xs">{building.developer}</span>
                 </div>
                 
                 {building.totalFlats && (
                   <div className="flex items-center text-gray-700">
-                    <Home className="w-4 h-4 mr-2 text-gray-500 shrink-0" />
-                    <span className="text-sm">{building.totalFlats} квартир</span>
+                    <Home className="w-3 h-3 mr-2 text-gray-500 shrink-0" />
+                    <span className="text-xs">{building.totalFlats} квартир</span>
                   </div>
                 )}
               </div>
 
-              <div>
-                <div className="text-xl font-bold text-accent-orange">
+              <div className="mb-3">
+                <div className="text-lg font-bold text-accent-orange">
                   от {formatPrice(building.priceFrom)}
                 </div>
                 {building.pricePerMeter && (
-                  <div className="text-sm text-gray-500">
+                  <div className="text-xs text-gray-500">
                     {formatPrice(building.pricePerMeter)}/м²
                   </div>
                 )}
               </div>
             </div>
             
-            <div className="mt-4">
+            <div>
               <Link href={`/new-buildings/${building.id}`}>
                 <Button 
                   size="sm" 
-                  className="bg-accent-orange hover:bg-orange-600 text-white h-9 text-sm font-medium px-4"
+                  className="bg-accent-orange hover:bg-orange-600 text-white h-8 text-sm font-medium px-3"
                   onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 >
                   Подробнее →
@@ -121,18 +119,18 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
             </Link>
             
             {/* Плашка статуса/сдачи */}
-            <div className="absolute top-4 left-4">
+            <div className="absolute top-3 left-3">
               {statusInfo.label === 'Сдан' ? (
-                <Badge className="bg-green-500 text-white font-medium px-3 py-1">
+                <Badge className="bg-green-500 text-white font-medium px-2 py-1 text-xs">
                   Сдан
                 </Badge>
               ) : building.completionYear ? (
-                <Badge className="bg-white/90 text-gray-900 font-medium px-3 py-1">
-                  <Calendar className="w-3 h-3 mr-1" />
+                <Badge className="bg-white/90 text-gray-900 font-medium px-2 py-1 text-xs">
+                  <Calendar className="w-2 h-2 mr-1" />
                   Сдача: {building.completionYear}
                 </Badge>
               ) : (
-                <Badge className={`${statusInfo.color} text-white font-medium px-3 py-1`}>
+                <Badge className={`${statusInfo.color} text-white font-medium px-2 py-1 text-xs`}>
                   {statusInfo.label}
                 </Badge>
               )}
@@ -143,9 +141,9 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
             
             {/* Индикатор количества фото */}
             {building.images && building.images.length > 1 && (
-              <div className="absolute bottom-4 right-4">
+              <div className="absolute bottom-3 right-3">
                 <div className="bg-black/70 text-white px-2 py-1 rounded text-xs flex items-center">
-                  <Building className="w-3 h-3 mr-1" />
+                  <Building className="w-2 h-2 mr-1" />
                   {building.images.length} фото
                 </div>
               </div>
