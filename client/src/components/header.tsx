@@ -49,21 +49,37 @@ export default function Header() {
     {
       name: "Услуги",
       href: "/services",
-      dropdown: [
-        { name: "Предпродажная подготовка", href: "/services/pre-sale-preparation" },
-        { name: "Дизайн-проект", href: "/services/design-project" },
-        { name: "Ремонт под ключ", href: "/services/renovation" },
-        { name: "Строительство домов", href: "/services/construction" },
-        { name: "Проектирование", href: "/services/design" },
-        { name: "Инженерные системы", href: "/services/engineering-systems" },
-        { name: "Ландшафтный дизайн", href: "/services/landscape-design" },
-        { name: "Юридическая проверка", href: "/services/legal-check" },
-        { name: "Сопровождение сделки", href: "/services/transaction-support" },
-        { name: "Управление недвижимостью", href: "/services/property-management" },
-        { name: "Комплектация мебелью", href: "/services/furniture-selection" },
-        { name: "Земельные участки", href: "/land" },
-        { name: "Все услуги", href: "/services" },
-      ]
+      megaMenu: {
+        sections: [
+          {
+            title: "Консультационные",
+            links: [
+              { name: "Предпродажная подготовка", href: "/services/pre-sale-preparation" },
+              { name: "Юридическая проверка", href: "/services/legal-check" },
+              { name: "Сопровождение сделки", href: "/services/transaction-support" },
+              { name: "Управление недвижимостью", href: "/services/property-management" },
+            ]
+          },
+          {
+            title: "Строительные",
+            links: [
+              { name: "Дизайн-проект", href: "/services/design-project" },
+              { name: "Ремонт под ключ", href: "/services/renovation" },
+              { name: "Строительство домов", href: "/services/construction" },
+              { name: "Проектирование", href: "/services/design" },
+            ]
+          },
+          {
+            title: "Специализированные",
+            links: [
+              { name: "Инженерные системы", href: "/services/engineering-systems" },
+              { name: "Ландшафтный дизайн", href: "/services/landscape-design" },
+              { name: "Комплектация мебелью", href: "/services/furniture-selection" },
+              { name: "Земельные участки", href: "/land" },
+            ]
+          }
+        ]
+      }
     },
     { name: "Специалисты", href: "/realtor-constructor", icon: "Users" },
     { name: "Блог", href: "/blog", icon: "BookOpen" },
