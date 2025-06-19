@@ -89,7 +89,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
             </div>
           </div>
           
-          <Button onClick={handleSearch} className="w-full bg-accent-orange text-white hover:bg-orange-600">
+          <Button onClick={handleSearch} className="w-full bg-accent-orange text-white hover:bg-accent-orange/90">
             <Search className="w-4 h-4 mr-2" />
             Найти недвижимость
           </Button>
@@ -186,7 +186,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
         </div>
         
         <div className="flex flex-col sm:flex-row gap-3">
-          <Button onClick={handleSearch} className="flex-1 bg-accent-orange text-white py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg hover:bg-orange-600">
+          <Button onClick={handleSearch} className="flex-1 bg-accent-orange text-white py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg hover:bg-accent-orange/90">
             <Search className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             Найти недвижимость
           </Button>

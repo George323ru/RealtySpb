@@ -131,10 +131,10 @@ export default function Header() {
             <div className="flex items-center space-x-3 text-xs">
               <span>Быстрая консультация:</span>
               <div className="flex items-center space-x-2">
-                <a href="#" className="w-6 h-6 bg-blue-500 text-white rounded flex items-center justify-center hover:bg-blue-600 transition-colors">
+                <a href="https://t.me/realtorvspb" className="w-6 h-6 bg-primary text-black rounded flex items-center justify-center hover:bg-primary/90 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
                   <span className="text-xs">Т</span>
                 </a>
-                <a href="#" className="w-6 h-6 bg-green-500 text-white rounded flex items-center justify-center hover:bg-green-600 transition-colors">
+                <a href="https://wa.me/79211234567" className="w-6 h-6 bg-accent-orange text-white rounded flex items-center justify-center hover:bg-accent-orange/90 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                   <span className="text-xs">W</span>
                 </a>
               </div>

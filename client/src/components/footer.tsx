@@ -161,9 +161,9 @@ export default function Footer() {
             © 2025 СПБ Недвижимость. Все права защищены.
           </div>
           <div className="flex flex-wrap gap-6 text-sm">
-            <a href="#" className="text-gray-400 hover:text-yandex-yellow transition-colors">Политика конфиденциальности</a>
-            <a href="#" className="text-gray-400 hover:text-yandex-yellow transition-colors">Пользовательское соглашение</a>
-            <a href="#" className="text-gray-400 hover:text-yandex-yellow transition-colors">Sitemap</a>
+            <a href="/privacy-policy" className="text-gray-400 hover:text-yandex-yellow transition-colors">Политика конфиденциальности</a>
+            <a href="/terms" className="text-gray-400 hover:text-yandex-yellow transition-colors">Пользовательское соглашение</a>
+            <a href="/sitemap.xml" className="text-gray-400 hover:text-yandex-yellow transition-colors">Sitemap</a>
           </div>
         </div>
       </div>
