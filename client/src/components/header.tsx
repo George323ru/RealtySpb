@@ -147,7 +147,7 @@ export default function Header() {
       <div className="container mx-auto px-4 mobile-nav-safe">
         <nav className="flex items-center justify-between py-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center" aria-label="Главная страница - Риэлтор в СПб">
             <div className="w-12 h-12 bg-yandex-yellow rounded-lg flex items-center justify-center mr-3">
               <Home className="text-yandex-black text-xl" />
             </div>
@@ -359,7 +359,7 @@ export default function Header() {
             <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-text-primary">Услуги</h3>
-                <button onClick={() => setActiveSubmenu(null)} className="text-gray-400 hover:text-gray-600">
+                <button onClick={() => setActiveSubmenu(null)} className="text-gray-400 hover:text-gray-600" aria-label="Закрыть меню услуг">
                   <X className="w-6 h-6" />
                 </button>
               </div>

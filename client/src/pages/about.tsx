@@ -108,7 +108,7 @@ export default function About() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl font-bold text-text-primary mb-6">
-              О компании "риэлтор в СПБ"
+              Риэлтор в СПб - О компании недвижимости
             </h1>
             <p className="text-xl text-text-secondary mb-8 leading-relaxed">
               Мы — ведущее агентство недвижимости Санкт-Петербурга с 15-летним опытом. 
