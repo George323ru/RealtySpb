@@ -113,18 +113,18 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-neutral-50 shadow-sm border-b border-neutral-200 sticky top-0 z-50">
+    <header className="bg-background shadow-sm border-b border sticky top-0 z-50">
       {/* Top Contact Bar - Desktop Only */}
-      <div className="hidden lg:block border-b border-neutral-100 bg-neutral-50">
+      <div className="hidden lg:block border-b border-neutral-100 bg-background">
         <div className="container mx-auto px-4">
-          <div className="flex justify-between items-center py-2 text-xs text-text-secondary">
+          <div className="flex justify-between items-center py-2 text-xs text-muted-foreground">
             <div className="flex items-center space-x-4">
-              <span className="flex items-center hover:text-accent-orange transition-colors">
-                <Phone className="w-3 h-3 mr-1 text-accent-orange" />
+              <span className="flex items-center hover:text-accent transition-colors">
+                <Phone className="w-3 h-3 mr-1 text-accent" />
                 +7 (812) 123-45-67
               </span>
-              <span className="flex items-center hover:text-accent-orange transition-colors">
-                <Clock className="w-3 h-3 mr-1 text-accent-orange" />
+              <span className="flex items-center hover:text-accent transition-colors">
+                <Clock className="w-3 h-3 mr-1 text-accent" />
                 Пн-Вс: 9:00-21:00
               </span>
             </div>
@@ -134,7 +134,7 @@ export default function Header() {
                 <a href="https://t.me/realtorvspb" className="w-6 h-6 bg-primary text-black rounded flex items-center justify-center hover:bg-primary/90 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
                   <span className="text-xs">Т</span>
                 </a>
-                <a href="https://wa.me/79211234567" className="w-6 h-6 bg-accent-orange text-text-primary rounded flex items-center justify-center hover:bg-accent-orange/90 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                <a href="https://wa.me/79211234567" className="w-6 h-6 bg-accent text-foreground rounded flex items-center justify-center hover:bg-accent/90 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
                   <span className="text-xs">W</span>
                 </a>
               </div>
@@ -148,12 +148,12 @@ export default function Header() {
         <nav className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Главная страница - Риэлтор в СПб">
-            <div className="w-12 h-12 bg-yandex-yellow rounded-lg flex items-center justify-center mr-3">
+            <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-3">
               <Home className="text-yandex-black text-xl" />
             </div>
             <div>
               <div className="text-xl font-bold text-yandex-black">риэлтор в СПБ</div>
-              <div className="text-xs text-text-secondary">realtorvspb.ru</div>
+              <div className="text-xs text-muted-foreground">realtorvspb.ru</div>
             </div>
           </Link>
 
@@ -179,8 +179,8 @@ export default function Header() {
                     className={cn(
                       "flex items-center px-1.5 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap",
                       location === item.href
-                        ? "text-text-primary bg-accent-orange shadow-lg"
-                        : "text-text-primary hover:text-accent-orange hover:bg-accent-orange/10"
+                        ? "text-foreground bg-accent shadow-lg"
+                        : "text-foreground hover:text-accent hover:bg-accent/10"
                     )}
                   >
                     {IconComponent && <IconComponent className="w-4 h-4 mr-2" />}
@@ -190,12 +190,12 @@ export default function Header() {
                   
                   {/* Mega Menu for "Купить" and "Услуги" */}
                   {item.megaMenu && (
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 bg-neutral-50 shadow-2xl rounded-2xl mt-3 py-8 w-[780px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-neutral-200">
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 bg-background shadow-2xl rounded-2xl mt-3 py-8 w-[780px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border">
                       <div className="px-8">
                         <div className="grid grid-cols-3 gap-10">
                           {item.megaMenu.sections.map((section, idx) => (
                             <div key={idx}>
-                              <h4 className="font-bold text-text-primary mb-5 text-sm uppercase tracking-wider text-neutral-800 border-b border-neutral-100 pb-3">
+                              <h4 className="font-bold text-foreground mb-5 text-sm uppercase tracking-wider text-neutral-800 border-b border-neutral-100 pb-3">
                                 {section.title}
                               </h4>
                               <div className="space-y-0">
@@ -205,12 +205,12 @@ export default function Header() {
                                     href={link.href}
                                     className="block group/item"
                                   >
-                                    <div className="px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-neutral-100 hover:to-neutral-100 transition-all duration-200 border border-transparent hover:border-neutral-200 min-h-[60px] flex flex-col justify-center">
-                                      <div className="font-medium text-text-primary group-hover/item:text-accent-orange text-sm leading-tight">
+                                    <div className="px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-neutral-100 hover:to-neutral-100 transition-all duration-200 border border-transparent hover:border min-h-[60px] flex flex-col justify-center">
+                                      <div className="font-medium text-foreground group-hover/item:text-accent text-sm leading-tight">
                                         {link.name}
                                       </div>
                                       {(link as any).desc && (
-                                        <div className="text-xs text-text-secondary mt-1 leading-relaxed">
+                                        <div className="text-xs text-muted-foreground mt-1 leading-relaxed">
                                           {(link as any).desc}
                                         </div>
                                       )}
@@ -244,8 +244,8 @@ export default function Header() {
                   className={cn(
                     "flex items-center px-1.5 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap",
                     location === item.href
-                      ? "text-text-primary bg-accent-orange shadow-lg"
-                      : "text-text-primary hover:text-accent-orange hover:bg-neutral-100"
+                      ? "text-foreground bg-accent shadow-lg"
+                      : "text-foreground hover:text-accent hover:bg-secondary"
                   )}
                 >
                   <IconComponent className="w-3 h-3 mr-1" />
@@ -258,10 +258,10 @@ export default function Header() {
           {/* Cart Button - Always visible */}
           <div className="flex items-center">
             <Link href="/cart" className="relative">
-              <Button variant="outline" size="sm" className="relative rounded-lg border-neutral-300 hover:border-accent-orange hover:text-accent-orange transition-colors">
+              <Button variant="outline" size="sm" className="relative rounded-lg border-neutral-300 hover:border-accent-orange hover:text-accent transition-colors">
                 <ShoppingCart className="h-4 w-4" />
                 {getTotalItems() > 0 && (
-                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-accent-orange text-text-primary text-xs">
+                  <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-accent text-foreground text-xs">
                     {getTotalItems()}
                   </Badge>
                 )}
@@ -276,7 +276,7 @@ export default function Header() {
           <div className="flex items-center justify-around py-2 px-1 max-w-full">
             <Link href="/" className={cn(
               "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
-              location === "/" ? "text-accent-orange" : "text-gray-600"
+              location === "/" ? "text-accent" : "text-gray-600"
             )}>
               <Home className="w-5 h-5 mb-0.5" />
               <span className="text-xs font-medium">Главная</span>
@@ -286,7 +286,7 @@ export default function Header() {
               onClick={() => setActiveSubmenu(activeSubmenu === 'buy' ? null : 'buy')}
               className={cn(
                 "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
-                activeSubmenu === 'buy' ? "text-accent-orange" : "text-gray-600"
+                activeSubmenu === 'buy' ? "text-accent" : "text-gray-600"
               )}
             >
               <ShoppingCart className="w-5 h-5 mb-0.5" />
@@ -295,7 +295,7 @@ export default function Header() {
             
             <Link href="/sell" className={cn(
               "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
-              location === "/sell" ? "text-accent-orange" : "text-gray-600"
+              location === "/sell" ? "text-accent" : "text-gray-600"
             )}>
               <TrendingUp className="w-5 h-5 mb-0.5" />
               <span className="text-xs font-medium">Продать</span>
@@ -303,7 +303,7 @@ export default function Header() {
             
             <Link href="/rent" className={cn(
               "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
-              location === "/rent" ? "text-accent-orange" : "text-gray-600"
+              location === "/rent" ? "text-accent" : "text-gray-600"
             )}>
               <Key className="w-5 h-5 mb-0.5" />
               <span className="text-xs font-medium">Аренда</span>
@@ -313,7 +313,7 @@ export default function Header() {
               onClick={() => setActiveSubmenu(activeSubmenu === 'services' ? null : 'services')}
               className={cn(
                 "flex flex-col items-center justify-center p-1 transition-all duration-200 min-w-0",
-                activeSubmenu === 'services' ? "text-accent-orange" : "text-gray-600"
+                activeSubmenu === 'services' ? "text-accent" : "text-gray-600"
               )}
             >
               <Grid3X3 className="w-5 h-5 mb-0.5" />
@@ -324,30 +324,30 @@ export default function Header() {
 
         {/* Mobile Submenus */}
         {activeSubmenu === 'buy' && (
-          <div className="lg:hidden fixed inset-0 bg-neutral-300/60 z-50" onClick={() => setActiveSubmenu(null)}>
+          <div className="lg:hidden fixed inset-0 bg-muted/60 z-50" onClick={() => setActiveSubmenu(null)}>
             <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-text-primary">Купить недвижимость</h3>
-                <button onClick={() => setActiveSubmenu(null)} className="text-text-secondary hover:text-text-primary" aria-label="Закрыть меню покупки недвижимости">
+                <h3 className="text-lg font-semibold text-foreground">Купить недвижимость</h3>
+                <button onClick={() => setActiveSubmenu(null)} className="text-muted-foreground hover:text-foreground" aria-label="Закрыть меню покупки недвижимости">
                   <X className="w-6 h-6" />
                 </button>
               </div>
               <div className="grid grid-cols-2 gap-3">
-                <Link href="/new-buildings" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-100 rounded-lg hover:bg-neutral-200 transition-colors">
-                  <Building2 className="w-8 h-8 mb-2 text-accent-orange" />
-                  <span className="text-sm font-medium text-text-primary text-center">Новостройки</span>
+                <Link href="/new-buildings" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-secondary rounded-lg hover:bg-muted transition-colors">
+                  <Building2 className="w-8 h-8 mb-2 text-accent" />
+                  <span className="text-sm font-medium text-foreground text-center">Новостройки</span>
                 </Link>
-                <Link href="/secondary" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-100 rounded-lg hover:bg-neutral-200 transition-colors">
-                  <Store className="w-8 h-8 mb-2 text-accent-orange" />
-                  <span className="text-sm font-medium text-text-primary text-center">Вторичное жилье</span>
+                <Link href="/secondary" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-secondary rounded-lg hover:bg-muted transition-colors">
+                  <Store className="w-8 h-8 mb-2 text-accent" />
+                  <span className="text-sm font-medium text-foreground text-center">Вторичное жилье</span>
                 </Link>
-                <Link href="/buy" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-100 rounded-lg hover:bg-neutral-200 transition-colors">
-                  <Warehouse className="w-8 h-8 mb-2 text-accent-orange" />
-                  <span className="text-sm font-medium text-text-primary text-center">Коммерческая</span>
+                <Link href="/buy" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-secondary rounded-lg hover:bg-muted transition-colors">
+                  <Warehouse className="w-8 h-8 mb-2 text-accent" />
+                  <span className="text-sm font-medium text-foreground text-center">Коммерческая</span>
                 </Link>
-                <Link href="/land" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-neutral-100 rounded-lg hover:bg-neutral-200 transition-colors">
-                  <Factory className="w-8 h-8 mb-2 text-accent-orange" />
-                  <span className="text-sm font-medium text-text-primary text-center">Земля</span>
+                <Link href="/land" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-4 bg-secondary rounded-lg hover:bg-muted transition-colors">
+                  <Factory className="w-8 h-8 mb-2 text-accent" />
+                  <span className="text-sm font-medium text-foreground text-center">Земля</span>
                 </Link>
               </div>
             </div>
@@ -355,10 +355,10 @@ export default function Header() {
         )}
 
         {activeSubmenu === 'services' && (
-          <div className="lg:hidden fixed inset-0 bg-neutral-300/60 z-50" onClick={() => setActiveSubmenu(null)}>
+          <div className="lg:hidden fixed inset-0 bg-muted/60 z-50" onClick={() => setActiveSubmenu(null)}>
             <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-semibold text-text-primary">Услуги</h3>
+                <h3 className="text-lg font-semibold text-foreground">Услуги</h3>
                 <button onClick={() => setActiveSubmenu(null)} className="text-gray-400 hover:text-gray-600" aria-label="Закрыть меню услуг">
                   <X className="w-6 h-6" />
                 </button>
@@ -369,10 +369,10 @@ export default function Header() {
                     key={service.href} 
                     href={service.href} 
                     onClick={() => setActiveSubmenu(null)} 
-                    className="flex items-center p-3 hover:bg-neutral-50 rounded-lg transition-colors"
+                    className="flex items-center p-3 hover:bg-background rounded-lg transition-colors"
                   >
                     <span className="text-lg mr-3">{service.icon}</span>
-                    <span className="font-medium text-text-primary">{service.name}</span>
+                    <span className="font-medium text-foreground">{service.name}</span>
                   </Link>
                 ))}
               </div>

@@ -20,7 +20,7 @@ export default function FloatingCTA() {
   return (
     <div className="fixed bottom-6 right-6 z-40 animate-fade-in-up">
       <Link href="/contact">
-        <Button className="bg-accent-orange text-text-primary hover:bg-accent-orange/90 shadow-lg px-6 py-4 rounded-full flex items-center space-x-2">
+        <Button className="bg-accent text-foreground hover:bg-accent/90 shadow-lg px-6 py-4 rounded-full flex items-center space-x-2">
           <Phone className="w-5 h-5" />
           <span className="hidden sm:inline">Обратный звонок</span>
         </Button>

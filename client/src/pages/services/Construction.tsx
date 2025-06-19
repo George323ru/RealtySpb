@@ -104,9 +104,9 @@ export default function Construction() {
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-700 to-blue-600 text-text-primary py-16">
+      <section className="bg-gradient-to-r from-blue-700 to-blue-600 text-foreground py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -118,10 +118,10 @@ export default function Construction() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+              <Button className="bg-primary text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Рассчитать стоимость
               </Button>
-              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-blue-700 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-foreground hover:bg-white hover:text-blue-700 px-8 py-4 text-lg">
                 Портфолио объектов
               </Button>
             </div>
@@ -133,10 +133,10 @@ export default function Construction() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Виды строительных работ
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Строим объекты любой сложности и назначения
             </p>
           </div>
@@ -148,13 +148,13 @@ export default function Construction() {
                   <div className="flex justify-center mb-4">
                     {service.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-text-primary mb-3">
+                  <h3 className="text-lg font-semibold text-foreground mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-text-secondary mb-4">
+                  <p className="text-muted-foreground mb-4">
                     {service.description}
                   </p>
-                  <Badge className="bg-blue-500 text-text-primary">
+                  <Badge className="bg-blue-500 text-foreground">
                     {service.price}
                   </Badge>
                 </CardContent>
@@ -165,13 +165,13 @@ export default function Construction() {
       </section>
 
       {/* Construction Types */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Технологии строительства
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Выберите подходящую технологию для вашего проекта
             </p>
           </div>
@@ -183,20 +183,20 @@ export default function Construction() {
                   <CardTitle className="text-xl">{type.title}</CardTitle>
                   <div className="flex gap-2 flex-wrap">
                     <Badge variant="outline">{type.timeline}</Badge>
-                    <Badge className="bg-blue-500 text-text-primary">{type.price}</Badge>
+                    <Badge className="bg-blue-500 text-foreground">{type.price}</Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-text-secondary">{type.description}</p>
+                  <p className="text-muted-foreground">{type.description}</p>
                   <div className="space-y-2">
                     {type.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-blue-500" />
-                        <span className="text-sm text-text-primary">{feature}</span>
+                        <span className="text-sm text-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-blue-500 text-text-primary hover:bg-blue-600">
+                  <Button className="w-full bg-blue-500 text-foreground hover:bg-blue-600">
                     Узнать подробнее
                   </Button>
                 </CardContent>
@@ -210,10 +210,10 @@ export default function Construction() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Этапы строительства
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Пошаговый процесс от проекта до готового объекта
             </p>
           </div>
@@ -221,14 +221,14 @@ export default function Construction() {
           <div className="max-w-4xl mx-auto">
             {process.map((item, index) => (
               <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-blue-500 text-text-primary rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                <div className="flex-shrink-0 w-16 h-16 bg-blue-500 text-foreground rounded-full flex items-center justify-center font-bold text-lg mr-6">
                   {item.step}
                 </div>
                 <div className="flex-grow">
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-text-secondary">
+                  <p className="text-muted-foreground">
                     {item.description}
                   </p>
                 </div>
@@ -239,11 +239,11 @@ export default function Construction() {
       </section>
 
       {/* Benefits */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Наши преимущества
               </h2>
             </div>
@@ -252,7 +252,7 @@ export default function Construction() {
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <CheckCircle className="w-6 h-6 text-blue-500 flex-shrink-0" />
-                  <span className="text-text-primary font-medium">{benefit}</span>
+                  <span className="text-foreground font-medium">{benefit}</span>
                 </div>
               ))}
             </div>
@@ -264,7 +264,7 @@ export default function Construction() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Гарантии качества
             </h2>
           </div>
@@ -273,10 +273,10 @@ export default function Construction() {
             <Card className="text-center">
               <CardContent className="p-8">
                 <Shield className="w-12 h-12 text-blue-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-text-primary mb-2">
+                <h3 className="text-xl font-semibold text-foreground mb-2">
                   Гарантия 5 лет
                 </h3>
-                <p className="text-text-secondary">
+                <p className="text-muted-foreground">
                   На все строительные работы
                 </p>
               </CardContent>
@@ -285,10 +285,10 @@ export default function Construction() {
             <Card className="text-center">
               <CardContent className="p-8">
                 <Clock className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-text-primary mb-2">
+                <h3 className="text-xl font-semibold text-foreground mb-2">
                   Точные сроки
                 </h3>
-                <p className="text-text-secondary">
+                <p className="text-muted-foreground">
                   Строго соблюдаем график работ
                 </p>
               </CardContent>
@@ -297,10 +297,10 @@ export default function Construction() {
             <Card className="text-center">
               <CardContent className="p-8">
                 <CheckCircle className="w-12 h-12 text-purple-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-text-primary mb-2">
+                <h3 className="text-xl font-semibold text-foreground mb-2">
                   Фиксированная цена
                 </h3>
-                <p className="text-text-secondary">
+                <p className="text-muted-foreground">
                   Стоимость не изменится
                 </p>
               </CardContent>
@@ -310,10 +310,10 @@ export default function Construction() {
       </section>
 
       {/* Portfolio Stats */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Наши результаты
             </h2>
           </div>
@@ -322,28 +322,28 @@ export default function Construction() {
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-blue-500 mb-2">150+</div>
-                <div className="text-text-primary font-semibold">Построенных объектов</div>
+                <div className="text-foreground font-semibold">Построенных объектов</div>
               </CardContent>
             </Card>
 
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-green-500 mb-2">100%</div>
-                <div className="text-text-primary font-semibold">Сданных в срок</div>
+                <div className="text-foreground font-semibold">Сданных в срок</div>
               </CardContent>
             </Card>
 
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-purple-500 mb-2">10</div>
-                <div className="text-text-primary font-semibold">Лет на рынке</div>
+                <div className="text-foreground font-semibold">Лет на рынке</div>
               </CardContent>
             </Card>
 
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-orange-500 mb-2">98%</div>
-                <div className="text-text-primary font-semibold">Довольных клиентов</div>
+                <div className="text-foreground font-semibold">Довольных клиентов</div>
               </CardContent>
             </Card>
           </div>
@@ -351,7 +351,7 @@ export default function Construction() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-700 to-blue-600 text-text-primary">
+      <section className="py-16 bg-gradient-to-r from-blue-700 to-blue-600 text-foreground">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">

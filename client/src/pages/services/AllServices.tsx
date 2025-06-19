@@ -68,9 +68,9 @@ export default function AllServices() {
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-text-primary py-16">
+      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-foreground py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -82,10 +82,10 @@ export default function AllServices() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+              <Button className="bg-primary text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Получить консультацию
               </Button>
-              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-purple-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-foreground hover:bg-white hover:text-purple-600 px-8 py-4 text-lg">
                 Рассчитать стоимость
               </Button>
             </div>
@@ -97,10 +97,10 @@ export default function AllServices() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Почему выбирают нас
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Преимущества работы с нашей командой профессионалов
             </p>
           </div>
@@ -112,10 +112,10 @@ export default function AllServices() {
                   <div className="flex justify-center mb-4">
                     {advantage.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-text-primary mb-3">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
                     {advantage.title}
                   </h3>
-                  <p className="text-text-secondary">
+                  <p className="text-muted-foreground">
                     {advantage.description}
                   </p>
                 </CardContent>
@@ -126,13 +126,13 @@ export default function AllServices() {
       </section>
 
       {/* Services by Category */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Наши услуги
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Полный перечень услуг по категориям
             </p>
           </div>
@@ -141,10 +141,10 @@ export default function AllServices() {
             {serviceCategories.map((category, categoryIndex) => (
               <div key={categoryIndex}>
                 <div className="text-center mb-8">
-                  <h3 className="text-2xl font-bold text-text-primary mb-2">
+                  <h3 className="text-2xl font-bold text-foreground mb-2">
                     {category.title}
                   </h3>
-                  <p className="text-text-secondary">
+                  <p className="text-muted-foreground">
                     {category.description}
                   </p>
                 </div>
@@ -157,20 +157,20 @@ export default function AllServices() {
                         <Card key={serviceIndex} className="hover:shadow-lg transition-shadow group">
                           <CardContent className="p-6">
                             <div className="flex items-center mb-4">
-                              <div className="w-12 h-12 bg-accent-orange bg-opacity-10 rounded-lg flex items-center justify-center mr-4">
-                                <i className={`${service.icon} text-accent-orange text-xl`}></i>
+                              <div className="w-12 h-12 bg-accent bg-opacity-10 rounded-lg flex items-center justify-center mr-4">
+                                <i className={`${service.icon} text-accent text-xl`}></i>
                               </div>
-                              <h4 className="text-lg font-semibold text-text-primary">
+                              <h4 className="text-lg font-semibold text-foreground">
                                 {service.title}
                               </h4>
                             </div>
-                            <p className="text-text-secondary mb-4">
+                            <p className="text-muted-foreground mb-4">
                               {service.description}
                             </p>
                             <Link href={service.slug === 'buy' ? '/buy' : service.slug === 'sell' ? '/sell' : '/rent'}>
                               <Button 
                                 variant="outline" 
-                                className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-text-primary group-hover:bg-accent-orange group-hover:text-text-primary transition-colors"
+                                className="w-full border-accent-orange text-accent hover:bg-accent hover:text-foreground group-hover:bg-accent group-hover:text-foreground transition-colors"
                               >
                                 Подробнее
                                 <ArrowRight className="ml-2 w-4 h-4" />
@@ -186,11 +186,11 @@ export default function AllServices() {
                       <Card key={service.id} className="hover:shadow-lg transition-shadow group">
                         <CardContent className="p-6">
                           <div className="flex items-center mb-4">
-                            <div className="w-12 h-12 bg-accent-orange bg-opacity-10 rounded-lg flex items-center justify-center mr-4">
-                              <i className={`${service.icon} text-accent-orange text-xl`}></i>
+                            <div className="w-12 h-12 bg-accent bg-opacity-10 rounded-lg flex items-center justify-center mr-4">
+                              <i className={`${service.icon} text-accent text-xl`}></i>
                             </div>
                             <div className="flex-1">
-                              <h4 className="text-lg font-semibold text-text-primary">
+                              <h4 className="text-lg font-semibold text-foreground">
                                 {service.title}
                               </h4>
                               {service.price && (
@@ -201,13 +201,13 @@ export default function AllServices() {
                             </div>
                           </div>
                           
-                          <p className="text-text-secondary mb-4">
+                          <p className="text-muted-foreground mb-4">
                             {service.description}
                           </p>
 
                           {service.features.length > 0 && (
                             <div className="mb-4">
-                              <ul className="text-sm text-text-secondary space-y-1">
+                              <ul className="text-sm text-muted-foreground space-y-1">
                                 {service.features.slice(0, 2).map((feature, featureIndex) => (
                                   <li key={featureIndex} className="flex items-center">
                                     <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
@@ -221,7 +221,7 @@ export default function AllServices() {
                           <Link href={`/services/${service.slug}`}>
                             <Button 
                               variant="outline" 
-                              className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-text-primary group-hover:bg-accent-orange group-hover:text-text-primary transition-colors"
+                              className="w-full border-accent-orange text-accent hover:bg-accent hover:text-foreground group-hover:bg-accent group-hover:text-foreground transition-colors"
                             >
                               Подробнее
                               <ArrowRight className="ml-2 w-4 h-4" />
@@ -242,10 +242,10 @@ export default function AllServices() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Как мы работаем
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Простой и понятный процесс сотрудничества
             </p>
           </div>
@@ -275,13 +275,13 @@ export default function AllServices() {
                 }
               ].map((step, index) => (
                 <div key={index} className="text-center">
-                  <div className="w-16 h-16 bg-accent-orange text-text-primary rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
+                  <div className="w-16 h-16 bg-accent text-foreground rounded-full flex items-center justify-center text-xl font-bold mx-auto mb-4">
                     {step.number}
                   </div>
-                  <h3 className="text-lg font-semibold text-text-primary mb-2">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-text-secondary">
+                  <p className="text-muted-foreground">
                     {step.description}
                   </p>
                 </div>
@@ -292,7 +292,7 @@ export default function AllServices() {
       </section>
 
       {/* Service Request */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-text-primary">
+      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-foreground">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
@@ -317,7 +317,7 @@ export default function AllServices() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
               Наши гарантии
             </h2>
           </div>
@@ -326,10 +326,10 @@ export default function AllServices() {
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-green-500 mb-2">100%</div>
-                <div className="font-semibold text-text-primary mb-1">
+                <div className="font-semibold text-foreground mb-1">
                   Качество работ
                 </div>
-                <div className="text-sm text-text-secondary">
+                <div className="text-sm text-muted-foreground">
                   Гарантируем высокое качество
                 </div>
               </CardContent>
@@ -338,10 +338,10 @@ export default function AllServices() {
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-blue-500 mb-2">24/7</div>
-                <div className="font-semibold text-text-primary mb-1">
+                <div className="font-semibold text-foreground mb-1">
                   Поддержка
                 </div>
-                <div className="text-sm text-text-secondary">
+                <div className="text-sm text-muted-foreground">
                   Круглосуточная поддержка
                 </div>
               </CardContent>
@@ -350,10 +350,10 @@ export default function AllServices() {
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-purple-500 mb-2">2 года</div>
-                <div className="font-semibold text-text-primary mb-1">
+                <div className="font-semibold text-foreground mb-1">
                   Гарантия
                 </div>
-                <div className="text-sm text-text-secondary">
+                <div className="text-sm text-muted-foreground">
                   На все виды работ
                 </div>
               </CardContent>
@@ -362,10 +362,10 @@ export default function AllServices() {
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-orange-500 mb-2">0₽</div>
-                <div className="font-semibold text-text-primary mb-1">
+                <div className="font-semibold text-foreground mb-1">
                   Консультация
                 </div>
-                <div className="text-sm text-text-secondary">
+                <div className="text-sm text-muted-foreground">
                   Бесплатная консультация
                 </div>
               </CardContent>

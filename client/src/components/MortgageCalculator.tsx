@@ -88,7 +88,7 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
               className="mt-1"
               placeholder="1 000 000"
             />
-            <div className="text-xs text-text-secondary mt-1">{downPaymentPercent}% от стоимости</div>
+            <div className="text-xs text-muted-foreground mt-1">{downPaymentPercent}% от стоимости</div>
           </div>
 
           <div>
@@ -101,7 +101,7 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
               step={0.1}
               className="mt-2"
             />
-            <div className="text-xs text-text-secondary mt-1">Среднерыночная ставка: 12-18%</div>
+            <div className="text-xs text-muted-foreground mt-1">Среднерыночная ставка: 12-18%</div>
           </div>
 
           <div>
@@ -116,21 +116,21 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
             />
           </div>
 
-          <div className="bg-neutral-50 rounded-lg p-3 space-y-2">
+          <div className="bg-background rounded-lg p-3 space-y-2">
             <div className="flex justify-between items-center">
-              <span className="text-sm text-text-secondary">Ежемесячный платеж</span>
+              <span className="text-sm text-muted-foreground">Ежемесячный платеж</span>
               <span className="font-bold text-lg">{formatNumber(monthlyPayment)} ₽</span>
             </div>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-text-secondary">Переплата</span>
+              <span className="text-sm text-muted-foreground">Переплата</span>
               <span className="text-sm font-medium text-red-600">{formatNumber(overpayment)} ₽</span>
             </div>
-            <div className="text-xs text-orange-600 mt-2 pt-2 border-t border-neutral-200">
+            <div className="text-xs text-orange-600 mt-2 pt-2 border-t border">
               ⚠️ Предварительный расчет.<br />
               Точные условия уточняйте у своего менеджера.
             </div>
             
-            <Button className="w-full mt-3 bg-accent-orange hover:bg-accent-orange/90 text-text-primary">
+            <Button className="w-full mt-3 bg-accent hover:bg-accent/90 text-foreground">
               Получить консультацию
             </Button>
           </div>
@@ -146,7 +146,7 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
           <Calculator className="w-8 h-8 text-yandex-yellow" />
           Калькулятор ипотеки
         </CardTitle>
-        <p className="text-text-secondary">
+        <p className="text-muted-foreground">
           Рассчитайте ежемесячный платеж и переплату по ипотечному кредиту
         </p>
       </CardHeader>
@@ -173,7 +173,7 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
                 step={100000}
                 className="mt-3"
               />
-              <div className="flex justify-between text-sm text-text-secondary mt-1">
+              <div className="flex justify-between text-sm text-muted-foreground mt-1">
                 <span>1 млн ₽</span>
                 <span>50 млн ₽</span>
               </div>
@@ -199,7 +199,7 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
                 step={10000}
                 className="mt-3"
               />
-              <div className="flex justify-between text-sm text-text-secondary mt-1">
+              <div className="flex justify-between text-sm text-muted-foreground mt-1">
                 <span>10% ({formatNumber(Math.round(price * 0.1))} ₽)</span>
                 <span>90% ({formatNumber(Math.round(price * 0.9))} ₽)</span>
               </div>
@@ -215,7 +215,7 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
                 step={0.1}
                 className="mt-3"
               />
-              <div className="flex justify-between text-sm text-text-secondary mt-1">
+              <div className="flex justify-between text-sm text-muted-foreground mt-1">
                 <span>3%</span>
                 <span>25%</span>
               </div>
@@ -234,7 +234,7 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
                 step={1}
                 className="mt-3"
               />
-              <div className="flex justify-between text-sm text-text-secondary mt-1">
+              <div className="flex justify-between text-sm text-muted-foreground mt-1">
                 <span>5 лет</span>
                 <span>30 лет</span>
               </div>
@@ -250,7 +250,7 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
                 step={0.1}
                 className="mt-3"
               />
-              <div className="flex justify-between text-sm text-text-secondary mt-1">
+              <div className="flex justify-between text-sm text-muted-foreground mt-1">
                 <span>6%</span>
                 <span>20%</span>
               </div>
@@ -268,14 +268,14 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
               <div className="space-y-4">
                 <div className="bg-white rounded-lg p-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-text-secondary">Сумма кредита</span>
+                    <span className="text-muted-foreground">Сумма кредита</span>
                     <span className="text-lg font-semibold">{formatNumber(loanAmount)} ₽</span>
                   </div>
                 </div>
 
                 <div className="bg-white rounded-lg p-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-text-secondary flex items-center gap-2">
+                    <span className="text-muted-foreground flex items-center gap-2">
                       <Calendar className="w-4 h-4" />
                       Ежемесячный платеж
                     </span>
@@ -285,14 +285,14 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
 
                 <div className="bg-white rounded-lg p-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-text-secondary">Общая сумма выплат</span>
+                    <span className="text-muted-foreground">Общая сумма выплат</span>
                     <span className="text-lg font-semibold">{formatNumber(totalAmount)} ₽</span>
                   </div>
                 </div>
 
                 <div className="bg-white rounded-lg p-4">
                   <div className="flex justify-between items-center">
-                    <span className="text-text-secondary flex items-center gap-2">
+                    <span className="text-muted-foreground flex items-center gap-2">
                       <TrendingUp className="w-4 h-4" />
                       Переплата по кредиту
                     </span>
@@ -303,10 +303,10 @@ export default function MortgageCalculator({ compact = false, defaultPrice = 500
             </div>
 
             <div className="space-y-3">
-              <Button className="w-full bg-accent-orange hover:bg-accent-orange/90 text-text-primary font-semibold py-3 text-lg">
+              <Button className="w-full bg-accent hover:bg-accent/90 text-foreground font-semibold py-3 text-lg">
                 Получить консультацию по ипотеке
               </Button>
-              <Button variant="outline" className="w-full border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-text-primary py-3 text-lg">
+              <Button variant="outline" className="w-full border-accent-orange text-accent hover:bg-accent hover:text-foreground py-3 text-lg">
                 Подобрать лучшие предложения
               </Button>
             </div>

@@ -254,7 +254,7 @@ export default function ServiceLanding() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-accent-orange to-orange-600 text-text-primary py-20">
+      <section className="bg-gradient-to-r from-accent-orange to-orange-600 text-foreground py-20">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto mb-6">
@@ -265,17 +265,17 @@ export default function ServiceLanding() {
             <p className="text-lg mb-8 max-w-3xl mx-auto">{serviceData.description}</p>
             
             <div className="flex flex-wrap justify-center gap-4 mb-8">
-              <Badge variant="outline" className="bg-white/10 text-text-primary border-white/30 text-lg px-4 py-2">
+              <Badge variant="outline" className="bg-white/10 text-foreground border-white/30 text-lg px-4 py-2">
                 <Clock className="w-5 h-5 mr-2" />
                 {serviceData.duration}
               </Badge>
-              <Badge variant="outline" className="bg-white/10 text-text-primary border-white/30 text-lg px-4 py-2">
+              <Badge variant="outline" className="bg-white/10 text-foreground border-white/30 text-lg px-4 py-2">
                 <Award className="w-5 h-5 mr-2" />
                 {serviceData.price}
               </Badge>
             </div>
 
-            <Button size="lg" variant="outline" className="bg-white text-accent-orange hover:bg-gray-50 border-white text-lg px-8 py-3">
+            <Button size="lg" variant="outline" className="bg-white text-accent hover:bg-gray-50 border-white text-lg px-8 py-3">
               Получить консультацию
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
@@ -287,14 +287,14 @@ export default function ServiceLanding() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12 text-text-primary">Преимущества услуги</h2>
+            <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Преимущества услуги</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {serviceData.benefits.map((benefit, index) => (
                 <Card key={index} className="bg-white border-0 shadow-sm hover:shadow-md transition-shadow">
                   <CardContent className="p-6">
                     <div className="flex items-start space-x-3">
                       <CheckCircle className="w-6 h-6 text-green-500 mt-1 flex-shrink-0" />
-                      <p className="text-text-primary font-medium">{benefit}</p>
+                      <p className="text-foreground font-medium">{benefit}</p>
                     </div>
                   </CardContent>
                 </Card>
@@ -308,14 +308,14 @@ export default function ServiceLanding() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold text-center mb-12 text-text-primary">Как мы работаем</h2>
+            <h2 className="text-3xl font-bold text-center mb-12 text-foreground">Как мы работаем</h2>
             <div className="space-y-6">
               {serviceData.process.map((step, index) => (
                 <div key={index} className="flex items-center space-x-4 p-4 rounded-lg bg-gray-50">
-                  <div className="w-10 h-10 bg-accent-orange text-text-primary rounded-full flex items-center justify-center font-bold">
+                  <div className="w-10 h-10 bg-accent text-foreground rounded-full flex items-center justify-center font-bold">
                     {index + 1}
                   </div>
-                  <p className="text-lg text-text-primary font-medium">{step}</p>
+                  <p className="text-lg text-foreground font-medium">{step}</p>
                 </div>
               ))}
             </div>
@@ -324,20 +324,20 @@ export default function ServiceLanding() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 bg-neutral-100 text-text-primary">
+      <section className="py-16 bg-secondary text-foreground">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="grid md:grid-cols-3 gap-8 text-center">
               <div>
-                <div className="text-4xl font-bold text-accent-orange mb-2">500+</div>
+                <div className="text-4xl font-bold text-accent mb-2">500+</div>
                 <p className="text-gray-300">Выполненных проектов</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-accent-orange mb-2">15+</div>
+                <div className="text-4xl font-bold text-accent mb-2">15+</div>
                 <p className="text-gray-300">Лет опыта</p>
               </div>
               <div>
-                <div className="text-4xl font-bold text-accent-orange mb-2">98%</div>
+                <div className="text-4xl font-bold text-accent mb-2">98%</div>
                 <p className="text-gray-300">Довольных клиентов</p>
               </div>
             </div>
@@ -350,8 +350,8 @@ export default function ServiceLanding() {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4 text-text-primary">Получить консультацию</h2>
-              <p className="text-text-secondary">Оставьте заявку, и мы свяжемся с вами в течение 15 минут</p>
+              <h2 className="text-3xl font-bold mb-4 text-foreground">Получить консультацию</h2>
+              <p className="text-muted-foreground">Оставьте заявку, и мы свяжемся с вами в течение 15 минут</p>
             </div>
             
             <UnifiedForm

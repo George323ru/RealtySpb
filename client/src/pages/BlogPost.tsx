@@ -75,7 +75,7 @@ export default function BlogPostPage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-neutral-50 py-8">
+      <div className="min-h-screen bg-background py-8">
         <div className="container mx-auto px-4">
           <div className="animate-pulse">
             <div className="h-8 bg-gray-200 rounded w-64 mb-6"></div>
@@ -97,7 +97,7 @@ export default function BlogPostPage() {
 
   if (error || !blogPost) {
     return (
-      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="w-full max-w-md mx-4">
           <CardContent className="pt-6 text-center">
             <div className="text-gray-400 mb-4">
@@ -108,7 +108,7 @@ export default function BlogPostPage() {
               Возможно, статья была удалена или перемещена
             </p>
             <Link href="/blog">
-              <Button className="bg-accent-orange hover:bg-orange-600">
+              <Button className="bg-accent hover:bg-orange-600">
                 Вернуться к блогу
               </Button>
             </Link>
@@ -119,13 +119,13 @@ export default function BlogPostPage() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <nav className="flex items-center space-x-2 text-sm text-secondary mb-6">
-          <Link href="/" className="hover:text-accent-orange">Главная</Link>
+          <Link href="/" className="hover:text-accent">Главная</Link>
           <span>/</span>
-          <Link href="/blog" className="hover:text-accent-orange">Блог</Link>
+          <Link href="/blog" className="hover:text-accent">Блог</Link>
           <span>/</span>
           <span className="text-primary">{blogPost.title}</span>
         </nav>
@@ -270,7 +270,7 @@ export default function BlogPostPage() {
                       {relatedPosts.map((post) => (
                         <Link key={post.id} href={`/blog/${post.slug}`}>
                           <div className="group cursor-pointer">
-                            <h4 className="text-sm font-medium text-primary group-hover:text-accent-orange transition-colors line-clamp-2 mb-2">
+                            <h4 className="text-sm font-medium text-primary group-hover:text-accent transition-colors line-clamp-2 mb-2">
                               {post.title}
                             </h4>
                             <p className="text-xs text-secondary">
@@ -297,7 +297,7 @@ export default function BlogPostPage() {
                       "Ипотека"
                     ].map((category) => (
                       <Link key={category} href={`/blog?category=${category}`}>
-                        <div className="text-sm text-secondary hover:text-accent-orange transition-colors cursor-pointer">
+                        <div className="text-sm text-secondary hover:text-accent transition-colors cursor-pointer">
                           {category}
                         </div>
                       </Link>
@@ -307,14 +307,14 @@ export default function BlogPostPage() {
               </Card>
 
               {/* CTA */}
-              <Card className="bg-gradient-to-br from-accent-orange to-orange-600 text-text-primary">
+              <Card className="bg-gradient-to-br from-accent-orange to-orange-600 text-foreground">
                 <CardContent className="p-6 text-center">
                   <h3 className="font-semibold mb-2">Нужна консультация?</h3>
                   <p className="text-sm opacity-90 mb-4">
                     Получите экспертную помощь по недвижимости
                   </p>
                   <Link href="/contact">
-                    <Button variant="secondary" size="sm" className="bg-white text-accent-orange hover:bg-gray-100">
+                    <Button variant="secondary" size="sm" className="bg-white text-accent hover:bg-gray-100">
                       Связаться с нами
                     </Button>
                   </Link>

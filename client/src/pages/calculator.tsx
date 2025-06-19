@@ -3,7 +3,7 @@ import ConsultationForm from "@/components/consultation-form";
 
 export default function Calculator() {
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-blue-900 to-indigo-800 py-20">
         <div className="absolute inset-0 bg-card bg-opacity-40"></div>
@@ -13,7 +13,7 @@ export default function Calculator() {
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-text-primary">
+          <div className="max-w-4xl mx-auto text-center text-foreground">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Калькулятор{" "}
               <span className="text-yandex-yellow">ипотеки</span>
@@ -48,14 +48,14 @@ export default function Calculator() {
       </section>
 
       {/* Information Section */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Как работает калькулятор
               </h2>
-              <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Наш калькулятор использует аннуитетную формулу расчета для максимально точного результата
               </p>
             </div>
@@ -65,32 +65,32 @@ export default function Calculator() {
                 <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-blue-600">1</span>
                 </div>
-                <h3 className="text-xl font-bold text-text-primary mb-2">Укажите стоимость</h3>
-                <p className="text-text-secondary">Введите полную стоимость недвижимости</p>
+                <h3 className="text-xl font-bold text-foreground mb-2">Укажите стоимость</h3>
+                <p className="text-muted-foreground">Введите полную стоимость недвижимости</p>
               </div>
               
               <div className="text-center">
                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-green-600">2</span>
                 </div>
-                <h3 className="text-xl font-bold text-text-primary mb-2">Первоначальный взнос</h3>
-                <p className="text-text-secondary">Определите размер первоначального взноса</p>
+                <h3 className="text-xl font-bold text-foreground mb-2">Первоначальный взнос</h3>
+                <p className="text-muted-foreground">Определите размер первоначального взноса</p>
               </div>
               
               <div className="text-center">
                 <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-orange-600">3</span>
                 </div>
-                <h3 className="text-xl font-bold text-text-primary mb-2">Срок и ставка</h3>
-                <p className="text-text-secondary">Выберите срок кредита и процентную ставку</p>
+                <h3 className="text-xl font-bold text-foreground mb-2">Срок и ставка</h3>
+                <p className="text-muted-foreground">Выберите срок кредита и процентную ставку</p>
               </div>
               
               <div className="text-center">
                 <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl font-bold text-purple-600">4</span>
                 </div>
-                <h3 className="text-xl font-bold text-text-primary mb-2">Получите результат</h3>
-                <p className="text-text-secondary">Узнайте точный размер ежемесячного платежа</p>
+                <h3 className="text-xl font-bold text-foreground mb-2">Получите результат</h3>
+                <p className="text-muted-foreground">Узнайте точный размер ежемесячного платежа</p>
               </div>
             </div>
           </div>
@@ -102,22 +102,22 @@ export default function Calculator() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Полезные советы
               </h2>
-              <p className="text-lg text-text-secondary">
+              <p className="text-lg text-muted-foreground">
                 Рекомендации для выгодного оформления ипотеки
               </p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="bg-blue-50 rounded-xl p-6 border border-blue-200">
-                <h3 className="text-xl font-bold text-text-primary mb-3">Первоначальный взнос</h3>
-                <p className="text-text-secondary mb-4">
+                <h3 className="text-xl font-bold text-foreground mb-3">Первоначальный взнос</h3>
+                <p className="text-muted-foreground mb-4">
                   Чем больше первоначальный взнос, тем меньше будет переплата по кредиту. 
                   Рекомендуемый размер — от 20% стоимости жилья.
                 </p>
-                <ul className="space-y-2 text-sm text-text-secondary">
+                <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>• 10% — минимальный взнос</li>
                   <li>• 20% — оптимальный размер</li>
                   <li>• 30%+ — максимальная выгода</li>
@@ -125,12 +125,12 @@ export default function Calculator() {
               </div>
               
               <div className="bg-green-50 rounded-xl p-6 border border-green-200">
-                <h3 className="text-xl font-bold text-text-primary mb-3">Срок кредита</h3>
-                <p className="text-text-secondary mb-4">
+                <h3 className="text-xl font-bold text-foreground mb-3">Срок кредита</h3>
+                <p className="text-muted-foreground mb-4">
                   Более длительный срок снижает ежемесячный платеж, но увеличивает общую переплату. 
                   Найдите баланс между комфортным платежом и экономией.
                 </p>
-                <ul className="space-y-2 text-sm text-text-secondary">
+                <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>• 10-15 лет — минимальная переплата</li>
                   <li>• 15-20 лет — оптимальный срок</li>
                   <li>• 25-30 лет — минимальный платеж</li>
@@ -138,12 +138,12 @@ export default function Calculator() {
               </div>
               
               <div className="bg-orange-50 rounded-xl p-6 border border-orange-200">
-                <h3 className="text-xl font-bold text-text-primary mb-3">Процентная ставка</h3>
-                <p className="text-text-secondary mb-4">
+                <h3 className="text-xl font-bold text-foreground mb-3">Процентная ставка</h3>
+                <p className="text-muted-foreground mb-4">
                   Ставка зависит от банка, вашей кредитной истории и дохода. 
                   Сравните предложения разных банков для выбора лучших условий.
                 </p>
-                <ul className="space-y-2 text-sm text-text-secondary">
+                <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>• Зарплатные клиенты — льготные ставки</li>
                   <li>• Госпрограммы — от 6%</li>
                   <li>• Стандартные условия — 8-15%</li>
@@ -151,12 +151,12 @@ export default function Calculator() {
               </div>
               
               <div className="bg-purple-50 rounded-xl p-6 border border-purple-200">
-                <h3 className="text-xl font-bold text-text-primary mb-3">Досрочное погашение</h3>
-                <p className="text-text-secondary mb-4">
+                <h3 className="text-xl font-bold text-foreground mb-3">Досрочное погашение</h3>
+                <p className="text-muted-foreground mb-4">
                   Досрочные платежи значительно сокращают переплату. 
                   Даже небольшие дополнительные взносы дают существенный эффект.
                 </p>
-                <ul className="space-y-2 text-sm text-text-secondary">
+                <ul className="space-y-2 text-sm text-muted-foreground">
                   <li>• Уменьшение срока кредита</li>
                   <li>• Снижение ежемесячного платежа</li>
                   <li>• Экономия на процентах</li>

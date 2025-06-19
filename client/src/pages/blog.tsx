@@ -47,7 +47,7 @@ export default function Blog() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-purple-900 to-indigo-800 py-20">
         <div className="absolute inset-0 bg-card bg-opacity-40"></div>
@@ -57,7 +57,7 @@ export default function Blog() {
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-text-primary">
+          <div className="max-w-4xl mx-auto text-center text-foreground">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Блог о{" "}
               <span className="text-yandex-yellow">недвижимости</span>
@@ -90,7 +90,7 @@ export default function Blog() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-8">
-                <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                   Рекомендуемая статья
                 </h2>
               </div>
@@ -104,20 +104,20 @@ export default function Blog() {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-4 left-4">
-                      <Badge className="bg-accent-orange text-text-primary">
+                      <Badge className="bg-accent text-foreground">
                         {featuredPost.category}
                       </Badge>
                     </div>
                   </div>
                   <div className="p-8 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-2xl font-bold text-text-primary mb-4">
+                      <h3 className="text-2xl font-bold text-foreground mb-4">
                         {featuredPost.title}
                       </h3>
-                      <p className="text-text-secondary mb-6 leading-relaxed">
+                      <p className="text-muted-foreground mb-6 leading-relaxed">
                         {featuredPost.excerpt}
                       </p>
-                      <div className="flex items-center text-sm text-text-secondary mb-6">
+                      <div className="flex items-center text-sm text-muted-foreground mb-6">
                         <User className="w-4 h-4 mr-2" />
                         <span className="mr-4">{featuredPost.author}</span>
                         <Calendar className="w-4 h-4 mr-2" />
@@ -125,7 +125,7 @@ export default function Blog() {
                       </div>
                     </div>
                     <Link href={`/blog/${featuredPost.slug}`}>
-                      <Button className="bg-accent-orange hover:bg-orange-600 text-text-primary">
+                      <Button className="bg-accent hover:bg-orange-600 text-foreground">
                         Читать статью
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
@@ -139,12 +139,12 @@ export default function Blog() {
       )}
 
       {/* Search and Filters */}
-      <section className="py-8 bg-neutral-100">
+      <section className="py-8 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col lg:flex-row gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary w-4 h-4" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
                 <Input
                   placeholder="Поиск по статьям..."
                   value={searchQuery}
@@ -171,14 +171,14 @@ export default function Blog() {
       </section>
 
       {/* Posts Grid */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
                 Все статьи
               </h2>
-              <span className="text-text-secondary">
+              <span className="text-muted-foreground">
                 Найдено {filteredPosts.length} статей
               </span>
             </div>
@@ -187,22 +187,22 @@ export default function Blog() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <Card key={i} className="animate-pulse">
-                    <div className="h-48 bg-neutral-200"></div>
+                    <div className="h-48 bg-muted"></div>
                     <CardContent className="p-6">
-                      <div className="h-4 bg-neutral-200 rounded mb-2"></div>
-                      <div className="h-4 bg-neutral-200 rounded mb-4 w-3/4"></div>
-                      <div className="h-16 bg-neutral-200 rounded"></div>
+                      <div className="h-4 bg-muted rounded mb-2"></div>
+                      <div className="h-4 bg-muted rounded mb-4 w-3/4"></div>
+                      <div className="h-16 bg-muted rounded"></div>
                     </CardContent>
                   </Card>
                 ))}
               </div>
             ) : filteredPosts.length === 0 ? (
               <Card className="p-12 text-center">
-                <Filter className="w-12 h-12 mx-auto mb-4 opacity-50 text-text-secondary" />
-                <h3 className="text-lg font-semibold text-text-primary mb-2">
+                <Filter className="w-12 h-12 mx-auto mb-4 opacity-50 text-muted-foreground" />
+                <h3 className="text-lg font-semibold text-foreground mb-2">
                   Статьи не найдены
                 </h3>
-                <p className="text-text-secondary">
+                <p className="text-muted-foreground">
                   Попробуйте изменить поисковый запрос или фильтры
                 </p>
               </Card>
@@ -218,21 +218,21 @@ export default function Blog() {
                           className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         <div className="absolute top-4 left-4">
-                          <Badge className="bg-accent-orange text-text-primary">
+                          <Badge className="bg-accent text-foreground">
                             {post.category}
                           </Badge>
                         </div>
                       </div>
                       
                       <CardContent className="p-6 flex flex-col flex-1">
-                        <h3 className="text-xl font-semibold text-text-primary mb-2 line-clamp-2">
+                        <h3 className="text-xl font-semibold text-foreground mb-2 line-clamp-2">
                           {post.title}
                         </h3>
-                        <p className="text-text-secondary mb-4 text-sm leading-relaxed flex-1">
+                        <p className="text-muted-foreground mb-4 text-sm leading-relaxed flex-1">
                           {truncateText(post.excerpt, 120)}
                         </p>
                         
-                        <div className="flex items-center text-xs text-text-secondary mb-4">
+                        <div className="flex items-center text-xs text-muted-foreground mb-4">
                           <User className="w-3 h-3 mr-1" />
                           <span className="mr-3">{post.author}</span>
                           <Calendar className="w-3 h-3 mr-1" />
@@ -252,7 +252,7 @@ export default function Blog() {
                         <Link href={`/blog/${post.slug}`} className="mt-auto">
                           <Button 
                             variant="ghost" 
-                            className="w-full text-accent-orange hover:text-orange-600 hover:bg-orange-50"
+                            className="w-full text-accent hover:text-orange-600 hover:bg-orange-50"
                           >
                             Читать далее
                             <ArrowRight className="w-4 h-4 ml-2" />
@@ -280,10 +280,10 @@ export default function Blog() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Категории
               </h2>
-              <p className="text-lg text-text-secondary">
+              <p className="text-lg text-muted-foreground">
                 Изучайте интересующие вас темы
               </p>
             </div>
@@ -296,9 +296,9 @@ export default function Blog() {
                   onClick={() => setSelectedCategory(category)}
                 >
                   <CardContent className="p-6 text-center">
-                    <Tag className="w-8 h-8 mx-auto mb-3 text-accent-orange" />
-                    <h3 className="font-semibold text-text-primary mb-2">{category}</h3>
-                    <p className="text-sm text-text-secondary">
+                    <Tag className="w-8 h-8 mx-auto mb-3 text-accent" />
+                    <h3 className="font-semibold text-foreground mb-2">{category}</h3>
+                    <p className="text-sm text-muted-foreground">
                       {posts.filter(post => post.category === category).length} статей
                     </p>
                   </CardContent>
@@ -312,7 +312,7 @@ export default function Blog() {
       {/* Newsletter */}
       <section className="py-16 bg-gradient-to-r from-purple-600 to-indigo-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-text-primary">
+          <div className="max-w-4xl mx-auto text-center text-foreground">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Подписаться на обновления
             </h2>
@@ -323,9 +323,9 @@ export default function Blog() {
               <Input
                 type="email"
                 placeholder="Ваш email"
-                className="bg-white text-text-primary"
+                className="bg-white text-foreground"
               />
-              <Button className="bg-white text-purple-600 hover:bg-neutral-100 px-8 font-semibold">
+              <Button className="bg-white text-purple-600 hover:bg-secondary px-8 font-semibold">
                 Подписаться
               </Button>
             </div>

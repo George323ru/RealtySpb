@@ -137,12 +137,12 @@ export default function Sell() {
       number: "05",
       title: "Сделка",
       description: "Оформление сделки и передача ключей новому владельцу",
-      color: "bg-accent-orange"
+      color: "bg-accent"
     }
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-green-900 to-green-700 py-20">
         <div className="absolute inset-0 bg-card bg-opacity-40"></div>
@@ -152,7 +152,7 @@ export default function Sell() {
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-text-primary">
+          <div className="max-w-4xl mx-auto text-center text-foreground">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Продать квартиру в СПб{" "}
               <span className="text-yandex-yellow">выгодно</span>
@@ -184,10 +184,10 @@ export default function Sell() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Получите бесплатную оценку недвижимости
               </h2>
-              <p className="text-lg text-text-secondary">
+              <p className="text-lg text-muted-foreground">
                 Заполните форму и узнайте точную рыночную стоимость вашего объекта
               </p>
             </div>
@@ -195,10 +195,10 @@ export default function Sell() {
             {isSubmitted ? (
               <Card className="p-12 text-center">
                 <div className="text-green-500 text-5xl mb-4">✓</div>
-                <h3 className="text-2xl font-bold text-text-primary mb-2">
+                <h3 className="text-2xl font-bold text-foreground mb-2">
                   Заявка отправлена!
                 </h3>
-                <p className="text-text-secondary">
+                <p className="text-muted-foreground">
                   Наш специалист свяжется с вами в течение 30 минут для проведения оценки.
                 </p>
               </Card>
@@ -243,7 +243,7 @@ export default function Sell() {
                       <Button
                         type="submit"
                         disabled={mutation.isPending}
-                        className="w-full bg-green-500 hover:bg-green-600 text-text-primary py-4 text-lg font-semibold"
+                        className="w-full bg-green-500 hover:bg-green-600 text-foreground py-4 text-lg font-semibold"
                       >
                         {mutation.isPending ? "Отправляем..." : "Получить бесплатную оценку"}
                       </Button>
@@ -257,13 +257,13 @@ export default function Sell() {
       </section>
 
       {/* Advantages */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Почему выбирают нас для продажи
             </h2>
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Наш опыт и профессиональный подход помогают продать недвижимость быстро и выгодно
             </p>
           </div>
@@ -275,10 +275,10 @@ export default function Sell() {
                   <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
                     <advantage.icon className="w-8 h-8 text-green-500" />
                   </div>
-                  <h3 className="text-xl font-semibold text-text-primary mb-3">
+                  <h3 className="text-xl font-semibold text-foreground mb-3">
                     {advantage.title}
                   </h3>
-                  <p className="text-text-secondary">
+                  <p className="text-muted-foreground">
                     {advantage.description}
                   </p>
                 </CardContent>
@@ -292,10 +292,10 @@ export default function Sell() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Процесс продажи
             </h2>
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Пошаговый план работы для успешной продажи вашей недвижимости
             </p>
           </div>
@@ -303,14 +303,14 @@ export default function Sell() {
           <div className="max-w-4xl mx-auto">
             {steps.map((step, index) => (
               <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className={`w-16 h-16 ${step.color} rounded-full flex items-center justify-center text-text-primary font-bold text-xl mr-6 flex-shrink-0`}>
+                <div className={`w-16 h-16 ${step.color} rounded-full flex items-center justify-center text-foreground font-bold text-xl mr-6 flex-shrink-0`}>
                   {step.number}
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-text-secondary">
+                  <p className="text-muted-foreground">
                     {step.description}
                   </p>
                 </div>
@@ -323,7 +323,7 @@ export default function Sell() {
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-green-500 to-green-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center text-text-primary">
+          <div className="max-w-3xl mx-auto text-center text-foreground">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Готовы продать недвижимость?
             </h2>
@@ -331,12 +331,12 @@ export default function Sell() {
               Получите бесплатную консультацию и узнайте точную стоимость вашего объекта
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-white text-green-600 hover:bg-neutral-100 px-8 py-3 text-lg font-semibold">
+              <Button className="bg-white text-green-600 hover:bg-secondary px-8 py-3 text-lg font-semibold">
                 Узнать стоимость
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-text-primary hover:bg-white hover:text-green-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-foreground hover:bg-white hover:text-green-600 px-8 py-3 text-lg font-semibold"
               >
                 Позвонить сейчас
               </Button>

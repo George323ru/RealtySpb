@@ -71,13 +71,13 @@ export default function Cart() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+          <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
             Избранные объекты
           </h1>
-          <p className="text-lg text-text-secondary">
+          <p className="text-lg text-muted-foreground">
             Ваша персональная подборка недвижимости
           </p>
         </div>
@@ -88,15 +88,15 @@ export default function Cart() {
             {cartItems.length === 0 ? (
               <Card>
                 <CardContent className="p-8 text-center">
-                  <Home className="w-16 h-16 text-text-secondary mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
+                  <Home className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
                     Подборка пуста
                   </h3>
-                  <p className="text-text-secondary mb-4">
+                  <p className="text-muted-foreground mb-4">
                     Добавьте интересующие объекты для создания персональной подборки
                   </p>
                   <Button asChild>
-                    <a href="/buy" className="bg-accent-orange hover:bg-orange-600 text-text-primary">
+                    <a href="/buy" className="bg-accent hover:bg-orange-600 text-foreground">
                       Найти недвижимость
                     </a>
                   </Button>
@@ -105,7 +105,7 @@ export default function Cart() {
             ) : (
               <>
                 <div className="flex justify-between items-center mb-4">
-                  <p className="text-text-secondary">
+                  <p className="text-muted-foreground">
                     Объектов в подборке: <span className="font-semibold">{cartItems.length}</span>
                   </p>
                   <Button
@@ -132,7 +132,7 @@ export default function Cart() {
                           
                           <div className="flex-1">
                             <div className="flex justify-between items-start mb-2">
-                              <h3 className="font-semibold text-text-primary">
+                              <h3 className="font-semibold text-foreground">
                                 {item.title}
                               </h3>
                               <Button
@@ -145,17 +145,17 @@ export default function Cart() {
                               </Button>
                             </div>
                             
-                            <div className="flex items-center text-text-secondary text-sm mb-2">
-                              <MapPin className="w-4 h-4 mr-1 text-accent-orange" />
+                            <div className="flex items-center text-muted-foreground text-sm mb-2">
+                              <MapPin className="w-4 h-4 mr-1 text-accent" />
                               {item.location}
                             </div>
                             
-                            <p className="text-sm text-text-secondary mb-2">
+                            <p className="text-sm text-muted-foreground mb-2">
                               {item.details}
                             </p>
                             
                             <div className="flex justify-between items-center">
-                              <p className="font-bold text-lg text-accent-orange">
+                              <p className="font-bold text-lg text-accent">
                                 {formatPrice(item.price)}
                               </p>
                               
@@ -185,7 +185,7 @@ export default function Cart() {
                   <CardContent className="space-y-3">
                     <Button
                       onClick={generatePDF}
-                      className="w-full bg-accent-orange hover:bg-orange-600 text-text-primary"
+                      className="w-full bg-accent hover:bg-orange-600 text-foreground"
                     >
                       <Download className="w-4 h-4 mr-2" />
                       Скачать PDF
@@ -251,11 +251,11 @@ export default function Cart() {
                     />
                   </div>
 
-                  <Button className="w-full bg-accent-orange hover:bg-orange-600 text-text-primary">
+                  <Button className="w-full bg-accent hover:bg-orange-600 text-foreground">
                     Получить консультацию
                   </Button>
                   
-                  <p className="text-xs text-text-secondary text-center">
+                  <p className="text-xs text-muted-foreground text-center">
                     Наш специалист свяжется с вами в течение 30 минут
                   </p>
                 </CardContent>
@@ -269,26 +269,26 @@ export default function Cart() {
                   </CardHeader>
                   <CardContent className="space-y-3">
                     <div className="flex justify-between text-sm">
-                      <span className="text-text-secondary">Средняя цена:</span>
+                      <span className="text-muted-foreground">Средняя цена:</span>
                       <span className="font-medium">
                         {formatPrice(cartItems.reduce((sum, item) => sum + item.price, 0) / cartItems.length)}
                       </span>
                     </div>
                     
                     <div className="flex justify-between text-sm">
-                      <span className="text-text-secondary">Всего объектов:</span>
+                      <span className="text-muted-foreground">Всего объектов:</span>
                       <span className="font-medium">{cartItems.length}</span>
                     </div>
                     
                     <div className="flex justify-between text-sm">
-                      <span className="text-text-secondary">Новостройки:</span>
+                      <span className="text-muted-foreground">Новостройки:</span>
                       <span className="font-medium">
                         {cartItems.filter(item => item.type === 'newBuilding').length}
                       </span>
                     </div>
                     
                     <div className="flex justify-between text-sm">
-                      <span className="text-text-secondary">Вторичка:</span>
+                      <span className="text-muted-foreground">Вторичка:</span>
                       <span className="font-medium">
                         {cartItems.filter(item => item.type === 'property').length}
                       </span>

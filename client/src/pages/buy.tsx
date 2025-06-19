@@ -89,15 +89,15 @@ export default function Buy() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <section className="bg-white border-b border-neutral-200">
+      <section className="bg-white border-b border">
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-6xl mx-auto">
-            <h1 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Купить недвижимость в СПб - {getPageTitle()}
             </h1>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               {properties.length} объектов в каталоге
             </p>
           </div>
@@ -127,7 +127,7 @@ export default function Buy() {
                 <CardContent className={`space-y-6 ${showFilters ? 'block' : 'hidden lg:block'}`}>
                   {/* Property Type */}
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-2">
+                    <label className="block text-sm font-medium text-foreground mb-2">
                       Тип недвижимости
                     </label>
                     <Select 
@@ -149,7 +149,7 @@ export default function Buy() {
 
                   {/* District */}
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-2">
+                    <label className="block text-sm font-medium text-foreground mb-2">
                       Район
                     </label>
                     <Select 
@@ -171,7 +171,7 @@ export default function Buy() {
 
                   {/* Price Range */}
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-2">
+                    <label className="block text-sm font-medium text-foreground mb-2">
                       Цена
                     </label>
                     <div className="grid grid-cols-2 gap-2">
@@ -191,7 +191,7 @@ export default function Buy() {
                   {/* Rooms */}
                   {filters.propertyType === 'квартира' && (
                     <div>
-                      <label className="block text-sm font-medium text-text-primary mb-2">
+                      <label className="block text-sm font-medium text-foreground mb-2">
                         Количество комнат
                       </label>
                       <Select 
@@ -214,7 +214,7 @@ export default function Buy() {
 
                   {/* Building Type */}
                   <div>
-                    <label className="block text-sm font-medium text-text-primary mb-2">
+                    <label className="block text-sm font-medium text-foreground mb-2">
                       Тип здания
                     </label>
                     <div className="space-y-2">
@@ -259,7 +259,7 @@ export default function Buy() {
               {/* Search and Sort */}
               <div className="flex flex-col sm:flex-row gap-4 mb-6">
                 <div className="flex-1 relative">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-text-secondary w-4 h-4" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
                   <Input
                     placeholder="Поиск по адресу или названию..."
                     className="pl-10"
@@ -284,20 +284,20 @@ export default function Buy() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {Array.from({ length: 6 }).map((_, i) => (
                     <Card key={i} className="animate-pulse">
-                      <div className="h-64 bg-neutral-200 rounded-t-lg"></div>
+                      <div className="h-64 bg-muted rounded-t-lg"></div>
                       <CardContent className="p-6">
-                        <div className="h-4 bg-neutral-200 rounded mb-2"></div>
-                        <div className="h-4 bg-neutral-200 rounded mb-4 w-3/4"></div>
-                        <div className="h-8 bg-neutral-200 rounded"></div>
+                        <div className="h-4 bg-muted rounded mb-2"></div>
+                        <div className="h-4 bg-muted rounded mb-4 w-3/4"></div>
+                        <div className="h-8 bg-muted rounded"></div>
                       </CardContent>
                     </Card>
                   ))}
                 </div>
               ) : properties.length === 0 ? (
                 <Card className="p-12 text-center">
-                  <div className="text-text-secondary mb-4">
+                  <div className="text-muted-foreground mb-4">
                     <Filter className="w-12 h-12 mx-auto mb-4 opacity-50" />
-                    <h3 className="text-lg font-semibold text-text-primary mb-2">
+                    <h3 className="text-lg font-semibold text-foreground mb-2">
                       Объекты не найдены
                     </h3>
                     <p>Попробуйте изменить параметры поиска</p>

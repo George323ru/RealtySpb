@@ -83,9 +83,9 @@ export default function DesignProject() {
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-text-primary py-16">
+      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-foreground py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -97,10 +97,10 @@ export default function DesignProject() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+              <Button className="bg-primary text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Заказать дизайн-проект
               </Button>
-              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-purple-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-foreground hover:bg-white hover:text-purple-600 px-8 py-4 text-lg">
                 Посмотреть портфолио
               </Button>
             </div>
@@ -112,10 +112,10 @@ export default function DesignProject() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Что включает дизайн-проект
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Полный комплекс услуг по созданию интерьера
             </p>
           </div>
@@ -127,13 +127,13 @@ export default function DesignProject() {
                   <div className="flex justify-center mb-4">
                     {service.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-text-primary mb-3">
+                  <h3 className="text-lg font-semibold text-foreground mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-text-secondary mb-4">
+                  <p className="text-muted-foreground mb-4">
                     {service.description}
                   </p>
-                  <Badge className="bg-purple-500 text-text-primary">
+                  <Badge className="bg-purple-500 text-foreground">
                     {service.price}
                   </Badge>
                 </CardContent>
@@ -144,13 +144,13 @@ export default function DesignProject() {
       </section>
 
       {/* Portfolio */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Наше портфолио
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Более 300 реализованных проектов в различных стилях
             </p>
           </div>
@@ -159,13 +159,13 @@ export default function DesignProject() {
             {portfolioCategories.map((category, index) => (
               <Card key={index} className="hover:shadow-lg transition-shadow">
                 <CardContent className="p-6 text-center">
-                  <h3 className="text-lg font-semibold text-text-primary mb-2">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     {category.title}
                   </h3>
                   <div className="text-purple-500 font-medium mb-2">
                     {category.count}
                   </div>
-                  <p className="text-sm text-text-secondary">
+                  <p className="text-sm text-muted-foreground">
                     {category.style}
                   </p>
                 </CardContent>
@@ -179,10 +179,10 @@ export default function DesignProject() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Этапы создания дизайн-проекта
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Пошаговый процесс от идеи до реализации
             </p>
           </div>
@@ -190,14 +190,14 @@ export default function DesignProject() {
           <div className="max-w-4xl mx-auto">
             {process.map((item, index) => (
               <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-purple-500 text-text-primary rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                <div className="flex-shrink-0 w-16 h-16 bg-purple-500 text-foreground rounded-full flex items-center justify-center font-bold text-lg mr-6">
                   {item.step}
                 </div>
                 <div className="flex-grow">
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-text-secondary">
+                  <p className="text-muted-foreground">
                     {item.description}
                   </p>
                 </div>
@@ -208,11 +208,11 @@ export default function DesignProject() {
       </section>
 
       {/* Benefits */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Преимущества работы с нами
               </h2>
             </div>
@@ -221,7 +221,7 @@ export default function DesignProject() {
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
-                  <span className="text-text-primary font-medium">{benefit}</span>
+                  <span className="text-foreground font-medium">{benefit}</span>
                 </div>
               ))}
             </div>
@@ -233,10 +233,10 @@ export default function DesignProject() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Стоимость дизайн-проекта
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Прозрачные цены на все виды услуг
             </p>
           </div>
@@ -247,7 +247,7 @@ export default function DesignProject() {
                 <CardTitle className="text-center">Эскизный проект</CardTitle>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-purple-500">1 500 ₽/м²</div>
-                  <div className="text-sm text-text-secondary">базовые решения</div>
+                  <div className="text-sm text-muted-foreground">базовые решения</div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -263,21 +263,21 @@ export default function DesignProject() {
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span className="text-sm">Подбор материалов</span>
                 </div>
-                <Button className="w-full mt-6 bg-purple-500 text-text-primary hover:bg-purple-600">
+                <Button className="w-full mt-6 bg-purple-500 text-foreground hover:bg-purple-600">
                   Заказать
                 </Button>
               </CardContent>
             </Card>
 
             <Card className="border-purple-500 border-2 relative">
-              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500 text-text-primary">
+              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500 text-foreground">
                 Популярный
               </Badge>
               <CardHeader>
                 <CardTitle className="text-center">Рабочий проект</CardTitle>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-purple-500">2 500 ₽/м²</div>
-                  <div className="text-sm text-text-secondary">полная документация</div>
+                  <div className="text-sm text-muted-foreground">полная документация</div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -293,7 +293,7 @@ export default function DesignProject() {
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span className="text-sm">3D визуализация</span>
                 </div>
-                <Button className="w-full mt-6 bg-purple-500 text-text-primary hover:bg-purple-600">
+                <Button className="w-full mt-6 bg-purple-500 text-foreground hover:bg-purple-600">
                   Заказать
                 </Button>
               </CardContent>
@@ -304,7 +304,7 @@ export default function DesignProject() {
                 <CardTitle className="text-center">Авторский надзор</CardTitle>
                 <div className="text-center">
                   <div className="text-3xl font-bold text-purple-500">500 ₽/м²</div>
-                  <div className="text-sm text-text-secondary">контроль реализации</div>
+                  <div className="text-sm text-muted-foreground">контроль реализации</div>
                 </div>
               </CardHeader>
               <CardContent className="space-y-3">
@@ -320,7 +320,7 @@ export default function DesignProject() {
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span className="text-sm">Корректировки проекта</span>
                 </div>
-                <Button className="w-full mt-6 bg-purple-500 text-text-primary hover:bg-purple-600">
+                <Button className="w-full mt-6 bg-purple-500 text-foreground hover:bg-purple-600">
                   Заказать
                 </Button>
               </CardContent>
@@ -330,7 +330,7 @@ export default function DesignProject() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-text-primary">
+      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-foreground">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">

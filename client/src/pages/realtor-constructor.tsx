@@ -135,7 +135,7 @@ export default function RealtorConstructor() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-blue-900 to-indigo-800 py-16">
         <div className="absolute inset-0 bg-card bg-opacity-40"></div>
@@ -145,7 +145,7 @@ export default function RealtorConstructor() {
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-text-primary">
+          <div className="max-w-4xl mx-auto text-center text-foreground">
             <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight">
               Подберите{" "}
               <span className="text-yandex-yellow">идеального</span>{" "}
@@ -170,8 +170,8 @@ export default function RealtorConstructor() {
                   {/* Step 1: Gender */}
                   <div className="mb-8">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-8 bg-accent-orange text-text-primary rounded-full flex items-center justify-center font-bold text-sm">1</div>
-                      <h3 className="text-xl font-semibold text-text-primary">Пол специалиста</h3>
+                      <div className="w-8 h-8 bg-accent text-foreground rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                      <h3 className="text-xl font-semibold text-foreground">Пол специалиста</h3>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                       {genderOptions.map((option) => (
@@ -180,8 +180,8 @@ export default function RealtorConstructor() {
                           onClick={() => setFilters(prev => ({ ...prev, gender: option.value }))}
                           className={`p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-3 hover:scale-105 ${
                             filters.gender === option.value
-                              ? 'border-accent-orange bg-orange-50 text-accent-orange shadow-lg'
-                              : 'border-neutral-200 hover:border-neutral-300 text-text-secondary hover:bg-neutral-50'
+                              ? 'border-accent-orange bg-orange-50 text-accent shadow-lg'
+                              : 'border hover:border-neutral-300 text-muted-foreground hover:bg-background'
                           }`}
                         >
                           <option.icon className="w-5 h-5" />
@@ -195,8 +195,8 @@ export default function RealtorConstructor() {
                   {/* Step 2: Experience */}
                   <div className="mb-8">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-8 bg-accent-orange text-text-primary rounded-full flex items-center justify-center font-bold text-sm">2</div>
-                      <h3 className="text-xl font-semibold text-text-primary">Опыт работы</h3>
+                      <div className="w-8 h-8 bg-accent text-foreground rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                      <h3 className="text-xl font-semibold text-foreground">Опыт работы</h3>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                       {experienceOptions.map((option) => (
@@ -205,8 +205,8 @@ export default function RealtorConstructor() {
                           onClick={() => setFilters(prev => ({ ...prev, experience: option.value }))}
                           className={`p-3 rounded-lg border-2 transition-all duration-200 text-center hover:scale-105 ${
                             filters.experience === option.value
-                              ? 'border-accent-orange bg-orange-50 text-accent-orange shadow-lg'
-                              : 'border-neutral-200 hover:border-neutral-300 text-text-secondary hover:bg-neutral-50'
+                              ? 'border-accent-orange bg-orange-50 text-accent shadow-lg'
+                              : 'border hover:border-neutral-300 text-muted-foreground hover:bg-background'
                           }`}
                         >
                           <span className="font-medium text-sm">{option.label}</span>
@@ -219,8 +219,8 @@ export default function RealtorConstructor() {
                   {/* Step 3: Services */}
                   <div className="mb-8">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="w-8 h-8 bg-accent-orange text-text-primary rounded-full flex items-center justify-center font-bold text-sm">3</div>
-                      <h3 className="text-xl font-semibold text-text-primary">Тип сделки</h3>
+                      <div className="w-8 h-8 bg-accent text-foreground rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                      <h3 className="text-xl font-semibold text-foreground">Тип сделки</h3>
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                       {serviceOptions.map((option) => (
@@ -229,8 +229,8 @@ export default function RealtorConstructor() {
                           onClick={() => handleServiceToggle(option.value)}
                           className={`p-4 rounded-xl border-2 transition-all duration-200 flex items-center gap-3 hover:scale-105 ${
                             filters.services.includes(option.value)
-                              ? 'border-accent-orange bg-orange-50 text-accent-orange shadow-lg'
-                              : 'border-neutral-200 hover:border-neutral-300 text-text-secondary hover:bg-neutral-50'
+                              ? 'border-accent-orange bg-orange-50 text-accent shadow-lg'
+                              : 'border hover:border-neutral-300 text-muted-foreground hover:bg-background'
                           }`}
                         >
                           <option.icon className="w-5 h-5" />
@@ -247,7 +247,7 @@ export default function RealtorConstructor() {
                   <div className="text-center pt-4">
                     <Button 
                       onClick={handleSearch}
-                      className="bg-gradient-to-r from-accent-orange to-orange-600 text-text-primary px-12 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 text-lg"
+                      className="bg-gradient-to-r from-accent-orange to-orange-600 text-foreground px-12 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 text-lg"
                     >
                       Найти специалиста
                       <ArrowRight className="ml-2 w-5 h-5" />
@@ -260,13 +260,13 @@ export default function RealtorConstructor() {
               <>
                 {/* Results Header */}
                 <div className="mb-8 text-center">
-                  <h2 className="text-3xl font-bold text-text-primary mb-4">
+                  <h2 className="text-3xl font-bold text-foreground mb-4">
                     Найдено {filteredRealtors.length} подходящих специалистов
                   </h2>
                   <Button 
                     onClick={() => setShowResults(false)}
                     variant="outline"
-                    className="mb-6 border-accent-orange text-accent-orange hover:bg-orange-50"
+                    className="mb-6 border-accent-orange text-accent hover:bg-orange-50"
                   >
                     ← Изменить критерии
                   </Button>
@@ -284,8 +284,8 @@ export default function RealtorConstructor() {
                             className="w-16 h-16 rounded-full object-cover border-2 border-orange-200"
                           />
                           <div className="flex-1">
-                            <h3 className="text-xl font-bold text-text-primary mb-1">{realtor.name}</h3>
-                            <p className="text-accent-orange font-medium mb-2">{realtor.specialization}</p>
+                            <h3 className="text-xl font-bold text-foreground mb-1">{realtor.name}</h3>
+                            <p className="text-accent font-medium mb-2">{realtor.specialization}</p>
                             
                             <div className="flex items-center gap-4 mb-3 text-sm">
                               <div className="flex items-center gap-1">
@@ -298,17 +298,17 @@ export default function RealtorConstructor() {
                               </div>
                             </div>
 
-                            <p className="text-text-secondary text-sm mb-4 leading-relaxed">{realtor.description}</p>
+                            <p className="text-muted-foreground text-sm mb-4 leading-relaxed">{realtor.description}</p>
 
                             <div className="flex flex-wrap gap-2 mb-4">
                               {realtor.services.map((service) => (
-                                <Badge key={service} variant="secondary" className="text-xs bg-orange-100 text-accent-orange">
+                                <Badge key={service} variant="secondary" className="text-xs bg-orange-100 text-accent">
                                   {service}
                                 </Badge>
                               ))}
                             </div>
 
-                            <Button className="bg-accent-orange text-text-primary hover:bg-orange-600 w-full rounded-lg font-medium">
+                            <Button className="bg-accent text-foreground hover:bg-orange-600 w-full rounded-lg font-medium">
                               <Phone className="w-4 h-4 mr-2" />
                               Связаться со специалистом
                             </Button>
@@ -322,15 +322,15 @@ export default function RealtorConstructor() {
                 {/* No Results */}
                 {filteredRealtors.length === 0 && (
                   <div className="text-center py-12">
-                    <div className="w-24 h-24 bg-neutral-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <div className="w-24 h-24 bg-secondary rounded-full flex items-center justify-center mx-auto mb-6">
                       <User className="w-12 h-12 text-neutral-400" />
                     </div>
-                    <h3 className="text-2xl font-bold text-text-primary mb-4">Специалисты не найдены</h3>
-                    <p className="text-text-secondary mb-6">Попробуйте изменить критерии поиска или оставьте заявку</p>
+                    <h3 className="text-2xl font-bold text-foreground mb-4">Специалисты не найдены</h3>
+                    <p className="text-muted-foreground mb-6">Попробуйте изменить критерии поиска или оставьте заявку</p>
                     <Button 
                       onClick={() => setShowResults(false)}
                       variant="outline"
-                      className="border-accent-orange text-accent-orange hover:bg-orange-50"
+                      className="border-accent-orange text-accent hover:bg-orange-50"
                     >
                       Изменить критерии
                     </Button>
@@ -346,10 +346,10 @@ export default function RealtorConstructor() {
       <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-6">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
               Не нашли подходящего специалиста?
             </h2>
-            <p className="text-xl text-text-primary mb-8 opacity-90">
+            <p className="text-xl text-foreground mb-8 opacity-90">
               Оставьте заявку и мы подберем эксперта под ваши требования в течение часа
             </p>
             

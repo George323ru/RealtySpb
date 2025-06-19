@@ -79,7 +79,7 @@ export default function Home() {
       icon: DollarSign,
       color: "from-green-50 to-green-100 border-green-200",
       iconBg: "bg-green-500",
-      buttonColor: "bg-accent-orange hover:bg-accent-orange/90",
+      buttonColor: "bg-accent hover:bg-accent/90",
       link: "/sell"
     },
     {
@@ -98,8 +98,8 @@ export default function Home() {
       features: ["13 видов услуг", "Полный цикл работ", "Профессиональная команда"],
       icon: Wrench,
       color: "from-orange-50 to-orange-100 border-orange-200",
-      iconBg: "bg-accent-orange",
-      buttonColor: "bg-accent-orange hover:bg-accent-orange/90",
+      iconBg: "bg-accent",
+      buttonColor: "bg-accent hover:bg-accent/90",
       link: "/services"
     }
   ];
@@ -130,7 +130,7 @@ export default function Home() {
         aria-label="Главная страница риэлтора в Санкт-Петербурге"
       >
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-text-primary">
+          <div className="max-w-4xl mx-auto text-center text-foreground">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Риэлтор в СПб - Купить недвижимость{" "}
               <span className="text-yandex-yellow">Санкт-Петербурге</span>
@@ -148,10 +148,10 @@ export default function Home() {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Что вы хотите сделать?
             </h2>
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Выберите подходящий вариант и мы поможем решить вашу задачу быстро и профессионально
             </p>
             </div>
@@ -161,17 +161,17 @@ export default function Home() {
               <Card key={index} className={`group bg-gradient-to-br ${action.color} hover:shadow-xl transition-all duration-300 cursor-pointer h-full`}>
                 <CardContent className="p-8 text-center h-full flex flex-col">
                   <div className={`w-16 h-16 ${action.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
-                    <action.icon className="text-text-primary text-2xl w-8 h-8" />
+                    <action.icon className="text-foreground text-2xl w-8 h-8" />
                     </div>
-                  <h3 className="text-xl font-bold text-text-primary mb-3">{action.title}</h3>
-                  <p className="text-text-secondary mb-6 flex-1">{action.description}</p>
-                  <div className="text-sm text-text-secondary space-y-1 mb-6 min-h-[72px] flex flex-col justify-center">
+                  <h3 className="text-xl font-bold text-foreground mb-3">{action.title}</h3>
+                  <p className="text-muted-foreground mb-6 flex-1">{action.description}</p>
+                  <div className="text-sm text-muted-foreground space-y-1 mb-6 min-h-[72px] flex flex-col justify-center">
                     {action.features.map((feature, idx) => (
                       <div key={idx}>• {feature}</div>
                     ))}
                     </div>
                   <Link href={action.link} className="mt-auto">
-                    <Button className={`w-full ${action.buttonColor} text-text-primary font-medium`}>
+                    <Button className={`w-full ${action.buttonColor} text-foreground font-medium`}>
                       {action.title === "Хочу купить" ? "Начать поиск" :
                        action.title === "Хочу продать" ? "Оценить квартиру" :
                        action.title === "Хочу сдать" ? "Сдать в аренду" : "Все услуги"}
@@ -185,13 +185,13 @@ export default function Home() {
         </section>
 
         {/* Featured Properties */}
-        <section className="py-16 bg-neutral-100">
+        <section className="py-16 bg-secondary">
           <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Рекомендуемые объекты
             </h2>
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Тщательно отобранная недвижимость с лучшим соотношением цена-качество
             </p>
             </div>
@@ -201,7 +201,7 @@ export default function Home() {
             {/* Navigation Buttons */}
             <button 
               id="scroll-left"
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-text-primary transition-all duration-300 border border-neutral-200"
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent hover:text-foreground transition-all duration-300 border border"
               onClick={() => {
                 const container = document.getElementById('properties-scroll');
                 if (container) container.scrollBy({ left: -400, behavior: 'smooth' });
@@ -212,7 +212,7 @@ export default function Home() {
             
             <button 
               id="scroll-right"
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-text-primary transition-all duration-300 border border-neutral-200"
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent hover:text-foreground transition-all duration-300 border border"
               onClick={() => {
                 const container = document.getElementById('properties-scroll');
                 if (container) container.scrollBy({ left: 400, behavior: 'smooth' });
@@ -239,7 +239,7 @@ export default function Home() {
               {Array.from({ length: Math.ceil(properties.length / 3) }).map((_, index) => (
                 <button 
                   key={index}
-                  className="w-3 h-3 rounded-full bg-neutral-300 hover:bg-accent-orange active:bg-accent-orange transition-colors cursor-pointer"
+                  className="w-3 h-3 rounded-full bg-muted hover:bg-accent active:bg-accent transition-colors cursor-pointer"
                   onClick={() => {
                     const container = document.getElementById('properties-scroll');
                     if (container) container.scrollTo({ left: index * 400, behavior: 'smooth' });
@@ -252,7 +252,7 @@ export default function Home() {
           {/* CTA Button */}
           <div className="text-center">
             <Link href="/buy">
-              <Button className="bg-accent-orange text-text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90 text-lg">
+              <Button className="bg-accent text-foreground px-8 py-4 rounded-lg font-semibold hover:bg-accent/90 text-lg">
                 Смотреть все объекты →
               </Button>
             </Link>
@@ -264,10 +264,10 @@ export default function Home() {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Новостройки Санкт-Петербурга
             </h2>
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Лучшие жилые комплексы от проверенных застройщиков с государственной гарантией
             </p>
             </div>
@@ -280,7 +280,7 @@ export default function Home() {
           
           <div className="text-center mt-12">
             <Link href="/new-buildings">
-              <Button className="bg-accent-orange text-text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90">
+              <Button className="bg-accent text-foreground px-8 py-4 rounded-lg font-semibold hover:bg-accent/90">
                 Все новостройки СПб
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
@@ -290,30 +290,30 @@ export default function Home() {
         </section>
 
         {/* Services Overview */}
-        <section className="py-16 bg-neutral-100">
+        <section className="py-16 bg-secondary">
           <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Дополнительные услуги
             </h2>
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Полный спектр услуг для работы с недвижимостью — от дизайна до юридического сопровождения
             </p>
             </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {additionalServices.map((service, index) => (
-              <Card key={index} className="bg-white hover:shadow-lg transition-shadow border border-neutral-200">
+              <Card key={index} className="bg-white hover:shadow-lg transition-shadow border border">
                 <CardContent className="p-6">
                   <div className={`w-12 h-12 ${service.color} rounded-lg flex items-center justify-center mb-4`}>
                     <service.icon className="w-6 h-6" />
                     </div>
-                  <h3 className="font-semibold text-text-primary mb-2">{service.name}</h3>
-                  <p className="text-sm text-text-secondary mb-4">
+                  <h3 className="font-semibold text-foreground mb-2">{service.name}</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
                     Профессиональные услуги высокого качества с гарантией результата
                   </p>
                   <Link href="/services">
-                    <Button variant="ghost" className="text-accent-orange font-medium text-sm hover:underline p-0">
+                    <Button variant="ghost" className="text-accent font-medium text-sm hover:underline p-0">
                       Подробнее →
                     </Button>
                   </Link>
@@ -330,25 +330,25 @@ export default function Home() {
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
-                <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-6">
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-6">
                   Рассчитайте ипотеку онлайн
                 </h2>
-                <p className="text-lg text-text-secondary mb-8">
+                <p className="text-lg text-muted-foreground mb-8">
                   Узнайте размер ежемесячного платежа и общую переплату по кредиту. 
                   Наш калькулятор поможет спланировать покупку недвижимости.
                 </p>
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-text-secondary">Точные расчеты по актуальным ставкам</span>
+                    <span className="text-muted-foreground">Точные расчеты по актуальным ставкам</span>
                     </div>
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-text-secondary">Учет всех параметров кредита</span>
+                    <span className="text-muted-foreground">Учет всех параметров кредита</span>
                     </div>
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-text-secondary">Подбор лучших банковских предложений</span>
+                    <span className="text-muted-foreground">Подбор лучших банковских предложений</span>
                     </div>
                   </div>
                 </div>
@@ -365,50 +365,50 @@ export default function Home() {
         <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Подберем идеального специалиста
             </h2>
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Ответьте на несколько вопросов, и мы найдем риэлтора с нужным опытом и специализацией
             </p>
             </div>
           
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-              <Card className="bg-white hover:shadow-lg transition-shadow text-center border border-neutral-200">
+              <Card className="bg-white hover:shadow-lg transition-shadow text-center border border">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Users className="w-8 h-8 text-blue-600" />
                     </div>
-                  <h3 className="text-xl font-bold text-text-primary mb-2">50+ специалистов</h3>
-                  <p className="text-text-secondary">Только проверенные эксперты с опытом от 3 лет</p>
+                  <h3 className="text-xl font-bold text-foreground mb-2">50+ специалистов</h3>
+                  <p className="text-muted-foreground">Только проверенные эксперты с опытом от 3 лет</p>
                 </CardContent>
               </Card>
               
-              <Card className="bg-white hover:shadow-lg transition-shadow text-center border border-neutral-200">
+              <Card className="bg-white hover:shadow-lg transition-shadow text-center border border">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle className="w-8 h-8 text-green-600" />
                     </div>
-                  <h3 className="text-xl font-bold text-text-primary mb-2">Персональный подбор</h3>
-                  <p className="text-text-secondary">Учитываем ваши требования и тип сделки</p>
+                  <h3 className="text-xl font-bold text-foreground mb-2">Персональный подбор</h3>
+                  <p className="text-muted-foreground">Учитываем ваши требования и тип сделки</p>
                 </CardContent>
               </Card>
               
-              <Card className="bg-white hover:shadow-lg transition-shadow text-center border border-neutral-200">
+              <Card className="bg-white hover:shadow-lg transition-shadow text-center border border">
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Clock className="w-8 h-8 text-orange-600" />
                     </div>
-                  <h3 className="text-xl font-bold text-text-primary mb-2">Быстрый отклик</h3>
-                  <p className="text-text-secondary">Специалист свяжется с вами в течение часа</p>
+                  <h3 className="text-xl font-bold text-foreground mb-2">Быстрый отклик</h3>
+                  <p className="text-muted-foreground">Специалист свяжется с вами в течение часа</p>
                 </CardContent>
               </Card>
               </div>
             
             <div className="text-center">
               <Link href="/realtor-constructor">
-                <Button className="bg-accent-orange text-text-primary px-8 py-4 rounded-lg font-semibold hover:bg-accent-orange/90 text-lg">
+                <Button className="bg-accent text-foreground px-8 py-4 rounded-lg font-semibold hover:bg-accent/90 text-lg">
                   Подобрать специалиста
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>

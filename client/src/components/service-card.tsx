@@ -37,32 +37,32 @@ const ServiceCard = ({ service, className = "" }: ServiceCardProps) => {
   const relatedServices = relatedServicesMap[service.name] || [];
 
   return (
-    <Card className={`hover:shadow-lg transition-shadow border border-neutral-200 h-full ${className}`}>
+    <Card className={`hover:shadow-lg transition-shadow border border h-full ${className}`}>
       <CardContent className="p-6 h-full flex flex-col">
         <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${getIconColorClass(service.id)}`}>
           <i className={`${service.icon} text-xl`}></i>
         </div>
         
-        <h3 className="font-semibold text-text-primary mb-2">
+        <h3 className="font-semibold text-foreground mb-2">
           {service.name}
         </h3>
         
-        <p className="text-sm text-text-secondary mb-4 flex-1">
+        <p className="text-sm text-muted-foreground mb-4 flex-1">
           {service.shortDescription}
         </p>
 
         <div className="space-y-3">
           {service.price && (
-            <p className="text-sm font-medium text-accent-orange">
+            <p className="text-sm font-medium text-accent">
               {service.price}
             </p>
           )}
 
           {service.features && service.features.length > 0 && (
-            <div className="text-xs text-text-secondary space-y-1">
+            <div className="text-xs text-muted-foreground space-y-1">
               {service.features.slice(0, 3).map((feature, index) => (
                 <div key={index} className="flex items-center">
-                  <div className="w-1 h-1 bg-accent-orange rounded-full mr-2"></div>
+                  <div className="w-1 h-1 bg-accent rounded-full mr-2"></div>
                   {feature}
                 </div>
               ))}
@@ -71,10 +71,10 @@ const ServiceCard = ({ service, className = "" }: ServiceCardProps) => {
 
           {relatedServices.length > 0 && (
             <div className="border-t border-neutral-100 pt-3 mt-3">
-              <p className="text-xs text-text-secondary mb-2">Дополнительные услуги:</p>
+              <p className="text-xs text-muted-foreground mb-2">Дополнительные услуги:</p>
               <div className="space-y-1">
                 {relatedServices.map((relatedService, index) => (
-                  <div key={index} className="text-xs text-text-secondary">
+                  <div key={index} className="text-xs text-muted-foreground">
                     • {relatedService}
                   </div>
                 ))}
@@ -85,7 +85,7 @@ const ServiceCard = ({ service, className = "" }: ServiceCardProps) => {
           <div className="mt-auto pt-4">
             <Link 
               href={`/services/${service.id}`}
-              className="inline-flex items-center text-accent-orange font-medium text-sm hover:underline"
+              className="inline-flex items-center text-accent font-medium text-sm hover:underline"
             >
               Подробнее
               <ArrowRight className="w-4 h-4 ml-1" />

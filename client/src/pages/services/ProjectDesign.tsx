@@ -139,9 +139,9 @@ export default function ProjectDesign() {
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-text-primary py-16">
+      <section className="bg-gradient-to-r from-indigo-600 to-indigo-500 text-foreground py-16">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl lg:text-6xl font-bold mb-6">
@@ -153,10 +153,10 @@ export default function ProjectDesign() {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+              <Button className="bg-primary text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
                 Заказать проект
               </Button>
-              <Button variant="outline" className="border-white text-text-primary hover:bg-white hover:text-indigo-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-foreground hover:bg-white hover:text-indigo-600 px-8 py-4 text-lg">
                 Портфолио проектов
               </Button>
             </div>
@@ -168,10 +168,10 @@ export default function ProjectDesign() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Виды проектных работ
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Полный комплекс проектных услуг
             </p>
           </div>
@@ -183,13 +183,13 @@ export default function ProjectDesign() {
                   <div className="flex justify-center mb-4">
                     {service.icon}
                   </div>
-                  <h3 className="text-lg font-semibold text-text-primary mb-3">
+                  <h3 className="text-lg font-semibold text-foreground mb-3">
                     {service.title}
                   </h3>
-                  <p className="text-text-secondary mb-4">
+                  <p className="text-muted-foreground mb-4">
                     {service.description}
                   </p>
-                  <Badge className="bg-indigo-500 text-text-primary">
+                  <Badge className="bg-indigo-500 text-foreground">
                     {service.price}
                   </Badge>
                 </CardContent>
@@ -200,13 +200,13 @@ export default function ProjectDesign() {
       </section>
 
       {/* Project Types */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Типы проектируемых объектов
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Специализируемся на проектировании различных типов зданий
             </p>
           </div>
@@ -218,20 +218,20 @@ export default function ProjectDesign() {
                   <CardTitle className="text-xl">{type.title}</CardTitle>
                   <div className="flex gap-2 flex-wrap">
                     <Badge variant="outline">{type.complexity}</Badge>
-                    <Badge className="bg-indigo-500 text-text-primary">{type.timeline}</Badge>
+                    <Badge className="bg-indigo-500 text-foreground">{type.timeline}</Badge>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-text-secondary">{type.description}</p>
+                  <p className="text-muted-foreground">{type.description}</p>
                   <div className="space-y-2">
                     {type.features.map((feature, featureIndex) => (
                       <div key={featureIndex} className="flex items-center gap-2">
                         <CheckCircle className="w-4 h-4 text-indigo-500" />
-                        <span className="text-sm text-text-primary">{feature}</span>
+                        <span className="text-sm text-foreground">{feature}</span>
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full bg-indigo-500 text-text-primary hover:bg-indigo-600">
+                  <Button className="w-full bg-indigo-500 text-foreground hover:bg-indigo-600">
                     Заказать проект
                   </Button>
                 </CardContent>
@@ -245,10 +245,10 @@ export default function ProjectDesign() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Стадии проектирования
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Выберите необходимую стадию проекта
             </p>
           </div>
@@ -257,7 +257,7 @@ export default function ProjectDesign() {
             {packages.map((pkg, index) => (
               <Card key={index} className={`relative ${pkg.popular ? 'border-indigo-500 border-2' : ''}`}>
                 {pkg.popular && (
-                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-indigo-500 text-text-primary">
+                  <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-indigo-500 text-foreground">
                     Популярный
                   </Badge>
                 )}
@@ -265,7 +265,7 @@ export default function ProjectDesign() {
                   <CardTitle className="text-center">{pkg.title}</CardTitle>
                   <div className="text-center">
                     <div className="text-3xl font-bold text-indigo-500">{pkg.price}</div>
-                    <div className="text-sm text-text-secondary">{pkg.description}</div>
+                    <div className="text-sm text-muted-foreground">{pkg.description}</div>
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-3">
@@ -277,8 +277,8 @@ export default function ProjectDesign() {
                   ))}
                   <Button 
                     className={`w-full mt-6 ${pkg.popular 
-                      ? 'bg-indigo-500 text-text-primary hover:bg-indigo-600' 
-                      : 'border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-text-primary'
+                      ? 'bg-indigo-500 text-foreground hover:bg-indigo-600' 
+                      : 'border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-foreground'
                     }`}
                     variant={pkg.popular ? "default" : "outline"}
                   >
@@ -292,13 +292,13 @@ export default function ProjectDesign() {
       </section>
 
       {/* Process */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Этапы проектирования
             </h2>
-            <p className="text-lg text-text-secondary">
+            <p className="text-lg text-muted-foreground">
               Пошаговый процесс создания проекта
             </p>
           </div>
@@ -306,14 +306,14 @@ export default function ProjectDesign() {
           <div className="max-w-4xl mx-auto">
             {process.map((item, index) => (
               <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-indigo-500 text-text-primary rounded-full flex items-center justify-center font-bold text-lg mr-6">
+                <div className="flex-shrink-0 w-16 h-16 bg-indigo-500 text-foreground rounded-full flex items-center justify-center font-bold text-lg mr-6">
                   {item.step}
                 </div>
                 <div className="flex-grow">
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
+                  <h3 className="text-xl font-semibold text-foreground mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-text-secondary">
+                  <p className="text-muted-foreground">
                     {item.description}
                   </p>
                 </div>
@@ -328,7 +328,7 @@ export default function ProjectDesign() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                 Наши преимущества
               </h2>
             </div>
@@ -337,7 +337,7 @@ export default function ProjectDesign() {
               {benefits.map((benefit, index) => (
                 <div key={index} className="flex items-center gap-3">
                   <CheckCircle className="w-6 h-6 text-indigo-500 flex-shrink-0" />
-                  <span className="text-text-primary font-medium">{benefit}</span>
+                  <span className="text-foreground font-medium">{benefit}</span>
                 </div>
               ))}
             </div>
@@ -346,10 +346,10 @@ export default function ProjectDesign() {
       </section>
 
       {/* Portfolio Stats */}
-      <section className="py-16 bg-neutral-100">
+      <section className="py-16 bg-secondary">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
               Наш опыт
             </h2>
           </div>
@@ -358,28 +358,28 @@ export default function ProjectDesign() {
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-indigo-500 mb-2">200+</div>
-                <div className="text-text-primary font-semibold">Проектов выполнено</div>
+                <div className="text-foreground font-semibold">Проектов выполнено</div>
               </CardContent>
             </Card>
 
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-green-500 mb-2">100%</div>
-                <div className="text-text-primary font-semibold">Прошли экспертизу</div>
+                <div className="text-foreground font-semibold">Прошли экспертизу</div>
               </CardContent>
             </Card>
 
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-purple-500 mb-2">12</div>
-                <div className="text-text-primary font-semibold">Лет опыта</div>
+                <div className="text-foreground font-semibold">Лет опыта</div>
               </CardContent>
             </Card>
 
             <Card className="text-center">
               <CardContent className="p-6">
                 <div className="text-3xl font-bold text-orange-500 mb-2">50+</div>
-                <div className="text-text-primary font-semibold">Архитекторов в команде</div>
+                <div className="text-foreground font-semibold">Архитекторов в команде</div>
               </CardContent>
             </Card>
           </div>
@@ -387,7 +387,7 @@ export default function ProjectDesign() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-indigo-600 to-indigo-500 text-text-primary">
+      <section className="py-16 bg-gradient-to-r from-indigo-600 to-indigo-500 text-foreground">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">

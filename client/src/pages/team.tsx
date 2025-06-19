@@ -55,18 +55,18 @@ export default function Team() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-neutral-50">
+      <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto">
             <div className="animate-pulse">
-              <div className="h-8 bg-neutral-200 rounded mb-8 w-1/3 mx-auto"></div>
+              <div className="h-8 bg-muted rounded mb-8 w-1/3 mx-auto"></div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {Array.from({ length: 8 }).map((_, i) => (
                   <div key={i} className="bg-white p-6 rounded-lg">
-                    <div className="w-32 h-32 bg-neutral-200 rounded-full mx-auto mb-4"></div>
-                    <div className="h-4 bg-neutral-200 rounded mb-2"></div>
-                    <div className="h-3 bg-neutral-200 rounded mb-4 w-3/4 mx-auto"></div>
-                    <div className="h-8 bg-neutral-200 rounded"></div>
+                    <div className="w-32 h-32 bg-muted rounded-full mx-auto mb-4"></div>
+                    <div className="h-4 bg-muted rounded mb-2"></div>
+                    <div className="h-3 bg-muted rounded mb-4 w-3/4 mx-auto"></div>
+                    <div className="h-8 bg-muted rounded"></div>
                   </div>
                 ))}
               </div>
@@ -89,9 +89,9 @@ export default function Team() {
           <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
         </div>
         
-        <h3 className="text-xl font-semibold text-text-primary mb-2">{member.name}</h3>
-        <p className="text-accent-orange font-medium mb-2">{member.position}</p>
-        <p className="text-sm text-text-secondary mb-4 flex-1">{member.experience}</p>
+        <h3 className="text-xl font-semibold text-foreground mb-2">{member.name}</h3>
+        <p className="text-accent font-medium mb-2">{member.position}</p>
+        <p className="text-sm text-muted-foreground mb-4 flex-1">{member.experience}</p>
         
         {member.specialization && member.specialization.length > 0 && (
           <div className="mb-6">
@@ -149,7 +149,7 @@ export default function Team() {
   );
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-r from-indigo-900 to-purple-800 py-20">
         <div className="absolute inset-0 bg-card bg-opacity-40"></div>
@@ -159,7 +159,7 @@ export default function Team() {
         ></div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-text-primary">
+          <div className="max-w-4xl mx-auto text-center text-foreground">
             <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Наша{" "}
               <span className="text-yandex-yellow">команда</span>
@@ -192,10 +192,10 @@ export default function Team() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                   Руководство
                 </h2>
-                <p className="text-lg text-text-secondary">
+                <p className="text-lg text-muted-foreground">
                   Опытные лидеры, определяющие стратегию развития компании
                 </p>
               </div>
@@ -213,14 +213,14 @@ export default function Team() {
       {/* Departments */}
       {departments.map((department, index) => 
         department.members.length > 0 && (
-          <section key={index} className={`py-16 ${index % 2 === 0 ? 'bg-neutral-100' : 'bg-white'}`}>
+          <section key={index} className={`py-16 ${index % 2 === 0 ? 'bg-secondary' : 'bg-white'}`}>
             <div className="container mx-auto px-4">
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-12">
-                  <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+                  <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                     {department.name}
                   </h2>
-                  <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+                  <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                     {department.description}
                   </p>
                 </div>
@@ -242,10 +242,10 @@ export default function Team() {
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+                <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
                   Другие специалисты
                 </h2>
-                <p className="text-lg text-text-secondary">
+                <p className="text-lg text-muted-foreground">
                   Профессионалы в различных областях недвижимости
                 </p>
               </div>
@@ -263,7 +263,7 @@ export default function Team() {
       {/* Join Team CTA */}
       <section className="py-16 bg-gradient-to-r from-indigo-600 to-purple-600">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center text-text-primary">
+          <div className="max-w-4xl mx-auto text-center text-foreground">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6">
               Хотите присоединиться к нашей команде?
             </h2>
@@ -271,12 +271,12 @@ export default function Team() {
               Мы всегда ищем талантливых и мотивированных специалистов в области недвижимости
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-white text-indigo-600 hover:bg-neutral-100 px-8 py-3 text-lg font-semibold">
+              <Button className="bg-white text-indigo-600 hover:bg-secondary px-8 py-3 text-lg font-semibold">
                 Отправить резюме
               </Button>
               <Button 
                 variant="outline" 
-                className="border-white text-text-primary hover:bg-white hover:text-indigo-600 px-8 py-3 text-lg font-semibold"
+                className="border-white text-foreground hover:bg-white hover:text-indigo-600 px-8 py-3 text-lg font-semibold"
               >
                 Узнать о вакансиях
               </Button>

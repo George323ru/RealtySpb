@@ -30,7 +30,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
   const colorClasses = getColorClasses(service.color);
 
   return (
-    <Card className="hover:shadow-lg transition-shadow border border-neutral-200 h-full">
+    <Card className="hover:shadow-lg transition-shadow border border h-full">
       <CardContent className="p-6 flex flex-col h-full">
         <div className={`w-12 h-12 ${colorClasses.bg} rounded-lg flex items-center justify-center mb-4`}>
           <i className={`${service.icon} ${colorClasses.text} text-xl`}></i>
@@ -53,7 +53,7 @@ export default function ServiceCard({ service }: ServiceCardProps) {
         
         <Link
           href={`/services/${service.slug}`}
-          className="text-accent-orange font-medium text-sm hover:underline flex items-center mt-auto"
+          className="text-accent font-medium text-sm hover:underline flex items-center mt-auto"
         >
           Подробнее <ArrowRight className="w-4 h-4 ml-1" />
         </Link>

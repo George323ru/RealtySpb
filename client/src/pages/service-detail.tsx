@@ -54,17 +54,17 @@ export default function ServiceDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-neutral-50">
+      <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-6xl mx-auto">
             <div className="animate-pulse">
-              <div className="h-8 bg-neutral-200 rounded mb-8 w-1/3"></div>
+              <div className="h-8 bg-muted rounded mb-8 w-1/3"></div>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2">
-                  <div className="h-64 bg-neutral-200 rounded mb-6"></div>
-                  <div className="h-32 bg-neutral-200 rounded mb-6"></div>
+                  <div className="h-64 bg-muted rounded mb-6"></div>
+                  <div className="h-32 bg-muted rounded mb-6"></div>
                 </div>
-                <div className="h-96 bg-neutral-200 rounded"></div>
+                <div className="h-96 bg-muted rounded"></div>
               </div>
             </div>
           </div>
@@ -75,12 +75,12 @@ export default function ServiceDetail() {
 
   if (!service) {
     return (
-      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="p-8 text-center">
-          <h2 className="text-2xl font-bold text-text-primary mb-2">
+          <h2 className="text-2xl font-bold text-foreground mb-2">
             Услуга не найдена
           </h2>
-          <p className="text-text-secondary mb-4">
+          <p className="text-muted-foreground mb-4">
             Возможно, услуга была удалена или перемещена
           </p>
           <Link href="/services">
@@ -92,17 +92,17 @@ export default function ServiceDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Breadcrumb */}
-      <div className="bg-white border-b border-neutral-200">
+      <div className="bg-white border-b border">
         <div className="container mx-auto px-4 py-4">
           <div className="max-w-6xl mx-auto">
-            <div className="flex items-center space-x-2 text-sm text-text-secondary">
-              <Link href="/" className="hover:text-accent-orange">Главная</Link>
+            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <Link href="/" className="hover:text-accent">Главная</Link>
               <span>/</span>
-              <Link href="/services" className="hover:text-accent-orange">Услуги</Link>
+              <Link href="/services" className="hover:text-accent">Услуги</Link>
               <span>/</span>
-              <span className="text-text-primary">{service.name}</span>
+              <span className="text-foreground">{service.name}</span>
             </div>
           </div>
         </div>
@@ -127,9 +127,9 @@ export default function ServiceDetail() {
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <CardTitle className="text-3xl mb-2">{service.name}</CardTitle>
-                      <p className="text-lg text-text-secondary">{service.shortDescription}</p>
+                      <p className="text-lg text-muted-foreground">{service.shortDescription}</p>
                     </div>
-                    <Badge className="bg-accent-orange text-text-primary text-lg px-4 py-2">
+                    <Badge className="bg-accent text-foreground text-lg px-4 py-2">
                       {service.price}
                     </Badge>
                   </div>
@@ -149,21 +149,21 @@ export default function ServiceDetail() {
                   </div>
 
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
-                    <div className="text-center p-4 bg-neutral-100 rounded-lg">
-                      <Clock className="w-6 h-6 mx-auto mb-2 text-text-secondary" />
-                      <div className="text-sm text-text-secondary">Срок выполнения</div>
+                    <div className="text-center p-4 bg-secondary rounded-lg">
+                      <Clock className="w-6 h-6 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground">Срок выполнения</div>
                       <div className="font-semibold">{details.timeline}</div>
                     </div>
                     
-                    <div className="text-center p-4 bg-neutral-100 rounded-lg">
-                      <Award className="w-6 h-6 mx-auto mb-2 text-text-secondary" />
-                      <div className="text-sm text-text-secondary">Гарантия</div>
+                    <div className="text-center p-4 bg-secondary rounded-lg">
+                      <Award className="w-6 h-6 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground">Гарантия</div>
                       <div className="font-semibold">{details.warranty}</div>
                     </div>
                     
-                    <div className="text-center p-4 bg-neutral-100 rounded-lg">
-                      <Star className="w-6 h-6 mx-auto mb-2 text-text-secondary" />
-                      <div className="text-sm text-text-secondary">Рейтинг</div>
+                    <div className="text-center p-4 bg-secondary rounded-lg">
+                      <Star className="w-6 h-6 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground">Рейтинг</div>
                       <div className="font-semibold">4.9/5</div>
                     </div>
                   </div>
@@ -173,10 +173,10 @@ export default function ServiceDetail() {
                   {/* Description */}
                   <div className="mb-8">
                     <h3 className="text-2xl font-semibold mb-4">Описание услуги</h3>
-                    <p className="text-text-secondary leading-relaxed mb-6">
+                    <p className="text-muted-foreground leading-relaxed mb-6">
                       {details.fullDescription}
                     </p>
-                    <p className="text-text-secondary leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed">
                       {service.description}
                     </p>
                   </div>
@@ -187,10 +187,10 @@ export default function ServiceDetail() {
                     <div className="space-y-4">
                       {details.stages.map((stage, index) => (
                         <div key={index} className="flex items-start">
-                          <div className="w-8 h-8 bg-accent-orange text-text-primary rounded-full flex items-center justify-center text-sm font-semibold mr-4 flex-shrink-0 mt-1">
+                          <div className="w-8 h-8 bg-accent text-foreground rounded-full flex items-center justify-center text-sm font-semibold mr-4 flex-shrink-0 mt-1">
                             {index + 1}
                           </div>
-                          <p className="text-text-secondary">{stage}</p>
+                          <p className="text-muted-foreground">{stage}</p>
                         </div>
                       ))}
                     </div>
@@ -203,7 +203,7 @@ export default function ServiceDetail() {
                       {details.benefits.map((benefit, index) => (
                         <div key={index} className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                          <span className="text-text-secondary">{benefit}</span>
+                          <span className="text-muted-foreground">{benefit}</span>
                         </div>
                       ))}
                     </div>
@@ -222,7 +222,7 @@ export default function ServiceDetail() {
                       {service.features.map((feature, index) => (
                         <div key={index} className="flex items-center">
                           <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                          <span className="text-text-secondary">{feature}</span>
+                          <span className="text-muted-foreground">{feature}</span>
                         </div>
                       ))}
                     </div>
@@ -238,28 +238,28 @@ export default function ServiceDetail() {
                 <CardContent>
                   <div className="space-y-6">
                     <div>
-                      <h4 className="font-semibold text-text-primary mb-2">
+                      <h4 className="font-semibold text-foreground mb-2">
                         Сколько времени занимает выполнение услуги?
                       </h4>
-                      <p className="text-text-secondary">
+                      <p className="text-muted-foreground">
                         Срок выполнения зависит от объема работ и составляет от {details.timeline}. 
                         Точные сроки определяются после осмотра объекта.
                       </p>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-text-primary mb-2">
+                      <h4 className="font-semibold text-foreground mb-2">
                         Предоставляете ли вы гарантию на выполненные работы?
                       </h4>
-                      <p className="text-text-secondary">
+                      <p className="text-muted-foreground">
                         Да, мы предоставляем гарантию {details.warranty} на все выполненные работы 
                         и используемые материалы.
                       </p>
                     </div>
                     <div>
-                      <h4 className="font-semibold text-text-primary mb-2">
+                      <h4 className="font-semibold text-foreground mb-2">
                         Можно ли заказать услугу частично?
                       </h4>
-                      <p className="text-text-secondary">
+                      <p className="text-muted-foreground">
                         Конечно! Мы можем адаптировать услугу под ваши потребности и бюджет, 
                         выполнив только необходимые этапы работ.
                       </p>
@@ -287,9 +287,9 @@ export default function ServiceDetail() {
               {/* Quick Contact */}
               <Card>
                 <CardContent className="p-6">
-                  <h3 className="font-semibold text-text-primary mb-4">Нужна консультация?</h3>
+                  <h3 className="font-semibold text-foreground mb-4">Нужна консультация?</h3>
                   <div className="space-y-3">
-                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-text-primary">
+                    <Button className="w-full bg-accent hover:bg-orange-600 text-foreground">
                       <Phone className="w-4 h-4 mr-2" />
                       Позвонить сейчас
                     </Button>
@@ -298,7 +298,7 @@ export default function ServiceDetail() {
                       Написать в WhatsApp
                     </Button>
                   </div>
-                  <p className="text-sm text-text-secondary mt-4 text-center">
+                  <p className="text-sm text-muted-foreground mt-4 text-center">
                     Бесплатная консультация по телефону
                   </p>
                 </CardContent>
@@ -312,19 +312,19 @@ export default function ServiceDetail() {
                 <CardContent>
                   <div className="space-y-4">
                     <div className="flex justify-between">
-                      <span className="text-text-secondary">Стоимость:</span>
-                      <span className="font-semibold text-accent-orange">{service.price}</span>
+                      <span className="text-muted-foreground">Стоимость:</span>
+                      <span className="font-semibold text-accent">{service.price}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-text-secondary">Срок:</span>
+                      <span className="text-muted-foreground">Срок:</span>
                       <span className="font-semibold">{details.timeline}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-text-secondary">Гарантия:</span>
+                      <span className="text-muted-foreground">Гарантия:</span>
                       <span className="font-semibold">{details.warranty}</span>
                     </div>
                     <div className="flex justify-between">
-                      <span className="text-text-secondary">Рейтинг:</span>
+                      <span className="text-muted-foreground">Рейтинг:</span>
                       <div className="flex items-center">
                         <Star className="w-4 h-4 text-yellow-400 fill-current" />
                         <span className="font-semibold ml-1">4.9</span>
@@ -345,7 +345,7 @@ export default function ServiceDetail() {
                       <Button variant="ghost" className="w-full justify-start text-left p-2">
                         <div>
                           <div className="font-medium">Дизайн-проект</div>
-                          <div className="text-sm text-text-secondary">от 3 000 ₽/м²</div>
+                          <div className="text-sm text-muted-foreground">от 3 000 ₽/м²</div>
                         </div>
                       </Button>
                     </Link>
@@ -353,7 +353,7 @@ export default function ServiceDetail() {
                       <Button variant="ghost" className="w-full justify-start text-left p-2">
                         <div>
                           <div className="font-medium">Ремонт под ключ</div>
-                          <div className="text-sm text-text-secondary">от 15 000 ₽/м²</div>
+                          <div className="text-sm text-muted-foreground">от 15 000 ₽/м²</div>
                         </div>
                       </Button>
                     </Link>

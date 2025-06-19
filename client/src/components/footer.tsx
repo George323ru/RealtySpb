@@ -3,27 +3,27 @@ import { Home, Phone, Mail, MapPin, Clock } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="bg-yandex-black text-text-primary pt-16 pb-8">
+    <footer className="bg-yandex-black text-foreground pt-16 pb-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Company Info */}
           <div>
             <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-yandex-yellow rounded-lg flex items-center justify-center mr-3">
+              <div className="w-12 h-12 bg-primary rounded-lg flex items-center justify-center mr-3">
                 <Home className="text-yandex-black text-xl" />
               </div>
               <div>
                 <div className="text-xl font-bold">СПБ Недвижимость</div>
-                <div className="text-sm text-text-secondary">Профессиональные услуги</div>
+                <div className="text-sm text-muted-foreground">Профессиональные услуги</div>
               </div>
             </div>
-            <p className="text-text-secondary mb-6">
+            <p className="text-muted-foreground mb-6">
               Лидирующее агентство недвижимости в Санкт-Петербурге. Более 15 лет помогаем клиентам решать вопросы с недвижимостью.
             </p>
             <div className="flex space-x-4">
               <a 
                 href="https://t.me/realtorvspb" 
-                className="w-10 h-10 bg-neutral-200 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors"
+                className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-accent transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Telegram канал"
@@ -32,7 +32,7 @@ export default function Footer() {
               </a>
               <a 
                 href="https://wa.me/79211234567" 
-                className="w-10 h-10 bg-neutral-200 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors"
+                className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-accent transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="WhatsApp"
@@ -41,7 +41,7 @@ export default function Footer() {
               </a>
               <a 
                 href="https://vk.com/realtorvspb" 
-                className="w-10 h-10 bg-neutral-200 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors"
+                className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-accent transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="ВКонтакте"
@@ -50,7 +50,7 @@ export default function Footer() {
               </a>
               <a 
                 href="https://instagram.com/realtorvspb" 
-                className="w-10 h-10 bg-neutral-200 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors"
+                className="w-10 h-10 bg-muted rounded-lg flex items-center justify-center hover:bg-accent transition-colors"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"

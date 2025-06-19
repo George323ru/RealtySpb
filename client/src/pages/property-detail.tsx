@@ -62,17 +62,17 @@ export default function PropertyDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-neutral-50">
+      <div className="min-h-screen bg-background">
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-6xl mx-auto">
             <div className="animate-pulse">
-              <div className="h-8 bg-neutral-200 rounded mb-8 w-1/3"></div>
+              <div className="h-8 bg-muted rounded mb-8 w-1/3"></div>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div className="lg:col-span-2">
-                  <div className="h-96 bg-neutral-200 rounded-lg mb-6"></div>
-                  <div className="h-32 bg-neutral-200 rounded mb-6"></div>
+                  <div className="h-96 bg-muted rounded-lg mb-6"></div>
+                  <div className="h-32 bg-muted rounded mb-6"></div>
                 </div>
-                <div className="h-96 bg-neutral-200 rounded"></div>
+                <div className="h-96 bg-muted rounded"></div>
               </div>
             </div>
           </div>
@@ -83,12 +83,12 @@ export default function PropertyDetail() {
 
   if (!property) {
     return (
-      <div className="min-h-screen bg-neutral-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <Card className="p-8 text-center">
-          <h2 className="text-2xl font-bold text-text-primary mb-2">
+          <h2 className="text-2xl font-bold text-foreground mb-2">
             Объект не найден
           </h2>
-          <p className="text-text-secondary mb-4">
+          <p className="text-muted-foreground mb-4">
             Возможно, объект был снят с продажи или перемещен
           </p>
           <Link href="/buy">
@@ -103,17 +103,17 @@ export default function PropertyDetail() {
   const filteredSimilar = similarProperties.filter(p => p.id !== property.id).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-background">
       {/* Breadcrumb */}
-      <div className="bg-white border-b border-neutral-200">
+      <div className="bg-white border-b border">
         <div className="container mx-auto px-4 py-4">
           <div className="max-w-6xl mx-auto">
-            <div className="flex items-center space-x-2 text-sm text-text-secondary">
-              <Link href="/" className="hover:text-accent-orange">Главная</Link>
+            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+              <Link href="/" className="hover:text-accent">Главная</Link>
               <span>/</span>
-              <Link href="/buy" className="hover:text-accent-orange">Купить</Link>
+              <Link href="/buy" className="hover:text-accent">Купить</Link>
               <span>/</span>
-              <span className="text-text-primary">{property.title}</span>
+              <span className="text-foreground">{property.title}</span>
             </div>
           </div>
         </div>
@@ -145,18 +145,18 @@ export default function PropertyDetail() {
                     <>
                       <button
                         onClick={prevImage}
-                        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-neutral-300/60 text-text-primary p-2 rounded-full hover:bg-opacity-70"
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-muted/60 text-foreground p-2 rounded-full hover:bg-opacity-70"
                       >
                         <ChevronLeft className="w-6 h-6" />
                       </button>
                       <button
                         onClick={nextImage}
-                        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-neutral-300/60 text-text-primary p-2 rounded-full hover:bg-opacity-70"
+                        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-muted/60 text-foreground p-2 rounded-full hover:bg-opacity-70"
                       >
                         <ChevronRight className="w-6 h-6" />
                       </button>
                       
-                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-neutral-300/60 text-text-primary px-3 py-1 rounded">
+                      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-muted/60 text-foreground px-3 py-1 rounded">
                         {currentImageIndex + 1} / {property.images.length}
                       </div>
                     </>
@@ -165,8 +165,8 @@ export default function PropertyDetail() {
                   <div className="absolute top-4 left-4">
                     <Badge className={
                       property.buildingType === "новостройка" 
-                        ? "bg-green-500 text-text-primary" 
-                        : "bg-blue-500 text-text-primary"
+                        ? "bg-green-500 text-foreground" 
+                        : "bg-blue-500 text-foreground"
                     }>
                       {property.buildingType === "новостройка" ? "Новостройка" : "Вторичка"}
                     </Badge>
@@ -174,10 +174,10 @@ export default function PropertyDetail() {
                   
                   <div className="absolute top-4 right-4 flex space-x-2">
                     <button className="bg-white bg-opacity-80 p-2 rounded-full hover:bg-opacity-100">
-                      <Heart className="w-5 h-5 text-text-secondary" />
+                      <Heart className="w-5 h-5 text-muted-foreground" />
                     </button>
                     <button className="bg-white bg-opacity-80 p-2 rounded-full hover:bg-opacity-100">
-                      <Share2 className="w-5 h-5 text-text-secondary" />
+                      <Share2 className="w-5 h-5 text-muted-foreground" />
                     </button>
                   </div>
                 </div>
@@ -190,7 +190,7 @@ export default function PropertyDetail() {
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
                         className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 ${
-                          index === currentImageIndex ? 'border-accent-orange' : 'border-neutral-200'
+                          index === currentImageIndex ? 'border-accent-orange' : 'border'
                         }`}
                       >
                         <img
@@ -210,17 +210,17 @@ export default function PropertyDetail() {
                   <div className="flex items-start justify-between">
                     <div>
                       <CardTitle className="text-2xl mb-2">{property.title}</CardTitle>
-                      <p className="text-text-secondary flex items-center">
-                        <MapPin className="w-4 h-4 mr-1 text-accent-orange" />
+                      <p className="text-muted-foreground flex items-center">
+                        <MapPin className="w-4 h-4 mr-1 text-accent" />
                         {property.district}, {property.address}
                       </p>
                     </div>
                     <div className="text-right">
-                      <div className="text-3xl font-bold text-text-primary">
+                      <div className="text-3xl font-bold text-foreground">
                         {formatPrice(property.price)}
                       </div>
                       {property.pricePerMeter && (
-                        <div className="text-text-secondary">
+                        <div className="text-muted-foreground">
                           {formatPricePerMeter(property.pricePerMeter)}
                         </div>
                       )}
@@ -231,30 +231,30 @@ export default function PropertyDetail() {
                 <CardContent>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                     {property.rooms && (
-                      <div className="text-center p-4 bg-neutral-100 rounded-lg">
-                        <Home className="w-6 h-6 mx-auto mb-2 text-text-secondary" />
-                        <div className="text-sm text-text-secondary">Комнаты</div>
+                      <div className="text-center p-4 bg-secondary rounded-lg">
+                        <Home className="w-6 h-6 mx-auto mb-2 text-muted-foreground" />
+                        <div className="text-sm text-muted-foreground">Комнаты</div>
                         <div className="font-semibold">{formatRooms(property.rooms)}</div>
                       </div>
                     )}
                     
-                    <div className="text-center p-4 bg-neutral-100 rounded-lg">
-                      <Maximize className="w-6 h-6 mx-auto mb-2 text-text-secondary" />
-                      <div className="text-sm text-text-secondary">Площадь</div>
+                    <div className="text-center p-4 bg-secondary rounded-lg">
+                      <Maximize className="w-6 h-6 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground">Площадь</div>
                       <div className="font-semibold">{formatArea(property.area)}</div>
                     </div>
                     
                     {property.floor && property.totalFloors && (
-                      <div className="text-center p-4 bg-neutral-100 rounded-lg">
-                        <Building className="w-6 h-6 mx-auto mb-2 text-text-secondary" />
-                        <div className="text-sm text-text-secondary">Этаж</div>
+                      <div className="text-center p-4 bg-secondary rounded-lg">
+                        <Building className="w-6 h-6 mx-auto mb-2 text-muted-foreground" />
+                        <div className="text-sm text-muted-foreground">Этаж</div>
                         <div className="font-semibold">{formatFloor(property.floor, property.totalFloors)}</div>
                       </div>
                     )}
                     
-                    <div className="text-center p-4 bg-neutral-100 rounded-lg">
-                      <Calendar className="w-6 h-6 mx-auto mb-2 text-text-secondary" />
-                      <div className="text-sm text-text-secondary">Тип</div>
+                    <div className="text-center p-4 bg-secondary rounded-lg">
+                      <Calendar className="w-6 h-6 mx-auto mb-2 text-muted-foreground" />
+                      <div className="text-sm text-muted-foreground">Тип</div>
                       <div className="font-semibold">{property.propertyType}</div>
                     </div>
                   </div>
@@ -263,7 +263,7 @@ export default function PropertyDetail() {
 
                   <div>
                     <h3 className="text-lg font-semibold mb-4">Описание</h3>
-                    <p className="text-text-secondary leading-relaxed">
+                    <p className="text-muted-foreground leading-relaxed">
                       {property.description}
                     </p>
                   </div>
@@ -286,7 +286,7 @@ export default function PropertyDetail() {
               {/* Similar Properties */}
               {filteredSimilar.length > 0 && (
                 <div>
-                  <h2 className="text-2xl font-bold text-text-primary mb-6">
+                  <h2 className="text-2xl font-bold text-foreground mb-6">
                     Похожие объекты
                   </h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -317,7 +317,7 @@ export default function PropertyDetail() {
               <Card>
                 <CardContent className="p-6">
                   <div className="space-y-3">
-                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-text-primary">
+                    <Button className="w-full bg-accent hover:bg-orange-600 text-foreground">
                       <Phone className="w-4 h-4 mr-2" />
                       Позвонить сейчас
                     </Button>
@@ -339,19 +339,19 @@ export default function PropertyDetail() {
                 <CardContent>
                   <div className="space-y-3">
                     <div className="flex items-center">
-                      <Car className="w-5 h-5 mr-3 text-text-secondary" />
+                      <Car className="w-5 h-5 mr-3 text-muted-foreground" />
                       <span className="text-sm">Парковка</span>
                     </div>
                     <div className="flex items-center">
-                      <Zap className="w-5 h-5 mr-3 text-text-secondary" />
+                      <Zap className="w-5 h-5 mr-3 text-muted-foreground" />
                       <span className="text-sm">Лифт</span>
                     </div>
                     <div className="flex items-center">
-                      <Wifi className="w-5 h-5 mr-3 text-text-secondary" />
+                      <Wifi className="w-5 h-5 mr-3 text-muted-foreground" />
                       <span className="text-sm">Интернет</span>
                     </div>
                     <div className="flex items-center">
-                      <Shield className="w-5 h-5 mr-3 text-text-secondary" />
+                      <Shield className="w-5 h-5 mr-3 text-muted-foreground" />
                       <span className="text-sm">Охрана</span>
                     </div>
                   </div>
@@ -366,8 +366,8 @@ export default function PropertyDetail() {
                     alt="Агент"
                     className="w-16 h-16 rounded-full mx-auto mb-4 object-cover"
                   />
-                  <h3 className="font-semibold text-text-primary mb-1">Анна Петрова</h3>
-                  <p className="text-sm text-text-secondary mb-4">Ваш персональный агент</p>
+                  <h3 className="font-semibold text-foreground mb-1">Анна Петрова</h3>
+                  <p className="text-sm text-muted-foreground mb-4">Ваш персональный агент</p>
                   <Button variant="outline" className="w-full">
                     Связаться с агентом
                   </Button>

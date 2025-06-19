@@ -19,15 +19,15 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
           <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
         </div>
         
-        <h3 className="text-xl font-semibold text-text-primary mb-2">
+        <h3 className="text-xl font-semibold text-foreground mb-2">
           {member.name}
         </h3>
         
-        <p className="text-accent-orange font-medium mb-2">
+        <p className="text-accent font-medium mb-2">
           {member.position}
         </p>
         
-        <p className="text-sm text-text-secondary mb-4">
+        <p className="text-sm text-muted-foreground mb-4">
           Опыт работы: {member.experience}
         </p>
 
@@ -36,7 +36,7 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
             {member.specialization.map((spec, index) => (
               <span
                 key={index}
-                className="px-2 py-1 bg-neutral-100 text-text-secondary text-xs rounded-full"
+                className="px-2 py-1 bg-secondary text-muted-foreground text-xs rounded-full"
               >
                 {spec}
               </span>
@@ -45,7 +45,7 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
         )}
 
         {member.description && (
-          <p className="text-sm text-text-secondary mb-6">
+          <p className="text-sm text-muted-foreground mb-6">
             {member.description}
           </p>
         )}
@@ -54,7 +54,7 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
           {member.telegram && (
             <a
               href={`https://t.me/${member.telegram.replace('@', '')}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-text-primary transition-colors"
+              className="w-8 h-8 bg-muted rounded-full flex items-center justify-center hover:bg-accent hover:text-foreground transition-colors"
             >
               <i className="fab fa-telegram text-sm"></i>
             </a>
@@ -62,7 +62,7 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
           {member.whatsapp && (
             <a
               href={`https://wa.me/${member.whatsapp.replace('+', '')}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-text-primary transition-colors"
+              className="w-8 h-8 bg-muted rounded-full flex items-center justify-center hover:bg-accent hover:text-foreground transition-colors"
             >
               <i className="fab fa-whatsapp text-sm"></i>
             </a>
@@ -70,7 +70,7 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
           {member.phone && (
             <a
               href={`tel:${member.phone}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-text-primary transition-colors"
+              className="w-8 h-8 bg-muted rounded-full flex items-center justify-center hover:bg-accent hover:text-foreground transition-colors"
             >
               <i className="fas fa-phone text-sm"></i>
             </a>
@@ -78,7 +78,7 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
           {member.email && (
             <a
               href={`mailto:${member.email}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-text-primary transition-colors"
+              className="w-8 h-8 bg-muted rounded-full flex items-center justify-center hover:bg-accent hover:text-foreground transition-colors"
             >
               <i className="fas fa-envelope text-sm"></i>
             </a>

@@ -89,7 +89,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
             </div>
           </div>
           
-          <Button onClick={handleSearch} className="w-full bg-accent-orange text-text-primary hover:bg-accent-orange/90">
+          <Button onClick={handleSearch} className="w-full bg-accent text-foreground hover:bg-accent/90">
             <Search className="w-4 h-4 mr-2" />
             Найти недвижимость
           </Button>
@@ -107,21 +107,21 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
             <Button
               variant={action === "buy" ? "default" : "outline"}
               onClick={() => setAction("buy")}
-              className={action === "buy" ? "bg-accent-orange text-text-primary" : ""}
+              className={action === "buy" ? "bg-accent text-foreground" : ""}
             >
               Купить
             </Button>
             <Button
               variant={action === "sell" ? "default" : "outline"}
               onClick={() => setAction("sell")}
-              className={action === "sell" ? "bg-accent-orange text-text-primary" : ""}
+              className={action === "sell" ? "bg-accent text-foreground" : ""}
             >
               Продать
             </Button>
             <Button
               variant={action === "rent" ? "default" : "outline"}
               onClick={() => setAction("rent")}
-              className={action === "rent" ? "bg-accent-orange text-text-primary" : ""}
+              className={action === "rent" ? "bg-accent text-foreground" : ""}
             >
               Сдать
             </Button>
@@ -186,11 +186,11 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
         </div>
         
         <div className="flex flex-col sm:flex-row gap-3">
-          <Button onClick={handleSearch} className="flex-1 bg-accent-orange text-text-primary py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg hover:bg-accent-orange/90">
+          <Button onClick={handleSearch} className="flex-1 bg-accent text-foreground py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg hover:bg-accent/90">
             <Search className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
             Найти недвижимость
           </Button>
-          <Button variant="outline" className="sm:w-auto py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-text-primary">
+          <Button variant="outline" className="sm:w-auto py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg border-accent-orange text-accent hover:bg-accent hover:text-foreground">
             Расширенный поиск
           </Button>
         </div>
