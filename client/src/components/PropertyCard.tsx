@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Heart, MapPin } from "lucide-react";
+import OptimizedImage from "@/components/OptimizedImage";
 import type { Property } from "@shared/schema";
 
 interface PropertyCardProps {
@@ -55,10 +56,13 @@ export default function PropertyCard({ property }: PropertyCardProps) {
   return (
     <Card className="card-unified group animate-fade-in">
       <div className="relative">
-        <img
-          src={property.images[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3"}
+        <OptimizedImage
+          src={property.images[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop"}
           alt={property.title}
-          className="w-full h-64 object-cover"
+          className="w-full h-64"
+          width={400}
+          height={300}
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute top-4 left-4">
           <Badge className={`${getCategoryColor(property.propertyType)} text-white font-medium px-3 py-1 rounded-md`}>

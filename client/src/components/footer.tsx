@@ -21,16 +21,40 @@ export default function Footer() {
               Лидирующее агентство недвижимости в Санкт-Петербурге. Более 15 лет помогаем клиентам решать вопросы с недвижимостью.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors">
+              <a 
+                href="https://t.me/realtorvspb" 
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Telegram канал"
+              >
                 <i className="fab fa-telegram"></i>
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors">
+              <a 
+                href="https://wa.me/79211234567" 
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp"
+              >
                 <i className="fab fa-whatsapp"></i>
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors">
+              <a 
+                href="https://vk.com/realtorvspb" 
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="ВКонтакте"
+              >
                 <i className="fab fa-vk"></i>
               </a>
-              <a href="#" className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors">
+              <a 
+                href="https://instagram.com/realtorvspb" 
+                className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-accent-orange transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
                 <i className="fab fa-instagram"></i>
               </a>
             </div>

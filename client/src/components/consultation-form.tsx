@@ -127,7 +127,11 @@ export default function ConsultationForm({ className, defaultService }: Consulta
 
           <p className="text-sm text-text-secondary text-center">
             Нажимая кнопку, вы соглашаетесь с{" "}
-            <a href="#" className="text-accent-orange hover:underline">
+            <a 
+              href="/privacy-policy" 
+              className="text-accent-orange hover:underline"
+              rel="noopener"
+            >
               политикой конфиденциальности
             </a>
           </p>

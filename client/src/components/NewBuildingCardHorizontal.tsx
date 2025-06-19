@@ -3,6 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Calendar, Building, Users, Home } from "lucide-react";
 import { Link } from "wouter";
+import OptimizedImage from "@/components/OptimizedImage";
 import type { NewBuilding } from "@shared/schema";
 
 interface NewBuildingCardProps {
@@ -110,12 +111,19 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
           {/* Правая часть - Фото */}
           <div className="relative w-1/2 shrink-0">
             <Link href={`/new-buildings/${building.id}`}>
-              <img 
-                src={getMainImage()} 
-                alt={building.name}
-                className="w-full h-full object-cover cursor-pointer"
+              <div 
+                className="cursor-pointer"
                 onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              />
+              >
+                <OptimizedImage 
+                  src={getMainImage()} 
+                  alt={building.name}
+                  className="w-full h-full"
+                  width={400}
+                  height={200}
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
             </Link>
             
             {/* Плашка статуса/сдачи */}
