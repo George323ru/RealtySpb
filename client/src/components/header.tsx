@@ -249,117 +249,80 @@ export default function Header() {
 
         </nav>
 
-        {/* Mobile Grid Navigation */}
-        <div className="lg:hidden bg-white border-t border-neutral-200">
-          <div className="grid grid-cols-4 gap-2 p-3">
-            {/* Row 1 */}
-            <Link href="/" className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-              location === "/" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-            )}>
-              <Home className="w-5 h-5 mb-1" />
-              <span className="text-xs">Главная</span>
-            </Link>
-            
-            <button 
-              onClick={() => setActiveSubmenu(activeSubmenu === 'buy' ? null : 'buy')}
-              className={cn(
-                "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-                activeSubmenu === 'buy' ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-              )}
-            >
-              <ShoppingCart className="w-5 h-5 mb-1" />
-              <span className="text-xs">Купить</span>
-            </button>
-            
-            <Link href="/sell" className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-              location === "/sell" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-            )}>
-              <TrendingUp className="w-5 h-5 mb-1" />
-              <span className="text-xs">Продать</span>
-            </Link>
-            
-            <Link href="/rent" className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-              location === "/rent" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-            )}>
-              <Key className="w-5 h-5 mb-1" />
-              <span className="text-xs">Аренда</span>
-            </Link>
-
-            {/* Row 2 */}
-            <Link href="/new-buildings" className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-              location === "/new-buildings" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-            )}>
-              <Building2 className="w-5 h-5 mb-1" />
-              <span className="text-xs">Новое</span>
-            </Link>
-            
-            <Link href="/secondary" className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-              location === "/secondary" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-            )}>
-              <Store className="w-5 h-5 mb-1" />
-              <span className="text-xs">Вторичка</span>
-            </Link>
-            
-            <button 
-              onClick={() => setActiveSubmenu(activeSubmenu === 'services' ? null : 'services')}
-              className={cn(
-                "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-                activeSubmenu === 'services' ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-              )}
-            >
-              <Grid3X3 className="w-5 h-5 mb-1" />
-              <span className="text-xs">Услуги</span>
-            </button>
-            
-            <Link href="/team" className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-              location === "/team" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-            )}>
-              <Users className="w-5 h-5 mb-1" />
-              <span className="text-xs">Команда</span>
-            </Link>
-
-            {/* Row 3 */}
-            <Link href="/about" className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-              location === "/about" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-            )}>
-              <BookOpen className="w-5 h-5 mb-1" />
-              <span className="text-xs">О нас</span>
-            </Link>
-            
-            <Link href="/reviews" className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-              location === "/reviews" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-            )}>
-              <Users className="w-5 h-5 mb-1" />
-              <span className="text-xs">Отзывы</span>
-            </Link>
-            
-            <Link href="/blog" className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-              location === "/blog" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-            )}>
-              <BookOpen className="w-5 h-5 mb-1" />
-              <span className="text-xs">Блог</span>
-            </Link>
-            
-            <Link href="/contacts" className={cn(
-              "flex flex-col items-center justify-center p-3 rounded-lg transition-all duration-200",
-              location === "/contacts" ? "bg-accent-orange text-white" : "bg-neutral-50 text-text-primary hover:bg-orange-50"
-            )}>
-              <Phone className="w-5 h-5 mb-1" />
-              <span className="text-xs">Контакты</span>
-            </Link>
-          </div>
-        </div>
+        {/* Mobile Floating Menu Button */}
+        <button 
+          onClick={() => setActiveSubmenu(activeSubmenu === 'main' ? null : 'main')}
+          className="lg:hidden fixed bottom-4 right-4 z-40 bg-accent-orange text-white p-4 rounded-full shadow-lg hover:bg-orange-600 transition-all duration-200"
+        >
+          {activeSubmenu === 'main' ? <X className="w-6 h-6" /> : <Grid3X3 className="w-6 h-6" />}
+        </button>
 
         {/* Mobile Submenus */}
+        {activeSubmenu === 'main' && (
+          <div className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setActiveSubmenu(null)}>
+            <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-text-primary">Навигация</h3>
+                <button onClick={() => setActiveSubmenu(null)} className="text-gray-400 hover:text-gray-600">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <div className="grid grid-cols-3 gap-3 mb-4">
+                {/* Main sections */}
+                <Link href="/" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <Home className="w-6 h-6 mb-2 text-accent-orange" />
+                  <span className="text-xs font-medium text-text-primary text-center">Главная</span>
+                </Link>
+                
+                <button onClick={() => setActiveSubmenu('buy')} className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <ShoppingCart className="w-6 h-6 mb-2 text-accent-orange" />
+                  <span className="text-xs font-medium text-text-primary text-center">Купить</span>
+                </button>
+                
+                <Link href="/sell" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <TrendingUp className="w-6 h-6 mb-2 text-accent-orange" />
+                  <span className="text-xs font-medium text-text-primary text-center">Продать</span>
+                </Link>
+                
+                <Link href="/rent" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <Key className="w-6 h-6 mb-2 text-accent-orange" />
+                  <span className="text-xs font-medium text-text-primary text-center">Аренда</span>
+                </Link>
+                
+                <button onClick={() => setActiveSubmenu('services')} className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <Grid3X3 className="w-6 h-6 mb-2 text-accent-orange" />
+                  <span className="text-xs font-medium text-text-primary text-center">Услуги</span>
+                </button>
+                
+                <Link href="/team" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <Users className="w-6 h-6 mb-2 text-accent-orange" />
+                  <span className="text-xs font-medium text-text-primary text-center">Команда</span>
+                </Link>
+                
+                <Link href="/about" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <BookOpen className="w-6 h-6 mb-2 text-accent-orange" />
+                  <span className="text-xs font-medium text-text-primary text-center">О нас</span>
+                </Link>
+                
+                <Link href="/reviews" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <Users className="w-6 h-6 mb-2 text-accent-orange" />
+                  <span className="text-xs font-medium text-text-primary text-center">Отзывы</span>
+                </Link>
+                
+                <Link href="/blog" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <BookOpen className="w-6 h-6 mb-2 text-accent-orange" />
+                  <span className="text-xs font-medium text-text-primary text-center">Блог</span>
+                </Link>
+                
+                <Link href="/contacts" onClick={() => setActiveSubmenu(null)} className="flex flex-col items-center p-3 bg-neutral-50 rounded-lg hover:bg-orange-50 transition-colors">
+                  <Phone className="w-6 h-6 mb-2 text-accent-orange" />
+                  <span className="text-xs font-medium text-text-primary text-center">Контакты</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
+
         {activeSubmenu === 'buy' && (
           <div className="lg:hidden fixed inset-0 bg-black bg-opacity-50 z-50" onClick={() => setActiveSubmenu(null)}>
             <div className="absolute bottom-0 left-0 right-0 bg-white rounded-t-2xl p-6 max-h-[80vh] overflow-y-auto">
