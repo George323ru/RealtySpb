@@ -24,16 +24,31 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* Yandex-inspired colors */
-  --yandex-yellow: hsl(49, 100%, 50%);
-  --yandex-black: hsl(0, 0%, 0%);
+  /* Color scheme 60/30/10 */
+  /* 60% - Neutral base colors */
+  --neutral-50: hsl(210, 20%, 98%);
+  --neutral-100: hsl(210, 15%, 96%);
+  --neutral-200: hsl(210, 12%, 93%);
+  --neutral-300: hsl(210, 10%, 88%);
+  --neutral-400: hsl(210, 8%, 75%);
+  --neutral-500: hsl(210, 6%, 60%);
+  
+  /* 30% - Secondary blue-gray tones */
+  --secondary-50: hsl(215, 25%, 97%);
+  --secondary-100: hsl(215, 20%, 94%);
+  --secondary-200: hsl(215, 15%, 85%);
+  --secondary-300: hsl(215, 12%, 70%);
+  
+  /* 10% - Accent orange (preserved for branding) */
   --accent-orange: hsl(20, 90%, 48%);
-  --neutral-50: hsl(0, 0%, 98%);
-  --neutral-100: hsl(0, 0%, 96%);
-  --neutral-200: hsl(0, 0%, 93%);
-  --neutral-300: hsl(0, 0%, 80%);
-  --text-primary: hsl(0, 0%, 10%);
-  --text-secondary: hsl(0, 0%, 25%);
+  --accent-orange-light: hsl(20, 85%, 55%);
+  --accent-orange-dark: hsl(20, 95%, 42%);
+  
+  /* Legacy colors for compatibility */
+  --yandex-yellow: hsl(20, 85%, 55%);
+  --yandex-black: hsl(210, 15%, 15%);
+  --text-primary: hsl(210, 15%, 15%);
+  --text-secondary: hsl(210, 10%, 35%);
 }
 
 /* Hide scrollbars for horizontal scroll */

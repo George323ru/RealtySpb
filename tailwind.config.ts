@@ -61,6 +61,28 @@ export default {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        // Custom color scheme 60/30/10
+        "yandex-yellow": "var(--yandex-yellow)",
+        "yandex-black": "var(--yandex-black)",
+        "accent-orange": "var(--accent-orange)",
+        "accent-orange-light": "var(--accent-orange-light)",
+        "accent-orange-dark": "var(--accent-orange-dark)",
+        "text-primary": "var(--text-primary)",
+        "text-secondary": "var(--text-secondary)",
+        neutral: {
+          50: "var(--neutral-50)",
+          100: "var(--neutral-100)",
+          200: "var(--neutral-200)",
+          300: "var(--neutral-300)",
+          400: "var(--neutral-400)",
+          500: "var(--neutral-500)",
+        },
+        secondary: {
+          50: "var(--secondary-50)",
+          100: "var(--secondary-100)",
+          200: "var(--secondary-200)",
+          300: "var(--secondary-300)",
+        },
       },
       keyframes: {
         "accordion-down": {
