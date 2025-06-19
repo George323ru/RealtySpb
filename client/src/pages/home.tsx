@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import SearchForm from "@/components/search-form";
 import PropertyCard from "@/components/property-card";
-import NewBuildingCard from "@/components/new-building-card";
+import NewBuildingCardHorizontal from "@/components/NewBuildingCardHorizontal";
 import ConsultationForm from "@/components/consultation-form";
 import PromotionBanner from "@/components/promotion-banner";
 import MortgageCalculator from "@/components/MortgageCalculator";
@@ -269,9 +269,9 @@ export default function Home() {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="space-y-6">
             {newBuildings.slice(0, 3).map((building) => (
-              <NewBuildingCard key={building.id} building={building} />
+              <NewBuildingCardHorizontal key={building.id} building={building} />
             ))}
           </div>
           
