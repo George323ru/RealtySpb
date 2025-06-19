@@ -144,7 +144,7 @@ img {
 /* Button System */
 .btn-primary {
   background: var(--yandex-yellow);
-  color: var(--yandex-black);
+  color: var(--text-primary);
   border: none;
   padding: 12px 24px;
   border-radius: var(--radius-md);
@@ -309,28 +309,28 @@ a[href]:hover:not(.no-interaction) {
   
   /* Core color system */
   --background: hsl(0, 0%, 100%);
-  --foreground: hsl(20, 14.3%, 4.1%);
+  --foreground: var(--neutral-200);
   --muted: hsl(60, 4.8%, 95.9%);
   --muted-foreground: hsl(25, 5.3%, 44.7%);
   --popover: hsl(0, 0%, 100%);
-  --popover-foreground: hsl(20, 14.3%, 4.1%);
+  --popover-foreground: var(--neutral-200);
   --card: hsl(0, 0%, 100%);
-  --card-foreground: hsl(20, 14.3%, 4.1%);
+  --card-foreground: var(--neutral-200);
   --border: hsl(20, 5.9%, 90%);
   --input: hsl(20, 5.9%, 90%);
   --primary: hsl(45, 100%, 50%);
-  --primary-foreground: hsl(0, 0%, 0%);
+  --primary-foreground: var(--text-primary);
   --secondary: hsl(60, 4.8%, 95.9%);
-  --secondary-foreground: hsl(24, 9.8%, 10%);
+  --secondary-foreground: var(--text-primary);
   --accent: hsl(20, 90%, 48%);
   --accent-foreground: hsl(0, 0%, 100%);
   --destructive: hsl(0, 84.2%, 60.2%);
   --destructive-foreground: hsl(0, 0%, 98%);
-  --ring: hsl(20, 14.3%, 4.1%);
+  --ring: var(--accent-orange);
   
   /* Extended color palette */
   --yandex-yellow: hsl(45, 100%, 50%);
-  --yandex-black: hsl(0, 0%, 8%);
+  --yandex-text: var(--text-primary);
   --accent-orange: hsl(20, 90%, 48%);
   --text-primary: hsl(0, 0%, 10%);
   --text-secondary: hsl(0, 0%, 25%);
@@ -342,24 +342,24 @@ a[href]:hover:not(.no-interaction) {
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: hsl(20, 14.3%, 4.1%);
+    --background: var(--neutral-200);
     --foreground: hsl(0, 0%, 95%);
-    --card: hsl(20, 14.3%, 4.1%);
+    --card: var(--neutral-200);
     --card-foreground: hsl(0, 0%, 95%);
-    --popover: hsl(20, 14.3%, 4.1%);
+    --popover: var(--neutral-200);
     --popover-foreground: hsl(0, 0%, 95%);
     --primary: hsl(45, 100%, 50%);
-    --primary-foreground: hsl(0, 0%, 0%);
-    --secondary: hsl(12, 6.5%, 15.1%);
+    --primary-foreground: var(--text-primary);
+    --secondary: var(--neutral-100);
     --secondary-foreground: hsl(0, 0%, 98%);
-    --muted: hsl(12, 6.5%, 15.1%);
+    --muted: var(--neutral-100);
     --muted-foreground: hsl(24, 5.4%, 63.9%);
-    --accent: hsl(12, 6.5%, 15.1%);
+    --accent: var(--neutral-100);
     --accent-foreground: hsl(0, 0%, 98%);
     --destructive: hsl(0, 62.8%, 30.6%);
     --destructive-foreground: hsl(0, 85.7%, 97.3%);
-    --border: hsl(12, 6.5%, 15.1%);
-    --input: hsl(12, 6.5%, 15.1%);
+    --border: var(--neutral-100);
+    --input: var(--neutral-100);
     --ring: hsl(24, 5.7%, 82.9%);
   }
 }
@@ -421,8 +421,8 @@ a[href]:hover:not(.no-interaction) {
 @media (prefers-contrast: high) {
   :root {
     --border: hsl(0, 0%, 50%);
-    --text-primary: hsl(0, 0%, 0%);
-    --text-secondary: hsl(0, 0%, 20%);
+    --text-primary: var(--text-primary);
+    --text-secondary: hsl(215, 20%, 35%);
   }
 }
 
@@ -438,7 +438,7 @@ a[href]:hover:not(.no-interaction) {
 /* Print styles */
 @media print {
   * {
-    color: black !important;
+    color: var(--text-primary) !important;
     background: white !important;
     box-shadow: none !important;
   }
