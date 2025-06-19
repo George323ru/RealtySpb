@@ -9,12 +9,14 @@ import { DISTRICTS, PROPERTY_TYPES, PROPERTY_CATEGORIES } from "@/lib/constants"
 import type { PropertySearchFilters } from "@shared/schema";
 
 interface SearchFormProps {
-  onSearch: (filters: PropertySearchFilters) => void;
+  onSearch?: (filters: PropertySearchFilters) => void;
   defaultCategory?: string;
   compact?: boolean;
+  className?: string;
+  initialFilters?: any;
 }
 
-export default function SearchForm({ onSearch, defaultCategory, compact = false }: SearchFormProps) {
+export default function SearchForm({ onSearch, defaultCategory, compact = false, className, initialFilters }: SearchFormProps) {
   const [action, setAction] = useState("buy");
   const [filters, setFilters] = useState<PropertySearchFilters>({
     propertyType: defaultCategory || "all",
@@ -22,7 +24,9 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
   });
 
   const handleSearch = () => {
-    onSearch(filters);
+    if (onSearch) {
+      onSearch(filters);
+    }
   };
 
   const updateFilter = (key: keyof PropertySearchFilters, value: string | number | undefined) => {
