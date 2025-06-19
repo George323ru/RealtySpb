@@ -145,7 +145,7 @@ export default function NewBuildingCardHorizontal({ building }: NewBuildingCardP
             </div>
             
             {/* Overlay при hover */}
-            <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            <div className="absolute inset-0 bg-neutral-300/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             
             {/* Индикатор количества фото */}
             {building.images && building.images.length > 1 && (

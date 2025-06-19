@@ -41,6 +41,73 @@ img {
   height: auto;
 }
 
+/* 60/30/10 Color Scheme Variables */
+:root {
+  /* 60% - Neutral Base (Light backgrounds) */
+  --neutral-50: hsl(0, 0%, 98%);
+  --neutral-100: hsl(0, 0%, 96%);
+  --neutral-200: hsl(0, 0%, 93%);
+  --neutral-300: hsl(0, 0%, 87%);
+  
+  /* 30% - Supporting Elements */
+  --yandex-yellow: hsl(45, 100%, 50%);
+  --secondary-blue: hsl(220, 25%, 25%);
+  --text-primary: hsl(210, 40%, 8%);
+  --text-secondary: hsl(215, 20%, 35%);
+  
+  /* 10% - Accent Colors */
+  --accent-orange: hsl(25, 95%, 53%);
+  --success-green: hsl(120, 60%, 45%);
+  --warning-red: hsl(0, 84%, 60%);
+  
+  /* Semantic Colors */
+  --background: var(--neutral-50);
+  --foreground: var(--text-primary);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: var(--text-primary);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--yandex-yellow);
+  --primary-foreground: var(--text-primary);
+  --secondary: var(--neutral-100);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--neutral-100);
+  --muted-foreground: var(--text-secondary);
+  --accent: var(--neutral-100);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--warning-red);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --border: var(--neutral-200);
+  --input: var(--neutral-200);
+  --ring: var(--accent-orange);
+  --radius: 0.75rem;
+  
+  /* Design System Variables */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  
+  /* Animation Timing */
+  --transition-fast: 150ms ease-out;
+  --transition-normal: 200ms ease-out;
+  --transition-slow: 300ms ease-out;
+}
+
 /* CSS Utility Classes for Unified Design System */
 .p-xs { padding: var(--spacing-xs); }
 .p-sm { padding: var(--spacing-sm); }
