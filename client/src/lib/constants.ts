@@ -11,6 +11,13 @@ export const PROPERTY_TYPES = [
   { value: "auto", label: "Автосервис" },
 ];
 
+export const PROPERTY_CATEGORIES = [
+  { value: "commercial", label: "Коммерческая" },
+  { value: "office", label: "Офисная" },
+  { value: "retail", label: "Торговая" },
+  { value: "warehouse", label: "Складская" },
+];
+
 export const TRANSACTION_TYPES = [
   { value: "sale", label: "Купить" },
   { value: "rent", label: "Снять" },

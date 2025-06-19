@@ -17,7 +17,7 @@ interface SearchFormProps {
 export default function SearchForm({ onSearch, defaultCategory, compact = false }: SearchFormProps) {
   const [action, setAction] = useState("buy");
   const [filters, setFilters] = useState<PropertySearchFilters>({
-    category: defaultCategory
+    propertyType: defaultCategory
   });
 
   const handleSearch = () => {

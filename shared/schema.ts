@@ -202,3 +202,13 @@ export type InsertUser = z.infer<typeof insertUserSchema>;
 
 export type Promotion = typeof promotions.$inferSelect;
 export type InsertPromotion = z.infer<typeof insertPromotionSchema>;
+
+// Search filters type
+export interface PropertySearchFilters {
+  propertyType?: string;
+  district?: string;
+  priceFrom?: number;
+  priceTo?: number;
+  buildingType?: string;
+  rooms?: number;
+}

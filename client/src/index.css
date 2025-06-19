@@ -98,8 +98,90 @@ img {
   /* Legacy colors for compatibility */
   --yandex-yellow: hsl(20, 85%, 55%);
   --yandex-black: hsl(210, 15%, 15%);
-  --text-primary: hsl(210, 15%, 15%);
-  --text-secondary: hsl(210, 10%, 35%);
+  /* Text colors with improved contrast (4.5:1 minimum) */
+  --text-primary: hsl(210, 15%, 8%);
+  --text-secondary: hsl(210, 12%, 20%);
+  --text-muted: hsl(210, 8%, 45%);
+}
+
+/* Typography improvements for accessibility */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+/* Improved heading hierarchy */
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 1.25rem;
+  color: var(--text-primary);
+}
+
+h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+h4 {
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+  color: var(--text-primary);
+}
+
+/* Mobile typography scaling */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px; /* Maintain minimum 16px for mobile */
+  }
+  
+  h1 {
+    font-size: 2rem;
+  }
+  
+  h2 {
+    font-size: 1.75rem;
+  }
+  
+  h3 {
+    font-size: 1.375rem;
+  }
+  
+  h4 {
+    font-size: 1.125rem;
+  }
+}
+
+/* Minimum touch target size (48x48px) */
+button, .btn, a[role="button"], input[type="submit"] {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Focus states for accessibility */
+button:focus, 
+input:focus, 
+textarea:focus, 
+select:focus,
+a:focus {
+  outline: 2px solid var(--accent-orange);
+  outline-offset: 2px;
 }
 
 /* Hide scrollbars for horizontal scroll */
