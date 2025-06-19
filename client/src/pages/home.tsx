@@ -140,13 +140,13 @@ export default function Home() {
             </p>
             
             <SearchForm className="max-w-5xl mx-auto mt-12" />
+            </div>
           </div>
-        </div>
-        </section>
+          </section>
 
         {/* Quick Actions */}
         <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Что вы хотите сделать?
@@ -154,7 +154,7 @@ export default function Home() {
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
               Выберите подходящий вариант и мы поможем решить вашу задачу быстро и профессионально
             </p>
-          </div>
+            </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {quickActions.map((action, index) => (
@@ -162,14 +162,14 @@ export default function Home() {
                 <CardContent className="p-8 text-center h-full flex flex-col">
                   <div className={`w-16 h-16 ${action.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
                     <action.icon className="text-white text-2xl w-8 h-8" />
-                  </div>
+                    </div>
                   <h3 className="text-xl font-bold text-text-primary mb-3">{action.title}</h3>
                   <p className="text-text-secondary mb-6 flex-1">{action.description}</p>
                   <div className="text-sm text-text-secondary space-y-1 mb-6 min-h-[72px] flex flex-col justify-center">
                     {action.features.map((feature, idx) => (
                       <div key={idx}>• {feature}</div>
                     ))}
-                  </div>
+                    </div>
                   <Link href={action.link} className="mt-auto">
                     <Button className={`w-full ${action.buttonColor} text-white font-medium`}>
                       {action.title === "Хочу купить" ? "Начать поиск" :
@@ -180,13 +180,13 @@ export default function Home() {
                 </CardContent>
               </Card>
             ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
         {/* Featured Properties */}
         <section className="py-16 bg-neutral-100">
-        <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Рекомендуемые объекты
@@ -194,7 +194,7 @@ export default function Home() {
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
               Тщательно отобранная недвижимость с лучшим соотношением цена-качество
             </p>
-          </div>
+            </div>
           
           {/* Property Carousel */}
           <div className="relative mb-8">
@@ -229,10 +229,10 @@ export default function Home() {
                 {properties.slice(0, 8).map((property) => (
                   <div key={property.id} className="flex-none w-80 lg:w-96">
                     <PropertyCard property={property} />
-                  </div>
+                    </div>
                 ))}
+                </div>
               </div>
-            </div>
             
             {/* Scroll Indicators */}
             <div className="flex justify-center mt-6 gap-3">
@@ -246,8 +246,8 @@ export default function Home() {
                   }}
                 />
               ))}
+              </div>
             </div>
-          </div>
           
           {/* CTA Button */}
           <div className="text-center">
@@ -256,13 +256,13 @@ export default function Home() {
                 Смотреть все объекты →
               </Button>
             </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
         {/* New Buildings */}
         <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Новостройки Санкт-Петербурга
@@ -270,13 +270,13 @@ export default function Home() {
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
               Лучшие жилые комплексы от проверенных застройщиков с государственной гарантией
             </p>
-          </div>
+            </div>
           
           <div className="space-y-6">
             {newBuildings.slice(0, 3).map((building) => (
               <NewBuildingCardHorizontal key={building.id} building={building} />
             ))}
-          </div>
+            </div>
           
           <div className="text-center mt-12">
             <Link href="/new-buildings">
@@ -285,13 +285,13 @@ export default function Home() {
                 <ArrowRight className="ml-2 w-4 h-4" />
               </Button>
             </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
         {/* Services Overview */}
         <section className="py-16 bg-neutral-100">
-        <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Дополнительные услуги
@@ -299,7 +299,7 @@ export default function Home() {
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
               Полный спектр услуг для работы с недвижимостью — от дизайна до юридического сопровождения
             </p>
-          </div>
+            </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {additionalServices.map((service, index) => (
@@ -307,7 +307,7 @@ export default function Home() {
                 <CardContent className="p-6">
                   <div className={`w-12 h-12 ${service.color} rounded-lg flex items-center justify-center mb-4`}>
                     <service.icon className="w-6 h-6" />
-                  </div>
+                    </div>
                   <h3 className="font-semibold text-text-primary mb-2">{service.name}</h3>
                   <p className="text-sm text-text-secondary mb-4">
                     Профессиональные услуги высокого качества с гарантией результата
@@ -320,13 +320,13 @@ export default function Home() {
                 </CardContent>
               </Card>
             ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
         {/* Mortgage Calculator Section */}
         <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -341,29 +341,29 @@ export default function Home() {
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-text-secondary">Точные расчеты по актуальным ставкам</span>
-                  </div>
+                    </div>
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-text-secondary">Учет всех параметров кредита</span>
-                  </div>
+                    </div>
                   <div className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-green-500" />
                     <span className="text-text-secondary">Подбор лучших банковских предложений</span>
+                    </div>
                   </div>
                 </div>
-              </div>
               
               <div className="flex justify-center">
                 <MortgageCalculator compact={true} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
         {/* Team Section */}
         <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
               Подберем идеального специалиста
@@ -371,7 +371,7 @@ export default function Home() {
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">
               Ответьте на несколько вопросов, и мы найдем риэлтора с нужным опытом и специализацией
             </p>
-          </div>
+            </div>
           
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
@@ -379,7 +379,7 @@ export default function Home() {
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Users className="w-8 h-8 text-blue-600" />
-                  </div>
+                    </div>
                   <h3 className="text-xl font-bold text-text-primary mb-2">50+ специалистов</h3>
                   <p className="text-text-secondary">Только проверенные эксперты с опытом от 3 лет</p>
                 </CardContent>
@@ -389,7 +389,7 @@ export default function Home() {
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <CheckCircle className="w-8 h-8 text-green-600" />
-                  </div>
+                    </div>
                   <h3 className="text-xl font-bold text-text-primary mb-2">Персональный подбор</h3>
                   <p className="text-text-secondary">Учитываем ваши требования и тип сделки</p>
                 </CardContent>
@@ -399,12 +399,12 @@ export default function Home() {
                 <CardContent className="p-8">
                   <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Clock className="w-8 h-8 text-orange-600" />
-                  </div>
+                    </div>
                   <h3 className="text-xl font-bold text-text-primary mb-2">Быстрый отклик</h3>
                   <p className="text-text-secondary">Специалист свяжется с вами в течение часа</p>
                 </CardContent>
               </Card>
-            </div>
+              </div>
             
             <div className="text-center">
               <Link href="/realtor-constructor">
@@ -413,14 +413,14 @@ export default function Home() {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>
               </Link>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
         {/* Conversion CTA */}
         <section className="py-16 bg-gradient-to-r from-accent-orange to-orange-600 conversion-section">
-        <div className="container mx-auto px-4">
+          <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-black">
               Получите консультацию эксперта бесплатно
@@ -430,9 +430,9 @@ export default function Home() {
             </p>
             
             <ConsultationForm className="max-w-2xl mx-auto" />
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       </main>
     </div>
   );
