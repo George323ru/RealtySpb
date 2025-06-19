@@ -272,17 +272,114 @@ export default function Home() {
             </p>
             </div>
           
-          <div className="space-y-6">
-            {newBuildings.slice(0, 3).map((building) => (
-              <NewBuildingCardHorizontal key={building.id} building={building} />
-            ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
+            {newBuildings.slice(0, 6).map((building) => {
+              const getDefaultImage = () => {
+                const defaultImages = [
+                  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&h=300&fit=crop&crop=building",
+                  "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop&crop=building",
+                  "https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=400&h=300&fit=crop&crop=building",
+                  "https://images.unsplash.com/photo-1555636222-cae831e670b3?w=400&h=300&fit=crop&crop=building"
+                ];
+                return defaultImages[building.id % defaultImages.length];
+              };
+
+              const getStatusInfo = (readiness: string | null) => {
+                if (!readiness) return { label: 'В продаже', color: 'bg-accent-orange' };
+                
+                switch (readiness.toLowerCase()) {
+                  case 'готов':
+                  case 'сдан':
+                    return { label: 'Сдан', color: 'bg-green-500' };
+                  case 'отделка':
+                  case 'чистовая отделка':
+                    return { label: 'Отделка', color: 'bg-blue-500' };
+                  case 'строительство':
+                  case 'строится':
+                    return { label: 'Строится', color: 'bg-orange-500' };
+                  case 'фундамент':
+                    return { label: 'Фундамент', color: 'bg-gray-500' };
+                  case 'проект':
+                    return { label: 'Проект', color: 'bg-purple-500' };
+                  default:
+                    return { label: readiness, color: 'bg-accent-orange' };
+                }
+              };
+
+              const statusInfo = getStatusInfo(building.readiness);
+
+              return (
+                <Card key={building.id} className="group bg-white hover:shadow-xl transition-all duration-300 overflow-hidden border border-neutral-200">
+                  <div className="relative">
+                    <img
+                      src={building.images?.[0] || getDefaultImage()}
+                      alt={building.name}
+                      className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <Badge className={`absolute top-4 right-4 ${statusInfo.color} text-white border-0`}>
+                      {statusInfo.label}
+                    </Badge>
+                  </div>
+                  
+                  <CardContent className="p-6">
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-accent-orange transition-colors">
+                          {building.name}
+                        </h3>
+                        
+                        <div className="flex items-start text-text-secondary mb-2">
+                          <MapPin className="w-4 h-4 mr-2 text-accent-orange shrink-0 mt-0.5" />
+                          <span className="text-sm">{building.location}</span>
+                        </div>
+                        
+                        <div className="flex items-center text-text-secondary mb-3">
+                          <Building className="w-4 h-4 mr-2 text-accent-orange shrink-0" />
+                          <span className="text-sm">{building.developer}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-xs text-text-secondary mb-1">от</p>
+                          <p className="text-2xl font-bold text-accent-orange">
+                            {(building.priceFrom / 1000000).toFixed(1)} млн ₽
+                          </p>
+                          {building.pricePerSqm && (
+                            <p className="text-sm text-text-secondary">
+                              {(building.pricePerSqm / 1000).toFixed(0)} тыс ₽/м²
+                            </p>
+                          )}
+                        </div>
+                        
+                        {building.totalFlats && (
+                          <div className="text-right">
+                            <div className="flex items-center text-text-secondary">
+                              <Home className="w-4 h-4 mr-1" />
+                              <span className="text-sm">{building.totalFlats} квартир</span>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+
+                      <Link href={`/new-buildings/${building.id}`} className="block">
+                        <Button className="w-full bg-accent-orange text-white hover:bg-orange-600 transition-colors font-semibold py-3">
+                          Подробнее о ЖК
+                          <ArrowRight className="ml-2 w-4 h-4" />
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
             </div>
           
           <div className="text-center mt-12">
             <Link href="/new-buildings">
-              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600">
+              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 text-lg">
                 Все новостройки СПб
-                <ArrowRight className="ml-2 w-4 h-4" />
+                <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
             </div>
