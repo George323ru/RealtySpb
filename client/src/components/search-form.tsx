@@ -71,7 +71,7 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
   };
 
   return (
-    <div className={`bg-white rounded-xl shadow-lg border border-neutral-200 ${className || ''}`}>
+    <div className={`bg-neutral-50 rounded-xl shadow-lg border border-neutral-200 ${className || ''}`}>
       {/* Compact Search Bar */}
       <div className="flex items-center gap-2 p-3">
         <div className="flex-1 flex items-center gap-2">

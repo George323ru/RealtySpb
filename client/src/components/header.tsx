@@ -113,7 +113,7 @@ export default function Header() {
   ];
 
   return (
-    <header className="bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-50">
+    <header className="bg-neutral-50 shadow-sm border-b border-neutral-200 sticky top-0 z-50">
       {/* Top Contact Bar - Desktop Only */}
       <div className="hidden lg:block border-b border-neutral-100 bg-neutral-50">
         <div className="container mx-auto px-4">
@@ -190,7 +190,7 @@ export default function Header() {
                   
                   {/* Mega Menu for "Купить" and "Услуги" */}
                   {item.megaMenu && (
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-2xl mt-3 py-8 w-[780px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-neutral-100">
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 bg-neutral-50 shadow-2xl rounded-2xl mt-3 py-8 w-[780px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-neutral-200">
                       <div className="px-8">
                         <div className="grid grid-cols-3 gap-10">
                           {item.megaMenu.sections.map((section, idx) => (
@@ -205,7 +205,7 @@ export default function Header() {
                                     href={link.href}
                                     className="block group/item"
                                   >
-                                    <div className="px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 transition-all duration-200 border border-transparent hover:border-orange-100 min-h-[60px] flex flex-col justify-center">
+                                    <div className="px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-neutral-100 hover:to-neutral-100 transition-all duration-200 border border-transparent hover:border-neutral-200 min-h-[60px] flex flex-col justify-center">
                                       <div className="font-medium text-text-primary group-hover/item:text-accent-orange text-sm leading-tight">
                                         {link.name}
                                       </div>
