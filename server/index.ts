@@ -80,8 +80,9 @@ app.use((req, res, next) => {
     }
 
     // Запуск сервера
-    const port = 3000;
-    server.listen(port, "localhost", () => {
+    const port = Number(process.env.PORT) || 3000;
+    const host = process.env.NODE_ENV === 'production' ? '0.0.0.0' : 'localhost';
+    server.listen(port, host, () => {
       logStartup('RealtySpb Server', port, process.env.NODE_ENV);
       serverLogger.processEnd('Server initialization');
     });
