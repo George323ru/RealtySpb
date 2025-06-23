@@ -25,7 +25,7 @@ import {
   type InsertReview,
   type BlogPost,
   type InsertBlogPost
-} from "@shared/schema";
+} from "../shared/schema.js";
 
 // Storage interface remains the same
 export interface IStorage {

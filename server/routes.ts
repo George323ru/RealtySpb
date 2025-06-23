@@ -1,7 +1,7 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertLeadSchema, insertReviewSchema } from "@shared/schema";
+import { insertLeadSchema, insertReviewSchema } from "../shared/schema.js";
 import { z } from "zod";
 import { routesLogger } from "./logger";
 

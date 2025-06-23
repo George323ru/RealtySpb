@@ -5,7 +5,7 @@ import {
   type TeamMember, type InsertTeamMember, type Lead, type InsertLead,
   type Review, type InsertReview, type BlogPost, type InsertBlogPost,
   type Promotion, type InsertPromotion
-} from "@shared/schema";
+} from "../shared/schema.js";
 import { storageLogger } from "./logger";
 
 export interface IStorage {
