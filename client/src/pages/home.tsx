@@ -10,6 +10,7 @@ import NewBuildingCardHorizontal from "@/components/NewBuildingCardHorizontal";
 import ConsultationForm from "@/components/consultation-form";
 import PromotionBanner from "@/components/promotion-banner";
 import MortgageCalculator from "@/components/MortgageCalculator";
+import { Skeleton } from "@/components/ui/skeleton";
 import useEmblaCarousel from 'embla-carousel-react';
 import { 
   Home as HomeIcon, 
@@ -34,8 +35,8 @@ import type { Property, NewBuilding, Service, TeamMember, Promotion } from "@sha
 
 
 export default function Home() {
-  const { data: properties = [] } = useQuery<Property[]>({
-    queryKey: ["/api/properties"],
+  const { data: properties = [], isLoading: isLoadingProperties, isError: isErrorProperties } = useQuery<Property[]>({
+    queryKey: ["/api/properties/featured"],
   });
 
   const { data: newBuildings = [] } = useQuery<NewBuilding[]>({
@@ -55,7 +56,7 @@ export default function Home() {
   });
 
   const heroStyle = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920')`,
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat'
@@ -131,11 +132,28 @@ export default function Home() {
       >
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <h1 
+              className="text-5xl lg:text-6xl font-bold mb-6 leading-tight text-white"
+              style={{ 
+                textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+              }}
+            >
               Риэлтор в СПб - Купить недвижимость{" "}
-              <span className="text-yandex-yellow">Санкт-Петербурге</span>
+              <span 
+                className="text-white"
+                style={{ 
+                  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
+                }}
+              >
+                Санкт-Петербурге
+              </span>
             </h1>
-            <p className="text-xl lg:text-2xl mb-8 font-light opacity-90">
+            <p 
+              className="text-xl lg:text-2xl mb-8 font-light opacity-90 text-white"
+              style={{ 
+                textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'
+              }}
+            >
               Профессиональные услуги по покупке, продаже и аренде недвижимости. Более 15 лет на рынке СПб.
             </p>
             
@@ -198,56 +216,76 @@ export default function Home() {
           
           {/* Property Carousel */}
           <div className="relative mb-8">
-            {/* Navigation Buttons */}
-            <button 
-              id="scroll-left"
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-white transition-all duration-300 border border-neutral-200"
-              onClick={() => {
-                const container = document.getElementById('properties-scroll');
-                if (container) container.scrollBy({ left: -400, behavior: 'smooth' });
-              }}
-            >
-              <ChevronLeft className="w-6 h-6 text-gray-700" />
-            </button>
-            
-            <button 
-              id="scroll-right"
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-white transition-all duration-300 border border-neutral-200"
-              onClick={() => {
-                const container = document.getElementById('properties-scroll');
-                if (container) container.scrollBy({ left: 400, behavior: 'smooth' });
-              }}
-            >
-              <ChevronRight className="w-6 h-6 text-gray-700" />
-            </button>
+            {properties && properties.length > 0 && (
+              <>
+                <button 
+                  id="scroll-left"
+                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-white transition-all duration-300 border border-neutral-200 hidden md:block"
+                  onClick={() => {
+                    const container = document.getElementById('properties-scroll');
+                    if (container) container.scrollBy({ left: -400, behavior: 'smooth' });
+                  }}
+                >
+                  <ChevronLeft className="w-6 h-6 text-gray-700" />
+                </button>
+                
+                <button 
+                  id="scroll-right"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-xl rounded-full p-4 hover:bg-accent-orange hover:text-white transition-all duration-300 border border-neutral-200 hidden md:block"
+                  onClick={() => {
+                    const container = document.getElementById('properties-scroll');
+                    if (container) container.scrollBy({ left: 400, behavior: 'smooth' });
+                  }}
+                >
+                  <ChevronRight className="w-6 h-6 text-gray-700" />
+                </button>
+              </>
+            )}
 
             <div 
               id="properties-scroll"
               className="overflow-x-auto scrollbar-hide px-12"
             >
               <div className="flex gap-6 pb-4 min-w-max">
-                {properties.slice(0, 8).map((property) => (
-                  <div key={property.id} className="flex-none w-80 lg:w-96">
-                    <PropertyCard property={property} />
+                {isLoadingProperties ? (
+                  Array.from({ length: 3 }).map((_, index) => (
+                    <div key={index} className="flex-none w-80 lg:w-96">
+                      <Skeleton className="h-[400px] w-full" />
                     </div>
-                ))}
-                </div>
-              </div>
-            
-            {/* Scroll Indicators */}
-            <div className="flex justify-center mt-6 gap-3">
-              {Array.from({ length: Math.ceil(properties.length / 3) }).map((_, index) => (
-                <button 
-                  key={index}
-                  className="w-3 h-3 rounded-full bg-neutral-300 hover:bg-accent-orange active:bg-accent-orange transition-colors cursor-pointer"
-                  onClick={() => {
-                    const container = document.getElementById('properties-scroll');
-                    if (container) container.scrollTo({ left: index * 400, behavior: 'smooth' });
-                  }}
-                />
-              ))}
+                  ))
+                ) : isErrorProperties ? (
+                  <div className="text-center text-red-500 py-8 col-span-full">
+                    Не удалось загрузить объекты. Попробуйте позже.
+                  </div>
+                ) : properties && properties.length > 0 ? (
+                  properties.map((property) => (
+                    <div key={property.id} className="flex-none w-80 lg:w-96">
+                      <PropertyCard property={property} />
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center text-text-secondary py-8 col-span-full w-full">
+                    Рекомендуемых объектов пока нет.
+                  </div>
+                )}
               </div>
             </div>
+            
+            {properties && properties.length > 3 && (
+              <div className="flex justify-center mt-6 gap-3">
+                {Array.from({ length: Math.ceil(properties.length / 3) }).map((_, index) => (
+                  <button 
+                    key={index}
+                    className="w-3 h-3 rounded-full bg-neutral-300 hover:bg-accent-orange active:bg-accent-orange transition-colors cursor-pointer"
+                    onClick={() => {
+                      const container = document.getElementById('properties-scroll');
+                      if (container) container.scrollTo({ left: index * 400, behavior: 'smooth' });
+                    }}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
           
           {/* CTA Button */}
           <div className="text-center">
@@ -303,17 +341,17 @@ export default function Home() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {additionalServices.map((service, index) => (
-              <Card key={index} className="bg-white hover:shadow-lg transition-shadow border border-neutral-200">
-                <CardContent className="p-6">
-                  <div className={`w-12 h-12 ${service.color} rounded-lg flex items-center justify-center mb-4`}>
+              <Card key={index} className="bg-white hover:shadow-lg transition-shadow border border-neutral-200 h-full flex flex-col">
+                <CardContent className="p-6 flex flex-col flex-1">
+                  <div className={`w-12 h-12 ${service.color} rounded-lg flex items-center justify-center mb-6`}>
                     <service.icon className="w-6 h-6" />
                     </div>
-                  <h3 className="font-semibold text-text-primary mb-2">{service.name}</h3>
-                  <p className="text-sm text-text-secondary mb-4">
+                  <h3 className="font-semibold text-text-primary mb-6 h-12 flex items-start">{service.name}</h3>
+                  <p className="text-sm text-text-secondary mb-4 flex-1">
                     Профессиональные услуги высокого качества с гарантией результата
                   </p>
                   <Link href="/services">
-                    <Button variant="ghost" className="text-accent-orange font-medium text-sm hover:underline p-0">
+                    <Button variant="ghost" className="text-accent-orange font-medium text-sm hover:bg-orange-50 hover:text-orange-600 transition-colors p-2 rounded-md !shadow-none border-0 hover:shadow-none focus:shadow-none active:shadow-none">
                       Подробнее →
                     </Button>
                   </Link>

@@ -120,28 +120,36 @@ export default function Rent() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-purple-900 to-purple-700 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+      <section className="relative bg-gradient-to-r from-purple-900 via-purple-800 to-indigo-900 py-20 min-h-[70vh] flex items-center">
+        {/* Enhanced Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70"></div>
+        
+        {/* Background Image with Enhanced Contrast */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920')"}}
         ></div>
         
+        {/* Additional Gradient Overlay for Better Text Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-900/80 via-transparent to-indigo-900/80"></div>
+        
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Enhanced Typography with Better Contrast */}
+            <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight text-white drop-shadow-2xl">
               Сдать квартиру в аренду СПб{" "}
-              <span className="text-yandex-yellow">выгодно</span>
+              <span className="text-yandex-yellow drop-shadow-lg">выгодно</span>
             </h1>
-            <p className="text-xl lg:text-2xl mb-8 font-light opacity-90">
+            <p className="text-xl lg:text-2xl mb-12 font-light text-white/95 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
               Найдем надежных арендаторов и обеспечим стабильный доход от вашей недвижимости
             </p>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12">
+            {/* Enhanced Stats Cards with Better Visibility */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16">
               {stats.map((stat, index) => (
-                <div key={index} className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                  <div className="text-3xl font-bold text-yandex-yellow mb-2">{stat.value}</div>
-                  <div className="text-sm">{stat.label}</div>
+                <div key={index} className="bg-white/15 backdrop-blur-md rounded-2xl p-6 lg:p-8 border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300">
+                  <div className="text-3xl lg:text-4xl font-bold text-yandex-yellow mb-2 drop-shadow-lg">{stat.value}</div>
+                  <div className="text-sm lg:text-base text-white/90 font-medium">{stat.label}</div>
                 </div>
               ))}
             </div>

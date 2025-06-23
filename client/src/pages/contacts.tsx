@@ -155,38 +155,46 @@ export default function Contacts() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-teal-900 to-blue-800 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+      <section className="relative bg-gradient-to-r from-teal-900 via-cyan-900 to-blue-900 py-20 min-h-[70vh] flex items-center">
+        {/* Enhanced Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70"></div>
+        
+        {/* Background Image with Enhanced Contrast */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1920')"}}
         ></div>
         
+        {/* Additional Gradient Overlay for Better Text Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-teal-900/80 via-transparent to-blue-900/80"></div>
+        
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Enhanced Typography with Better Contrast */}
+            <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight text-white drop-shadow-2xl">
               Свяжитесь{" "}
-              <span className="text-yandex-yellow">с нами</span>
+              <span className="text-yandex-yellow drop-shadow-lg">с нами</span>
             </h1>
-            <p className="text-xl lg:text-2xl mb-8 font-light opacity-90">
+            <p className="text-xl lg:text-2xl mb-12 font-light text-white/95 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
               Мы готовы ответить на все ваши вопросы и помочь с любыми задачами в сфере недвижимости
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                <Phone className="w-8 h-8 mx-auto mb-2 text-yandex-yellow" />
-                <div className="text-lg font-semibold mb-1">Телефон</div>
-                <div className="text-sm">{officeInfo.phone}</div>
+            {/* Enhanced Contact Cards with Better Visibility */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+              <div className="bg-white/15 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300">
+                <Phone className="w-10 h-10 mx-auto mb-4 text-yandex-yellow drop-shadow-lg" />
+                <div className="text-lg font-semibold mb-2 text-white/95">Телефон</div>
+                <div className="text-base text-white/90">{officeInfo.phone}</div>
               </div>
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                <Mail className="w-8 h-8 mx-auto mb-2 text-yandex-yellow" />
-                <div className="text-lg font-semibold mb-1">Email</div>
-                <div className="text-sm">{officeInfo.email}</div>
+              <div className="bg-white/15 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300">
+                <Mail className="w-10 h-10 mx-auto mb-4 text-yandex-yellow drop-shadow-lg" />
+                <div className="text-lg font-semibold mb-2 text-white/95">Email</div>
+                <div className="text-base text-white/90">{officeInfo.email}</div>
               </div>
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                <Clock className="w-8 h-8 mx-auto mb-2 text-yandex-yellow" />
-                <div className="text-lg font-semibold mb-1">Режим работы</div>
-                <div className="text-sm">{officeInfo.workHours}</div>
+              <div className="bg-white/15 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300">
+                <Clock className="w-10 h-10 mx-auto mb-4 text-yandex-yellow drop-shadow-lg" />
+                <div className="text-lg font-semibold mb-2 text-white/95">Режим работы</div>
+                <div className="text-base text-white/90">{officeInfo.workHours}</div>
               </div>
             </div>
           </div>

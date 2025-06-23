@@ -6,6 +6,7 @@ import {
   type Review, type InsertReview, type BlogPost, type InsertBlogPost,
   type Promotion, type InsertPromotion
 } from "@shared/schema";
+import { storageLogger } from "./logger";
 
 export interface IStorage {
   // Users
@@ -924,8 +925,9 @@ import { db } from "./db";
 import { eq, like, and, gte, lte, or } from "drizzle-orm";
 
 // Commented out MemStorage for database implementation
-// export const storage = new MemStorage();
+export const storage = new MemStorage();
 
+/*
 export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
     const [user] = await db.select().from(users).where(eq(users.id, id));
@@ -1111,4 +1113,5 @@ export class DatabaseStorage implements IStorage {
   }
 }
 
-export const storage = new DatabaseStorage();
+}
+*/

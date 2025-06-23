@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
@@ -8,9 +7,10 @@ import { cn } from "@/lib/utils";
 import { useCart } from "@/components/CartProvider";
 
 export default function Header() {
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
   const { getTotalItems } = useCart();
   const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
+  const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
 
   // Services data for mobile submenu
   const services = [
@@ -112,6 +112,19 @@ export default function Header() {
     { name: "Контакты", href: "/contacts", icon: "Phone" },
   ];
 
+  const handleMenuEnter = (menuName: string) => {
+    setHoveredMenu(menuName);
+  };
+
+  const handleMenuLeave = () => {
+    setHoveredMenu(null);
+  };
+
+  const handleMenuClick = (href: string) => {
+    setLocation(href);
+    setHoveredMenu(null);
+  };
+
   return (
     <header className="bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-50">
       {/* Top Contact Bar - Desktop Only */}
@@ -144,7 +157,7 @@ export default function Header() {
       </div>
 
       {/* Main Navigation */}
-      <div className="container mx-auto px-4 mobile-nav-safe">
+      <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center" aria-label="Главная страница - Риэлтор в СПб">
@@ -158,59 +171,68 @@ export default function Header() {
           </Link>
 
           {/* Desktop and Mobile Navigation */}
-          <div className="flex items-center space-x-0.5 overflow-x-auto lg:flex" style={{ 
-            maxWidth: 'calc(100vw - 200px)',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none'
-          }}>
+          <div className="hidden lg:flex items-center space-x-2">
             {mainNavigation.map((item) => {
-              const IconComponent = item.icon === 'TrendingUp' ? TrendingUp :
-                                 item.icon === 'Key' ? Key :
-                                 item.icon === 'Users' ? Users :
-                                 item.icon === 'BookOpen' ? BookOpen :
-                                 item.icon === 'Phone' ? Phone : 
-                                 item.icon === 'ShoppingCart' ? ShoppingCart :
-                                 item.icon === 'Grid3X3' ? Grid3X3 : Home;
+              const IconComponent = item.icon ? {
+                'TrendingUp': TrendingUp, 'Key': Key, 'Users': Users, 'BookOpen': BookOpen, 'Phone': Phone, 'ShoppingCart': ShoppingCart, 'Grid3X3': Grid3X3
+              }[item.icon] || Home : Home;
+              
+              const isMenuOpen = hoveredMenu === item.name;
               
               return (
-                <div key={item.name} className="relative group">
-                  <Link
-                    href={item.href}
-                    className={cn(
-                      "flex items-center px-1.5 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap",
-                      location === item.href
-                        ? "text-white bg-accent-orange shadow-lg"
-                        : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
-                    )}
-                  >
-                    {IconComponent && <IconComponent className="w-4 h-4 mr-2" />}
-                    {item.name}
-                    {item.megaMenu && <ChevronDown className="ml-1 w-3 h-3" />}
-                  </Link>
-                  
-                  {/* Mega Menu for "Купить" and "Услуги" */}
-                  {item.megaMenu && (
-                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 bg-white shadow-2xl rounded-2xl mt-3 py-8 w-[780px] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 border border-neutral-100">
-                      <div className="px-8">
-                        <div className="grid grid-cols-3 gap-10">
-                          {item.megaMenu.sections.map((section, idx) => (
-                            <div key={idx}>
-                              <h4 className="font-bold text-text-primary mb-5 text-sm uppercase tracking-wider text-neutral-800 border-b border-neutral-100 pb-3">
+                <div 
+                  key={item.name} 
+                  className="relative"
+                  onMouseEnter={() => item.megaMenu && handleMenuEnter(item.name)}
+                  onMouseLeave={() => item.megaMenu && handleMenuLeave()}
+                >
+                  {item.megaMenu ? (
+                    <>
+                      <button
+                        onClick={() => handleMenuClick(item.href)}
+                        className={cn(
+                          "flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
+                          location === item.href && "text-white bg-accent-orange shadow-lg",
+                          location !== item.href && !isMenuOpen && "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200 hover:shadow-md hover:transform hover:scale-102",
+                          isMenuOpen && "text-white bg-gradient-to-r from-accent-orange to-orange-500 shadow-lg transform scale-105"
+                        )}
+                      >
+                        <IconComponent className="w-4 h-4 mr-2" />
+                        {item.name}
+                        <ChevronDown className={cn(
+                          "ml-2 w-4 h-4 transition-transform duration-300",
+                          isMenuOpen && "rotate-180"
+                        )} />
+                      </button>
+                      
+                      <div 
+                        className={cn(
+                          "absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[820px] rounded-2xl shadow-2xl border border-neutral-100 bg-white/95 backdrop-blur-sm p-8 transform transition-all duration-300 ease-in-out",
+                          isMenuOpen 
+                            ? "opacity-100 visible pointer-events-auto scale-100" 
+                            : "opacity-0 invisible pointer-events-none scale-95"
+                        )}
+                        style={{ zIndex: 999 }}
+                      >
+                        <div className="grid grid-cols-3 gap-12">
+                          {item.megaMenu.sections.map((section) => (
+                            <div key={section.title} className="space-y-1">
+                              <h4 className="font-bold text-text-primary mb-6 text-sm uppercase tracking-wider text-neutral-800 border-b-2 border-gradient-to-r from-accent-orange to-orange-400 pb-3 bg-gradient-to-r from-accent-orange to-orange-500 bg-clip-text text-transparent">
                                 {section.title}
                               </h4>
-                              <div className="space-y-0">
-                                {section.links.map((link, linkIdx) => (
+                              <div className="space-y-2">
+                                {section.links.map((link) => (
                                   <Link
                                     key={link.name}
                                     href={link.href}
                                     className="block group/item"
                                   >
-                                    <div className="px-3 py-3 rounded-lg hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 transition-all duration-200 border border-transparent hover:border-orange-100 min-h-[60px] flex flex-col justify-center">
-                                      <div className="font-medium text-text-primary group-hover/item:text-accent-orange text-sm leading-tight">
+                                    <div className="px-4 py-4 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:via-amber-25 hover:to-yellow-50 transition-all duration-300 border border-transparent hover:border-orange-100 hover:shadow-lg hover:transform hover:scale-102 min-h-[70px] flex flex-col justify-center">
+                                      <div className="font-semibold text-text-primary group-hover/item:text-accent-orange text-sm leading-tight transition-colors">
                                         {link.name}
                                       </div>
                                       {(link as any).desc && (
-                                        <div className="text-xs text-text-secondary mt-1 leading-relaxed">
+                                        <div className="text-xs text-text-secondary group-hover/item:text-orange-600 mt-2 leading-relaxed transition-colors">
                                           {(link as any).desc}
                                         </div>
                                       )}
@@ -222,46 +244,99 @@ export default function Header() {
                           ))}
                         </div>
                       </div>
-                    </div>
+                    </>
+                  ) : (
+                    <Link
+                      href={item.href}
+                      className={cn(
+                        "flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
+                        location === item.href
+                          ? "text-white bg-gradient-to-r from-accent-orange to-orange-500 shadow-lg transform scale-105"
+                          : "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200 hover:shadow-md hover:transform hover:scale-102"
+                      )}
+                    >
+                      <IconComponent className="w-4 h-4 mr-2" />
+                      {item.name}
+                    </Link>
                   )}
-
                 </div>
               );
             })}
             
-            {/* Secondary Navigation */}
-            {secondaryNavigation.map((item) => {
-              const IconComponent = item.icon === 'Users' ? Users :
-                                 item.icon === 'Info' ? BookOpen :
-                                 item.icon === 'Star' ? Users :
-                                 item.icon === 'BookOpen' ? BookOpen :
-                                 item.icon === 'Phone' ? Phone : Home;
+            {secondaryNavigation.filter(item => ['Команда', 'Контакты', 'Отзывы'].includes(item.name)).map((item) => {
+              const IconComponent = item.icon ? {
+                'Users': Users, 'Info': BookOpen, 'Star': Users, 'BookOpen': BookOpen, 'Phone': Phone
+              }[item.icon] || Home : Home;
               
               return (
                 <Link
                   key={item.name}
                   href={item.href}
                   className={cn(
-                    "flex items-center px-1.5 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap",
+                    "flex items-center px-4 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
                     location === item.href
-                      ? "text-white bg-accent-orange shadow-lg"
-                      : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
+                      ? "text-white bg-gradient-to-r from-accent-orange to-orange-500 shadow-lg transform scale-105"
+                      : "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200 hover:shadow-md hover:transform hover:scale-102"
                   )}
                 >
-                  <IconComponent className="w-3 h-3 mr-1" />
+                  <IconComponent className="w-4 h-4 mr-2" />
                   {item.name}
                 </Link>
               );
             })}
-          </div>
 
-          {/* Cart Button - Always visible */}
-          <div className="flex items-center">
-            <Link href="/cart" className="relative">
+            {/* Cart Button - Desktop */}
+            <Link href="/cart" className="relative ml-4">
               <Button variant="outline" size="sm" className="relative rounded-lg border-neutral-300 hover:border-accent-orange hover:text-accent-orange transition-colors">
                 <ShoppingCart className="h-4 w-4" />
                 {getTotalItems() > 0 && (
                   <Badge className="absolute -top-2 -right-2 h-5 w-5 rounded-full p-0 flex items-center justify-center bg-accent-orange text-white text-xs">
+                    {getTotalItems()}
+                  </Badge>
+                )}
+              </Button>
+            </Link>
+          </div>
+
+          {/* Mobile Navigation - Show on smaller screens */}
+          <div className="lg:hidden flex items-center justify-between flex-1 ml-4">
+            {/* Mobile Menu Items */}
+            <div className="flex items-center space-x-1 overflow-x-auto flex-1 mr-2">
+              {mainNavigation.slice(0, 2).map((item) => {
+                const IconComponent = item.icon ? {
+                  'TrendingUp': TrendingUp, 'Key': Key, 'Users': Users, 'BookOpen': BookOpen, 'Phone': Phone, 'ShoppingCart': ShoppingCart, 'Grid3X3': Grid3X3
+                }[item.icon] || Home : Home;
+
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={cn(
+                      "flex items-center px-2 py-1 text-xs font-medium rounded-md transition-all duration-200 whitespace-nowrap flex-shrink-0",
+                      location === item.href
+                        ? "text-white bg-accent-orange shadow-lg"
+                        : "text-text-primary hover:text-accent-orange hover:bg-orange-50"
+                    )}
+                  >
+                    {IconComponent && <IconComponent className="w-3 h-3 mr-1" />}
+                    {item.name}
+                  </Link>
+                );
+              })}
+              
+              {/* More button for remaining items */}
+              <button className="flex items-center px-2 py-1 text-xs font-medium rounded-md text-text-primary hover:text-accent-orange hover:bg-orange-50 transition-all duration-200 whitespace-nowrap flex-shrink-0">
+                <MoreHorizontal className="w-3 h-3 mr-1" />
+                Ещё
+              </button>
+            </div>
+
+            {/* Cart Button - Mobile */}
+            <Link href="/cart" className="relative flex-shrink-0 ml-2">
+              <Button variant="outline" size="sm" className="relative rounded-lg border-neutral-300 hover:border-accent-orange hover:text-accent-orange transition-colors h-8 w-8 p-0">
+                <ShoppingCart className="h-3 w-3" />
+                {getTotalItems() > 0 && (
+                  <Badge className="absolute -top-1 -right-1 h-4 w-4 rounded-full p-0 flex items-center justify-center bg-accent-orange text-white text-xs">
                     {getTotalItems()}
                   </Badge>
                 )}

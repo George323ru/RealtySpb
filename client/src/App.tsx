@@ -7,6 +7,7 @@ import Header from "@/components/header";
 import Footer from "@/components/footer";
 import FloatingCTA from "@/components/floating-cta";
 import CartProvider from "@/components/CartProvider";
+import ScrollToTop from "@/components/ScrollToTop";
 import Home from "@/pages/home";
 import Buy from "@/pages/buy";
 import Sell from "@/pages/sell";
@@ -66,6 +67,7 @@ function App() {
       <CartProvider>
         <TooltipProvider>
           <div className="min-h-screen bg-neutral-50">
+            <ScrollToTop />
             <Header />
             <main>
               <Router />

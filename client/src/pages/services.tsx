@@ -128,35 +128,43 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-indigo-900 to-blue-800 py-20">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+      <section className="relative bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 py-20 min-h-[70vh] flex items-center">
+        {/* Enhanced Dark Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70"></div>
+        
+        {/* Background Image with Enhanced Contrast */}
         <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40"
           style={{backgroundImage: "url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1920')"}}
         ></div>
         
+        {/* Additional Gradient Overlay for Better Text Contrast */}
+        <div className="absolute inset-0 bg-gradient-to-r from-indigo-900/80 via-transparent to-purple-900/80"></div>
+        
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <h1 className="text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+          <div className="max-w-5xl mx-auto text-center">
+            {/* Enhanced Typography with Better Contrast */}
+            <h1 className="text-5xl lg:text-7xl font-bold mb-8 leading-tight text-white drop-shadow-2xl">
               Дополнительные{" "}
-              <span className="text-yandex-yellow">услуги</span>
+              <span className="text-yandex-yellow drop-shadow-lg">услуги</span>
             </h1>
-            <p className="text-xl lg:text-2xl mb-8 font-light opacity-90">
+            <p className="text-xl lg:text-2xl mb-12 font-light text-white/95 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
               Полный спектр услуг для работы с недвижимостью — от дизайна до юридического сопровождения
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                <div className="text-3xl font-bold text-yandex-yellow mb-2">13</div>
-                <div className="text-sm">Видов услуг</div>
+            {/* Enhanced Stats Cards with Better Visibility */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
+              <div className="bg-white/15 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300">
+                <div className="text-4xl font-bold text-yandex-yellow mb-3 drop-shadow-lg">13</div>
+                <div className="text-base text-white/90 font-medium">Видов услуг</div>
               </div>
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                <div className="text-3xl font-bold text-yandex-yellow mb-2">500+</div>
-                <div className="text-sm">Завершенных проектов</div>
+              <div className="bg-white/15 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300">
+                <div className="text-4xl font-bold text-yandex-yellow mb-3 drop-shadow-lg">500+</div>
+                <div className="text-base text-white/90 font-medium">Завершенных проектов</div>
               </div>
-              <div className="bg-white bg-opacity-10 backdrop-blur-sm rounded-xl p-6">
-                <div className="text-3xl font-bold text-yandex-yellow mb-2">24/7</div>
-                <div className="text-sm">Поддержка клиентов</div>
+              <div className="bg-white/15 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300">
+                <div className="text-4xl font-bold text-yandex-yellow mb-3 drop-shadow-lg">24/7</div>
+                <div className="text-base text-white/90 font-medium">Поддержка клиентов</div>
               </div>
             </div>
           </div>
@@ -178,8 +186,8 @@ export default function Services() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {serviceCategories.map((category, index) => (
-                <Card key={index} className={`${category.color} hover:shadow-lg transition-all duration-300 cursor-pointer h-full`}>
-                  <CardContent className="p-8 text-center h-full flex flex-col">
+                <Card key={index} className={`${category.color} hover:shadow-lg transition-all duration-300 cursor-pointer h-full flex flex-col`}>
+                  <CardContent className="p-8 text-center flex flex-col flex-1">
                     <div className="text-4xl mb-4">{category.icon}</div>
                     <h3 className="text-xl font-semibold text-text-primary mb-3">
                       {category.title}
@@ -187,7 +195,7 @@ export default function Services() {
                     <p className="text-text-secondary text-sm mb-4 flex-1">
                       {category.description}
                     </p>
-                    <Button variant="ghost" className="text-accent-orange font-medium mt-auto">
+                    <Button variant="ghost" className="text-accent-orange font-medium">
                       Подробнее →
                     </Button>
                   </CardContent>
@@ -213,7 +221,7 @@ export default function Services() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {allServices.map((service, index) => (
-                <Card key={index} className="hover:shadow-lg transition-shadow">
+                <Card key={index} className="hover:shadow-lg transition-shadow h-full flex flex-col">
                   <CardHeader className="pb-4">
                     <div className="flex items-start justify-between mb-2">
                       <div className="text-3xl">{service.icon}</div>
@@ -224,12 +232,12 @@ export default function Services() {
                     <CardTitle className="text-xl">{service.name}</CardTitle>
                   </CardHeader>
                   
-                  <CardContent>
+                  <CardContent className="flex flex-col flex-1">
                     <p className="text-text-secondary mb-4 text-sm">
                       {service.description}
                     </p>
                     
-                    <div className="space-y-2 mb-6">
+                    <div className="space-y-2 mb-6 flex-1">
                       {service.features.map((feature, idx) => (
                         <div key={idx} className="flex items-center text-sm">
                           <CheckCircle className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
@@ -238,7 +246,7 @@ export default function Services() {
                       ))}
                     </div>
                     
-                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white">
+                    <Button className="w-full bg-accent-orange hover:bg-orange-600 text-white mt-auto">
                       Заказать услугу
                       <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>
