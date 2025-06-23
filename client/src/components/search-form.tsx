@@ -29,24 +29,45 @@ const districts = [
 const propertyTypes = [
   { value: "apartment", label: "Квартира" },
   { value: "house", label: "Дом" },
-  { value: "office", label: "Офисное помещение" },
-  { value: "retail", label: "Торговое помещение" },
+  { value: "office", label: "Офис" },
+  { value: "retail", label: "Торговля" },
   { value: "warehouse", label: "Склад" },
-  { value: "production", label: "Производственное помещение" },
-  { value: "restaurant", label: "Ресторан/Кафе" },
-  { value: "hotel", label: "Гостиница" },
-  { value: "medical", label: "Медицинский центр" },
-  { value: "beauty", label: "Салон красоты" },
-  { value: "fitness", label: "Спортзал/Фитнес" },
-  { value: "auto", label: "Автосервис" },
   { value: "land", label: "Земля" },
-  { value: "garage", label: "Гараж" },
-  { value: "parking", label: "Машиноместо" }
+  { value: "garage", label: "Гараж" }
 ];
+
+// Кастомный компонент для полей цены
+interface PriceInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+}
+
+function PriceInput({ value, onChange, placeholder }: PriceInputProps) {
+  const formatPrice = (inputValue: string) => {
+    const numValue = inputValue.replace(/\D/g, '');
+    if (!numValue) return '';
+    return new Intl.NumberFormat('ru-RU').format(parseInt(numValue));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = e.target.value.replace(/\D/g, '');
+    onChange(numericValue);
+  };
+
+  return (
+    <input
+      type="text"
+      placeholder={placeholder}
+      value={formatPrice(value)}
+      onChange={handleChange}
+      className="flex h-12 w-full rounded-lg bg-gray-50/80 px-3 py-2 text-sm text-center text-gray-900 placeholder:text-gray-500 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:outline-none transition-all duration-200 border-0"
+    />
+  );
+}
 
 export default function SearchForm({ className, onSearch }: SearchFormProps) {
   const [, setLocation] = useLocation();
-  // Removed action state since this form is only for purchasing
   const [propertyType, setPropertyType] = useState("");
   const [district, setDistrict] = useState("");
   const [priceFrom, setPriceFrom] = useState("");
@@ -58,7 +79,6 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
     if (onSearch) {
       onSearch(filters);
     } else {
-      // Navigate to buy page with filters
       const searchParams = new URLSearchParams();
       if (propertyType) searchParams.set('propertyType', propertyType);
       if (district) searchParams.set('district', district);
@@ -71,67 +91,66 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
   };
 
   return (
-    <div className={`bg-white rounded-xl shadow-lg border border-neutral-200 ${className || ''}`}>
-      {/* Compact Search Bar */}
-      <div className="flex items-center gap-2 p-3">
-        <div className="flex-1 flex items-center gap-2">
-          <Select value={propertyType} onValueChange={setPropertyType}>
-            <SelectTrigger className="w-[140px] h-10 border-none bg-neutral-50 text-sm">
-              <SelectValue placeholder="Тип" />
-            </SelectTrigger>
-            <SelectContent>
-              {propertyTypes.map((type) => (
-                <SelectItem key={type.value} value={type.value}>
-                  {type.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          
-          <div className="w-px h-6 bg-neutral-200"></div>
-          
-          <Select value={district} onValueChange={setDistrict}>
-            <SelectTrigger className="w-[130px] h-10 border-none bg-neutral-50 text-sm">
-              <SelectValue placeholder="Район" />
-            </SelectTrigger>
-            <SelectContent>
-              {districts.map((districtName) => (
-                <SelectItem key={districtName} value={districtName}>
-                  {districtName}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-          
-          <div className="w-px h-6 bg-neutral-200"></div>
-          
-          <Input
-            type="text"
-            placeholder="От"
-            value={priceFrom}
-            onChange={(e) => setPriceFrom(e.target.value)}
-            className="w-[90px] h-10 border-none bg-neutral-50 text-sm text-center"
-          />
-          
-          <span className="text-neutral-400 text-sm">—</span>
-          
-          <Input
-            type="text"
-            placeholder="До"
-            value={priceTo}
-            onChange={(e) => setPriceTo(e.target.value)}
-            className="w-[90px] h-10 border-none bg-neutral-50 text-sm text-center"
-          />
+    <div className={`bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 ${className || ''}`}>
+      <div className="p-4 sm:p-6">
+        {/* Компактная форма для всех экранов */}
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-2">
+          {/* Тип недвижимости */}
+          <div className="flex-1 min-w-0">
+            <Select value={propertyType} onValueChange={setPropertyType}>
+              <SelectTrigger className="h-12 border-0 bg-gray-50/80 hover:bg-gray-100/80 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:ring-offset-0 transition-all duration-200 focus:outline-none">
+                <SelectValue placeholder="Тип недвижимости" />
+              </SelectTrigger>
+              <SelectContent>
+                {propertyTypes.map((type) => (
+                  <SelectItem key={type.value} value={type.value}>
+                    {type.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Район */}
+          <div className="flex-1 min-w-0">
+            <Select value={district} onValueChange={setDistrict}>
+              <SelectTrigger className="h-12 border-0 bg-gray-50/80 hover:bg-gray-100/80 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:ring-offset-0 transition-all duration-200 focus:outline-none">
+                <SelectValue placeholder="Район" />
+              </SelectTrigger>
+              <SelectContent className="max-h-[300px]">
+                {districts.map((districtName) => (
+                  <SelectItem key={districtName} value={districtName}>
+                    {districtName}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+
+          {/* Цена */}
+          <div className="flex items-center gap-2 sm:min-w-[200px]">
+            <PriceInput
+              value={priceFrom}
+              onChange={setPriceFrom}
+              placeholder="От"
+            />
+            <span className="text-gray-400 font-light">—</span>
+            <PriceInput
+              value={priceTo}
+              onChange={setPriceTo}
+              placeholder="До"
+            />
+          </div>
+
+          {/* Кнопка поиска */}
+          <Button
+            onClick={handleSearch}
+            className="h-12 px-6 sm:px-8 bg-accent-orange hover:bg-accent-orange-dark focus:bg-accent-orange-dark focus:ring-2 focus:ring-accent-orange/30 focus:ring-offset-0 text-white font-medium flex items-center gap-2 transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none"
+          >
+            <Search className="w-4 h-4" />
+            <span className="hidden sm:inline">Найти</span>
+          </Button>
         </div>
-        
-        <Button
-          onClick={handleSearch}
-          className="px-6 h-10 flex items-center gap-2"
-          size="sm"
-        >
-          <Search className="w-4 h-4" />
-          Найти
-        </Button>
       </div>
     </div>
   );
