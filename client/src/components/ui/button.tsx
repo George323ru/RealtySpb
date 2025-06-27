@@ -44,7 +44,7 @@ export interface ButtonProps
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, disableRipple = false, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, disableRipple = false, children, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     
     // Determine ripple color based on variant
@@ -69,7 +69,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        {props.children}
+        {children}
         {!disableRipple && !asChild && (
           <Ripple color={getRippleColor(variant)} />
         )}
