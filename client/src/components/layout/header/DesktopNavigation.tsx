@@ -50,7 +50,7 @@ export default function DesktopNavigation() {
                 <button
                   onClick={() => handleMenuClick(item.href)}
                   className={cn(
-                    "flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
+                    "flex items-center px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
                     location === item.href && "text-white bg-accent-orange shadow-lg",
                     location !== item.href && !isMenuOpen && "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200 hover:shadow-md hover:transform hover:scale-102",
                     isMenuOpen && "text-white bg-gradient-to-r from-accent-orange to-orange-500 shadow-lg transform scale-105"
@@ -66,7 +66,8 @@ export default function DesktopNavigation() {
                 
                 <div 
                   className={cn(
-                    "absolute top-full left-1/2 -translate-x-1/2 mt-4 w-[820px] rounded-2xl shadow-2xl border border-neutral-100 bg-white/95 backdrop-blur-sm p-8 transform transition-all duration-300 ease-in-out",
+                    "absolute top-full mt-4 w-[780px] max-w-[calc(100vw-2rem)] rounded-2xl shadow-2xl border border-neutral-100 bg-white/95 backdrop-blur-sm p-8 transform transition-all duration-300 ease-in-out",
+                    "left-0 -translate-x-1/4",
                     isMenuOpen 
                       ? "opacity-100 visible pointer-events-auto scale-100" 
                       : "opacity-0 invisible pointer-events-none scale-95"
@@ -117,7 +118,7 @@ export default function DesktopNavigation() {
               <Link
                 href={item.href}
                 className={cn(
-                  "flex items-center px-4 py-3 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
+                  "flex items-center px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
                   location === item.href
                     ? "text-white bg-gradient-to-r from-accent-orange to-orange-500 shadow-lg transform scale-105"
                     : "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200 hover:shadow-md hover:transform hover:scale-102"
@@ -139,7 +140,7 @@ export default function DesktopNavigation() {
             key={item.name}
             href={item.href}
             className={cn(
-              "flex items-center px-4 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
+              "flex items-center px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
               location === item.href
                 ? "text-white bg-gradient-to-r from-accent-orange to-orange-500 shadow-lg transform scale-105"
                 : "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200 hover:shadow-md hover:transform hover:scale-102"

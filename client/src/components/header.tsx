@@ -15,7 +15,7 @@ export default function Header() {
             <Logo />
 
             {/* Desktop Navigation Links */}
-            <div className="ml-6">
+            <div className="ml-6 mr-8">
               <DesktopNavigation />
             </div>
           </div>
