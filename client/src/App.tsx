@@ -1,4 +1,5 @@
-import { Switch, Route } from "wouter";
+import { Switch, Route, useLocation } from "wouter";
+import { motion, AnimatePresence } from "framer-motion";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
@@ -33,35 +34,56 @@ import PreSalePreparation from "@/pages/services/PreSalePreparation";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import AdminPage from "@/pages/admin";
 
+// Упрощенная анимация страниц
+const pageTransition = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 },
+  transition: { duration: 0.3, ease: "easeInOut" }
+};
+
 function Router() {
+  const [location] = useLocation();
+
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/buy" component={Buy} />
-      <Route path="/sell" component={Sell} />
-      <Route path="/rent" component={Rent} />
-      <Route path="/new-buildings" component={NewBuildings} />
-      <Route path="/new-buildings/:id" component={NewBuildingDetail} />
-      <Route path="/secondary" component={Secondary} />
-      <Route path="/property/:id" component={PropertyDetail} />
-      <Route path="/services" component={Services} />
-      <Route path="/services/pre-sale-preparation" component={PreSalePreparation} />
-      <Route path="/services/:id" component={ServiceDetail} />
-      <Route path="/services/:slug" component={ServiceLanding} />
-      <Route path="/land" component={Land} />
-      <Route path="/about" component={About} />
-      <Route path="/team" component={RealtorConstructor} />
-      <Route path="/realtor-constructor" component={RealtorConstructor} />
-      <Route path="/reviews" component={Reviews} />
-      <Route path="/blog" component={Blog} />
-      <Route path="/blog/:slug" component={BlogPost} />
-      <Route path="/contacts" component={Contacts} />
-      <Route path="/cart" component={Cart} />
-      <Route path="/calculator" component={Calculator} />
-      <Route path="/privacy-policy" component={PrivacyPolicy} />
-      <Route path="/admin" component={AdminPage} />
-      <Route component={NotFound} />
-    </Switch>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={location}
+        initial={pageTransition.initial}
+        animate={pageTransition.animate}
+        exit={pageTransition.exit}
+        transition={pageTransition.transition}
+      >
+        <Switch>
+          <Route path="/" component={Home} />
+          <Route path="/buy" component={Buy} />
+          <Route path="/sell" component={Sell} />
+          <Route path="/rent" component={Rent} />
+          <Route path="/new-buildings" component={NewBuildings} />
+          <Route path="/new-buildings/:id" component={NewBuildingDetail} />
+          <Route path="/secondary" component={Secondary} />
+          <Route path="/property/:id" component={PropertyDetail} />
+          <Route path="/services" component={Services} />
+          <Route path="/services/pre-sale-preparation" component={PreSalePreparation} />
+          <Route path="/services/:id" component={ServiceDetail} />
+          <Route path="/services/:slug" component={ServiceLanding} />
+          <Route path="/land" component={Land} />
+          <Route path="/about" component={About} />
+          <Route path="/team" component={RealtorConstructor} />
+          <Route path="/realtor-constructor" component={RealtorConstructor} />
+          <Route path="/reviews" component={Reviews} />
+          <Route path="/blog" component={Blog} />
+          <Route path="/blog/:slug" component={BlogPost} />
+          <Route path="/contacts" component={Contacts} />
+          <Route path="/cart" component={Cart} />
+          <Route path="/favorites" component={Cart} />
+          <Route path="/calculator" component={Calculator} />
+          <Route path="/privacy-policy" component={PrivacyPolicy} />
+          <Route path="/admin" component={AdminPage} />
+          <Route component={NotFound} />
+        </Switch>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 

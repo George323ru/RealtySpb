@@ -129,17 +129,21 @@ export default function SearchForm({ className, onSearch }: SearchFormProps) {
 
           {/* Цена */}
           <div className="flex items-center gap-2 sm:min-w-[200px]">
-            <PriceInput
-              value={priceFrom}
-              onChange={setPriceFrom}
-              placeholder="От"
-            />
+            <div className="flex-1">
+              <PriceInput
+                value={priceFrom}
+                onChange={setPriceFrom}
+                placeholder="Цена от"
+              />
+            </div>
             <span className="text-gray-400 font-light">—</span>
-            <PriceInput
-              value={priceTo}
-              onChange={setPriceTo}
-              placeholder="До"
-            />
+            <div className="flex-1">
+              <PriceInput
+                value={priceTo}
+                onChange={setPriceTo}
+                placeholder="Цена до"
+              />
+            </div>
           </div>
 
           {/* Кнопка поиска */}

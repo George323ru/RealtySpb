@@ -1,5 +1,13 @@
-import { HeaderTopBar, Logo, DesktopNavigation, MobileNavigation } from "./layout/header";
-import DesktopHeaderActions from "./layout/header/DesktopHeaderActions";
+import {
+  HeaderTopBar,
+  Logo,
+  DesktopNavigation,
+  CompactDesktopNavigation,
+  TabletNavigation,
+  MobileNavigation,
+  TabletHeaderActions,
+} from './layout/header';
+import DesktopHeaderActions from './layout/header/DesktopHeaderActions';
 
 export default function Header() {
   return (
@@ -10,21 +18,24 @@ export default function Header() {
       {/* Main Navigation */}
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between py-4">
-          <div className="flex items-center">
-            {/* Logo */}
+          {/* Left Block: Logo */}
+          <div className="flex-shrink-0">
             <Logo />
-
-            {/* Desktop Navigation Links */}
-            <div className="ml-6 mr-8">
-              <DesktopNavigation />
-            </div>
           </div>
 
-          {/* Desktop Actions */}
-          <DesktopHeaderActions />
+          {/* Center Block: Navigation Links (hidden on mobile) */}
+          <div className="hidden lg:flex flex-1 items-center justify-center">
+            <DesktopNavigation />
+            <CompactDesktopNavigation />
+            <TabletNavigation />
+          </div>
 
-          {/* Mobile Navigation (burger icon and full-screen menu) */}
-          <MobileNavigation />
+          {/* Right Block: Actions & Mobile Menu */}
+          <div className="flex items-center justify-end flex-1 lg:flex-none">
+            <DesktopHeaderActions />
+            <TabletHeaderActions />
+            <MobileNavigation />
+          </div>
         </nav>
       </div>
     </header>

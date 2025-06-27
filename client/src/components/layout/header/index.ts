@@ -1,5 +1,9 @@
 export { default as HeaderTopBar } from './HeaderTopBar';
 export { default as Logo } from './Logo';
 export { default as DesktopNavigation } from './DesktopNavigation';
+export { default as CompactDesktopNavigation } from './CompactDesktopNavigation';
+export { default as TabletNavigation } from './TabletNavigation';
 export { default as MobileNavigation } from './MobileNavigation';
-export { default as CartButton } from './CartButton'; 
+export { default as CartButton } from './CartButton';
+export { default as FavoritesButton } from './FavoritesButton';
+export { default as TabletHeaderActions } from './TabletHeaderActions'; 

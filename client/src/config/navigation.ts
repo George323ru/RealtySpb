@@ -4,7 +4,7 @@ import {
   Users, 
   BookOpen, 
   Phone, 
-  ShoppingCart, 
+  Heart, 
   Home,
   Building2,
   Store,
@@ -93,8 +93,8 @@ export const mainNavigation: NavigationItem[] = [
       ]
     }
   },
-  { name: "Продать", href: "/sell", icon: TrendingUp },
-  { name: "Сдать", href: "/rent", icon: Key },
+  { name: "Продать", href: "/sell" },
+  { name: "Сдать", href: "/rent" },
   {
     name: "Услуги",
     href: "/services",
@@ -134,17 +134,17 @@ export const mainNavigation: NavigationItem[] = [
 
 // Secondary navigation items
 export const secondaryNavigation: NavigationItem[] = [
-  { name: "Команда", href: "/team", icon: Users },
-  { name: "О нас", href: "/about", icon: BookOpen },
-  { name: "Отзывы", href: "/reviews", icon: Users },
-  { name: "Блог", href: "/blog", icon: BookOpen },
-  { name: "Контакты", href: "/contacts", icon: Phone },
+  { name: "Команда", href: "/team" },
+  { name: "О нас", href: "/about" },
+  { name: "Отзывы", href: "/reviews" },
+  { name: "Блог", href: "/blog" },
+  { name: "Контакты", href: "/contacts" },
 ];
 
 // Mobile bottom navigation items
 export const mobileBottomNav = [
   { name: "Главная", href: "/", icon: Home },
-  { name: "Купить", href: "/buy", icon: ShoppingCart, hasSubmenu: true },
+  { name: "Избранное", href: "/favorites", icon: Heart },
   { name: "Продать", href: "/sell", icon: TrendingUp },
   { name: "Аренда", href: "/rent", icon: Key },
   { name: "Услуги", href: "/services", icon: Building2, hasSubmenu: true },

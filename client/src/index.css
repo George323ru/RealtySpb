@@ -53,6 +53,29 @@ img {
   }
 }
 
+/* Header adaptive improvements */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Tablet header optimizations */
+  .container {
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Improve button spacing in tablet mode */
+  nav button {
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  /* Desktop header optimizations */
+  .container {
+    max-width: 1200px;
+  }
+}
+
 :root {
   /* Modular 8px-based spacing system */
   --spacing-0: 0px;
@@ -672,44 +695,5 @@ input:focus, textarea:focus, select:focus {
 
   .form-unified .space-y-2 > * + * {
     margin-top: var(--spacing-sm);
-  }
-
-  /* Material Design Ripple Effect */
-  .ripple-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    overflow: hidden;
-    pointer-events: auto;
-  }
-
-  .ripple-effect {
-    position: absolute;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    transform: translate(-50%, -50%) scale(0);
-    animation: ripple-animation ease-out;
-    pointer-events: none;
-  }
-
-  @keyframes ripple-animation {
-    0% {
-      width: 0;
-      height: 0;
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    50% {
-      opacity: 0.8;
-    }
-    100% {
-      width: 200px;
-      height: 200px;
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(1);
-    }
   }
 }

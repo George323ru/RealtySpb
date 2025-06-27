@@ -61,16 +61,15 @@ export default function ConsultationForm({ className, defaultService }: Consulta
     onSuccess: () => {
       setIsSubmitted(true);
       form.reset();
-      toast({
+      toast.success({
         title: "Заявка отправлена!",
         description: "Наш специалист свяжется с вами в течение 15 минут.",
       });
     },
     onError: () => {
-      toast({
-        title: "Ошибка",
+      toast.error({
+        title: "Ошибка отправки",
         description: "Не удалось отправить заявку. Попробуйте еще раз.",
-        variant: "destructive",
       });
     },
   });
@@ -109,7 +108,9 @@ export default function ConsultationForm({ className, defaultService }: Consulta
                       placeholder="Введите ваше имя" 
                       {...field} 
                       className={cn(
-                        formState.touchedFields.name && (formState.errors.name ? 'border-destructive' : 'border-green-500')
+                        "transition-all duration-300",
+                        formState.touchedFields.name && !formState.errors.name && field.value && 'border-green-500 shadow-green-500/20 shadow-sm',
+                        formState.touchedFields.name && formState.errors.name && 'border-red-500 shadow-red-500/20 shadow-sm'
                       )}
                     />
                   </FormControl>
@@ -129,7 +130,9 @@ export default function ConsultationForm({ className, defaultService }: Consulta
                       placeholder="+7 (___) ___-__-__" 
                       {...field}
                       className={cn(
-                        formState.touchedFields.phone && (formState.errors.phone ? 'border-destructive' : 'border-green-500')
+                        "transition-all duration-300",
+                        formState.touchedFields.phone && !formState.errors.phone && field.value && 'border-green-500 shadow-green-500/20 shadow-sm',
+                        formState.touchedFields.phone && formState.errors.phone && 'border-red-500 shadow-red-500/20 shadow-sm'
                       )}
                     />
                   </FormControl>
@@ -150,7 +153,9 @@ export default function ConsultationForm({ className, defaultService }: Consulta
                     placeholder="example@mail.com" 
                     {...field} 
                     className={cn(
-                      formState.touchedFields.email && formState.dirtyFields.email && (formState.errors.email ? 'border-destructive' : 'border-green-500')
+                      "transition-all duration-300",
+                      formState.touchedFields.email && formState.dirtyFields.email && !formState.errors.email && field.value && 'border-green-500 shadow-green-500/20 shadow-sm',
+                      formState.touchedFields.email && formState.errors.email && 'border-red-500 shadow-red-500/20 shadow-sm'
                     )}
                   />
                 </FormControl>
@@ -161,11 +166,13 @@ export default function ConsultationForm({ className, defaultService }: Consulta
 
           <Button
             type="submit"
-            disabled={mutation.isPending || !formState.isValid}
+            disabled={!formState.isValid}
+            loading={mutation.isPending}
+            success={mutation.isSuccess}
             className="w-full py-4 px-6 text-lg transition-all"
             size="lg"
           >
-            {mutation.isPending ? "Отправляем..." : "Получить консультацию"}
+            Получить консультацию
           </Button>
 
           <p className="text-sm text-text-secondary text-center">

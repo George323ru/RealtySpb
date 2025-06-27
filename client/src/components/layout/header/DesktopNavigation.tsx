@@ -34,7 +34,7 @@ export default function DesktopNavigation() {
   };
 
   return (
-    <nav className="hidden lg:flex items-center space-x-1">
+    <nav className="hidden 2xl:flex items-center space-x-1">
       {mainNavigation.map((item) => {
         const IconComponent = item.icon || Home;
         const isMenuOpen = hoveredMenu === item.name;
@@ -58,7 +58,7 @@ export default function DesktopNavigation() {
                     (isActive || isMenuOpen) && "text-accent-orange [background-size:100%_100%]"
                   )}
                 >
-                  <IconComponent className="w-4 h-4 mr-2" />
+                  {IconComponent && IconComponent !== Home && <IconComponent className="w-4 h-4 mr-2" />}
                   {item.name}
                   <ChevronDown className={cn(
                     "ml-2 w-4 h-4 transition-transform duration-300",
@@ -68,8 +68,8 @@ export default function DesktopNavigation() {
                 
                 <div 
                   className={cn(
-                    "absolute top-full mt-4 w-[780px] max-w-[calc(100vw-2rem)] rounded-2xl shadow-2xl border border-neutral-100 bg-white/95 backdrop-blur-sm p-8 transform transition-all duration-300 ease-in-out",
-                    "left-0 -translate-x-1/4",
+                    "absolute top-full mt-4 w-[900px] max-w-[calc(100vw-2rem)] rounded-2xl shadow-2xl border border-neutral-100 bg-white/95 backdrop-blur-sm p-8 transform transition-all duration-300 ease-in-out",
+                    "left-0 -translate-x-1/3 xl:-translate-x-1/4",
                     isMenuOpen 
                       ? "opacity-100 visible pointer-events-auto scale-100" 
                       : "opacity-0 invisible pointer-events-none scale-95"
@@ -128,7 +128,7 @@ export default function DesktopNavigation() {
                 className={cn(isActive && "text-accent-orange [background-size:100%_100%]")}
               >
                 <Link href={item.href}>
-                  <IconComponent className="w-4 h-4 mr-2" />
+                  {IconComponent && <IconComponent className="w-4 h-4 mr-2" />}
                   {item.name}
                 </Link>
               </Button>
@@ -150,7 +150,7 @@ export default function DesktopNavigation() {
             className={cn(isActive && "text-accent-orange [background-size:100%_100%]")}
           >
             <Link href={item.href}>
-              <IconComponent className="w-4 h-4 mr-2" />
+              {IconComponent && <IconComponent className="w-4 h-4 mr-2" />}
               {item.name}
             </Link>
           </Button>

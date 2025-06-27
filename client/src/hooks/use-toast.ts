@@ -5,7 +5,7 @@ import type {
   ToastProps,
 } from "@/components/ui/toast"
 
-const TOAST_LIMIT = 1
+const TOAST_LIMIT = 5
 const TOAST_REMOVE_DELAY = 1000000
 
 type ToasterToast = ToastProps & {
@@ -13,6 +13,7 @@ type ToasterToast = ToastProps & {
   title?: React.ReactNode
   description?: React.ReactNode
   action?: ToastActionElement
+  variant?: "default" | "destructive" | "success" | "warning" | "info"
 }
 
 const actionTypes = {
@@ -167,6 +168,19 @@ function toast({ ...props }: Toast) {
     update,
   }
 }
+
+// Удобные методы для разных типов уведомлений
+toast.success = (props: Omit<Toast, "variant">) => 
+  toast({ ...props, variant: "success" })
+
+toast.error = (props: Omit<Toast, "variant">) => 
+  toast({ ...props, variant: "destructive" })
+
+toast.warning = (props: Omit<Toast, "variant">) => 
+  toast({ ...props, variant: "warning" })
+
+toast.info = (props: Omit<Toast, "variant">) => 
+  toast({ ...props, variant: "info" })
 
 function useToast() {
   const [state, setState] = React.useState<State>(memoryState)

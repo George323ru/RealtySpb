@@ -56,7 +56,7 @@ export default function Home() {
   });
 
   const heroStyle = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=1920')`,
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat'
@@ -128,7 +128,7 @@ export default function Home() {
         className="relative min-h-screen flex items-center"
         style={heroStyle}
         role="banner"
-        aria-label="Главная страница риэлтора в Санкт-Петербурге"
+        aria-label="Поиск недвижимости в Санкт-Петербурге - безопасные сделки с экспертами"
       >
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
@@ -138,14 +138,14 @@ export default function Home() {
                 textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
               }}
             >
-              Риэлтор в СПб - Купить недвижимость{" "}
+              Найдем квартиру вашей мечты{" "}
               <span 
-                className="text-white"
+                className="text-accent-orange"
                 style={{ 
                   textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)'
                 }}
               >
-                Санкт-Петербурге
+                в сердце Петербурга
               </span>
             </h1>
             <p 
@@ -154,7 +154,7 @@ export default function Home() {
                 textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)'
               }}
             >
-              Профессиональные услуги по покупке, продаже и аренде недвижимости. Более 15 лет на рынке СПб.
+              Более 15 лет защищаем ваши интересы и помогаем принять верное финансовое решение. Гарантируем безопасность сделки и экономию вашего времени.
             </p>
             
             <SearchForm className="max-w-5xl mx-auto mt-12" />
