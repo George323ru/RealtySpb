@@ -9,12 +9,20 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
+import { cn } from "@/lib/utils";
 import { insertLeadSchema } from "@shared/schema";
 import { z } from "zod";
 
-const consultationSchema = insertLeadSchema.extend({
+const phoneRegex = new RegExp(
+  /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9A-Z]{3}[)])?([-]?[\s]?[0-9A-Z]{3})([-]?[\s]?[0-9A-Z]{2})([-]?[\s]?[0-9A-Z]{2})$/
+);
+
+const consultationSchema = z.object({
   name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
-  phone: z.string().min(10, "Введите корректный номер телефона"),
+  phone: z.string().regex(phoneRegex, "Введите корректный номер телефона"),
+  email: z.string().email("Неверный формат email").optional().or(z.literal('')),
+  serviceType: z.string().optional(),
+  comment: z.string().optional(),
 });
 
 type ConsultationFormData = z.infer<typeof consultationSchema>;
@@ -30,17 +38,22 @@ export default function ConsultationForm({ className, defaultService }: Consulta
 
   const form = useForm<ConsultationFormData>({
     resolver: zodResolver(consultationSchema),
+    mode: "onBlur",
     defaultValues: {
       name: "",
       phone: "",
+      email: "",
+      serviceType: defaultService || "консультация",
+      comment: "",
     },
   });
+
+  const { formState } = form;
 
   const mutation = useMutation({
     mutationFn: async (data: ConsultationFormData) => {
       const response = await apiRequest("POST", "/api/leads", {
         ...data,
-        serviceType: defaultService || "консультация",
         source: "website",
       });
       return response.json();
@@ -92,7 +105,13 @@ export default function ConsultationForm({ className, defaultService }: Consulta
                 <FormItem>
                   <FormLabel>Ваше имя</FormLabel>
                   <FormControl>
-                    <Input placeholder="Введите ваше имя" {...field} />
+                    <Input 
+                      placeholder="Введите ваше имя" 
+                      {...field} 
+                      className={cn(
+                        formState.touchedFields.name && (formState.errors.name ? 'border-destructive' : 'border-green-500')
+                      )}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -106,7 +125,13 @@ export default function ConsultationForm({ className, defaultService }: Consulta
                 <FormItem>
                   <FormLabel>Телефон</FormLabel>
                   <FormControl>
-                    <Input placeholder="+7 (___) ___-__-__" {...field} />
+                    <Input 
+                      placeholder="+7 (___) ___-__-__" 
+                      {...field}
+                      className={cn(
+                        formState.touchedFields.phone && (formState.errors.phone ? 'border-destructive' : 'border-green-500')
+                      )}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -114,12 +139,30 @@ export default function ConsultationForm({ className, defaultService }: Consulta
             />
           </div>
 
-
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Email (необязательно)</FormLabel>
+                <FormControl>
+                  <Input 
+                    placeholder="example@mail.com" 
+                    {...field} 
+                    className={cn(
+                      formState.touchedFields.email && formState.dirtyFields.email && (formState.errors.email ? 'border-destructive' : 'border-green-500')
+                    )}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <Button
             type="submit"
-            disabled={mutation.isPending}
-            className="w-full py-4 px-6 text-lg"
+            disabled={mutation.isPending || !formState.isValid}
+            className="w-full py-4 px-6 text-lg transition-all"
             size="lg"
           >
             {mutation.isPending ? "Отправляем..." : "Получить консультацию"}
