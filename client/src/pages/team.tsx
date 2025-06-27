@@ -80,11 +80,11 @@ export default function Team() {
   const TeamMemberCard = ({ member }: { member: TeamMember }) => (
     <Card className="text-center group hover:shadow-lg transition-all duration-300 h-full">
       <CardContent className="p-8 h-full flex flex-col">
-        <div className="relative mb-6">
+        <div className="relative mb-6 overflow-hidden rounded-full w-32 h-32 mx-auto">
           <img 
             src={member.photo} 
             alt={member.name}
-            className="w-32 h-32 rounded-full mx-auto object-cover group-hover:scale-105 transition-transform" 
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform" 
           />
           <div className="absolute inset-0 rounded-full bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
         </div>

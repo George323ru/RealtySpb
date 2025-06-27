@@ -219,7 +219,7 @@ export default function Blog() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {filteredPosts.map((post) => (
                     <Card key={post.id} className="group hover:shadow-xl transition-shadow h-full flex flex-col">
-                      <div className="relative">
+                      <div className="relative overflow-hidden rounded-t-lg">
                         <img
                           src={post.image || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400"}
                           alt={post.title}

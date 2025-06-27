@@ -5,12 +5,6 @@ import { cn } from "@/lib/utils";
 import { mainNavigation, secondaryNavigation } from "@/config/navigation";
 import { Button } from "@/components/ui/button";
 
-// Navigation-specific button styles that override global styles
-const navButtonStyles = "h-10 min-h-10 px-3 text-sm font-semibold whitespace-nowrap transition-colors duration-300 border border-transparent rounded-xl hover:transform-none hover:shadow-md";
-
-const activeStyles = "bg-accent-orange text-white shadow-lg";
-const inactiveStyles = "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200";
-
 export default function DesktopNavigation() {
   const [location, setLocation] = useLocation();
   const [hoveredMenu, setHoveredMenu] = useState<string | null>(null);
@@ -55,12 +49,13 @@ export default function DesktopNavigation() {
           >
             {item.megaMenu ? (
               <>
-                <button
+                <Button
+                  variant="ghost"
+                  size="sm"
                   onClick={() => handleMenuClick(item.href)}
                   className={cn(
-                    navButtonStyles,
                     "flex items-center",
-                    (isActive || isMenuOpen) ? activeStyles : inactiveStyles
+                    (isActive || isMenuOpen) && "text-accent-orange [background-size:100%_100%]"
                   )}
                 >
                   <IconComponent className="w-4 h-4 mr-2" />
@@ -69,7 +64,7 @@ export default function DesktopNavigation() {
                     "ml-2 w-4 h-4 transition-transform duration-300",
                     isMenuOpen && "rotate-180"
                   )} />
-                </button>
+                </Button>
                 
                 <div 
                   className={cn(
@@ -91,19 +86,23 @@ export default function DesktopNavigation() {
                         </h4>
                         <div className="space-y-2">
                           {section.links.map((link) => (
-                            <Link
+                            <Button
                               key={link.name}
-                              href={link.href}
-                              className="block group/item"
-                              onClick={() => {
-                                if (timeoutRef.current) {
-                                  clearTimeout(timeoutRef.current);
-                                  timeoutRef.current = null;
-                                }
-                                setHoveredMenu(null);
-                              }}
+                              variant="ghost"
+                              size="sm"
+                              asChild
+                              className="w-full justify-start h-auto p-4 min-h-[70px] flex flex-col items-start"
                             >
-                              <div className="px-4 py-4 rounded-xl hover:bg-gradient-to-r hover:from-orange-50 hover:via-amber-25 hover:to-yellow-50 transition-all duration-300 border border-transparent hover:border-orange-100 hover:shadow-lg hover:transform hover:scale-102 min-h-[70px] flex flex-col justify-center">
+                              <Link
+                                href={link.href}
+                                onClick={() => {
+                                  if (timeoutRef.current) {
+                                    clearTimeout(timeoutRef.current);
+                                    timeoutRef.current = null;
+                                  }
+                                  setHoveredMenu(null);
+                                }}
+                              >
                                 <div className="font-semibold text-text-primary group-hover/item:text-accent-orange text-sm leading-tight transition-colors">
                                   {link.name}
                                 </div>
@@ -112,8 +111,8 @@ export default function DesktopNavigation() {
                                     {link.desc}
                                   </div>
                                 )}
-                              </div>
-                            </Link>
+                              </Link>
+                            </Button>
                           ))}
                         </div>
                       </div>
@@ -122,17 +121,17 @@ export default function DesktopNavigation() {
                 </div>
               </>
             ) : (
-              <Link
-                href={item.href}
-                className={cn(
-                  navButtonStyles,
-                  "flex items-center",
-                  isActive ? activeStyles : inactiveStyles
-                )}
+              <Button
+                variant="ghost"
+                size="sm"
+                asChild
+                className={cn(isActive && "text-accent-orange [background-size:100%_100%]")}
               >
-                <IconComponent className="w-4 h-4 mr-2" />
-                {item.name}
-              </Link>
+                <Link href={item.href}>
+                  <IconComponent className="w-4 h-4 mr-2" />
+                  {item.name}
+                </Link>
+              </Button>
             )}
           </div>
         );
@@ -143,18 +142,18 @@ export default function DesktopNavigation() {
         const isActive = location === item.href;
         
         return (
-          <Link
+          <Button
             key={item.name}
-            href={item.href}
-            className={cn(
-              navButtonStyles,
-              "flex items-center",
-              isActive ? activeStyles : inactiveStyles
-            )}
+            variant="ghost"
+            size="sm"
+            asChild
+            className={cn(isActive && "text-accent-orange [background-size:100%_100%]")}
           >
-            <IconComponent className="w-4 h-4 mr-2" />
-            {item.name}
-          </Link>
+            <Link href={item.href}>
+              <IconComponent className="w-4 h-4 mr-2" />
+              {item.name}
+            </Link>
+          </Button>
         );
       })}
     </nav>

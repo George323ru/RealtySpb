@@ -331,7 +331,7 @@ export default function BlogPostPage() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {relatedPosts.map((relatedPost) => (
                   <Card key={relatedPost.id} className="group hover:shadow-lg transition-shadow">
-                    <div className="relative">
+                    <div className="relative overflow-hidden rounded-t-lg">
                       <img
                         src={relatedPost.image || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400"}
                         alt={relatedPost.title}

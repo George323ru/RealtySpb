@@ -55,7 +55,7 @@ export default function PropertyCard({ property }: PropertyCardProps) {
 
   return (
     <Card className="card-unified group animate-fade-in">
-      <div className="relative">
+      <div className="relative overflow-hidden rounded-t-lg">
         <OptimizedImage
           src={property.images[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&h=300&fit=crop"}
           alt={property.title}

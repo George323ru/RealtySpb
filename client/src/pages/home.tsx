@@ -271,20 +271,7 @@ export default function Home() {
               </div>
             </div>
             
-            {properties && properties.length > 3 && (
-              <div className="flex justify-center mt-6 gap-3">
-                {Array.from({ length: Math.ceil(properties.length / 3) }).map((_, index) => (
-                  <button 
-                    key={index}
-                    className="w-3 h-3 rounded-full bg-neutral-300 hover:bg-accent-orange active:bg-accent-orange transition-colors cursor-pointer"
-                    onClick={() => {
-                      const container = document.getElementById('properties-scroll');
-                      if (container) container.scrollTo({ left: index * 400, behavior: 'smooth' });
-                    }}
-                  />
-                ))}
-              </div>
-            )}
+
           </div>
           
           {/* CTA Button */}
@@ -318,9 +305,9 @@ export default function Home() {
           
           <div className="text-center mt-12">
             <Link href="/new-buildings">
-              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600">
+              <Button className="bg-accent-orange text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-600 text-lg">
                 Все новостройки СПб
-                <ArrowRight className="ml-2 w-4 h-4" />
+                <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
             </div>

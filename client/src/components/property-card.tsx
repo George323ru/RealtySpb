@@ -27,11 +27,11 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
 
   return (
     <Card className={`group hover:shadow-xl transition-shadow duration-300 h-full flex flex-col ${className || ''}`}>
-      <div className="relative">
+      <div className="relative overflow-hidden rounded-t-lg">
         <img
           src={mainImage}
           alt={property.title}
-          className="w-full h-64 object-cover rounded-t-lg group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute top-4 left-4">
           <Badge className={getBadgeVariant(property.buildingType || "")}>
