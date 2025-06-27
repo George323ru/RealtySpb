@@ -1,8 +1,9 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import LeadForm from "@/components/LeadForm";
-import { CheckCircle, Camera, Paintbrush, Wrench, TrendingUp, Clock, Euro } from "lucide-react";
+import { CheckCircle, Camera, Paintbrush, Wrench, TrendingUp, Clock, Euro, Star, Users, Briefcase, ArrowRight } from "lucide-react";
 
 export default function PreSalePreparation() {
   const services = [
@@ -82,6 +83,44 @@ export default function PreSalePreparation() {
     }
   ];
 
+  const testimonials = [
+    {
+      quote: "Благодаря подготовке, моя квартира была продана на 2 недели быстрее и на 1.2 млн рублей дороже, чем я ожидал. Невероятный результат!",
+      author: "Алексей Петров",
+      property: "2-комн. квартира на Комендантском",
+      rating: 5
+    },
+    {
+      quote: "Никогда бы не подумала, что небольшой косметический ремонт и правильная расстановка мебели могут так преобразить квартиру. Спасибо команде!",
+      author: "Елена Сидорова",
+      property: "Студия в Девяткино",
+      rating: 5
+    }
+  ];
+
+  const faqItems = [
+    {
+      question: "Сколько времени занимает предпродажная подготовка?",
+      answer: "В среднем, от 1 до 3 недель в зависимости от объема работ. Косметический ремонт и стейджинг могут занять больше времени, в то время как профессиональная фотосессия — всего 1-2 дня."
+    },
+    {
+      question: "Обязательно ли делать ремонт?",
+      answer: "Не всегда. Мы проводим анализ и рекомендуем только те работы, которые действительно повысят стоимость и привлекательность объекта. Иногда достаточно генеральной уборки и мелких исправлений."
+    },
+    {
+      question: "Как определяется, какие улучшения нужны?",
+      answer: "Наш специалист выезжает на объект, оценивает его состояние, анализирует целевую аудиторию и конкурентов, после чего составляет подробный план работ с оценкой их рентабельности."
+    },
+    {
+      question: "А если у меня ипотека на этой квартире?",
+      answer: "Это не является препятствием. Мы работаем со всеми видами обременений. Юридический отдел поможет согласовать все действия с банком, если это потребуется."
+    },
+    {
+      question: "Что такое хоум-стейджинг?",
+      answer: "Это технология подготовки недвижимости к продаже или аренде, которая включает в себя деперсонализацию интерьера, расстановку мебели и декора для создания максимально привлекательного образа для широкого круга покупателей."
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-neutral-50">
       {/* Hero Section */}
@@ -103,6 +142,38 @@ export default function PreSalePreparation() {
               <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
                 Примеры работ
               </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof Section */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              Нам доверяют лучшие
+            </h2>
+            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+              Мы сотрудничаем с ведущими банками и площадками, а наши клиенты всегда остаются довольны результатом.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
+            <div className="bg-neutral-100 p-6 rounded-lg">
+              <Star className="w-10 h-10 text-accent-orange mx-auto mb-3" />
+              <div className="text-3xl font-bold text-text-primary">4.9/5</div>
+              <p className="text-text-secondary">Средний рейтинг</p>
+            </div>
+            <div className="bg-neutral-100 p-6 rounded-lg">
+              <Users className="w-10 h-10 text-accent-orange mx-auto mb-3" />
+              <div className="text-3xl font-bold text-text-primary">200+</div>
+              <p className="text-text-secondary">Подготовленных объектов</p>
+            </div>
+            <div className="bg-neutral-100 p-6 rounded-lg">
+              <Briefcase className="w-10 h-10 text-accent-orange mx-auto mb-3" />
+              <div className="text-3xl font-bold text-text-primary">12 лет</div>
+              <p className="text-text-secondary">Опыта на рынке</p>
             </div>
           </div>
         </div>
@@ -230,13 +301,14 @@ export default function PreSalePreparation() {
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
+          <div className="relative max-w-4xl mx-auto">
+            <div className="absolute left-8 top-8 bottom-0 w-0.5 bg-gray-200" aria-hidden="true"></div>
             {process.map((item, index) => (
-              <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
+              <div key={index} className="flex items-start mb-10 last:mb-0">
+                <div className="flex-shrink-0 w-16 h-16 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6 z-10 relative">
                   {item.step}
                 </div>
-                <div className="flex-grow">
+                <div className="flex-grow pt-1">
                   <h3 className="text-xl font-semibold text-text-primary mb-2">
                     {item.title}
                   </h3>
@@ -244,6 +316,81 @@ export default function PreSalePreparation() {
                     {item.description}
                   </p>
                 </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Second CTA Section */}
+      <section className="py-20 bg-accent-orange text-white">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+            Готовы продать дороже и быстрее?
+          </h2>
+          <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
+            Не теряйте деньги и время. Узнайте, какой потенциал скрыт в вашей недвижимости.
+          </p>
+          <Button size="lg" variant="outline" className="bg-white text-accent-orange hover:bg-gray-50 border-white text-lg px-8 py-3 font-bold">
+            Получить бесплатную консультацию
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+        </div>
+      </section>
+
+      {/* Expanded Testimonials */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              Истории успеха наших клиентов
+            </h2>
+            <p className="text-lg text-text-secondary">
+              Реальные результаты и отзывы о предпродажной подготовке
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="flex flex-col">
+                <CardContent className="p-6 flex-grow">
+                  <div className="flex mb-2">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-text-secondary mb-4 italic">"{testimonial.quote}"</p>
+                </CardContent>
+                <div className="bg-neutral-50 p-4 flex items-center gap-4 border-t">
+                  <div className="w-12 h-12 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold">
+                    {testimonial.author.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-text-primary">{testimonial.author}</p>
+                    <p className="text-sm text-text-secondary">{testimonial.property}</p>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-16 bg-neutral-100">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
+              Часто задаваемые вопросы
+            </h2>
+            <p className="text-lg text-text-secondary">
+              Ответы на популярные вопросы о предпродажной подготовке
+            </p>
+          </div>
+          <div className="max-w-3xl mx-auto space-y-4">
+            {faqItems.map((item, index) => (
+              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
+                <h3 className="text-lg font-semibold text-text-primary mb-2">{item.question}</h3>
+                <p className="text-text-secondary">{item.answer}</p>
               </div>
             ))}
           </div>

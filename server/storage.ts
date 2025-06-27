@@ -25,39 +25,64 @@ export interface IStorage {
   }): Promise<Property[]>;
   getProperty(id: number): Promise<Property | undefined>;
   createProperty(property: InsertProperty): Promise<Property>;
+  updateProperty(id: number, property: Partial<InsertProperty>): Promise<Property | undefined>;
+  deleteProperty(id: number): Promise<boolean>;
 
   // New Buildings
   getNewBuildings(): Promise<NewBuilding[]>;
   getNewBuilding(id: number): Promise<NewBuilding | undefined>;
   createNewBuilding(building: InsertNewBuilding): Promise<NewBuilding>;
+  updateNewBuilding(id: number, building: Partial<InsertNewBuilding>): Promise<NewBuilding | undefined>;
+  deleteNewBuilding(id: number): Promise<boolean>;
 
   // Services
   getServices(): Promise<Service[]>;
   getService(id: number): Promise<Service | undefined>;
   createService(service: InsertService): Promise<Service>;
+  updateService(id: number, service: Partial<InsertService>): Promise<Service | undefined>;
+  deleteService(id: number): Promise<boolean>;
 
   // Team Members
   getTeamMembers(): Promise<TeamMember[]>;
   getTeamMember(id: number): Promise<TeamMember | undefined>;
   createTeamMember(member: InsertTeamMember): Promise<TeamMember>;
+  updateTeamMember(id: number, member: Partial<InsertTeamMember>): Promise<TeamMember | undefined>;
+  deleteTeamMember(id: number): Promise<boolean>;
 
   // Leads
   getLeads(): Promise<Lead[]>;
   createLead(lead: InsertLead): Promise<Lead>;
+  updateLead(id: number, lead: Partial<InsertLead>): Promise<Lead | undefined>;
+  deleteLead(id: number): Promise<boolean>;
 
   // Reviews
   getReviews(): Promise<Review[]>;
   createReview(review: InsertReview): Promise<Review>;
+  updateReview(id: number, review: Partial<InsertReview>): Promise<Review | undefined>;
+  deleteReview(id: number): Promise<boolean>;
 
   // Blog Posts
   getBlogPosts(): Promise<BlogPost[]>;
   getBlogPost(slug: string): Promise<BlogPost | undefined>;
   createBlogPost(post: InsertBlogPost): Promise<BlogPost>;
+  updateBlogPost(id: number, post: Partial<InsertBlogPost>): Promise<BlogPost | undefined>;
+  deleteBlogPost(id: number): Promise<boolean>;
 
   // Promotions
   getPromotions(category?: string): Promise<Promotion[]>;
   getPromotion(id: number): Promise<Promotion | undefined>;
   createPromotion(promotion: InsertPromotion): Promise<Promotion>;
+  updatePromotion(id: number, promotion: Partial<InsertPromotion>): Promise<Promotion | undefined>;
+  deletePromotion(id: number): Promise<boolean>;
+
+  // Admin methods - get all items including inactive
+  getAllProperties(): Promise<Property[]>;
+  getAllNewBuildings(): Promise<NewBuilding[]>;
+  getAllServices(): Promise<Service[]>;
+  getAllTeamMembers(): Promise<TeamMember[]>;
+  getAllReviews(): Promise<Review[]>;
+  getAllBlogPosts(): Promise<BlogPost[]>;
+  getAllPromotions(): Promise<Promotion[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -748,6 +773,25 @@ export class MemStorage implements IStorage {
     return newProperty;
   }
 
+  async updateProperty(id: number, propertyUpdate: Partial<InsertProperty>): Promise<Property | undefined> {
+    const existingProperty = this.properties.get(id);
+    if (!existingProperty) return undefined;
+
+    const updatedProperty: Property = {
+      ...existingProperty,
+      ...propertyUpdate,
+      id, // Keep original ID
+      createdAt: existingProperty.createdAt, // Keep original creation date
+    };
+    
+    this.properties.set(id, updatedProperty);
+    return updatedProperty;
+  }
+
+  async deleteProperty(id: number): Promise<boolean> {
+    return this.properties.delete(id);
+  }
+
   // New Building methods
   async getNewBuildings(): Promise<NewBuilding[]> {
     return Array.from(this.newBuildings.values()).filter(b => b.isActive);
@@ -775,6 +819,25 @@ export class MemStorage implements IStorage {
     return newBuilding;
   }
 
+  async updateNewBuilding(id: number, buildingUpdate: Partial<InsertNewBuilding>): Promise<NewBuilding | undefined> {
+    const existingBuilding = this.newBuildings.get(id);
+    if (!existingBuilding) return undefined;
+
+    const updatedBuilding: NewBuilding = {
+      ...existingBuilding,
+      ...buildingUpdate,
+      id,
+      createdAt: existingBuilding.createdAt,
+    };
+    
+    this.newBuildings.set(id, updatedBuilding);
+    return updatedBuilding;
+  }
+
+  async deleteNewBuilding(id: number): Promise<boolean> {
+    return this.newBuildings.delete(id);
+  }
+
   // Service methods
   async getServices(): Promise<Service[]> {
     return Array.from(this.services.values()).filter(s => s.isActive);
@@ -796,6 +859,25 @@ export class MemStorage implements IStorage {
     };
     this.services.set(id, newService);
     return newService;
+  }
+
+  async updateService(id: number, serviceUpdate: Partial<InsertService>): Promise<Service | undefined> {
+    const existingService = this.services.get(id);
+    if (!existingService) return undefined;
+
+    const updatedService: Service = {
+      ...existingService,
+      ...serviceUpdate,
+      id,
+      createdAt: existingService.createdAt,
+    };
+    
+    this.services.set(id, updatedService);
+    return updatedService;
+  }
+
+  async deleteService(id: number): Promise<boolean> {
+    return this.services.delete(id);
   }
 
   // Team Member methods
@@ -822,6 +904,24 @@ export class MemStorage implements IStorage {
     return newMember;
   }
 
+  async updateTeamMember(id: number, memberUpdate: Partial<InsertTeamMember>): Promise<TeamMember | undefined> {
+    const existingMember = this.teamMembers.get(id);
+    if (!existingMember) return undefined;
+
+    const updatedMember: TeamMember = {
+      ...existingMember,
+      ...memberUpdate,
+      id,
+    };
+    
+    this.teamMembers.set(id, updatedMember);
+    return updatedMember;
+  }
+
+  async deleteTeamMember(id: number): Promise<boolean> {
+    return this.teamMembers.delete(id);
+  }
+
   // Lead methods
   async getLeads(): Promise<Lead[]> {
     return Array.from(this.leads.values());
@@ -844,6 +944,25 @@ export class MemStorage implements IStorage {
     return newLead;
   }
 
+  async updateLead(id: number, leadUpdate: Partial<InsertLead>): Promise<Lead | undefined> {
+    const existingLead = this.leads.get(id);
+    if (!existingLead) return undefined;
+
+    const updatedLead: Lead = {
+      ...existingLead,
+      ...leadUpdate,
+      id,
+      createdAt: existingLead.createdAt,
+    };
+    
+    this.leads.set(id, updatedLead);
+    return updatedLead;
+  }
+
+  async deleteLead(id: number): Promise<boolean> {
+    return this.leads.delete(id);
+  }
+
   // Review methods
   async getReviews(): Promise<Review[]> {
     return Array.from(this.reviews.values()).filter(r => r.isPublished);
@@ -861,6 +980,25 @@ export class MemStorage implements IStorage {
     };
     this.reviews.set(id, newReview);
     return newReview;
+  }
+
+  async updateReview(id: number, reviewUpdate: Partial<InsertReview>): Promise<Review | undefined> {
+    const existingReview = this.reviews.get(id);
+    if (!existingReview) return undefined;
+
+    const updatedReview: Review = {
+      ...existingReview,
+      ...reviewUpdate,
+      id,
+      createdAt: existingReview.createdAt,
+    };
+    
+    this.reviews.set(id, updatedReview);
+    return updatedReview;
+  }
+
+  async deleteReview(id: number): Promise<boolean> {
+    return this.reviews.delete(id);
   }
 
   // Blog Post methods
@@ -885,6 +1023,26 @@ export class MemStorage implements IStorage {
     };
     this.blogPosts.set(id, newPost);
     return newPost;
+  }
+
+  async updateBlogPost(id: number, postUpdate: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
+    const existingPost = this.blogPosts.get(id);
+    if (!existingPost) return undefined;
+
+    const updatedPost: BlogPost = {
+      ...existingPost,
+      ...postUpdate,
+      id,
+      createdAt: existingPost.createdAt,
+      updatedAt: new Date(),
+    };
+    
+    this.blogPosts.set(id, updatedPost);
+    return updatedPost;
+  }
+
+  async deleteBlogPost(id: number): Promise<boolean> {
+    return this.blogPosts.delete(id);
   }
 
   // Promotion methods
@@ -918,6 +1076,181 @@ export class MemStorage implements IStorage {
     };
     this.promotions.set(id, newPromotion);
     return newPromotion;
+  }
+
+  async updatePromotion(id: number, promotionUpdate: Partial<InsertPromotion>): Promise<Promotion | undefined> {
+    const existingPromotion = this.promotions.get(id);
+    if (!existingPromotion) return undefined;
+
+    const updatedPromotion: Promotion = {
+      ...existingPromotion,
+      ...promotionUpdate,
+      id,
+      createdAt: existingPromotion.createdAt,
+    };
+    
+    this.promotions.set(id, updatedPromotion);
+    return updatedPromotion;
+  }
+
+  async deletePromotion(id: number): Promise<boolean> {
+    return this.promotions.delete(id);
+  }
+
+  // New methods
+  async updateProperty(id: number, property: Partial<InsertProperty>): Promise<Property | undefined> {
+    const existingProperty = this.properties.get(id);
+    if (existingProperty) {
+      const updatedProperty: Property = {
+        ...existingProperty,
+        ...property,
+        updatedAt: new Date()
+      };
+      this.properties.set(id, updatedProperty);
+      return updatedProperty;
+    }
+    return undefined;
+  }
+
+  async deleteProperty(id: number): Promise<boolean> {
+    return this.properties.delete(id);
+  }
+
+  async updateNewBuilding(id: number, building: Partial<InsertNewBuilding>): Promise<NewBuilding | undefined> {
+    const existingBuilding = this.newBuildings.get(id);
+    if (existingBuilding) {
+      const updatedBuilding: NewBuilding = {
+        ...existingBuilding,
+        ...building,
+        updatedAt: new Date()
+      };
+      this.newBuildings.set(id, updatedBuilding);
+      return updatedBuilding;
+    }
+    return undefined;
+  }
+
+  async deleteNewBuilding(id: number): Promise<boolean> {
+    return this.newBuildings.delete(id);
+  }
+
+  async updateService(id: number, service: Partial<InsertService>): Promise<Service | undefined> {
+    const existingService = this.services.get(id);
+    if (existingService) {
+      const updatedService: Service = {
+        ...existingService,
+        ...service,
+        updatedAt: new Date()
+      };
+      this.services.set(id, updatedService);
+      return updatedService;
+    }
+    return undefined;
+  }
+
+  async deleteService(id: number): Promise<boolean> {
+    return this.services.delete(id);
+  }
+
+  async updateTeamMember(id: number, member: Partial<InsertTeamMember>): Promise<TeamMember | undefined> {
+    const existingMember = this.teamMembers.get(id);
+    if (existingMember) {
+      const updatedMember: TeamMember = {
+        ...existingMember,
+        ...member,
+        updatedAt: new Date()
+      };
+      this.teamMembers.set(id, updatedMember);
+      return updatedMember;
+    }
+    return undefined;
+  }
+
+  async deleteTeamMember(id: number): Promise<boolean> {
+    return this.teamMembers.delete(id);
+  }
+
+  async updateReview(id: number, review: Partial<InsertReview>): Promise<Review | undefined> {
+    const existingReview = this.reviews.get(id);
+    if (existingReview) {
+      const updatedReview: Review = {
+        ...existingReview,
+        ...review,
+        updatedAt: new Date()
+      };
+      this.reviews.set(id, updatedReview);
+      return updatedReview;
+    }
+    return undefined;
+  }
+
+  async deleteReview(id: number): Promise<boolean> {
+    return this.reviews.delete(id);
+  }
+
+  async updateBlogPost(id: number, post: Partial<InsertBlogPost>): Promise<BlogPost | undefined> {
+    const existingPost = this.blogPosts.get(id);
+    if (existingPost) {
+      const updatedPost: BlogPost = {
+        ...existingPost,
+        ...post,
+        updatedAt: new Date()
+      };
+      this.blogPosts.set(id, updatedPost);
+      return updatedPost;
+    }
+    return undefined;
+  }
+
+  async deleteBlogPost(id: number): Promise<boolean> {
+    return this.blogPosts.delete(id);
+  }
+
+  async updatePromotion(id: number, promotion: Partial<InsertPromotion>): Promise<Promotion | undefined> {
+    const existingPromotion = this.promotions.get(id);
+    if (existingPromotion) {
+      const updatedPromotion: Promotion = {
+        ...existingPromotion,
+        ...promotion,
+        updatedAt: new Date()
+      };
+      this.promotions.set(id, updatedPromotion);
+      return updatedPromotion;
+    }
+    return undefined;
+  }
+
+  async deletePromotion(id: number): Promise<boolean> {
+    return this.promotions.delete(id);
+  }
+
+  // Admin methods
+  async getAllProperties(): Promise<Property[]> {
+    return Array.from(this.properties.values());
+  }
+
+  async getAllNewBuildings(): Promise<NewBuilding[]> {
+    return Array.from(this.newBuildings.values());
+  }
+
+  async getAllServices(): Promise<Service[]> {
+    return Array.from(this.services.values());
+  }
+
+  async getAllTeamMembers(): Promise<TeamMember[]> {
+    return Array.from(this.teamMembers.values());
+  }
+
+  async getAllReviews(): Promise<Review[]> {
+    return Array.from(this.reviews.values());
+  }
+
+  async getAllBlogPosts(): Promise<BlogPost[]> {
+    return Array.from(this.blogPosts.values());
+  }
+
+  async getAllPromotions(): Promise<Promotion[]> {
+    return Array.from(this.promotions.values());
   }
 }
 

@@ -14,8 +14,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./client/src/*"],
+      "@shared/*": ["./shared/*"],
+      "@assets/*": ["./attached_assets/*"]
+    }
   },
-  "include": ["apps/**/*", "packages/**/*"],
+  "include": ["client/**/*", "server/**/*", "packages/**/*", "shared/**/*"],
   "exclude": ["node_modules", "**/dist", "**/build"]
 }

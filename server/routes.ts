@@ -1,7 +1,16 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertLeadSchema, insertReviewSchema } from "../shared/schema.js";
+import { 
+  insertLeadSchema, 
+  insertReviewSchema, 
+  insertPropertySchema,
+  insertNewBuildingSchema,
+  insertServiceSchema,
+  insertTeamMemberSchema,
+  insertBlogPostSchema,
+  insertPromotionSchema
+} from "../shared/schema.js";
 import { z } from "zod";
 import { routesLogger } from "./logger";
 
@@ -421,6 +430,242 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       routesLogger.error("Ошибка при получении акции", error, { promotionId: req.params.id });
       res.status(500).json({ message: "Failed to fetch promotion" });
+    }
+  });
+
+  // Admin routes
+  // Properties
+  app.get("/api/admin/properties", async (req, res) => {
+    res.json(await storage.getAllProperties());
+  });
+  app.post("/api/admin/properties", async (req, res) => {
+    try {
+      const data = insertPropertySchema.parse(req.body);
+      const newProperty = await storage.createProperty(data);
+      res.status(201).json(newProperty);
+    } catch (e) {
+      res.status(400).json(e);
+    }
+  });
+  app.put("/api/admin/properties/:id", async (req, res) => {
+    res.json(await storage.updateProperty(parseInt(req.params.id), req.body));
+  });
+  app.delete("/api/admin/properties/:id", async (req, res) => {
+    res.json({ success: await storage.deleteProperty(parseInt(req.params.id)) });
+  });
+
+  // New Buildings
+  app.get("/api/admin/new-buildings", async (req, res) => {
+    res.json(await storage.getAllNewBuildings());
+  });
+  app.post("/api/admin/new-buildings", async (req, res) => {
+    try {
+      const data = insertNewBuildingSchema.parse(req.body);
+      const newBuilding = await storage.createNewBuilding(data);
+      res.status(201).json(newBuilding);
+    } catch (e) {
+      res.status(400).json(e);
+    }
+  });
+  app.put("/api/admin/new-buildings/:id", async (req, res) => {
+    res.json(await storage.updateNewBuilding(parseInt(req.params.id), req.body));
+  });
+  app.delete("/api/admin/new-buildings/:id", async (req, res) => {
+    res.json({ success: await storage.deleteNewBuilding(parseInt(req.params.id)) });
+  });
+
+  // Services
+  app.get("/api/admin/services", async (req, res) => {
+    try {
+      const services = await storage.getAllServices();
+      res.json(services);
+    } catch (error) {
+      routesLogger.error("Ошибка при получении всех услуг", error);
+      res.status(500).json({ message: "Failed to fetch services" });
+    }
+  });
+
+  app.put("/api/admin/services/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const updatedService = await storage.updateService(id, req.body);
+      if (!updatedService) {
+        return res.status(404).json({ message: "Service not found" });
+      }
+      res.json(updatedService);
+    } catch (error) {
+      routesLogger.error("Ошибка при обновлении услуги", error);
+      res.status(500).json({ message: "Failed to update service" });
+    }
+  });
+
+  app.delete("/api/admin/services/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const deleted = await storage.deleteService(id);
+      if (!deleted) {
+        return res.status(404).json({ message: "Service not found" });
+      }
+      res.json({ message: "Service deleted successfully" });
+    } catch (error) {
+      routesLogger.error("Ошибка при удалении услуги", error);
+      res.status(500).json({ message: "Failed to delete service" });
+    }
+  });
+
+  // Team
+  app.get("/api/admin/team", async (req, res) => {
+    try {
+      const team = await storage.getAllTeamMembers();
+      res.json(team);
+    } catch (error) {
+      routesLogger.error("Ошибка при получении всех сотрудников", error);
+      res.status(500).json({ message: "Failed to fetch team members" });
+    }
+  });
+
+  app.put("/api/admin/team/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const updatedMember = await storage.updateTeamMember(id, req.body);
+      if (!updatedMember) {
+        return res.status(404).json({ message: "Team member not found" });
+      }
+      res.json(updatedMember);
+    } catch (error) {
+      routesLogger.error("Ошибка при обновлении сотрудника", error);
+      res.status(500).json({ message: "Failed to update team member" });
+    }
+  });
+
+  app.delete("/api/admin/team/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const deleted = await storage.deleteTeamMember(id);
+      if (!deleted) {
+        return res.status(404).json({ message: "Team member not found" });
+      }
+      res.json({ message: "Team member deleted successfully" });
+    } catch (error) {
+      routesLogger.error("Ошибка при удалении сотрудника", error);
+      res.status(500).json({ message: "Failed to delete team member" });
+    }
+  });
+
+  // Reviews
+  app.get("/api/admin/reviews", async (req, res) => {
+    try {
+      const reviews = await storage.getAllReviews();
+      res.json(reviews);
+    } catch (error) {
+      routesLogger.error("Ошибка при получении всех отзывов", error);
+      res.status(500).json({ message: "Failed to fetch reviews" });
+    }
+  });
+
+  app.put("/api/admin/reviews/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const updatedReview = await storage.updateReview(id, req.body);
+      if (!updatedReview) {
+        return res.status(404).json({ message: "Review not found" });
+      }
+      res.json(updatedReview);
+    } catch (error) {
+      routesLogger.error("Ошибка при обновлении отзыва", error);
+      res.status(500).json({ message: "Failed to update review" });
+    }
+  });
+
+  app.delete("/api/admin/reviews/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const deleted = await storage.deleteReview(id);
+      if (!deleted) {
+        return res.status(404).json({ message: "Review not found" });
+      }
+      res.json({ message: "Review deleted successfully" });
+    } catch (error) {
+      routesLogger.error("Ошибка при удалении отзыва", error);
+      res.status(500).json({ message: "Failed to delete review" });
+    }
+  });
+
+  // Blog
+  app.get("/api/admin/blog", async (req, res) => {
+    try {
+      const posts = await storage.getAllBlogPosts();
+      res.json(posts);
+    } catch (error) {
+      routesLogger.error("Ошибка при получении всех статей блога", error);
+      res.status(500).json({ message: "Failed to fetch blog posts" });
+    }
+  });
+
+  app.put("/api/admin/blog/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const updatedPost = await storage.updateBlogPost(id, req.body);
+      if (!updatedPost) {
+        return res.status(404).json({ message: "Blog post not found" });
+      }
+      res.json(updatedPost);
+    } catch (error) {
+      routesLogger.error("Ошибка при обновлении статьи блога", error);
+      res.status(500).json({ message: "Failed to update blog post" });
+    }
+  });
+
+  app.delete("/api/admin/blog/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const deleted = await storage.deleteBlogPost(id);
+      if (!deleted) {
+        return res.status(404).json({ message: "Blog post not found" });
+      }
+      res.json({ message: "Blog post deleted successfully" });
+    } catch (error) {
+      routesLogger.error("Ошибка при удалении статьи блога", error);
+      res.status(500).json({ message: "Failed to delete blog post" });
+    }
+  });
+
+  // Leads
+  app.get("/api/admin/leads", async (req, res) => {
+    try {
+      const leads = await storage.getLeads();
+      res.json(leads);
+    } catch (error) {
+      routesLogger.error("Ошибка при получении всех заявок", error);
+      res.status(500).json({ message: "Failed to fetch leads" });
+    }
+  });
+
+  app.put("/api/admin/leads/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const updatedLead = await storage.updateLead(id, req.body);
+      if (!updatedLead) {
+        return res.status(404).json({ message: "Lead not found" });
+      }
+      res.json(updatedLead);
+    } catch (error) {
+      routesLogger.error("Ошибка при обновлении заявки", error);
+      res.status(500).json({ message: "Failed to update lead" });
+    }
+  });
+
+  app.delete("/api/admin/leads/:id", async (req, res) => {
+    try {
+      const id = parseInt(req.params.id);
+      const deleted = await storage.deleteLead(id);
+      if (!deleted) {
+        return res.status(404).json({ message: "Lead not found" });
+      }
+      res.json({ message: "Lead deleted successfully" });
+    } catch (error) {
+      routesLogger.error("Ошибка при удалении заявки", error);
+      res.status(500).json({ message: "Failed to delete lead" });
     }
   });
 

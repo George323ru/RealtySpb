@@ -1,4 +1,5 @@
 import { HeaderTopBar, Logo, DesktopNavigation, MobileNavigation } from "./layout/header";
+import DesktopHeaderActions from "./layout/header/DesktopHeaderActions";
 
 export default function Header() {
   return (
@@ -9,13 +10,20 @@ export default function Header() {
       {/* Main Navigation */}
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between py-4">
-          {/* Logo */}
-          <Logo />
+          <div className="flex items-center">
+            {/* Logo */}
+            <Logo />
 
-          {/* Desktop Navigation */}
-          <DesktopNavigation />
+            {/* Desktop Navigation Links */}
+            <div className="ml-6">
+              <DesktopNavigation />
+            </div>
+          </div>
 
-          {/* Mobile Navigation */}
+          {/* Desktop Actions */}
+          <DesktopHeaderActions />
+
+          {/* Mobile Navigation (burger icon and full-screen menu) */}
           <MobileNavigation />
         </nav>
       </div>

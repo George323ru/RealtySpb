@@ -29,7 +29,9 @@ import RealtorConstructor from "@/pages/realtor-constructor";
 import Land from "@/pages/land";
 import Calculator from "@/pages/calculator";
 import ServiceLanding from "@/pages/services/service-landing";
+import PreSalePreparation from "@/pages/services/PreSalePreparation";
 import PrivacyPolicy from "@/pages/privacy-policy";
+import AdminPage from "@/pages/admin";
 
 function Router() {
   return (
@@ -43,6 +45,7 @@ function Router() {
       <Route path="/secondary" component={Secondary} />
       <Route path="/property/:id" component={PropertyDetail} />
       <Route path="/services" component={Services} />
+      <Route path="/services/pre-sale-preparation" component={PreSalePreparation} />
       <Route path="/services/:id" component={ServiceDetail} />
       <Route path="/services/:slug" component={ServiceLanding} />
       <Route path="/land" component={Land} />
@@ -56,6 +59,7 @@ function Router() {
       <Route path="/cart" component={Cart} />
       <Route path="/calculator" component={Calculator} />
       <Route path="/privacy-policy" component={PrivacyPolicy} />
+      <Route path="/admin" component={AdminPage} />
       <Route component={NotFound} />
     </Switch>
   );

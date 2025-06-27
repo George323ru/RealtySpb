@@ -3,7 +3,6 @@ import { Link, useLocation } from "wouter";
 import { ChevronDown, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNavigation, secondaryNavigation } from "@/config/navigation";
-import CartButton from "./CartButton";
 
 export default function DesktopNavigation() {
   const [location, setLocation] = useLocation();
@@ -151,8 +150,6 @@ export default function DesktopNavigation() {
           </Link>
         );
       })}
-
-      <CartButton variant="desktop" />
     </div>
   );
 } 

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { MoreHorizontal, X } from "lucide-react";
+import { MoreHorizontal, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNavigation, mobileBottomNav, mobileBuySubmenu, services } from "@/config/navigation";
 import CartButton from "./CartButton";
+import { Button } from "@/components/ui/button";
 
 export default function MobileNavigation() {
   const [location] = useLocation();
@@ -40,7 +41,17 @@ export default function MobileNavigation() {
           </button>
         </div>
 
-        <CartButton variant="mobile" />
+        {/* Иконки действий */}
+        <div className="flex items-center space-x-2 flex-shrink-0">
+          <Button 
+            size="icon"
+            className="bg-accent-orange text-white hover:bg-accent-orange/90 rounded-lg h-8 w-8"
+            onClick={() => console.log('CTA Clicked')}
+          >
+            <Phone className="h-4 w-4" />
+          </Button>
+          <CartButton variant="mobile" />
+        </div>
       </div>
 
       {/* Mobile Bottom Navigation Bar */}

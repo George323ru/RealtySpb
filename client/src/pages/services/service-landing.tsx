@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Star, ArrowRight, Users, Award, Clock } from "lucide-react";
 import UnifiedForm from "@/components/UnifiedForm";
 import { SERVICES } from "@/lib/constants";
+import PreSalePreparation from "./PreSalePreparation";
 
 // Подробные данные для каждой услуги
 const SERVICE_DATA = {
@@ -244,6 +245,12 @@ const SERVICE_DATA = {
 
 export default function ServiceLanding() {
   const { slug } = useParams();
+  
+  // Специальная страница для предпродажной подготовки
+  if (slug === "pre-sale-preparation") {
+    return <PreSalePreparation />;
+  }
+  
   const serviceData = SERVICE_DATA[slug as keyof typeof SERVICE_DATA];
   const serviceInfo = SERVICES.find(s => s.slug === slug);
 
