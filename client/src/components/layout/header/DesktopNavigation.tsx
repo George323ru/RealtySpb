@@ -3,6 +3,13 @@ import { Link, useLocation } from "wouter";
 import { ChevronDown, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { mainNavigation, secondaryNavigation } from "@/config/navigation";
+import { Button } from "@/components/ui/button";
+
+// Navigation-specific button styles that override global styles
+const navButtonStyles = "h-10 min-h-10 px-3 text-sm font-semibold whitespace-nowrap transition-colors duration-300 border border-transparent rounded-xl hover:transform-none hover:shadow-md";
+
+const activeStyles = "bg-accent-orange text-white shadow-lg";
+const inactiveStyles = "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200";
 
 export default function DesktopNavigation() {
   const [location, setLocation] = useLocation();
@@ -33,10 +40,11 @@ export default function DesktopNavigation() {
   };
 
   return (
-    <div className="hidden lg:flex items-center space-x-2">
+    <nav className="hidden lg:flex items-center space-x-1">
       {mainNavigation.map((item) => {
         const IconComponent = item.icon || Home;
         const isMenuOpen = hoveredMenu === item.name;
+        const isActive = location === item.href;
         
         return (
           <div 
@@ -50,10 +58,9 @@ export default function DesktopNavigation() {
                 <button
                   onClick={() => handleMenuClick(item.href)}
                   className={cn(
-                    "flex items-center px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
-                    location === item.href && "text-white bg-accent-orange shadow-lg",
-                    location !== item.href && !isMenuOpen && "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200 hover:shadow-md hover:transform hover:scale-102",
-                    isMenuOpen && "text-white bg-gradient-to-r from-accent-orange to-orange-500 shadow-lg transform scale-105"
+                    navButtonStyles,
+                    "flex items-center",
+                    (isActive || isMenuOpen) ? activeStyles : inactiveStyles
                   )}
                 >
                   <IconComponent className="w-4 h-4 mr-2" />
@@ -118,10 +125,9 @@ export default function DesktopNavigation() {
               <Link
                 href={item.href}
                 className={cn(
-                  "flex items-center px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
-                  location === item.href
-                    ? "text-white bg-gradient-to-r from-accent-orange to-orange-500 shadow-lg transform scale-105"
-                    : "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200 hover:shadow-md hover:transform hover:scale-102"
+                  navButtonStyles,
+                  "flex items-center",
+                  isActive ? activeStyles : inactiveStyles
                 )}
               >
                 <IconComponent className="w-4 h-4 mr-2" />
@@ -134,16 +140,16 @@ export default function DesktopNavigation() {
       
       {secondaryNavigation.filter(item => ['Команда', 'Контакты', 'Отзывы'].includes(item.name)).map((item) => {
         const IconComponent = item.icon || Home;
+        const isActive = location === item.href;
         
         return (
           <Link
             key={item.name}
             href={item.href}
             className={cn(
-              "flex items-center px-3 py-2 text-sm font-semibold rounded-xl transition-all duration-300 whitespace-nowrap shadow-sm border border-transparent",
-              location === item.href
-                ? "text-white bg-gradient-to-r from-accent-orange to-orange-500 shadow-lg transform scale-105"
-                : "text-text-primary hover:text-accent-orange hover:bg-gradient-to-r hover:from-orange-50 hover:to-amber-50 hover:border-orange-200 hover:shadow-md hover:transform hover:scale-102"
+              navButtonStyles,
+              "flex items-center",
+              isActive ? activeStyles : inactiveStyles
             )}
           >
             <IconComponent className="w-4 h-4 mr-2" />
@@ -151,6 +157,6 @@ export default function DesktopNavigation() {
           </Link>
         );
       })}
-    </div>
+    </nav>
   );
 } 
