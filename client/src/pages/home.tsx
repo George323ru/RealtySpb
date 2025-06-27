@@ -56,7 +56,7 @@ export default function Home() {
   });
 
   const heroStyle = {
-    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1920')`,
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('https://images.unsplash.com/photo-1548707309-dcebeab9ea9b?w=1920')`,
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat'
