@@ -292,6 +292,15 @@ export default function Home() {
   // Фаза 0.1: Состояние сценария пользователя
   const [userIntent, setUserIntent] = useState<'buy' | 'sell' | 'rent' | 'service'>('buy');
 
+  const actionButtonProps = {
+    buy: { text: "Начать поиск", link: "/buy" },
+    sell: { text: "Выбрать способ продажи", link: "/sell" },
+    rent: { text: "Выбрать тип аренды", link: "/rent" },
+    service: { text: "Смотреть услуги", link: "/services" },
+  };
+
+  const currentButtonProps = actionButtonProps[userIntent];
+
   // Фаза 4.1: Память сессии - загрузка из localStorage при инициализации
   useEffect(() => {
     const savedIntent = localStorage.getItem('realtyspb-user-intent');
@@ -353,28 +362,23 @@ export default function Home() {
                     </div>
                   <h3 className="text-xl font-bold text-text-primary mb-3">{action.title}</h3>
                   <p className="text-text-secondary mb-6 flex-1">{action.description}</p>
-                  <div className="text-sm text-text-secondary space-y-1 mb-6 min-h-[72px] flex flex-col justify-center">
+                  <div className="text-sm text-text-secondary space-y-1 mt-auto min-h-[72px] flex flex-col justify-center">
                     {action.features.map((feature, idx) => (
                       <div key={idx}>• {feature}</div>
                     ))}
                     </div>
-                  <Link href={action.link} className="mt-auto">
-                    <Button className={`w-full ${action.buttonColor} text-white font-medium ${
-                      action.title === "Хочу купить" ? "shadow-lg shadow-blue-500/25 py-3" : ""
-                    }`}>
-                          {action.title === "Хочу купить"
-                            ? "Начать поиск"
-                            : action.title === "Хочу продать"
-                            ? "Выбрать способ продажи"
-                            : action.title === "Хочу сдать"
-                            ? "Выбрать тип аренды"
-                            : "Смотреть услуги"}
-                    </Button>
-                  </Link>
                 </CardContent>
               </Card>
                 );
               })}
+            </div>
+            <div className="text-center mt-12">
+              <Link href={currentButtonProps.link}>
+                <Button size="lg" className="bg-accent-orange text-white px-10 py-6 rounded-lg font-semibold hover:bg-orange-600 text-lg shadow-lg shadow-orange-500/30 transition-all hover:shadow-xl hover:scale-105">
+                  {currentButtonProps.text}
+                  <ArrowRight className="ml-2 w-5 h-5" />
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
