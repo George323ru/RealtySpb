@@ -8,10 +8,22 @@ import {
   TabletHeaderActions,
 } from './layout/header';
 import DesktopHeaderActions from './layout/header/DesktopHeaderActions';
+import { useScrollDirection } from '@/hooks/useScrollDirection';
+import { cn } from '@/lib/utils';
 
 export default function Header() {
+  const { isVisible } = useScrollDirection();
+
   return (
-    <header className="bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-50">
+    <header 
+      className={cn(
+        "bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-50 transition-transform duration-300 ease-in-out",
+        // Применяем умное поведение только на больших экранах (lg:)
+        // На мобильных оставляем обычное липкое поведение
+        "lg:transition-transform lg:duration-300 lg:ease-in-out",
+        !isVisible && "lg:-translate-y-full"
+      )}
+    >
       {/* Top Contact Bar - Desktop Only */}
       <HeaderTopBar />
 
