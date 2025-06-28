@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Heart, MapPin } from "lucide-react";
+import { Heart, MapPin, Layout, Layers, Ruler } from "lucide-react";
 import { formatPrice, formatPricePerMeter, formatArea, formatFloor, formatRooms } from "@/lib/utils";
 import type { Property } from "@shared/schema";
 
@@ -11,19 +11,25 @@ interface PropertyCardProps {
   className?: string;
 }
 
+// Унифицированная функция для тега
+function getPropertyBadge(buildingType: string, propertyType: string) {
+  if (buildingType === "новостройка") {
+    return { color: "bg-green-500 text-white", label: "Новостройка" };
+  }
+  if (buildingType === "вторичка") {
+    return { color: "bg-blue-500 text-white", label: "Вторичка" };
+  }
+  // Коммерция и офисы
+  if (["office", "retail", "commercial"].includes(propertyType)) {
+    return { color: "bg-purple-500 text-white", label: propertyType === "office" ? "Офис" : propertyType === "retail" ? "Ритейл" : "Коммерция" };
+  }
+  // Остальные типы
+  return { color: "bg-gray-500 text-white", label: propertyType.charAt(0).toUpperCase() + propertyType.slice(1) };
+}
+
 export default function PropertyCard({ property, className }: PropertyCardProps) {
   const mainImage = property.images?.[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=800";
-  
-  const getBadgeVariant = (buildingType: string) => {
-    switch (buildingType) {
-      case "новостройка":
-        return "bg-green-500 text-white";
-      case "вторичка":
-        return "bg-blue-500 text-white";
-      default:
-        return "bg-purple-500 text-white";
-    }
-  };
+  const badge = getPropertyBadge(property.buildingType || "", property.propertyType || "");
 
   return (
     <Card className={`group hover:shadow-xl transition-shadow duration-300 h-full flex flex-col ${className || ''}`}>
@@ -34,11 +40,7 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
           className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute top-4 left-4">
-          <Badge className={getBadgeVariant(property.buildingType || "")}>
-            {property.buildingType === "новостройка" ? "Новостройка" : 
-             property.buildingType === "вторичка" ? "Вторичка" :
-             property.propertyType}
-          </Badge>
+          <Badge className={badge.color}>{badge.label}</Badge>
         </div>
         <button className="absolute top-4 right-4 w-8 h-8 bg-white bg-opacity-80 rounded-full flex items-center justify-center hover:bg-opacity-100 transition-all">
           <Heart className="w-4 h-4 text-text-secondary" />
@@ -66,12 +68,23 @@ export default function PropertyCard({ property, className }: PropertyCardProps)
           {property.district}, {property.address}
         </p>
         
-        <div className="flex items-center justify-between text-sm text-text-secondary mb-4">
-          {property.rooms && <span>{formatRooms(property.rooms)}</span>}
-          {property.floor && property.totalFloors && (
-            <span>{formatFloor(property.floor, property.totalFloors)}</span>
-          )}
-          <span>{formatArea(property.area)}</span>
+        {/* Характеристики с иконками и подписями */}
+        <div className="flex items-center justify-between text-sm text-text-secondary mb-4 gap-2">
+          <div className="flex flex-col items-center flex-1">
+            <Layout className="w-5 h-5 mb-0.5 text-accent-orange" />
+            <span className="font-medium text-text-primary">{property.rooms || '-'} </span>
+            <span className="text-xs text-text-secondary">комнат</span>
+          </div>
+          <div className="flex flex-col items-center flex-1">
+            <Layers className="w-5 h-5 mb-0.5 text-accent-orange" />
+            <span className="font-medium text-text-primary">{property.floor && property.totalFloors ? `${property.floor}/${property.totalFloors}` : '-'}</span>
+            <span className="text-xs text-text-secondary">этаж</span>
+          </div>
+          <div className="flex flex-col items-center flex-1">
+            <Ruler className="w-5 h-5 mb-0.5 text-accent-orange" />
+            <span className="font-medium text-text-primary">{formatArea(property.area)}</span>
+            <span className="text-xs text-text-secondary">м²</span>
+          </div>
         </div>
         
         <Link href={`/property/${property.id}`} className="mt-auto">
