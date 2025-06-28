@@ -17,8 +17,11 @@ export default function Header() {
   return (
     <header 
       className={cn(
-        "bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-50",
-        // Умное поведение только на десктопе
+        "bg-white shadow-sm border-b border-neutral-200 z-50",
+        // На мобиле и планшете - sticky
+        "sticky top-0",
+        // На десктопе - fixed с анимацией
+        "lg:fixed lg:top-0 lg:left-0 lg:right-0",
         "lg:transition-transform lg:duration-300 lg:ease-in-out",
         !isVisible && "lg:-translate-y-full"
       )}

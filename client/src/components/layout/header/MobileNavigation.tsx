@@ -78,8 +78,12 @@ export default function MobileNavigation() {
       </div>
 
       {/* --- Bottom Mobile Navigation Bar --- */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 shadow-lg mobile-nav-safe">
-        <div className="flex items-center justify-around py-2 px-1 max-w-full">
+      <div 
+        data-mobile-nav
+        className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 z-40 shadow-lg" 
+        style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+      >
+        <div className="flex items-center justify-around px-1 max-w-full h-[64px]">
           {mobileBottomNav.map(item => {
             const IconComponent = item.icon;
             const isActive = location === item.href;

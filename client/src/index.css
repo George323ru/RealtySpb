@@ -159,6 +159,11 @@ img {
   --transition-normal: 200ms ease-out;
   --transition-slow: 300ms ease-out;
   
+  /* Mobile navigation heights and spacing */
+  --mobile-nav-height: 80px;        /* Высота нижнего мобильного меню */
+  --mobile-nav-safe-bottom: 32px;   /* Увеличенный отступ от мобильного меню */
+  --floating-cta-offset: calc(var(--mobile-nav-height) + var(--mobile-nav-safe-bottom));
+  
   /* Core color system */
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(20, 14.3%, 4.1%);
@@ -694,6 +699,36 @@ input:focus, textarea:focus, select:focus {
   }
 
   .form-unified .space-y-2 > * + * {
-    margin-top: var(--spacing-sm);
+    margin-top: var(--spacing-2);
+  }
+
+  /* Утилиты для мобильной навигации */
+  .pb-safe-bottom {
+    padding-bottom: var(--floating-cta-offset);
+  }
+  
+  .bottom-safe {
+    bottom: var(--floating-cta-offset);
+  }
+  
+  @media (min-width: 1024px) {
+    .bottom-safe {
+      bottom: 24px;
+    }
+  }
+}
+
+/* Надежное позиционирование кнопки CTA с учетом безопасных зон iOS */
+@layer utilities {
+  .floating-cta-final-position {
+    /* Рассчитываем отступ для мобильных: 64px (высота меню) + отступ для iOS + 16px (зазор) */
+    bottom: calc(64px + env(safe-area-inset-bottom) + 16px);
+  }
+
+  @media (min-width: 1024px) {
+    .floating-cta-final-position {
+      /* Отступ для десктопа */
+      bottom: 24px;
+    }
   }
 }

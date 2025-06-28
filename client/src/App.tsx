@@ -6,7 +6,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "@/components/header";
 import Footer from "@/components/footer";
-import FloatingCTA from "@/components/floating-cta";
+import FloatingCTA from "@/components/FloatingCTA";
 import CartProvider from "@/components/CartProvider";
 import ScrollToTop from "@/components/ScrollToTop";
 import Home from "@/pages/home";
@@ -95,7 +95,7 @@ function App() {
           <div className="min-h-screen bg-neutral-50">
             <ScrollToTop />
             <Header />
-            <main>
+            <main className="lg:pt-[120px]">
               <Router />
             </main>
             <Footer />
