@@ -15,14 +15,17 @@ export function useScrollDirection() {
       if (scrollY < 10) {
         setScrollDirection('top');
         setIsVisible(true);
+        console.log('📍 TOP: isVisible =', true);
       } else if (scrollY > lastScrollY) {
         // Скроллим вниз
         setScrollDirection('down');
         setIsVisible(false);
+        console.log('📍 DOWN: isVisible =', false, 'scrollY:', scrollY);
       } else if (scrollY < lastScrollY) {
         // Скроллим вверх
         setScrollDirection('up');
         setIsVisible(true);
+        console.log('📍 UP: isVisible =', true, 'scrollY:', scrollY);
       }
 
       lastScrollY = scrollY > 0 ? scrollY : 0;

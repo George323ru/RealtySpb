@@ -18,7 +18,7 @@ export default function FloatingCTA() {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 animate-fade-in-up">
+    <div className="fixed bottom-20 lg:bottom-6 right-6 z-40 animate-fade-in-up">
       <Link href="/contact">
         <Button className="bg-accent-orange text-white hover:bg-orange-600 shadow-lg px-6 py-4 rounded-full flex items-center space-x-2">
           <Phone className="w-5 h-5" />

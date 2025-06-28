@@ -17,9 +17,10 @@ export default function Header() {
   return (
     <header 
       className={cn(
-        "bg-white shadow-sm border-b border-neutral-200 sticky top-0 z-50 transition-transform duration-300 ease-in-out",
-        // Применяем умное поведение только на больших экранах (lg:)
-        // На мобильных оставляем обычное липкое поведение
+        "bg-white shadow-sm border-b border-neutral-200 z-50",
+        // На мобильных остается sticky (для совместимости с нижней навигацией)
+        "sticky top-0 lg:fixed lg:top-0 lg:left-0 lg:right-0",
+        // Умное поведение только на десктопе
         "lg:transition-transform lg:duration-300 lg:ease-in-out",
         !isVisible && "lg:-translate-y-full"
       )}
