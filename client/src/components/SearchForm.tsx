@@ -5,23 +5,69 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Search } from "lucide-react";
-import { DISTRICTS, PROPERTY_TYPES, PROPERTY_CATEGORIES } from "@/lib/constants";
+import { useLocation } from "wouter";
+import { DISTRICTS, PROPERTY_TYPES } from "@/lib/constants";
 import type { PropertySearchFilters } from "@shared/schema";
 
 interface SearchFormProps {
-  onSearch: (filters: PropertySearchFilters) => void;
+  onSearch?: (filters: PropertySearchFilters) => void;
   defaultCategory?: string;
   compact?: boolean;
+  className?: string;
 }
 
-export default function SearchForm({ onSearch, defaultCategory, compact = false }: SearchFormProps) {
+// Компонент для красивого форматирования цены
+interface PriceInputProps {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder: string;
+  className?: string;
+}
+
+function PriceInput({ value, onChange, placeholder, className = "" }: PriceInputProps) {
+  const formatPrice = (inputValue: string) => {
+    const numValue = inputValue.replace(/\D/g, '');
+    if (!numValue) return '';
+    return new Intl.NumberFormat('ru-RU').format(parseInt(numValue));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const numericValue = e.target.value.replace(/\D/g, '');
+    onChange(numericValue);
+  };
+
+  return (
+    <Input
+      type="text"
+      placeholder={placeholder}
+      value={formatPrice(value)}
+      onChange={handleChange}
+      className={`text-center ${className}`}
+    />
+  );
+}
+
+export default function SearchForm({ onSearch, defaultCategory, compact = false, className }: SearchFormProps) {
+  const [, setLocation] = useLocation();
   const [action, setAction] = useState("buy");
   const [filters, setFilters] = useState<PropertySearchFilters>({
     propertyType: defaultCategory
   });
 
   const handleSearch = () => {
-    onSearch(filters);
+    if (onSearch) {
+      onSearch(filters);
+    } else {
+      // Навигация на страницу поиска
+      const searchParams = new URLSearchParams();
+      if (filters.propertyType) searchParams.set('propertyType', filters.propertyType);
+      if (filters.district) searchParams.set('district', filters.district);
+      if (filters.priceFrom) searchParams.set('priceFrom', filters.priceFrom.toString());
+      if (filters.priceTo) searchParams.set('priceTo', filters.priceTo.toString());
+      
+      const query = searchParams.toString();
+      setLocation(`/buy${query ? `?${query}` : ''}`);
+    }
   };
 
   const updateFilter = (key: keyof PropertySearchFilters, value: string | number | undefined) => {
@@ -33,7 +79,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
 
   if (compact) {
     return (
-      <Card className="w-full">
+      <Card className={`w-full ${className || ''}`}>
         <CardContent className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
             <div>
@@ -70,21 +116,19 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
             
             <div>
               <Label htmlFor="price-from">Цена от</Label>
-              <Input
-                type="number"
+              <PriceInput
+                value={filters.priceFrom?.toString() || ""}
+                onChange={(value) => updateFilter("priceFrom", value ? Number(value) : undefined)}
                 placeholder="3 000 000"
-                value={filters.priceFrom || ""}
-                onChange={(e) => updateFilter("priceFrom", e.target.value ? Number(e.target.value) : undefined)}
               />
             </div>
             
             <div>
               <Label htmlFor="price-to">Цена до</Label>
-              <Input
-                type="number"
+              <PriceInput
+                value={filters.priceTo?.toString() || ""}
+                onChange={(value) => updateFilter("priceTo", value ? Number(value) : undefined)}
                 placeholder="15 000 000"
-                value={filters.priceTo || ""}
-                onChange={(e) => updateFilter("priceTo", e.target.value ? Number(e.target.value) : undefined)}
               />
             </div>
           </div>
@@ -99,42 +143,40 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
   }
 
   return (
-    <Card className="w-full max-w-5xl mx-auto">
-      <CardContent className="p-6 lg:p-8">
-        <div className="flex flex-col lg:flex-row lg:items-center lg:space-x-6 space-y-4 lg:space-y-0 mb-6">
-          {/* Action Buttons */}
-          <div className="flex flex-wrap gap-2 justify-center lg:justify-start">
-            <Button
-              variant={action === "buy" ? "default" : "outline"}
-              onClick={() => setAction("buy")}
-              className={action === "buy" ? "bg-accent-orange text-white" : ""}
-            >
-              Купить
-            </Button>
-            <Button
-              variant={action === "sell" ? "default" : "outline"}
-              onClick={() => setAction("sell")}
-              className={action === "sell" ? "bg-accent-orange text-white" : ""}
-            >
-              Продать
-            </Button>
-            <Button
-              variant={action === "rent" ? "default" : "outline"}
-              onClick={() => setAction("rent")}
-              className={action === "rent" ? "bg-accent-orange text-white" : ""}
-            >
-              Сдать
-            </Button>
-          </div>
+    <div className={`bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 ${className || ''}`}>
+      <div className="p-4 sm:p-6">
+        {/* Action Buttons - только для полной версии */}
+        <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-6">
+          <Button
+            variant={action === "buy" ? "default" : "outline"}
+            onClick={() => setAction("buy")}
+            className={action === "buy" ? "bg-accent-orange text-white" : ""}
+          >
+            Купить
+          </Button>
+          <Button
+            variant={action === "sell" ? "default" : "outline"}
+            onClick={() => setAction("sell")}
+            className={action === "sell" ? "bg-accent-orange text-white" : ""}
+          >
+            Продать
+          </Button>
+          <Button
+            variant={action === "rent" ? "default" : "outline"}
+            onClick={() => setAction("rent")}
+            className={action === "rent" ? "bg-accent-orange text-white" : ""}
+          >
+            Сдать
+          </Button>
         </div>
         
-        {/* Mobile-first responsive grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6">
-          <div>
-            <Label htmlFor="property-type" className="text-sm mb-1 block">Тип недвижимости</Label>
+        {/* Компактная форма для всех экранов */}
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-2">
+          {/* Тип недвижимости */}
+          <div className="flex-1 min-w-0">
             <Select value={filters.propertyType} onValueChange={(value) => updateFilter("propertyType", value)}>
-              <SelectTrigger className="h-10">
-                <SelectValue placeholder="Квартира" />
+              <SelectTrigger className="h-12 border-0 bg-gray-50/80 hover:bg-gray-100/80 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:ring-offset-0 transition-all duration-200 focus:outline-none">
+                <SelectValue placeholder="Тип недвижимости" />
               </SelectTrigger>
               <SelectContent>
                 {PROPERTY_TYPES.map((type) => (
@@ -145,14 +187,14 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
               </SelectContent>
             </Select>
           </div>
-          
-          <div>
-            <Label htmlFor="district" className="text-sm mb-1 block">Район</Label>
+
+          {/* Район */}
+          <div className="flex-1 min-w-0">
             <Select value={filters.district} onValueChange={(value) => updateFilter("district", value)}>
-              <SelectTrigger className="h-10">
-                <SelectValue placeholder="Центральный" />
+              <SelectTrigger className="h-12 border-0 bg-gray-50/80 hover:bg-gray-100/80 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:ring-offset-0 transition-all duration-200 focus:outline-none">
+                <SelectValue placeholder="Район" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="max-h-[300px]">
                 {DISTRICTS.map((district) => (
                   <SelectItem key={district} value={district}>
                     {district}
@@ -161,40 +203,38 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false 
               </SelectContent>
             </Select>
           </div>
-          
-          <div>
-            <Label htmlFor="price-from" className="text-sm mb-1 block">Цена от</Label>
-            <Input
-              type="number"
-              placeholder="3 000 000"
-              value={filters.priceFrom || ""}
-              onChange={(e) => updateFilter("priceFrom", e.target.value ? Number(e.target.value) : undefined)}
-              className="focus-orange h-10 text-sm"
-            />
+
+          {/* Цена */}
+          <div className="flex items-center gap-2 sm:min-w-[200px]">
+            <div className="flex-1">
+              <PriceInput
+                value={filters.priceFrom?.toString() || ""}
+                onChange={(value) => updateFilter("priceFrom", value ? Number(value) : undefined)}
+                placeholder="Цена от"
+                className="h-12 border-0 bg-gray-50/80 hover:bg-gray-100/80 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:ring-offset-0 transition-all duration-200 focus:outline-none"
+              />
+            </div>
+            <span className="text-gray-400 font-light">—</span>
+            <div className="flex-1">
+              <PriceInput
+                value={filters.priceTo?.toString() || ""}
+                onChange={(value) => updateFilter("priceTo", value ? Number(value) : undefined)}
+                placeholder="Цена до"
+                className="h-12 border-0 bg-gray-50/80 hover:bg-gray-100/80 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:ring-offset-0 transition-all duration-200 focus:outline-none"
+              />
+            </div>
           </div>
-          
-          <div>
-            <Label htmlFor="price-to" className="text-sm mb-1 block">Цена до</Label>
-            <Input
-              type="number"
-              placeholder="15 000 000"
-              value={filters.priceTo || ""}
-              onChange={(e) => updateFilter("priceTo", e.target.value ? Number(e.target.value) : undefined)}
-              className="focus-orange h-10 text-sm"
-            />
-          </div>
-        </div>
-        
-        <div className="flex flex-col sm:flex-row gap-3">
-          <Button onClick={handleSearch} className="flex-1 bg-accent-orange text-white py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg hover:bg-orange-600">
-            <Search className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-            Найти недвижимость
-          </Button>
-          <Button variant="outline" className="sm:w-auto py-3 px-4 sm:py-4 sm:px-6 text-base sm:text-lg border-accent-orange text-accent-orange hover:bg-accent-orange hover:text-white">
-            Расширенный поиск
+
+          {/* Кнопка поиска */}
+          <Button
+            onClick={handleSearch}
+            className="h-12 px-6 sm:px-8 bg-accent-orange hover:bg-accent-orange-dark focus:bg-accent-orange-dark focus:ring-2 focus:ring-accent-orange/30 focus:ring-offset-0 text-white font-medium flex items-center gap-2 transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none"
+          >
+            <Search className="w-4 h-4" />
+            <span className="hidden sm:inline">Найти</span>
           </Button>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }

@@ -1,4 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
+import { Phone, Send, MessageSquare } from "lucide-react";
 import { TeamMember } from "@shared/schema";
 
 interface TeamCardProps {
@@ -43,44 +44,37 @@ const TeamCard = ({ member, className = "" }: TeamCardProps) => {
             ))}
           </div>
         )}
-
-        {member.description && (
-          <p className="text-sm text-text-secondary mb-6">
-            {member.description}
-          </p>
-        )}
         
         <div className="flex justify-center space-x-3">
           {member.telegram && (
             <a
               href={`https://t.me/${member.telegram.replace('@', '')}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-blue-500 hover:text-white transition-colors"
+              title="Написать в Telegram"
             >
-              <i className="fab fa-telegram text-sm"></i>
+              <Send className="w-4 h-4" />
             </a>
           )}
           {member.whatsapp && (
             <a
-              href={`https://wa.me/${member.whatsapp.replace('+', '')}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+              href={`https://wa.me/${member.whatsapp.replace(/[^\d]/g, '')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors"
+              title="Написать в WhatsApp"
             >
-              <i className="fab fa-whatsapp text-sm"></i>
+              <MessageSquare className="w-4 h-4" />
             </a>
           )}
           {member.phone && (
             <a
               href={`tel:${member.phone}`}
               className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
+              title="Позвонить"
             >
-              <i className="fas fa-phone text-sm"></i>
-            </a>
-          )}
-          {member.email && (
-            <a
-              href={`mailto:${member.email}`}
-              className="w-8 h-8 bg-neutral-200 rounded-full flex items-center justify-center hover:bg-accent-orange hover:text-white transition-colors"
-            >
-              <i className="fas fa-envelope text-sm"></i>
+              <Phone className="w-4 h-4" />
             </a>
           )}
         </div>

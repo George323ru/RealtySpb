@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import PropertyCard from "@/components/property-card";
+import PropertyCard from "@/components/PropertyCard";
 import { Search, Filter, SlidersHorizontal } from "lucide-react";
 import type { Property } from "@shared/schema";
 

@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import ConsultationForm from "@/components/consultation-form";
-import PropertyCard from "@/components/property-card";
+import PropertyCard from "@/components/PropertyCard";
 import { 
   MapPin, 
   Home, 

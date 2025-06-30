@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
-import PropertyCard from "@/components/property-card";
+import PropertyCard from "@/components/PropertyCard";
 import { Search, Filter, MapPin, TrendingUp, Shield, Clock } from "lucide-react";
 import type { Property } from "@shared/schema";
 

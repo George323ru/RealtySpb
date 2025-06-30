@@ -33,6 +33,7 @@ import ServiceLanding from "@/pages/services/service-landing";
 import PreSalePreparation from "@/pages/services/PreSalePreparation";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import AdminPage from "@/pages/admin";
+import Cleaning from "@/pages/services/Cleaning";
 
 // Упрощенная анимация страниц
 const pageTransition = {
@@ -65,6 +66,7 @@ function Router() {
           <Route path="/property/:id" component={PropertyDetail} />
           <Route path="/services" component={Services} />
           <Route path="/services/pre-sale-preparation" component={PreSalePreparation} />
+          <Route path="/services/cleaning" component={Cleaning} />
           <Route path="/services/:id" component={ServiceDetail} />
           <Route path="/services/:slug" component={ServiceLanding} />
           <Route path="/land" component={Land} />

@@ -5,59 +5,116 @@ import type { Service } from "@shared/schema";
 
 interface ServiceCardProps {
   service: Service;
+  className?: string;
 }
 
-export default function ServiceCard({ service }: ServiceCardProps) {
-  const getColorClasses = (color: string) => {
-    const colors: Record<string, { bg: string; text: string }> = {
-      blue: { bg: "bg-blue-100", text: "text-blue-500" },
-      purple: { bg: "bg-purple-100", text: "text-purple-500" },
-      green: { bg: "bg-green-100", text: "text-green-500" },
-      yellow: { bg: "bg-yellow-100", text: "text-yellow-500" },
-      red: { bg: "bg-red-100", text: "text-red-500" },
-      indigo: { bg: "bg-indigo-100", text: "text-indigo-500" },
-      pink: { bg: "bg-pink-100", text: "text-pink-500" },
-      teal: { bg: "bg-teal-100", text: "text-teal-500" },
-      emerald: { bg: "bg-emerald-100", text: "text-emerald-500" },
-      orange: { bg: "bg-orange-100", text: "text-orange-500" },
-      cyan: { bg: "bg-cyan-100", text: "text-cyan-500" },
-      violet: { bg: "bg-violet-100", text: "text-violet-500" },
-      rose: { bg: "bg-rose-100", text: "text-rose-500" },
-    };
-    return colors[color] || colors.blue;
+// Related services mapping
+const relatedServicesMap: Record<string, string[]> = {
+  "Предпродажная подготовка": ["Дизайн-проект", "Фотосъемка", "Юридическая проверка"],
+  "Юридическое сопровождение": ["Регистрация права", "Проверка документов", "Нотариальные услуги"],
+  "Оценка недвижимости": ["Анализ рынка", "Техническая экспертиза", "Страхование"],
+  "Ипотечное консультирование": ["Подбор банка", "Помощь с документами", "Страхование жизни"],
+  "Управление инвестициями": ["Анализ доходности", "Налоговое планирование", "Мониторинг рынка"],
+  "Коммерческая недвижимость": ["Бизнес-план", "Лицензирование", "Арендные отношения"],
+  "Земля": ["Подбор участков", "Межевание", "Оформление документов", "Разрешения на строительство"]
+};
+
+export default function ServiceCard({ service, className }: ServiceCardProps) {
+  const getIconColorClass = (serviceId: number) => {
+    const colors = [
+      "bg-blue-100 text-blue-500 group-hover:bg-blue-500 group-hover:text-white",
+      "bg-purple-100 text-purple-500 group-hover:bg-purple-500 group-hover:text-white",
+      "bg-green-100 text-green-500 group-hover:bg-green-500 group-hover:text-white",
+      "bg-yellow-100 text-yellow-500 group-hover:bg-yellow-500 group-hover:text-white",
+      "bg-red-100 text-red-500 group-hover:bg-red-500 group-hover:text-white",
+      "bg-indigo-100 text-indigo-500 group-hover:bg-indigo-500 group-hover:text-white",
+      "bg-pink-100 text-pink-500 group-hover:bg-pink-500 group-hover:text-white",
+      "bg-teal-100 text-teal-500 group-hover:bg-teal-500 group-hover:text-white",
+      "bg-emerald-100 text-emerald-500 group-hover:bg-emerald-500 group-hover:text-white",
+      "bg-orange-100 text-orange-500 group-hover:bg-orange-500 group-hover:text-white",
+      "bg-cyan-100 text-cyan-500 group-hover:bg-cyan-500 group-hover:text-white",
+      "bg-violet-100 text-violet-500 group-hover:bg-violet-500 group-hover:text-white",
+      "bg-rose-100 text-rose-500 group-hover:bg-rose-500 group-hover:text-white",
+    ];
+    return colors[serviceId % colors.length];
   };
 
-  const colorClasses = getColorClasses(service.color);
+  const relatedServices = relatedServicesMap[service.name] || [];
 
   return (
-    <Card className="hover:shadow-lg transition-shadow border border-neutral-200 h-full">
-      <CardContent className="p-6 flex flex-col h-full">
-        <div className={`w-12 h-12 ${colorClasses.bg} rounded-lg flex items-center justify-center mb-4`}>
-          <i className={`${service.icon} ${colorClasses.text} text-xl`}></i>
-        </div>
-        
-        <h3 className="font-semibold text-primary mb-2">{service.name}</h3>
-        <p className="text-sm text-secondary mb-4 flex-grow">{service.shortDescription}</p>
-        
-        {service.price && (
-          <p className="text-sm font-medium text-primary mb-2">
-            Стоимость: {service.price}
+    <Link href={`/services/${service.id}`} className="block group h-full">
+      <Card className={`h-full border border-neutral-200 bg-white transition-all duration-300 ease-out group-hover:shadow-2xl group-hover:shadow-blue-100/50 group-hover:-translate-y-1 group-hover:scale-[1.02] cursor-pointer ${className || ''}`}>
+        <CardContent className="p-6 h-full flex flex-col">
+          {/* Icon Section */}
+          <div className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 transform group-hover:scale-110 group-hover:rotate-3 ${getIconColorClass(service.id)}`}>
+            <i className={`${service.icon} text-xl transition-transform duration-300`}></i>
+          </div>
+          
+          {/* Title */}
+          <h3 className="font-bold text-xl text-text-primary mb-3 transition-colors duration-300 group-hover:text-accent-orange line-clamp-2">
+            {service.name}
+          </h3>
+          
+          {/* Description */}
+          <p className="text-base text-text-secondary mb-6 flex-1 transition-colors duration-300 group-hover:text-text-primary leading-relaxed">
+            {service.shortDescription}
           </p>
-        )}
-        
-        {service.duration && (
-          <p className="text-sm text-secondary mb-4">
-            Срок: {service.duration}
-          </p>
-        )}
-        
-        <Link
-          href={`/services/${service.slug}`}
-          className="text-accent-orange font-medium text-sm hover:underline flex items-center mt-auto"
-        >
-          Подробнее <ArrowRight className="w-4 h-4 ml-1" />
-        </Link>
-      </CardContent>
-    </Card>
+
+          <div className="space-y-4 mt-auto">
+            {/* Price */}
+            {service.price && (
+              <div className="transform transition-all duration-300 group-hover:scale-105">
+                <p className="text-lg font-bold text-accent-orange transition-colors duration-300 group-hover:text-accent-orange-dark">
+                  {service.price}
+                </p>
+              </div>
+            )}
+
+            {/* Features */}
+            {service.features && service.features.length > 0 && (
+              <div className="space-y-2">
+                {service.features.slice(0, 3).map((feature, index) => (
+                  <div key={index} className="flex items-center transition-all duration-300 group-hover:translate-x-1">
+                    <div className="w-2 h-2 bg-accent-orange rounded-full mr-3 transition-transform duration-300 group-hover:scale-125"></div>
+                    <span className="text-sm text-text-secondary transition-colors duration-300 group-hover:text-text-primary">
+                      {feature}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Related Services */}
+            {relatedServices.length > 0 && (
+              <div className="border-t border-neutral-100 pt-4 mt-4 transition-colors duration-300 group-hover:border-accent-orange/30">
+                <p className="text-xs font-medium text-text-secondary mb-3 transition-colors duration-300 group-hover:text-accent-orange">
+                  Дополнительные услуги:
+                </p>
+                <div className="space-y-1">
+                  {relatedServices.slice(0, 2).map((relatedService, index) => (
+                    <div key={index} className="text-xs text-text-secondary transition-all duration-300 group-hover:text-text-primary group-hover:translate-x-1">
+                      • {relatedService}
+                    </div>
+                  ))}
+                  {relatedServices.length > 2 && (
+                    <div className="text-xs text-accent-orange transition-colors duration-300 group-hover:text-accent-orange-dark">
+                      +{relatedServices.length - 2} еще
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+            
+            {/* Call to Action */}
+            <div className="pt-2">
+              <div className="inline-flex items-center text-accent-orange font-medium text-sm transition-all duration-300 group-hover:text-accent-orange-dark transform group-hover:translate-x-1">
+                Подробнее
+                <ArrowRight className="w-4 h-4 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+              </div>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </Link>
   );
 }

@@ -2,48 +2,46 @@ import { Link } from "wouter";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Heart, MapPin } from "lucide-react";
+import { Heart, MapPin, Layout, Layers, Ruler } from "lucide-react";
 import OptimizedImage from "@/components/OptimizedImage";
+import { formatPrice, formatPricePerMeter, formatArea } from "@/lib/utils";
 import type { Property } from "@shared/schema";
 
 interface PropertyCardProps {
   property: Property;
+  className?: string;
 }
 
-export default function PropertyCard({ property }: PropertyCardProps) {
-  const formatPrice = (price: number) => {
-    return new Intl.NumberFormat("ru-RU").format(price);
+const getPropertyTypeLabel = (property: Property) => {
+  if (property.buildingType === "новостройка") {
+    return { label: "Новостройка", color: "bg-green-500" };
+  }
+  if (property.buildingType === "вторичка") {
+    return { label: "Вторичка", color: "bg-blue-500" };
+  }
+  const types: Record<string, string> = {
+    apartment: "Квартира",
+    house: "Дом",
+    commercial: "Коммерция",
+    land: "Участок",
+    garage: "Гараж",
+    parking: "Паркинг"
   };
-
-  const formatPricePerMeter = (price: number | null) => {
-    if (!price) return "";
-    return new Intl.NumberFormat("ru-RU").format(price);
+  const colors: Record<string, string> = {
+    apartment: "bg-blue-500",
+    house: "bg-green-500", 
+    commercial: "bg-accent-orange",
+    land: "bg-yellow-500",
+    garage: "bg-gray-500",
+    parking: "bg-purple-500"
   };
-
-  const getPropertyTypeLabel = (type: string) => {
-    const types = {
-      apartment: "Квартира",
-      house: "Дом",
-      commercial: "Коммерческая",
-      land: "Земля",
-      garage: "Гараж",
-      parking: "Машиноместо"
-    };
-    return types[type as keyof typeof types] || type;
+  return {
+    label: types[property.propertyType] || "Недвижимость",
+    color: colors[property.propertyType] || "bg-gray-500"
   };
+};
 
-  const getCategoryColor = (propertyType: string) => {
-    const colors = {
-      apartment: "bg-blue-500",
-      house: "bg-green-500", 
-      commercial: "bg-accent-orange",
-      land: "bg-yellow-500",
-      garage: "bg-gray-500",
-      parking: "bg-purple-500"
-    };
-    return colors[propertyType as keyof typeof colors] || "bg-gray-500";
-  };
-
+export default function PropertyCard({ property, className }: PropertyCardProps) {
   const handleFavoriteClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -51,9 +49,11 @@ export default function PropertyCard({ property }: PropertyCardProps) {
     console.log("Added to favorites:", property.id);
   };
 
+  const badge = getPropertyTypeLabel(property);
+
   return (
-    <Link href={`/property/${property.id}`} className="block group">
-      <Card className="h-full overflow-hidden border border-neutral-200 bg-white transition-all duration-300 ease-out group-hover:shadow-2xl group-hover:shadow-orange-100/50 group-hover:-translate-y-1 group-hover:scale-[1.02] cursor-pointer">
+    <Link href={`/property/${property.id}`} className="block group h-full">
+      <Card className={`h-full overflow-hidden border border-neutral-200 bg-white transition-all duration-300 ease-out group-hover:shadow-2xl group-hover:shadow-orange-100/50 group-hover:-translate-y-1 group-hover:scale-[1.02] cursor-pointer flex flex-col ${className || ''}`}>
         {/* Image Section */}
         <div className="relative overflow-hidden">
           <OptimizedImage
@@ -65,17 +65,14 @@ export default function PropertyCard({ property }: PropertyCardProps) {
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           
-          {/* Gradient overlay that appears on hover */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
           
-          {/* Property Type Badge */}
           <div className="absolute top-4 left-4 transform transition-transform duration-300 group-hover:scale-110">
-            <Badge className={`${getCategoryColor(property.propertyType)} text-white font-medium px-3 py-1 shadow-lg backdrop-blur-sm`}>
-              {getPropertyTypeLabel(property.propertyType)}
+            <Badge className={`${badge.color} text-white font-medium px-3 py-1 shadow-lg`}>
+              {badge.label}
             </Badge>
           </div>
           
-          {/* Favorite Button */}
           <div className="absolute top-4 right-4 transform transition-all duration-300 group-hover:scale-110">
             <Button
               variant="ghost"
@@ -89,15 +86,15 @@ export default function PropertyCard({ property }: PropertyCardProps) {
         </div>
 
         {/* Content Section */}
-        <CardContent className="p-6 flex flex-col h-full">
+        <CardContent className="p-6 flex flex-col flex-1">
           {/* Price Section */}
           <div className="flex items-center justify-between mb-4">
             <span className="text-2xl font-bold text-text-primary transition-colors duration-300 group-hover:text-accent-orange">
-              {formatPrice(property.price)} ₽
+              {formatPrice(property.price)}
             </span>
             {property.pricePerMeter && (
               <span className="text-sm text-text-secondary transition-colors duration-300 group-hover:text-text-primary">
-                {formatPricePerMeter(property.pricePerMeter)} ₽/м²
+                {formatPricePerMeter(property.pricePerMeter)}
               </span>
             )}
           </div>
@@ -109,33 +106,27 @@ export default function PropertyCard({ property }: PropertyCardProps) {
 
           {/* Location */}
           <div className="flex items-center text-text-secondary mb-4 transition-colors duration-300 group-hover:text-text-primary">
-            <MapPin className="w-4 h-4 mr-2 text-accent-orange transition-transform duration-300 group-hover:scale-110" />
-            <span className="text-sm">{property.address}</span>
+            <MapPin className="w-4 h-4 mr-2 text-accent-orange transition-transform duration-300 group-hover:scale-110 flex-shrink-0" />
+            <span className="text-sm line-clamp-1">{property.district}, {property.address}</span>
           </div>
 
           {/* Property Details */}
-          <div className="flex items-center justify-between text-sm text-text-secondary mb-6 flex-1">
-            <span className="transition-colors duration-300 group-hover:text-text-primary">
-              {property.rooms ? `${property.rooms} комнат` : getPropertyTypeLabel(property.propertyType)}
-            </span>
-            {property.floor && property.totalFloors && (
-              <span className="transition-colors duration-300 group-hover:text-text-primary">
-                {property.floor}/{property.totalFloors} этаж
-              </span>
-            )}
-            <span className="transition-colors duration-300 group-hover:text-text-primary">
-              {parseFloat(property.area)} м²
-            </span>
-          </div>
-
-          {/* Action Button */}
-          <div className="mt-auto">
-            <Button 
-              className="w-full transition-all duration-300 group-hover:shadow-lg transform group-hover:-translate-y-0.5 bg-accent-orange hover:bg-accent-orange-dark text-white font-medium"
-              size="default"
-            >
-              Подробнее
-            </Button>
+          <div className="flex items-center justify-between text-sm text-text-secondary pt-4 mt-auto border-t border-neutral-100">
+            <div className="flex flex-col items-center flex-1 text-center">
+              <Layout className="w-5 h-5 mb-1 text-accent-orange" />
+              <span className="font-medium text-text-primary">{property.rooms ? `${property.rooms}` : '-'}</span>
+              <span className="text-xs text-text-secondary">комнат</span>
+            </div>
+            <div className="flex flex-col items-center flex-1 text-center">
+              <Layers className="w-5 h-5 mb-1 text-accent-orange" />
+              <span className="font-medium text-text-primary">{property.floor && property.totalFloors ? `${property.floor}/${property.totalFloors}` : '-'}</span>
+              <span className="text-xs text-text-secondary">этаж</span>
+            </div>
+            <div className="flex flex-col items-center flex-1 text-center">
+              <Ruler className="w-5 h-5 mb-1 text-accent-orange" />
+              <span className="font-medium text-text-primary">{formatArea(property.area)}</span>
+              <span className="text-xs text-text-secondary">м²</span>
+            </div>
           </div>
         </CardContent>
       </Card>
