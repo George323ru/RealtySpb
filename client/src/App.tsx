@@ -13,23 +13,23 @@ import Home from "@/pages/home";
 import Buy from "@/pages/buy";
 import Sell from "@/pages/sell";
 import Rent from "@/pages/rent";
-import NewBuildings from "@/pages/new-buildings";
+import NewBuildings from "@/pages/NewBuildings";
 import NewBuildingDetail from "@/pages/new-building-detail";
-import Secondary from "@/pages/secondary";
-import PropertyDetail from "@/pages/property-detail";
+import SecondaryProperties from "@/pages/SecondaryProperties";
+import PropertyDetail from "@/pages/PropertyDetail";
 import Services from "@/pages/services";
-import ServiceDetail from "@/pages/service-detail";
+import ServiceDetail from "@/pages/ServiceDetail";
 import About from "@/pages/about";
 import Reviews from "@/pages/reviews";
 import Blog from "@/pages/blog";
-import BlogPost from "@/pages/blog-post";
-import Contacts from "@/pages/contacts";
+import BlogPost from "@/pages/BlogPost";
+import Contacts from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
 import Cart from "@/pages/cart";
 import RealtorConstructor from "@/pages/realtor-constructor";
 import Land from "@/pages/land";
 import Calculator from "@/pages/calculator";
-import ServiceLanding from "@/pages/services/service-landing";
+
 import PreSalePreparation from "@/pages/services/PreSalePreparation";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import AdminPage from "@/pages/admin";
@@ -62,13 +62,12 @@ function Router() {
           <Route path="/rent" component={Rent} />
           <Route path="/new-buildings" component={NewBuildings} />
           <Route path="/new-buildings/:id" component={NewBuildingDetail} />
-          <Route path="/secondary" component={Secondary} />
+          <Route path="/secondary" component={SecondaryProperties} />
           <Route path="/property/:id" component={PropertyDetail} />
           <Route path="/services" component={Services} />
           <Route path="/services/pre-sale-preparation" component={PreSalePreparation} />
           <Route path="/services/cleaning" component={Cleaning} />
-          <Route path="/services/:id" component={ServiceDetail} />
-          <Route path="/services/:slug" component={ServiceLanding} />
+          <Route path="/services/:slug" component={ServiceDetail} />
           <Route path="/land" component={Land} />
           <Route path="/about" component={About} />
           <Route path="/team" component={RealtorConstructor} />
