@@ -1,39 +1,41 @@
 import { Switch, Route } from "wouter";
-import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import Header from "@/components/header";
-import Footer from "@/components/footer";
-import FloatingCTA from "@/components/floating-cta";
-import CartProvider from "@/components/CartProvider";
-import ScrollToTop from "@/components/ScrollToTop";
-import Home from "@/pages/home";
-import Buy from "@/pages/buy";
-import Sell from "@/pages/sell";
-import Rent from "@/pages/rent";
-import NewBuildings from "@/pages/new-buildings";
-import NewBuildingDetail from "@/pages/new-building-detail";
-import Secondary from "@/pages/secondary";
-import PropertyDetail from "@/pages/property-detail";
-import Services from "@/pages/services";
-import ServiceDetail from "@/pages/service-detail";
-import About from "@/pages/about";
-import Reviews from "@/pages/reviews";
-import Blog from "@/pages/blog";
-import BlogPost from "@/pages/blog-post";
-import Contacts from "@/pages/contacts";
-import NotFound from "@/pages/not-found";
-import Cart from "@/pages/cart";
-import RealtorConstructor from "@/pages/realtor-constructor";
-import Land from "@/pages/land";
-import Calculator from "@/pages/calculator";
-import ServiceLanding from "@/pages/services/service-landing";
-import PreSalePreparation from "@/pages/services/PreSalePreparation";
-import PrivacyPolicy from "@/pages/privacy-policy";
-import AdminPage from "@/pages/admin";
+import { queryClient } from "./lib/queryClient";
+import CartProvider from "./components/CartProvider";
+import { TooltipProvider } from "./components/ui/tooltip";
+import ScrollToTop from "./components/ScrollToTop";
+import Header from "./components/header";
+import Footer from "./components/footer";
+import FloatingCTA from "./components/FloatingCTA";
+import { Toaster } from "./components/ui/toaster";
+import Home from "./pages/home";
+import Buy from "./pages/buy";
+import Sell from "./pages/sell";
+import Rent from "./pages/rent";
+import NewBuildings from "./pages/NewBuildings";
+import NewBuildingDetail from "./pages/new-building-detail";
+import Secondary from "./pages/secondary";
+import PropertyDetail from "./pages/PropertyDetail";
+import Services from "./pages/services";
+import ServiceDetail from "./pages/ServiceDetail";
+import Land from "./pages/land";
+import About from "./pages/about";
+import RealtorConstructor from "./pages/realtor-constructor";
+import Reviews from "./pages/reviews";
+import Blog from "./pages/blog";
+import BlogPost from "./pages/BlogPost";
+import Contacts from "./pages/contacts";
+import Cart from "./pages/cart";
+import Calculator from "./pages/calculator";
+import PrivacyPolicy from "./pages/privacy-policy";
+import AdminPage from "./pages/admin";
+import NotFound from "./pages/not-found";
+import PreSalePreparation from "./pages/services/PreSalePreparation";
+import DesignProject from "./pages/services/DesignProject";
+import EngineeringSystems from "./pages/services/EngineeringSystems";
+import HeatingPage from "./pages/services/engineering/Heating";
 
-function Router() {
+const Router = () => {
   return (
     <Switch>
       <Route path="/" component={Home} />
@@ -45,9 +47,20 @@ function Router() {
       <Route path="/secondary" component={Secondary} />
       <Route path="/property/:id" component={PropertyDetail} />
       <Route path="/services" component={Services} />
-      <Route path="/services/pre-sale-preparation" component={PreSalePreparation} />
+      <Route
+        path="/services/pre-sale-preparation"
+        component={PreSalePreparation}
+      />
+      <Route path="/services/design-project" component={DesignProject} />
+      <Route
+        path="/services/engineering-systems"
+        component={EngineeringSystems}
+      />
+      <Route
+        path="/services/engineering/heating"
+        component={HeatingPage}
+      />
       <Route path="/services/:id" component={ServiceDetail} />
-      <Route path="/services/:slug" component={ServiceLanding} />
       <Route path="/land" component={Land} />
       <Route path="/about" component={About} />
       <Route path="/team" component={RealtorConstructor} />
@@ -63,7 +76,7 @@ function Router() {
       <Route component={NotFound} />
     </Switch>
   );
-}
+};
 
 function App() {
   return (

@@ -8,12 +8,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { SERVICE_TYPES } from "@/lib/constants";
 import { insertLeadSchema } from "@shared/schema";
+import { cn } from "@/lib/utils";
 
 const leadFormSchema = insertLeadSchema.extend({
   name: z.string().min(2, "Имя должно содержать минимум 2 символа"),
@@ -23,17 +24,17 @@ const leadFormSchema = insertLeadSchema.extend({
 type LeadFormData = z.infer<typeof leadFormSchema>;
 
 interface LeadFormProps {
-  title?: string;
-  description?: string;
-  serviceType?: string;
-  compact?: boolean;
+  title: string;
+  description: string;
+  serviceType: string;
+  theme?: 'light' | 'dark';
 }
 
 export default function LeadForm({ 
-  title = "Получить консультацию", 
-  description = "Оставьте заявку и наш специалист свяжется с вами в течение 15 минут",
+  title, 
+  description,
   serviceType,
-  compact = false 
+  theme = 'light'
 }: LeadFormProps) {
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -76,119 +77,95 @@ export default function LeadForm({
     createLeadMutation.mutate(data);
   };
 
-  if (compact) {
-    return (
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-xl text-center">{title}</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Ваше имя</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Введите имя" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Телефон</FormLabel>
-                    <FormControl>
-                      <Input placeholder="+7 (___) ___-__-__" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+  const cardClasses = cn(
+    'w-full max-w-md mx-auto transition-all',
+    theme === 'dark'
+      ? 'bg-neutral-800 border-neutral-700 text-white'
+      : 'bg-white',
+  );
 
-              <Button 
-                type="submit" 
-                className="w-full bg-accent-orange text-white hover:bg-orange-600"
-                disabled={createLeadMutation.isPending}
-              >
-                {createLeadMutation.isPending ? "Отправка..." : "Отправить заявку"}
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
-    );
-  }
+  const inputClasses = cn(
+    theme === 'dark' 
+      ? 'bg-neutral-700 border-neutral-600 text-white placeholder:text-neutral-400 focus:border-accent-orange'
+      : 'bg-white'
+  );
+
+  const labelClasses = cn(
+    theme === 'dark' ? 'text-neutral-300' : 'text-text-primary'
+  );
 
   return (
-    <Card className="max-w-2xl mx-auto">
+    <Card className={cardClasses}>
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl lg:text-3xl font-bold text-text-primary">
-          {title}
-        </CardTitle>
-        <p className="text-text-secondary">{description}</p>
+        <CardTitle className="text-2xl font-bold">{title}</CardTitle>
+        <CardDescription className={cn(theme === 'dark' && 'text-neutral-400')}>
+          {description}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="name" className={labelClasses}>Имя</Label>
               <FormField
                 control={form.control}
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Ваше имя *</FormLabel>
                     <FormControl>
-                      <Input placeholder="Введите имя" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Телефон *</FormLabel>
-                    <FormControl>
-                      <Input placeholder="+7 (___) ___-__-__" {...field} />
+                      <Input
+                        id="name"
+                        placeholder="Как к вам обращаться?"
+                        {...field}
+                        required
+                        className={inputClasses}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
             </div>
-
-
-
+            <div className="space-y-2">
+              <Label htmlFor="phone" className={labelClasses}>Телефон</Label>
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="+7 (___) ___-__-__"
+                        {...field}
+                        required
+                        className={inputClasses}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
             <Button 
               type="submit" 
-              className="w-full bg-accent-orange text-white py-4 hover:bg-orange-600 text-lg"
+              className="w-full bg-accent-orange text-white hover:bg-orange-600 font-bold text-base py-3"
               disabled={createLeadMutation.isPending}
             >
               {createLeadMutation.isPending ? "Отправка..." : "Получить консультацию"}
             </Button>
-
-            <p className="text-sm text-text-secondary text-center">
-              Нажимая кнопку, вы соглашаетесь с{" "}
-              <a 
-                href="/privacy-policy" 
-                className="text-accent-orange hover:underline"
-                rel="noopener"
-              >
-                политикой конфиденциальности
-              </a>
-            </p>
           </form>
+          <p className={cn("text-xs text-center mt-4", theme === 'dark' ? 'text-neutral-500' : 'text-text-secondary')}>
+            Нажимая кнопку, вы соглашаетесь с{" "}
+            <a 
+              href="/privacy-policy" 
+              className="text-accent-orange hover:underline"
+              rel="noopener"
+            >
+              политикой конфиденциальности
+            </a>
+          </p>
         </Form>
       </CardContent>
     </Card>

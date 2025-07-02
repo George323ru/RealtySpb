@@ -1,30 +1,37 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Phone } from "lucide-react";
-import { Link } from "wouter";
+import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 
-export default function FloatingCTA() {
-  const [isVisible, setIsVisible] = useState(false);
+import { Button } from './ui/button'
+
+const FloatingCTA = () => {
+  const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsVisible(window.scrollY > 500);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  if (!isVisible) return null;
+      const scrollY = window.scrollY
+      const halfWindow = window.innerHeight * 0.5
+      setIsVisible(scrollY > halfWindow)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 animate-fade-in-up">
-      <Link href="/contact">
-        <Button className="bg-accent-orange text-white hover:bg-orange-600 shadow-lg px-6 py-4 rounded-full flex items-center space-x-2">
-          <Phone className="w-5 h-5" />
-          <span className="hidden sm:inline">Обратный звонок</span>
-        </Button>
-      </Link>
-    </div>
-  );
+    <motion.div
+      initial={{ y: 40, opacity: 0 }}
+      animate={isVisible ? { y: 0, opacity: 1 } : { y: 40, opacity: 0 }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
+      className="fixed bottom-4 right-4 z-50 hidden md:block"
+    >
+      <Button asChild size="lg" className="shadow-2xl">
+        <a href="#lead-form">
+          Получить расчет
+          <ArrowRight className="ml-2 h-5 w-5" />
+        </a>
+      </Button>
+    </motion.div>
+  )
 }
+
+export default FloatingCTA

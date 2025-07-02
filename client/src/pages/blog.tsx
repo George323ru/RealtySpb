@@ -6,24 +6,75 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Search, Calendar, User, Tag, ArrowRight, Filter } from "lucide-react";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import type { BlogPost } from "@shared/schema";
+
+const heatingArticles: BlogPost[] = [
+  {
+    id: 101,
+    title: '5 мифов об автономном отоплении в квартире',
+    slug: '5-myths-about-autonomous-heating',
+    excerpt: 'Разбираем популярные заблуждения, которые мешают перейти на индивидуальное отопление и экономить на коммунальных платежах.',
+    content: '',
+    author: 'Алексей Петров',
+    category: 'Инженерные системы',
+    tags: ['отопление', 'мифы', 'экономия', 'жкх'],
+    image: 'https://images.unsplash.com/photo-1628592102751-ba834f697244?w=800&q=80',
+    isPublished: true,
+    createdAt: new Date('2024-06-15T10:00:00Z'),
+    updatedAt: new Date('2024-06-15T10:00:00Z'),
+  },
+  {
+    id: 102,
+    title: 'Газовый котел vs Электрический: что выбрать для дома?',
+    slug: 'gas-vs-electric-boiler',
+    excerpt: 'Сравниваем стоимость установки, эксплуатации и обслуживания двух самых популярных видов котлов. Помогаем сделать правильный выбор.',
+    content: '',
+    author: 'Иван Сергеев',
+    category: 'Инженерные системы',
+    tags: ['газовый котел', 'электрический котел', 'выбор', 'сравнение'],
+    image: 'https://images.unsplash.com/photo-1588704233439-d345f34d1f28?w=800&q=80',
+    isPublished: true,
+    createdAt: new Date('2024-06-10T12:30:00Z'),
+    updatedAt: new Date('2024-06-10T12:30:00Z'),
+  },
+  {
+    id: 103,
+    title: 'Теплый пол: как не ошибиться при монтаже',
+    slug: 'underfloor-heating-guide',
+    excerpt: 'Подробное руководство по видам теплых полов, их преимуществам и недостаткам. Ключевые моменты, на которые стоит обратить внимание.',
+    content: '',
+    author: 'Мария Иванова',
+    category: 'Ремонт',
+    tags: ['теплый пол', 'ремонт', 'монтаж', 'советы'],
+    image: 'https://images.unsplash.com/photo-1617103996302-d5563c63ac6a?w=800&q=80',
+    isPublished: true,
+    createdAt: new Date('2024-06-05T09:00:00Z'),
+    updatedAt: new Date('2024-06-05T09:00:00Z'),
+  },
+];
 
 export default function Blog() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   
-  const { data: posts = [], isLoading } = useQuery<BlogPost[]>({
+  const { data: realPosts = [], isLoading: isLoadingRealPosts } = useQuery<BlogPost[]>({
     queryKey: ["/api/blog"],
   });
+
+  const allPosts = useMemo(() => {
+    const combined = [...heatingArticles, ...realPosts];
+    const uniquePosts = Array.from(new Map(combined.map(post => [post.id, post])).values());
+    return uniquePosts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+  }, [realPosts]);
 
   const categories = [
     "Покупка", "Продажа", "Аренда", "Новостройки", "Инвестиции", 
     "Право", "Дизайн", "Ремонт", "Советы", "Рынок"
   ];
 
-  const featuredPost = posts[0];
-  const regularPosts = posts.slice(1);
+  const featuredPost = allPosts[0];
+  const regularPosts = allPosts.slice(1);
 
   const filteredPosts = regularPosts.filter(post => {
     const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -76,7 +127,7 @@ export default function Blog() {
             {/* Enhanced Stats Cards with Better Visibility */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
               <div className="bg-white/15 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300">
-                <div className="text-4xl font-bold text-yandex-yellow mb-3 drop-shadow-lg">{posts.length}</div>
+                <div className="text-4xl font-bold text-yandex-yellow mb-3 drop-shadow-lg">{allPosts.length}</div>
                 <div className="text-base text-white/90 font-medium">Статей в блоге</div>
               </div>
               <div className="bg-white/15 backdrop-blur-md rounded-2xl p-8 border border-white/20 shadow-2xl hover:bg-white/20 transition-all duration-300">
@@ -191,7 +242,7 @@ export default function Blog() {
               </span>
             </div>
 
-            {isLoading ? (
+            {isLoadingRealPosts ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {Array.from({ length: 6 }).map((_, i) => (
                   <Card key={i} className="animate-pulse">
@@ -307,7 +358,7 @@ export default function Blog() {
                     <Tag className="w-8 h-8 mx-auto mb-3 text-accent-orange" />
                     <h3 className="font-semibold text-text-primary mb-2">{category}</h3>
                     <p className="text-sm text-text-secondary">
-                      {posts.filter(post => post.category === category).length} статей
+                      {allPosts.filter(post => post.category === category).length} статей
                     </p>
                   </CardContent>
                 </Card>

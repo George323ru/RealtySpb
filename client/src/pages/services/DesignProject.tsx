@@ -1,355 +1,635 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import LeadForm from "@/components/LeadForm";
-import { CheckCircle, Palette, Home, Lightbulb, Monitor, Clock, Star } from "lucide-react";
+import React, { useEffect } from 'react';
+import { motion, useInView, animate } from 'framer-motion';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
+import LeadForm from '@/components/LeadForm';
+import {
+  CheckCircle,
+  Palette,
+  Ruler,
+  DraftingCompass,
+  Lightbulb,
+  Camera,
+  Layers,
+  Star,
+  ArrowRight,
+  ArrowLeft,
+  XCircle,
+  FileText,
+  Save,
+  Clock,
+  Eye,
+} from 'lucide-react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '../../components/ui/accordion';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  useCarousel,
+} from '../../components/ui/carousel';
+import { cn } from '../../lib/utils';
 
+// --- Animation Variants (from Template "1") ---
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeOut',
+      when: 'beforeChildren',
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
+const cardSlideIn = (direction = 'left') => ({
+  hidden: { opacity: 0, x: direction === 'left' ? -100 : 100 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+});
+
+// --- Reusable Components (from Template "1") ---
+
+const AnimatedCounter = ({ value }: { value: number }) => {
+  const [displayValue, setDisplayValue] = React.useState(0);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: '-100px' });
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(0, value, {
+        duration: 2,
+        ease: 'easeOut',
+        onUpdate: latest => {
+          setDisplayValue(Math.floor(latest));
+        },
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, value]);
+
+  return <span ref={ref}>{displayValue}</span>;
+};
+
+const TestimonialsHeader = () => {
+  const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } =
+    useCarousel();
+  return (
+    <div className="flex justify-between items-center mb-8">
+      <div className="max-w-xl">
+        <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+          Что говорят о наших проектах
+        </h2>
+        <p className="text-lg text-text-secondary mt-2">
+          Истории, в которых дизайн изменил жизнь.
+        </p>
+      </div>
+      <div className="hidden md:flex gap-3">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={scrollPrev}
+          disabled={!canScrollPrev}
+          className="h-12 w-12 rounded-full bg-white border-neutral-300 text-neutral-600 hover:border-accent-orange hover:text-accent-orange disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-neutral-300 disabled:hover:text-neutral-600"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={scrollNext}
+          disabled={!canScrollNext}
+          className="h-12 w-12 rounded-full bg-white border-neutral-300 text-neutral-600 hover:border-accent-orange hover:text-accent-orange disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-neutral-300 disabled:hover:text-neutral-600"
+        >
+          <ArrowRight className="h-5 w-5" />
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+interface BenefitCardProps {
+  icon: React.ReactElement;
+  title: string;
+  description: string;
+}
+
+const BenefitCard = ({ icon, title, description }: BenefitCardProps) => (
+  <motion.div
+    className="bg-neutral-50 rounded-2xl p-8 border h-full transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
+    variants={itemVariants}
+  >
+    <div className="mb-5">
+      <div className="w-12 h-12 flex items-center justify-center bg-accent-orange/10 rounded-lg">
+        {React.cloneElement(icon, {
+          className: 'w-6 h-6 text-accent-orange',
+        })}
+      </div>
+    </div>
+    <h3 className="text-xl font-bold mb-2 text-text-primary">{title}</h3>
+    <p className="text-text-secondary leading-relaxed">{description}</p>
+  </motion.div>
+);
+
+const StarRating = ({
+  rating,
+  className,
+}: {
+  rating: number;
+  className?: string;
+}) => (
+  <div className={cn('flex items-center gap-1', className)}>
+    {Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={`w-5 h-5 ${
+          i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-neutral-300'
+        }`}
+      />
+    ))}
+  </div>
+);
+
+interface ProcessStepProps {
+  icon: React.ReactElement;
+  title: string;
+  description: string;
+  index: number;
+}
+
+const ProcessStep = ({ icon, title, description, index }: ProcessStepProps) => (
+  <motion.div
+    className="relative bg-white rounded-2xl p-8 border shadow-sm overflow-hidden h-full"
+    variants={itemVariants}
+  >
+    <div className="absolute -top-2 -left-2 text-8xl font-extrabold text-neutral-100 z-0 select-none">
+      {String(index + 1).padStart(2, '0')}
+    </div>
+    <div className="relative z-10">
+      <div className="absolute top-0 right-0 w-10 h-10 flex items-center justify-center bg-accent-orange/10 rounded-lg">
+        {React.cloneElement(icon, {
+          className: 'w-5 h-5 text-accent-orange',
+        })}
+      </div>
+      <h3 className="text-xl font-bold mb-3 mt-12 text-text-primary">
+        {title}
+      </h3>
+      <p className="text-text-secondary leading-relaxed">{description}</p>
+    </div>
+  </motion.div>
+);
+
+// --- Page Component ---
 export default function DesignProject() {
-  const services = [
+  // --- Page-specific Content ---
+
+  const processSteps = [
     {
-      icon: <Palette className="w-8 h-8 text-purple-500" />,
-      title: "Дизайн-проект интерьера",
-      description: "Полный дизайн-проект с 3D визуализацией",
-      price: "от 2 500 ₽/м²"
+      icon: <Lightbulb />,
+      title: 'Брифинг и Техническое Задание',
+      description:
+        'Вместе мы определяем ваши цели, стиль и бюджет. Вы получаете четкое ТЗ — основу будущего интерьера, где учтена каждая деталь.',
     },
     {
-      icon: <Home className="w-8 h-8 text-blue-500" />,
-      title: "Перепланировка",
-      description: "Проектирование новой планировки",
-      price: "от 1 500 ₽/м²"
+      icon: <Ruler />,
+      title: 'Планировка и концепция',
+      description:
+        'Разрабатываем 2-3 варианта планировочных решений. Вы выбираете лучшее, а мы создаем концепцию, которая делает пространство логичным и удобным.',
     },
     {
-      icon: <Lightbulb className="w-8 h-8 text-yellow-500" />,
-      title: "Светодизайн",
-      description: "Проект освещения с расчетами",
-      price: "от 800 ₽/м²"
+      icon: <Layers />,
+      title: '3D-визуализация',
+      description:
+        'Вы увидите свой будущий интерьер на фотореалистичных изображениях. Это ваша гарантия, что результат на 100% совпадет с ожиданиями.',
     },
     {
-      icon: <Monitor className="w-8 h-8 text-green-500" />,
-      title: "3D визуализация",
-      description: "Фотореалистичные изображения интерьера",
-      price: "от 15 000 ₽/комната"
-    }
+      icon: <FileText />,
+      title: 'Рабочая документация',
+      description:
+        'Готовим полный альбом чертежей для строителей. Это исключает ошибки, переделки и экономит ваши деньги на этапе ремонта.',
+    },
   ];
 
-  const benefits = [
-    "Экономия времени и средств на этапе ремонта",
-    "Избежание ошибок и переделок",
-    "Точный расчет количества материалов",
-    "Оптимальное использование пространства",
-    "Создание уникального стиля",
-    "Увеличение стоимости недвижимости"
+  const beforeAfter = [
+    {
+      title: 'Без проекта (ремонт наугад)',
+      points: [
+        'Перерасход бюджета на 20-40% из-за переделок',
+        'Сроки ремонта непредсказуемы и всегда затягиваются',
+        'Результат не совпадает с картинкой в голове',
+        'Неудобная планировка и "мертвые зоны"',
+      ],
+      iconColor: 'text-red-500 bg-red-500/10',
+      Icon: XCircle,
+    },
+    {
+      title: 'С дизайн-проектом',
+      points: [
+        'Точный бюджет, экономия на материалах до 30%',
+        'Четкий план и соблюдение сроков строителями',
+        'Вы на 100% знаете, что получите в финале',
+        'Каждый сантиметр площади работает на вас',
+      ],
+      iconColor: 'text-green-500 bg-green-500/10',
+      Icon: CheckCircle,
+    },
   ];
 
-  const process = [
+  const testimonialsData = [
     {
-      step: "01",
-      title: "Техническое задание",
-      description: "Обсуждаем ваши пожелания, бюджет и сроки"
+      name: 'Ольга и Максим',
+      image:
+        'https://images.unsplash.com/photo-1524250502761-1ac6f2e30d43?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Дизайн-проект сэкономил нам кучу денег и нервов. Строители работали строго по чертежам, и мы избежали всех "сюрпризов". Квартира получилась именно такой, как мы мечтали!',
+      rating: 5,
     },
     {
-      step: "02",
-      title: "Обмеры и планировка",
-      description: "Делаем точные замеры и создаем планировку"
+      name: 'Андрей В.',
+      image:
+        'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Никогда бы не подумал, что моя маленькая студия может быть такой функциональной. Дизайнеры предложили гениальное решение с зонированием. Теперь у меня есть и гостиная, и спальня.',
+      rating: 5,
     },
     {
-      step: "03",
-      title: "Концепция дизайна",
-      description: "Разрабатываем стилистическое решение"
+      name: 'Екатерина Ф.',
+      image:
+        'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Я увидела квартиру в 3D и сразу влюбилась! Это так круто — вносить правки еще до того, как купили хоть один гвоздь. Результат превзошел все ожидания.',
+      rating: 5,
     },
-    {
-      step: "04",
-      title: "3D визуализация",
-      description: "Создаем фотореалистичные изображения"
-    },
-    {
-      step: "05",
-      title: "Рабочие чертежи",
-      description: "Готовим техническую документацию"
-    },
-    {
-      step: "06",
-      title: "Авторский надзор",
-      description: "Контролируем реализацию проекта"
-    }
   ];
 
-  const portfolioCategories = [
-    { title: "Квартиры", count: "150+ проектов", style: "Современный, классический, лофт" },
-    { title: "Загородные дома", count: "80+ проектов", style: "Скандинавский, прованс, кантри" },
-    { title: "Коммерческие помещения", count: "45+ проектов", style: "Офисы, рестораны, магазины" },
-    { title: "Элитная недвижимость", count: "25+ проектов", style: "Премиум, арт-деко, неоклассика" }
+  const faqData = [
+    {
+      question: 'Сколько стоит дизайн-проект?',
+      answer:
+        'Стоимость зависит от площади объекта и состава проекта (от базового до полного с авторским надзором). Но главный принцип — проект должен экономить деньги, а не быть статьей расходов. В среднем, он окупается 2-3 раза только за счет грамотного подбора материалов и отсутствия переделок.',
+    },
+    {
+      question: 'Зачем нужен проект, если я и так знаю, чего хочу?',
+      answer:
+        'Знать, чего вы хотите — это прекрасно! Наша задача — превратить ваше "хочу" в четкий технический план для строителей. Мы продумаем эргономику, освещение, расположение розеток и все те детали, которые и создают настоящий комфорт. Проект — это мост между идеей и ее безупречной реализацией.',
+    },
+    {
+      question: 'Как долго делается проект?',
+      answer:
+        'В среднем, разработка полного дизайн-проекта для квартиры 50-80 м² занимает от 25 до 40 рабочих дней. Мы всегда закрепляем сроки в договоре. Помните: один месяц планирования экономит 3-4 месяца хаоса на стройке.',
+    },
+    {
+      question: 'Вы помогаете с подбором мебели и материалов?',
+      answer:
+        'Да, это часть полного дизайн-проекта. Мы не просто рисуем красивые картинки, а создаем ведомость всех чистовых материалов, мебели, сантехники и освещения с артикулами и контактами поставщиков. Это избавляет вас от мучительных походов по магазинам.',
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-purple-600 to-purple-500 text-white py-16">
+    <div className="min-h-screen bg-white text-text-primary">
+      {/* --- Hero Section --- */}
+      <motion.section
+        className="bg-white pt-20 pb-16 lg:pt-32 lg:pb-24"
+        initial="hidden"
+        animate="visible"
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Дизайн-проект 
-              <span className="text-yandex-yellow"> интерьера</span>
-            </h1>
-            <p className="text-xl lg:text-2xl mb-8 opacity-90">
-              Создаем уникальные интерьеры с 3D визуализацией и полным комплектом рабочих чертежей
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
-                Заказать дизайн-проект
+            <motion.h1
+              className="text-4xl lg:text-6xl font-extrabold mb-6 !leading-tight tracking-tighter"
+              variants={itemVariants}
+            >
+              Создайте интерьер, в котором хочется жить.
+              <br />
+              <span className="text-accent-orange">Еще до начала ремонта</span>
+            </motion.h1>
+            <motion.p
+              className="text-lg lg:text-xl mb-10 text-text-secondary max-w-3xl mx-auto"
+              variants={itemVariants}
+            >
+              Профессиональный дизайн-проект интерьера в Санкт-Петербурге,
+              который экономит ваши деньги, время и гарантирует результат.
+            </motion.p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              variants={itemVariants}
+            >
+              <Button
+                size="lg"
+                className="bg-accent-orange text-white hover:bg-orange-600 px-8 h-12 text-base font-bold"
+              >
+                Получить консультацию
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-purple-600 px-8 py-4 text-lg">
-                Посмотреть портфолио
-              </Button>
-            </div>
+            </motion.div>
+            <motion.p
+              className="mt-4 text-sm text-text-secondary"
+              variants={itemVariants}
+            >
+              Это бесплатно и ни к чему не обязывает
+            </motion.p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Services */}
-      <section className="py-16 bg-white">
+      {/* --- Social Proof Section --- */}
+      <motion.section
+        className="py-16 bg-neutral-50"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Что включает дизайн-проект
-            </h2>
-            <p className="text-lg text-text-secondary">
-              Полный комплекс услуг по созданию интерьера
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <div className="flex justify-center mb-4">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-primary mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-text-secondary mb-4">
-                    {service.description}
-                  </p>
-                  <Badge className="bg-purple-500 text-white">
-                    {service.price}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Portfolio */}
-      <section className="py-16 bg-neutral-100">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Наше портфолио
-            </h2>
-            <p className="text-lg text-text-secondary">
-              Более 300 реализованных проектов в различных стилях
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {portfolioCategories.map((category, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <h3 className="text-lg font-semibold text-text-primary mb-2">
-                    {category.title}
-                  </h3>
-                  <div className="text-purple-500 font-medium mb-2">
-                    {category.count}
-                  </div>
-                  <p className="text-sm text-text-secondary">
-                    {category.style}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Этапы создания дизайн-проекта
-            </h2>
-            <p className="text-lg text-text-secondary">
-              Пошаговый процесс от идеи до реализации
-            </p>
-          </div>
-
-          <div className="max-w-4xl mx-auto">
-            {process.map((item, index) => (
-              <div key={index} className="flex items-start mb-8 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-purple-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-6">
-                  {item.step}
-                </div>
-                <div className="flex-grow">
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-text-secondary">
-                    {item.description}
-                  </p>
-                </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-8 text-center max-w-5xl mx-auto">
+            <motion.div variants={itemVariants}>
+              <div className="text-4xl lg:text-5xl font-extrabold text-accent-orange">
+                <AnimatedCounter value={400} />+
               </div>
+              <p className="text-text-secondary mt-2">проектов в портфолио</p>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <div className="text-4xl lg:text-5xl font-extrabold text-accent-orange">
+                до <AnimatedCounter value={30} />%
+              </div>
+              <p className="text-text-secondary mt-2">экономия бюджета на ремонте</p>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <div className="text-4xl lg:text-5xl font-extrabold text-accent-orange">
+                <AnimatedCounter value={25} />
+              </div>
+              <p className="text-text-secondary mt-2">дней от идеи до альбома</p>
+            </motion.div>
+          </div>
+        </div>
+      </motion.section>
+
+      {/* --- Benefits Comparison --- */}
+      <motion.section
+        className="py-20 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+      >
+        <div className="container mx-auto px-4">
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+              Планирование vs. Случайность
+            </h2>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {beforeAfter.map((comparison, index) => (
+              <motion.div
+                key={index}
+                className="bg-neutral-50 rounded-2xl p-8 border"
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+                variants={cardSlideIn(index === 0 ? 'left' : 'right')}
+              >
+                <h3 className="text-2xl font-bold text-center text-text-primary mb-6">
+                  {comparison.title}
+                </h3>
+                <ul className="space-y-4">
+                  {comparison.points.map((point, pointIndex) => (
+                    <li key={pointIndex} className="flex items-start gap-4">
+                      <div
+                        className={cn(
+                          'w-7 h-7 flex-shrink-0 mt-0.5 rounded-lg flex items-center justify-center',
+                          comparison.iconColor
+                        )}
+                      >
+                        <comparison.Icon className="w-5 h-5" />
+                      </div>
+                      <span className="text-text-secondary">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Benefits */}
-      <section className="py-16 bg-neutral-100">
+      {/* --- How It Works --- */}
+      <motion.section
+        id="process"
+        className="py-20 bg-neutral-50"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-                Преимущества работы с нами
-              </h2>
-            </div>
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+              Как рождается ваш идеальный интерьер
+            </h2>
+            <p className="text-lg text-text-secondary mt-3 max-w-3xl mx-auto">
+              Четыре прозрачных этапа от вашей мечты до готовых чертежей для
+              строителей.
+            </p>
+          </motion.div>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            {processSteps.map((step, index) => (
+              <ProcessStep
+                key={index}
+                icon={step.icon}
+                title={step.title}
+                description={step.description}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      </motion.section>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
-                  <span className="text-text-primary font-medium">{benefit}</span>
-                </div>
+      {/* --- Benefits Section --- */}
+      <motion.section
+        id="benefits"
+        className="py-20 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
+        <div className="container mx-auto px-4">
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+              Проект — это ваша выгода и спокойствие
+            </h2>
+            <p className="text-lg text-text-secondary mt-4 max-w-3xl mx-auto">
+              Дизайн-проект — это не дополнительные расходы, а самый умный
+              инструмент экономии на ремонте.
+            </p>
+          </motion.div>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                Icon: Save,
+                title: 'Экономия бюджета',
+                description:
+                  'Просчитанные объемы материалов и точные чертежи исключают ошибки и переделки, экономя до 30% стоимости ремонта.',
+              },
+              {
+                Icon: CheckCircle,
+                title: 'Гарантия результата',
+                description:
+                  'Благодаря 3D-визуализации вы видите финальный результат еще до начала работ и можете быть уверены, что он вам понравится.',
+              },
+              {
+                Icon: Eye,
+                title: 'Авторский надзор',
+                description:
+                  'Мы проследим, чтобы строители реализовали проект в точности по чертежам, освобождая вас от контроля за стройкой.',
+              },
+              {
+                Icon: Palette,
+                title: 'Функциональность и эргономика',
+                description:
+                  'Мы создаем не просто красивую картинку, а продуманное пространство, где каждый метр работает на ваш комфорт.',
+              },
+            ].map((benefit, index) => (
+              <BenefitCard
+                key={index}
+                icon={<benefit.Icon />}
+                title={benefit.title}
+                description={benefit.description}
+              />
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* --- Reviews Section --- */}
+      <motion.section
+        id="reviews"
+        className="py-20 bg-neutral-50 overflow-hidden"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
+        <div className="container mx-auto px-4">
+          <Carousel>
+            <TestimonialsHeader />
+            <CarouselContent className="-ml-4">
+              {testimonialsData.map((testimonial, index) => (
+                <CarouselItem
+                  key={index}
+                  className="pl-4 md:basis-1/2 lg:basis-1/3"
+                >
+                  <div className="h-full">
+                    <Card className="flex flex-col h-full bg-white shadow-sm border rounded-2xl">
+                      <CardContent className="p-6 flex-grow">
+                        <StarRating rating={testimonial.rating} />
+                        <p className="text-text-secondary mt-4">
+                          "{testimonial.message}"
+                        </p>
+                      </CardContent>
+                      <CardHeader className="pt-0 p-6">
+                        <div className="flex items-center gap-4">
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="w-11 h-11 rounded-full object-cover"
+                          />
+                          <div>
+                            <p className="font-semibold text-text-primary">
+                              {testimonial.name}
+                            </p>
+                          </div>
+                        </div>
+                      </CardHeader>
+                    </Card>
+                  </div>
+                </CarouselItem>
               ))}
-            </div>
-          </div>
+            </CarouselContent>
+          </Carousel>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Pricing */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Стоимость дизайн-проекта
+      {/* --- FAQ Section --- */}
+      <motion.section
+        id="faq"
+        className="py-20 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
+        <div className="container mx-auto px-4 max-w-3xl">
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+              Часто задаваемые вопросы
             </h2>
-            <p className="text-lg text-text-secondary">
-              Прозрачные цены на все виды услуг
+            <p className="text-lg text-text-secondary mt-4">
+              Отвечаем на то, что волнует вас больше всего.
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-center">Эскизный проект</CardTitle>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-500">1 500 ₽/м²</div>
-                  <div className="text-sm text-text-secondary">базовые решения</div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm">Планировочные решения</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm">Стилистическая концепция</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm">Подбор материалов</span>
-                </div>
-                <Button className="w-full mt-6 bg-purple-500 text-white hover:bg-purple-600">
-                  Заказать
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card className="border-purple-500 border-2 relative">
-              <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-purple-500 text-white">
-                Популярный
-              </Badge>
-              <CardHeader>
-                <CardTitle className="text-center">Рабочий проект</CardTitle>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-500">2 500 ₽/м²</div>
-                  <div className="text-sm text-text-secondary">полная документация</div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm">Все из эскизного проекта</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm">Рабочие чертежи</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm">3D визуализация</span>
-                </div>
-                <Button className="w-full mt-6 bg-purple-500 text-white hover:bg-purple-600">
-                  Заказать
-                </Button>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-center">Авторский надзор</CardTitle>
-                <div className="text-center">
-                  <div className="text-3xl font-bold text-purple-500">500 ₽/м²</div>
-                  <div className="text-sm text-text-secondary">контроль реализации</div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm">Контроль качества работ</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm">Консультации подрядчиков</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-green-500" />
-                  <span className="text-sm">Корректировки проекта</span>
-                </div>
-                <Button className="w-full mt-6 bg-purple-500 text-white hover:bg-purple-600">
-                  Заказать
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {faqData.map((item, index) => (
+                <AccordionItem
+                  value={`item-${index}`}
+                  key={index}
+                  className="border bg-neutral-50 rounded-xl"
+                >
+                  <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline p-6 text-text-primary">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-text-secondary text-base px-6 pb-6 pt-0 leading-relaxed">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-purple-500 text-white">
+      {/* --- Final CTA Section --- */}
+      <motion.section
+        className="py-20 bg-neutral-800 text-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Готовы создать дом мечты?
+          <motion.div className="text-center" variants={itemVariants}>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              Готовы увидеть ваш будущий интерьер?
             </h2>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              Получите бесплатную консультацию дизайнера и узнайте стоимость проекта для вашего интерьера
+            <p className="text-xl opacity-80 max-w-2xl mx-auto mb-8">
+              Оставьте заявку на бесплатную консультацию, и мы расскажем, как
+              создать дизайн-проект, который превзойдет ваши ожидания.
             </p>
-          </div>
-          
-          <div className="max-w-2xl mx-auto">
-            <LeadForm 
-              title="Заказать дизайн-проект"
-              description="Расскажите о ваших пожеланиях, и мы создадим уникальный проект"
+          </motion.div>
+          <motion.div className="max-w-xl mx-auto" variants={itemVariants}>
+            <LeadForm
+              title="Записаться на консультацию"
+              description="Это займет 1 минуту и ни к чему не обязывает"
               serviceType="Дизайн-проект"
+              theme="dark"
             />
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }
