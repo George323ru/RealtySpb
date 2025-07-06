@@ -1,9 +1,166 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { motion, useAnimation, useInView, animate } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import LeadForm from "@/components/LeadForm";
-import { CheckCircle, Camera, Paintbrush, Wrench, TrendingUp, Clock, Euro, Star, Users, Briefcase, ArrowRight } from "lucide-react";
+import { CheckCircle, Camera, Paintbrush, Wrench, TrendingUp, Clock, Euro, Star, Users, Briefcase, ArrowRight, Award, BarChart, ShieldCheck, MessageSquare, Eye, ClipboardList, Megaphone, ArrowLeft, XCircle, FileText, Handshake, Building } from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../../components/ui/accordion";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext, useCarousel } from "../../components/ui/carousel";
+import { cn } from "../../lib/utils";
+
+const sectionVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      when: "beforeChildren",
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+};
+
+const cardSlideIn = (direction = 'left') => ({
+  hidden: { opacity: 0, x: direction === 'left' ? -100 : 100 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: 'easeOut' } },
+});
+
+const AnimatedCounter = ({ value }: { value: number }) => {
+  const [displayValue, setDisplayValue] = React.useState(0);
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+  useEffect(() => {
+    if (isInView) {
+      const controls = animate(0, value, {
+        duration: 2,
+        ease: 'easeOut',
+        onUpdate: (latest) => {
+          setDisplayValue(Math.floor(latest));
+        },
+      });
+      return () => controls.stop();
+    }
+  }, [isInView, value]);
+
+  return <span ref={ref}>{displayValue}</span>;
+};
+
+const TestimonialsHeader = () => {
+  const { scrollPrev, scrollNext, canScrollPrev, canScrollNext } = useCarousel();
+
+  return (
+    <div className="flex justify-between items-center mb-8">
+      <div className="max-w-xl">
+        <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+          Говорят наши клиенты
+        </h2>
+        <p className="text-lg text-text-secondary mt-2">
+          Реальные истории, которые доказывают ценность нашей работы.
+        </p>
+      </div>
+      <div className="hidden md:flex gap-3">
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={scrollPrev}
+          disabled={!canScrollPrev}
+          className="h-12 w-12 rounded-full bg-white border-neutral-300 text-neutral-600 hover:border-accent-orange hover:text-accent-orange disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-neutral-300 disabled:hover:text-neutral-600"
+        >
+          <ArrowLeft className="h-5 w-5" />
+        </Button>
+        <Button
+          variant="outline"
+          size="icon"
+          onClick={scrollNext}
+          disabled={!canScrollNext}
+          className="h-12 w-12 rounded-full bg-white border-neutral-300 text-neutral-600 hover:border-accent-orange hover:text-accent-orange disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-neutral-300 disabled:hover:text-neutral-600"
+        >
+          <ArrowRight className="h-5 w-5" />
+        </Button>
+      </div>
+    </div>
+  );
+};
+
+interface BenefitCardProps {
+  icon: React.ReactElement;
+  title: string;
+  description: string;
+}
+
+const BenefitCard = ({ icon, title, description }: BenefitCardProps) => (
+  <motion.div 
+    className="bg-neutral-50 rounded-2xl p-8 border h-full transition-transform duration-300 hover:scale-[1.03] hover:shadow-lg"
+    variants={itemVariants}
+  >
+    <div className="mb-5">
+      <div className="w-12 h-12 flex items-center justify-center bg-accent-orange/10 rounded-lg">
+        {React.cloneElement(icon, {
+          className: 'w-6 h-6 text-accent-orange',
+        })}
+      </div>
+    </div>
+    <h3 className="text-xl font-bold mb-2 text-text-primary">{title}</h3>
+    <p className="text-text-secondary leading-relaxed">{description}</p>
+  </motion.div>
+);
+
+const StarRating = ({
+  rating,
+  className,
+}: {
+  rating: number;
+  className?: string;
+}) => (
+  <div className={cn('flex items-center gap-1', className)}>
+    {Array.from({ length: 5 }, (_, i) => (
+      <Star
+        key={i}
+        className={`w-5 h-5 ${
+          i < rating ? 'text-yellow-400 fill-yellow-400' : 'text-neutral-300'
+        }`}
+      />
+    ))}
+  </div>
+);
+
+interface ProcessStepProps {
+  icon: React.ReactElement;
+  title: string;
+  description: string;
+  index: number;
+}
+
+const ProcessStep = ({ icon, title, description, index }: ProcessStepProps) => (
+  <motion.div 
+    className="relative bg-white rounded-2xl p-8 border shadow-sm overflow-hidden h-full"
+    variants={itemVariants}
+  >
+    <div className="absolute -top-2 -left-2 text-8xl font-extrabold text-neutral-100 z-0 select-none">
+      {String(index + 1).padStart(2, '0')}
+    </div>
+    <div className="relative z-10">
+      <div className="absolute top-0 right-0 w-10 h-10 flex items-center justify-center bg-accent-orange/10 rounded-lg">
+        {React.cloneElement(icon, {
+          className: 'w-5 h-5 text-accent-orange',
+        })}
+      </div>
+      <h3 className="text-xl font-bold mb-3 mt-12 text-text-primary">
+        {title}
+      </h3>
+      <p className="text-text-secondary leading-relaxed">{description}</p>
+    </div>
+  </motion.div>
+);
 
 export default function PreSalePreparation() {
   const services = [
@@ -42,45 +199,56 @@ export default function PreSalePreparation() {
     "Выделение среди конкурентов на рынке"
   ];
 
-  const process = [
+  const processSteps = [
     {
-      step: "01",
-      title: "Анализ объекта",
-      description: "Осматриваем недвижимость и определяем объем работ"
+      icon: <FileText />,
+      title: 'Анализ и стратегия',
+      description:
+        'Вы получаете ясный план действий и прозрачную смету. Мы находим скрытый потенциал вашего объекта, чтобы выжать максимум из продажи.',
     },
     {
-      step: "02",
-      title: "Составление плана",
-      description: "Разрабатываем план подготовки с учетом бюджета"
+      icon: <Paintbrush />,
+      title: 'Преображение объекта',
+      description:
+        'Мы берем всю рутину на себя. Ваша недвижимость становится идеальной для покупателя, пока вы занимаетесь своими делами.',
     },
     {
-      step: "03",
-      title: "Выполнение работ",
-      description: "Проводим все необходимые работы по подготовке"
+      icon: <Camera />,
+      title: 'Профессиональная упаковка',
+      description:
+        'Создаем "вау-эффект" с помощью фото, видео и 3D-туров, которые выделяют вашу квартиру среди сотен других и привлекают целевых покупателей.',
     },
     {
-      step: "04",
-      title: "Фотосъемка",
-      description: "Делаем профессиональные фото готового объекта"
+      icon: <Handshake />,
+      title: 'Продажа и переговоры',
+      description:
+        'Организуем поток покупателей, проводим показы и ведем переговоры от вашего имени, профессионально отстаивая цену и доводя сделку до успешного финала.',
     },
-    {
-      step: "05",
-      title: "Размещение",
-      description: "Размещаем привлекательные объявления на площадках"
-    }
   ];
 
   const beforeAfter = [
     {
-      title: "Без подготовки",
-      points: ["Среднее время продажи: 6-8 месяцев", "Торг до 15% от цены", "Мало просмотров объявления"],
-      color: "bg-red-50 border-red-200"
+      title: 'Без подготовки',
+      points: [
+        'Среднее время продажи: 6-8 месяцев',
+        'Постоянный торг до 15% от стартовой цены',
+        "Мало звонков и 'пустые' просмотры",
+        "Объявление 'приедается' и теряется в потоке",
+      ],
+      iconColor: 'text-red-500 bg-red-500/10',
+      Icon: XCircle,
     },
     {
-      title: "С подготовкой",
-      points: ["Среднее время продажи: 2-3 месяца", "Торг до 5% от цены", "Высокий интерес покупателей"],
-      color: "bg-green-50 border-green-200"
-    }
+      title: 'С нашей подготовкой',
+      points: [
+        'Среднее время продажи: 1-2 месяца',
+        'Продажа по максимальной цене, торг минимален',
+        'Высокий спрос и очередь из реальных покупателей',
+        'Ваш объект — самый привлекательный в районе',
+      ],
+      iconColor: 'text-green-500 bg-green-500/10',
+      Icon: CheckCircle,
+    },
   ];
 
   const testimonials = [
@@ -95,431 +263,473 @@ export default function PreSalePreparation() {
       author: "Елена Сидорова",
       property: "Студия в Девяткино",
       rating: 5
-    }
+    },
+    {
+      name: 'Константин Р.',
+      image:
+        'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Думал, это только для дорогих квартир. Но моя однушка в спальном районе после подготовки ушла на 15% дороже рынка. Инвестиция, которая точно того стоила.',
+      rating: 5,
+    },
+    {
+      name: 'Анна К.',
+      image:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Квартира не продавалась полгода, уже отчаялась. После вашей подготовки ушла за 3 недели, да еще и на 800 тыс. дороже, чем я просила изначально! Просто в шоке, спасибо!',
+      rating: 5,
+    },
+    {
+      name: 'Виктор П.',
+      image:
+        'https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Самое ценное — с меня сняли всю головную боль. Не пришлось самому искать ремонтников, клининг, фотографа. Все сделали под ключ. Экономия времени и нервов колоссальная.',
+      rating: 5,
+    },
+    {
+      name: 'Мария С.',
+      image:
+        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Сделали легкий косметический ремонт и красивый декор. Покупатели на просмотре сказали: "Как уютно, хотим здесь жить!". Продали первому же клиенту.',
+      rating: 5,
+    },
   ];
 
-  const faqItems = [
+  const faqData = [
     {
-      question: "Сколько времени занимает предпродажная подготовка?",
-      answer: "В среднем, от 1 до 3 недель в зависимости от объема работ. Косметический ремонт и стейджинг могут занять больше времени, в то время как профессиональная фотосессия — всего 1-2 дня."
+      question: 'Зачем нужна подготовка? Не проще ли просто снизить цену?',
+      answer:
+        'Снижение цены привлекает "охотников за скидками", а качественная предпродажная подготовка — серьезных покупателей, готовых платить больше. Инвестируя в хоумстейджинг и косметический ремонт, вы увеличиваете конечную стоимость квартиры на 10-20%. Мы создаем "вау-эффект", чтобы покупатель влюбился в вашу квартиру, а не искал поводы для торга.',
     },
     {
-      question: "Обязательно ли делать ремонт?",
-      answer: "Не всегда. Мы проводим анализ и рекомендуем только те работы, которые действительно повысят стоимость и привлекательность объекта. Иногда достаточно генеральной уборки и мелких исправлений."
+      question: "У меня нет времени на ремонт. Вы все делаете 'под ключ'?",
+      answer:
+        'Именно! В этом и заключается наша услуга. Мы полностью забираем на себя всю рутину: от планирования и закупки материалов до контроля рабочих и финального клининга. Ваше участие минимально — вы просто принимаете готовый результат, экономя время и нервы для более важных дел.',
     },
     {
-      question: "Как определяется, какие улучшения нужны?",
-      answer: "Наш специалист выезжает на объект, оценивает его состояние, анализирует целевую аудиторию и конкурентов, после чего составляет подробный план работ с оценкой их рентабельности."
+      question: 'Сколько это стоит и когда я верну свои вложения?',
+      answer:
+        'Стоимость предпродажной подготовки всегда индивидуальна. Мы начинаем с прозрачной сметы, где каждый рубль обоснован. В 95% случаев вложения окупаются многократно прямо на сделке за счет увеличения цены. В среднем, каждый вложенный рубль в подготовку приносит 5-7 рублей дополнительной прибыли.',
     },
     {
-      question: "А если у меня ипотека на этой квартире?",
-      answer: "Это не является препятствием. Мы работаем со всеми видами обременений. Юридический отдел поможет согласовать все действия с банком, если это потребуется."
+      question: 'Что если у меня совсем небольшой бюджет?',
+      answer:
+        'Большой бюджет не всегда нужен. Иногда чудеса творят генеральная уборка, правильная перестановка мебели (это и есть хоумстейджинг), и новый текстиль. Мы — эксперты в поиске решений с максимальной отдачей. Мы найдем "болевые точки" вашей квартиры и предложим план, который поможет продать квартиру быстро и выгодно даже с ограниченными средствами.',
+    },
+  ];
+
+  // Data for the "What's Included" block
+  const includedServicesData = {
+    title: "Что включает подготовка",
+    description: "Комплекс услуг для максимального повышения привлекательности объекта",
+    services: [
+      {
+        icon: <Camera className="w-8 h-8 text-blue-500" />,
+        title: "Профессиональная фотосъемка",
+        description: "Качественные фото для привлекательных объявлений",
+        price: "от 15 000 ₽"
+      },
+      {
+        icon: <Paintbrush className="w-8 h-8 text-green-500" />,
+        title: "Косметический ремонт",
+        description: "Устранение дефектов и освежение интерьера",
+        price: "от 2 500 ₽/м²"
+      },
+      {
+        icon: <Wrench className="w-8 h-8 text-purple-500" />,
+        title: "Мелкий ремонт",
+        description: "Устранение мелких недостатков и поломок",
+        price: "от 5 000 ₽"
+      },
+      {
+        icon: <TrendingUp className="w-8 h-8 text-orange-500" />,
+        title: "Стейджинг",
+        description: "Расстановка мебели и декора для показов",
+        price: "от 25 000 ₽"
+      }
+    ]
+  };
+
+  // 9. Messenger-style Reviews Data
+  const testimonialsData = [
+    {
+      name: 'Константин Р.',
+      image:
+        'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Думал, это только для дорогих квартир. Но моя однушка в спальном районе после подготовки ушла на 15% дороже рынка. Инвестиция, которая точно того стоила.',
+      rating: 5,
     },
     {
-      question: "Что такое хоум-стейджинг?",
-      answer: "Это технология подготовки недвижимости к продаже или аренде, которая включает в себя деперсонализацию интерьера, расстановку мебели и декора для создания максимально привлекательного образа для широкого круга покупателей."
-    }
+      name: 'Анна К.',
+      image:
+        'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Квартира не продавалась полгода, уже отчаялась. После вашей подготовки ушла за 3 недели, да еще и на 800 тыс. дороже, чем я просила изначально! Просто в шоке, спасибо!',
+      rating: 5,
+    },
+    {
+      name: 'Виктор П.',
+      image:
+        'https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Самое ценное — с меня сняли всю головную боль. Не пришлось самому искать ремонтников, клининг, фотографа. Все сделали под ключ. Экономия времени и нервов колоссальная.',
+      rating: 5,
+    },
+    {
+      name: 'Мария С.',
+      image:
+        'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=300&auto=format&fit=crop',
+      message:
+        'Сделали легкий косметический ремонт и красивый декор. Покупатели на просмотре сказали: "Как уютно, хотим здесь жить!". Продали первому же клиенту.',
+      rating: 5,
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen bg-white text-text-primary">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-16">
+      <motion.section 
+        className="bg-white pt-20 pb-16 lg:pt-32 lg:pb-24"
+        initial="hidden"
+        animate="visible"
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Предпродажная 
-              <span className="text-yandex-yellow"> подготовка</span>
-            </h1>
-            <p className="text-xl lg:text-2xl mb-8 opacity-90">
-              Увеличим стоимость вашей недвижимости на 15-20% и сократим время продажи в 2-3 раза
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
-                Получить оценку
+            <motion.h1 
+              className="text-4xl lg:text-6xl font-extrabold mb-6 !leading-tight tracking-tighter"
+              variants={itemVariants}
+            >
+              Продайте квартиру <br />
+              <span className="text-accent-orange">дороже и быстрее</span>
+            </motion.h1>
+            <motion.p 
+              className="text-lg lg:text-xl mb-10 text-text-secondary max-w-3xl mx-auto"
+              variants={itemVariants}
+            >
+              Профессиональная предпродажная подготовка и хоумстейджинг в
+              Санкт-Петербурге. Увеличиваем итоговую стоимость объекта в
+              среднем на 15-20%.
+            </motion.p>
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              variants={itemVariants}
+            >
+              <Button
+                size="lg"
+                className="bg-accent-orange text-white hover:bg-orange-600 px-8 h-12 text-base font-bold"
+              >
+                Рассчитать стоимость
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
-                Примеры работ
-              </Button>
-            </div>
+            </motion.div>
+            <motion.p 
+              className="mt-4 text-sm text-text-secondary"
+              variants={itemVariants}
+            >
+              Это бесплатно и ни к чему не обязывает
+            </motion.p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Social Proof Section */}
-      <section className="py-16 bg-white">
+      <motion.section 
+        className="py-16 bg-neutral-50"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.5 }}
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Нам доверяют лучшие
-            </h2>
-            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
-              Мы сотрудничаем с ведущими банками и площадками, а наши клиенты всегда остаются довольны результатом.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center max-w-5xl mx-auto">
-            <div className="bg-neutral-100 p-6 rounded-lg">
-              <Star className="w-10 h-10 text-accent-orange mx-auto mb-3" />
-              <div className="text-3xl font-bold text-text-primary">4.9/5</div>
-              <p className="text-text-secondary">Средний рейтинг</p>
-            </div>
-            <div className="bg-neutral-100 p-6 rounded-lg">
-              <Users className="w-10 h-10 text-accent-orange mx-auto mb-3" />
-              <div className="text-3xl font-bold text-text-primary">200+</div>
-              <p className="text-text-secondary">Подготовленных объектов</p>
-            </div>
-            <div className="bg-neutral-100 p-6 rounded-lg">
-              <Briefcase className="w-10 h-10 text-accent-orange mx-auto mb-3" />
-              <div className="text-3xl font-bold text-text-primary">12 лет</div>
-              <p className="text-text-secondary">Опыта на рынке</p>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-y-10 md:gap-x-8 text-center max-w-5xl mx-auto">
+            <motion.div variants={itemVariants}>
+              <div className="text-4xl lg:text-5xl font-extrabold text-accent-orange">
+                +<AnimatedCounter value={18} />%
+              </div>
+              <p className="text-text-secondary mt-2">
+                среднее увеличение цены
+              </p>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <div className="text-4xl lg:text-5xl font-extrabold text-accent-orange">
+                в <AnimatedCounter value={2} /> раза
+              </div>
+              <p className="text-text-secondary mt-2">
+                среднее ускорение продажи
+              </p>
+            </motion.div>
+            <motion.div variants={itemVariants}>
+              <div className="text-4xl lg:text-5xl font-extrabold text-accent-orange">
+                <AnimatedCounter value={200} />+
+              </div>
+              <p className="text-text-secondary mt-2">
+                счастливых клиентов
+              </p>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Benefits Comparison */}
-      <section className="py-16 bg-white">
+      <motion.section 
+        className="py-20 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Разница очевидна
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+              Разница, которую видят покупатели
             </h2>
-            <p className="text-lg text-text-secondary">
-              Сравните результаты продажи с подготовкой и без неё
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {beforeAfter.map((comparison, index) => (
-              <Card key={index} className={`${comparison.color} border-2`}>
-                <CardHeader>
-                  <CardTitle className="text-xl text-center">
-                    {comparison.title}
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  {comparison.points.map((point, pointIndex) => (
-                    <div key={pointIndex} className="flex items-center gap-3">
-                      <div className={`w-2 h-2 rounded-full ${index === 0 ? 'bg-red-500' : 'bg-green-500'}`}></div>
-                      <span className="text-text-primary">{point}</span>
-                    </div>
-                  ))}
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Card className="inline-block">
-              <CardContent className="p-8">
-                <h3 className="text-2xl font-bold text-text-primary mb-4">
-                  Увеличение прибыли
-                </h3>
-                <div className="text-4xl font-bold text-green-500 mb-2">
-                  +2-3 млн ₽
-                </div>
-                <p className="text-text-secondary">
-                  Средняя дополнительная прибыль от продажи 3-комнатной квартиры после подготовки
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="py-16 bg-neutral-100">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Что включает подготовка
-            </h2>
-            <p className="text-lg text-text-secondary">
-              Комплекс услуг для максимального повышения привлекательности объекта
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => (
-              <Card key={index} className="hover:shadow-lg transition-shadow">
-                <CardContent className="p-6 text-center">
-                  <div className="flex justify-center mb-4">
-                    {service.icon}
-                  </div>
-                  <h3 className="text-lg font-semibold text-text-primary mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-text-secondary mb-4">
-                    {service.description}
-                  </p>
-                  <Badge className="bg-accent-orange text-white">
-                    {service.price}
-                  </Badge>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Benefits */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-                Преимущества подготовки
-              </h2>
-              <p className="text-lg text-text-secondary">
-                Почему стоит инвестировать в предпродажную подготовку
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-center gap-3">
-                  <CheckCircle className="w-6 h-6 text-green-500 flex-shrink-0" />
-                  <span className="text-text-primary font-medium">{benefit}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Process */}
-      <section className="py-16 bg-neutral-100">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Этапы работы
-            </h2>
-            <p className="text-lg text-text-secondary">
-              Как проходит процесс предпродажной подготовки
-            </p>
-          </div>
-
-          <div className="relative max-w-4xl mx-auto">
-            <div className="absolute left-8 top-8 bottom-0 w-0.5 bg-gray-200" aria-hidden="true"></div>
-            {process.map((item, index) => (
-              <div key={index} className="flex items-start mb-10 last:mb-0">
-                <div className="flex-shrink-0 w-16 h-16 bg-accent-orange text-white rounded-full flex items-center justify-center font-bold text-lg mr-6 z-10 relative">
-                  {item.step}
-                </div>
-                <div className="flex-grow pt-1">
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
-                    {item.title}
-                  </h3>
-                  <p className="text-text-secondary">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Second CTA Section */}
-      <section className="py-20 bg-accent-orange text-white">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-            Готовы продать дороже и быстрее?
-          </h2>
-          <p className="text-xl opacity-90 mb-8 max-w-2xl mx-auto">
-            Не теряйте деньги и время. Узнайте, какой потенциал скрыт в вашей недвижимости.
-          </p>
-          <Button size="lg" variant="outline" className="bg-white text-accent-orange hover:bg-gray-50 border-white text-lg px-8 py-3 font-bold">
-            Получить бесплатную консультацию
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
-        </div>
-      </section>
-
-      {/* Expanded Testimonials */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Истории успеха наших клиентов
-            </h2>
-            <p className="text-lg text-text-secondary">
-              Реальные результаты и отзывы о предпродажной подготовке
-            </p>
-          </div>
+          </motion.div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <Card key={index} className="flex flex-col">
-                <CardContent className="p-6 flex-grow">
-                  <div className="flex mb-2">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-text-secondary mb-4 italic">"{testimonial.quote}"</p>
-                </CardContent>
-                <div className="bg-neutral-50 p-4 flex items-center gap-4 border-t">
-                  <div className="w-12 h-12 bg-accent-orange rounded-full flex items-center justify-center text-white font-bold">
-                    {testimonial.author.split(' ').map(n => n[0]).join('')}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-text-primary">{testimonial.author}</p>
-                    <p className="text-sm text-text-secondary">{testimonial.property}</p>
-                  </div>
-                </div>
-              </Card>
+            {beforeAfter.map((comparison, index) => (
+              <motion.div
+                key={index}
+                className="bg-neutral-50 rounded-2xl p-8 border"
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.5 }}
+                variants={cardSlideIn(index === 0 ? 'left' : 'right')}
+              >
+                <h3 className="text-2xl font-bold text-center text-text-primary mb-6">
+                    {comparison.title}
+                </h3>
+                <ul className="space-y-4">
+                  {comparison.points.map((point, pointIndex) => (
+                    <li key={pointIndex} className="flex items-start gap-4">
+                      <div
+                        className={cn(
+                          'w-7 h-7 flex-shrink-0 mt-0.5 rounded-lg flex items-center justify-center',
+                          comparison.iconColor
+                        )}
+                      >
+                        <comparison.Icon className="w-5 h-5" />
+                    </div>
+                      <span className="text-text-secondary">{point}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </motion.section>
+
+      {/* How It Works */}
+      <motion.section 
+        id="process" 
+        className="py-20 bg-neutral-50"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
+        <div className="container mx-auto px-4">
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+              Как мы создаем ценность
+            </h2>
+            <p className="text-lg text-text-secondary mt-3 max-w-3xl mx-auto">
+              Четыре этапа, которые превращают вашу квартиру в востребованный
+              актив на рынке.
+            </p>
+          </motion.div>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            {processSteps.map((step, index) => (
+              <ProcessStep
+                key={index}
+                icon={step.icon}
+                title={step.title}
+                description={step.description}
+                index={index}
+              />
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Benefits Section */}
+      <motion.section 
+        id="benefits" 
+        className="py-20 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
+        <div className="container mx-auto px-4">
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+              Почему это работает
+            </h2>
+            <p className="text-lg text-text-secondary mt-4 max-w-3xl mx-auto">
+              Подготовка — это не затраты, а самая выгодная инвестиция в вашу
+              недвижимость.
+            </p>
+          </motion.div>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                Icon: BarChart,
+                title: 'Рост цены на 15-20%',
+                description:
+                  'Профессионально подготовленный объект воспринимается как более дорогой и статусный, что напрямую влияет на финальную цену продажи.',
+              },
+              {
+                Icon: Clock,
+                title: 'Продажа в 2-3 раза быстрее',
+                description:
+                  'Привлекательные фото и «вау-эффект» на показах генерируют больше звонков и предложений, сокращая срок экспозиции.',
+              },
+              {
+                Icon: Eye,
+                title: 'Профессиональная презентация',
+                description:
+                  'Мы знаем, как скрыть мелкие недостатки и выгодно подчеркнуть все достоинства вашего объекта, чтобы он выглядел безупречно.',
+              },
+              {
+                Icon: Star,
+                title: 'Эмоциональная привязка',
+                description:
+                  'С помощью хоумстейджинга мы создаем интерьер, в котором хочется жить. Покупатель влюбляется в квартиру, а не ищет поводы для торга.',
+              },
+            ].map((benefit, index) => (
+              <BenefitCard
+                key={index}
+                icon={<benefit.Icon />}
+                title={benefit.title}
+                description={benefit.description}
+              />
+            ))}
+          </div>
+        </div>
+      </motion.section>
+
+      {/* Reviews Section */}
+      <motion.section 
+        id="reviews" 
+        className="py-20 bg-neutral-50 overflow-hidden"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
+        <div className="container mx-auto px-4">
+          <Carousel>
+            <TestimonialsHeader />
+            <CarouselContent className="-ml-4">
+              {testimonialsData.map((testimonial, index) => (
+                <CarouselItem
+                  key={index}
+                  className="pl-4 md:basis-1/2 lg:basis-1/3"
+                >
+                  <div className="h-full">
+                    <Card className="flex flex-col h-full bg-white shadow-sm border rounded-2xl">
+                      <CardContent className="p-6 flex-grow">
+                        <StarRating rating={testimonial.rating} />
+                        <p className="text-text-secondary mt-4">
+                          "{testimonial.message}"
+                        </p>
+                      </CardContent>
+                      <CardHeader className="pt-0 p-6">
+                        <div className="flex items-center gap-4">
+                          <img
+                            src={testimonial.image}
+                            alt={testimonial.name}
+                            className="w-11 h-11 rounded-full object-cover"
+                          />
+                          <div>
+                            <p className="font-semibold text-text-primary">
+                              {testimonial.name}
+                            </p>
+                          </div>
+                        </div>
+                      </CardHeader>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+          </Carousel>
+        </div>
+      </motion.section>
 
       {/* FAQ Section */}
-      <section className="py-16 bg-neutral-100">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Часто задаваемые вопросы
+      <motion.section 
+        id="faq" 
+        className="py-20 bg-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
+        <div className="container mx-auto px-4 max-w-3xl">
+          <motion.div className="text-center mb-16" variants={itemVariants}>
+            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary">
+              Остались вопросы?
             </h2>
-            <p className="text-lg text-text-secondary">
-              Ответы на популярные вопросы о предпродажной подготовке
+            <p className="text-lg text-text-secondary mt-4">
+              Здесь самые частые сомнения наших клиентов. Возможно, среди них
+              есть и ваше.
             </p>
-          </div>
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqItems.map((item, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-sm">
-                <h3 className="text-lg font-semibold text-text-primary mb-2">{item.question}</h3>
-                <p className="text-text-secondary">{item.answer}</p>
-              </div>
-            ))}
-          </div>
+          </motion.div>
+          <motion.div variants={itemVariants}>
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {faqData.map((item, index) => (
+                <AccordionItem
+                  value={`item-${index}`}
+                  key={index}
+                  className="border bg-neutral-50 rounded-xl"
+                >
+                  <AccordionTrigger className="text-lg font-semibold text-left hover:no-underline p-6 text-text-primary">
+                    {item.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-text-secondary text-base px-6 pb-6 pt-0 leading-relaxed">
+                    {item.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
-      {/* Price Calculator */}
-      <section className="py-16 bg-white">
+      {/* Final CTA Section */}
+      <motion.section 
+        className="py-20 bg-neutral-800 text-white"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        variants={sectionVariants}
+      >
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-                Стоимость услуг
-              </h2>
-              <p className="text-lg text-text-secondary">
-                Прозрачное ценообразование без скрытых платежей
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-center">Базовый</CardTitle>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-accent-orange">от 50 000 ₽</div>
-                    <div className="text-sm text-text-secondary">для 1-2 комнатных</div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-sm">Профессиональная фотосъемка</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-sm">Мелкий ремонт</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-sm">Уборка</span>
-                  </div>
-                  <Button className="w-full mt-6 bg-accent-orange text-white hover:bg-orange-600">
-                    Выбрать
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card className="border-accent-orange border-2 relative">
-                <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-accent-orange text-white">
-                  Популярный
-                </Badge>
-                <CardHeader>
-                  <CardTitle className="text-center">Стандартный</CardTitle>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-accent-orange">от 120 000 ₽</div>
-                    <div className="text-sm text-text-secondary">для 3-4 комнатных</div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-sm">Все из базового пакета</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-sm">Косметический ремонт</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-sm">Базовый стейджинг</span>
-                  </div>
-                  <Button className="w-full mt-6 bg-accent-orange text-white hover:bg-orange-600">
-                    Выбрать
-                  </Button>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-center">Премиум</CardTitle>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-accent-orange">от 250 000 ₽</div>
-                    <div className="text-sm text-text-secondary">любая площадь</div>
-                  </div>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-sm">Все из стандартного</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-sm">Полный стейджинг</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5 text-green-500" />
-                    <span className="text-sm">3D-тур</span>
-                  </div>
-                  <Button className="w-full mt-6 bg-accent-orange text-white hover:bg-orange-600">
-                    Выбрать
-                  </Button>
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-500 text-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold mb-6">
-              Готовы увеличить стоимость недвижимости?
+          <motion.div className="text-center" variants={itemVariants}>
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4">
+              Увеличьте стоимость своей недвижимости
             </h2>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              Получите бесплатную консультацию и узнайте, сколько можно дополнительно получить от продажи
+            <p className="text-xl opacity-80 max-w-2xl mx-auto mb-8">
+              Оставьте заявку, и мы бесплатно рассчитаем потенциал роста цены
+              вашей квартиры после подготовки.
             </p>
-          </div>
-          
-          <div className="max-w-2xl mx-auto">
+          </motion.div>
+          <motion.div className="max-w-xl mx-auto" variants={itemVariants}>
             <LeadForm 
-              title="Получить консультацию по подготовке"
-              description="Оценим ваш объект и составим план подготовки"
+              title="Получить бесплатный расчет"
+              description="Это займет 1 минуту и ни к чему не обязывает"
               serviceType="Предпродажная подготовка"
+              theme="dark"
             />
-          </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
     </div>
   );
 }

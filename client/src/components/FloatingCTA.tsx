@@ -140,3 +140,5 @@ export default function FloatingCTA({
     </div>
   );
 }
+
+export default FloatingCTA

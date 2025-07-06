@@ -53,4 +53,137 @@ export interface HeroSearchData {
   district: string;
   priceFrom: string;
   priceTo: string;
+}
+
+// Types for General Service Page (the one with all service cards)
+export interface ServicePageDirection {
+  icon: string;
+  title: string;
+  description: string;
+  cta?: string;
+  slug: string;
+}
+
+export interface ServicePageWorkStep {
+  id: string;
+  title: string;
+  description: string;
+}
+
+export interface ServicePageAdvantage {
+  icon: string; // Corresponds to a lucide-react icon name
+  title: string;
+  description: string;
+}
+
+export interface ServicePageFaqItem {
+  icon: string;
+  question: string;
+  answer: string;
+}
+
+export interface ServicePageReview {
+  author: string;
+  text: string;
+}
+
+export interface ServicePageData {
+  directions: ServicePageDirection[];
+  howItWorksSteps: ServicePageWorkStep[];
+  advantages: ServicePageAdvantage[];
+  faqItems: ServicePageFaqItem[];
+  reviews: ServicePageReview[];
+}
+
+// =================================================================
+// Types for Specific Service Detail Page (e.g., Heating, Design)
+// =================================================================
+
+interface Cta {
+  primaryCta: string;
+  secondaryCta?: string;
+}
+
+interface Audience {
+  icon: string;
+  title: string;
+}
+
+interface PainGainItem {
+  text: string;
+}
+
+interface SubService {
+  icon: string;
+  title:string;
+  description: string;
+}
+
+interface CaseStudy {
+  image: string;
+  title: string;
+  problem: string;
+  solution: string;
+  duration: string;
+  budget: string;
+  videoUrl?: string;
+  beforeImage?: string;
+  afterImage?: string;
+}
+
+interface ProcessStep {
+  id: string;
+  title: string;
+  description: string;
+}
+
+interface Advantage {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface ServiceDetailData {
+  serviceName: string;
+  metaDescription: string;
+  hero: Cta & {
+    title: string;
+    subtitle: string;
+    image: string;
+    videoUrl?: string;
+  };
+  targetAudiences: Audience[];
+  painGain: {
+    painTitle: string;
+    gainTitle: string;
+    pains: PainGainItem[];
+    gains: PainGainItem[];
+  };
+  subServices: SubService[];
+  caseStudies: CaseStudy[];
+  processSteps: ProcessStep[];
+  advantages: Advantage[];
+  faq: FaqItem[];
+  districts?: string[];
+}
+
+export interface EstimateExample {
+  type: string; // Например: "Студия", "2-комнатная квартира"
+  price: string; // Например: "от 180 000 ₽"
+  works: string[]; // Перечень основных работ
+  duration: string; // Например: "7 дней"
+  image?: string; // URL изображения (опционально)
+}
+
+export interface EngineerExpert {
+  name: string;
+  photo: string;
+  experience: string; // Например: '12 лет опыта'
+  quote: string;
+  position: string;
 } 

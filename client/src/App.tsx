@@ -86,7 +86,7 @@ function Router() {
       </motion.div>
     </AnimatePresence>
   );
-}
+};
 
 function App() {
   return (
