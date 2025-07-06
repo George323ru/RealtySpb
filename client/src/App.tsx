@@ -30,10 +30,21 @@ import Calculator from "./pages/calculator";
 import PrivacyPolicy from "./pages/privacy-policy";
 import AdminPage from "./pages/admin";
 import NotFound from "./pages/not-found";
-import PreSalePreparation from "./pages/services/PreSalePreparation";
-import DesignProject from "./pages/services/DesignProject";
-import EngineeringSystems from "./pages/services/EngineeringSystems";
-import HeatingPage from "./pages/services/engineering/Heating";
+import Team from './pages/team'
+import Contact from './pages/contacts'
+import AllServices from './pages/services/AllServices'
+import Construction from './pages/services/Construction'
+import DesignProject from './pages/services/DesignProject'
+import EngineeringSystems from './pages/services/EngineeringSystems'
+import Heating from './pages/services/engineering/Heating'
+import GasSupplyPage from './pages/services/engineering/GasSupply'
+import Renovation from './pages/services/Renovation'
+import LegalCheck from './pages/services/LegalCheck'
+import PreSalePreparation from './pages/services/PreSalePreparation'
+import VodosnabzhenieIKanalizaciya from './pages/services/engineering/VodosnabzhenieIKanalizaciya'
+import Electricity from './pages/services/engineering/Electricity'
+import Ventilation from './pages/services/engineering/Ventilation'
+import SecuritySystems from './pages/services/engineering/SecuritySystems'
 
 const Router = () => {
   return (
@@ -47,18 +58,32 @@ const Router = () => {
       <Route path="/secondary" component={Secondary} />
       <Route path="/property/:id" component={PropertyDetail} />
       <Route path="/services" component={Services} />
-      <Route
-        path="/services/pre-sale-preparation"
-        component={PreSalePreparation}
-      />
-      <Route path="/services/design-project" component={DesignProject} />
+      <Route path="/services/all" component={AllServices} />
       <Route
         path="/services/engineering-systems"
         component={EngineeringSystems}
       />
+      <Route path="/services/engineering/heating" component={Heating} />
+      <Route path="/services/engineering/gas-supply" component={GasSupplyPage} />
+      <Route path="/services/engineering/ventilation" component={Ventilation} />
       <Route
-        path="/services/engineering/heating"
-        component={HeatingPage}
+        path="/services/engineering/security-systems"
+        component={SecuritySystems}
+      />
+      <Route path="/services/design-project" component={DesignProject} />
+      <Route path="/services/renovation" component={Renovation} />
+      <Route path="/services/construction" component={Construction} />
+      <Route
+        path="/services/engineering/vodosnabzhenie-i-kanalizaciya"
+        component={VodosnabzhenieIKanalizaciya}
+      />
+      <Route
+        path="/services/engineering/electricity"
+        component={Electricity}
+      />
+      <Route
+        path="/services/presale-preparation"
+        component={PreSalePreparation}
       />
       <Route path="/services/:id" component={ServiceDetail} />
       <Route path="/land" component={Land} />

@@ -13,7 +13,7 @@ export const engineeringSystemsData: ServicePageData = {
     {
       icon: 'Droplets',
       title: 'Водоснабжение и канализация',
-      slug: 'water-supply',
+      slug: 'vodosnabzhenie-i-kanalizaciya',
       description:
         'Вода там, где нужна, с гарантией давления и отвода. Создаем внутренние и наружные сети, автономные системы со скважинами и септиками. Обеспечиваем защиту от протечек и работаем даже без центральных коммуникаций.',
       cta: 'Подобрать септик и скважину',

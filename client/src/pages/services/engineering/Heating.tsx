@@ -248,13 +248,16 @@ const faq = {
 
 const engineerData = {
   name: 'Иван Петров',
-  position: 'Ведущий инженер',
   experience: '15 лет',
   quote: 'Я отвечаю за каждую систему как за свою собственную. Опыт работы с объектами до 5000 м².',
-  certificates: ['Viessmann', 'Rehau', 'Buderus'],
+  certificates: [
+    { name: 'Viessmann', icon: 'https://logo.com/image-cdn/images/kts928pd/production/d389149029d20c575510074213054363c43734a7-338x337.png?w=1080&q=72' },
+    { name: 'Rehau', icon: 'https://www.rehau.com/images/873420/7x5/1200/857/rehau-logo-pos-red-5c-red-rgb.jpg' },
+    { name: 'Buderus', icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Buderus-Logo.svg/1200px-Buderus-Logo.svg.png' },
+  ],
   projectsCount: 57,
   photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
-}
+};
 
 // --- Компоненты страницы ---
 const HeroSection = () => (
@@ -727,35 +730,14 @@ const FAQSection = () => {
 }
 
 const CTASection = () => (
-  <section className={`${SPACING.section} bg-gradient-to-r from-blue-600 to-blue-700`}>
+  <section id="lead-form" className={`${SPACING.section} bg-gradient-to-r from-blue-600 to-blue-700`}>
     <div className={SPACING.container}>
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={{
-          hidden: { opacity: 0, y: 20 },
-          visible: { opacity: 1, y: 0, transition: { duration: ANIMATION.duration } }
-        }}
-        className="text-center text-white"
-      >
-        <h2 className="text-4xl font-bold mb-6">
-          Остались вопросы?
-        </h2>
-        <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-          Получите бесплатную консультацию от нашего ведущего инженера. 
-          Ответим на все вопросы и подготовим индивидуальное предложение.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
-            Получить консультацию
-            <ArrowRight className="w-5 h-5 ml-2" />
-          </Button>
-          <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-white text-white hover:bg-white hover:text-blue-600">
-            Заказать звонок
-          </Button>
-        </div>
-      </motion.div>
+       <LeadForm 
+        title="Остались вопросы?"
+        description="Получите бесплатную консультацию от нашего ведущего инженера. Ответим на все вопросы и подготовим индивидуальное предложение."
+        serviceType="heating_installation"
+        theme="dark"
+      />
     </div>
   </section>
 )
@@ -817,10 +799,7 @@ const Heating = () => {
       <FAQSection />
       <CTASection />
       
-      <FloatingCTA 
-        text="Получить консультацию"
-        showAfterScroll={300}
-      />
+      <FloatingCTA />
     </>
   )
 }
