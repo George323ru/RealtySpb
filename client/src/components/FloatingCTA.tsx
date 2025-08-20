@@ -76,17 +76,16 @@ export default function FloatingCTA({
 
   const buttonStyles = variant === 'modern' 
     ? cn(
-        // Современный стиль с белым фоном и оранжевой обводкой
+        // Современный стиль с белым фоном и оранжевой обводкой (без bounce)
         "h-14 px-6 rounded-full shadow-2xl",
-        "!bg-white !border-3 !border-orange-500",
-        "!text-orange-500",
+        "!bg-white !border-2 !border-accent-orange",
+        "!text-accent-orange",
         "hover:!bg-orange-50 hover:!border-orange-600 hover:!text-orange-600",
-        "hover:shadow-2xl hover:scale-110",
+        "hover:shadow-2xl hover:scale-105",
         "transition-all duration-300 ease-in-out",
-        "animate-bounce-slow",
         "flex items-center gap-2",
         "!opacity-100",
-        "ring-2 ring-orange-200 ring-opacity-50",
+        "ring-2 ring-orange-200/50",
         "text-lg font-bold"
       )
     : cn(
@@ -113,7 +112,7 @@ export default function FloatingCTA({
               className={buttonStyles}
               aria-label="Обратный звонок - заказать бесплатную консультацию"
             >
-              <Phone className={variant === 'modern' ? "w-6 h-6 animate-bounce" : "w-4 h-4 lg:w-5 lg:h-5"} />
+              <Phone className={variant === 'modern' ? "w-6 h-6" : "w-4 h-4 lg:w-5 lg:h-5"} />
               <span className="hidden sm:inline font-bold whitespace-nowrap">
                 Обратный звонок
               </span>
@@ -140,5 +139,3 @@ export default function FloatingCTA({
     </div>
   );
 }
-
-export default FloatingCTA

@@ -1,29 +1,17 @@
 import { useState, useRef } from 'react';
 import { Link, useLocation } from 'wouter';
-import { ChevronDown, Home, MoreHorizontal } from 'lucide-react';
+import { ChevronDown, Home, Wrench } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { mainNavigation, secondaryNavigation } from '@/config/navigation';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 
-// Элементы, которые всегда видны
-const visibleMainItems = mainNavigation.filter(item =>
-  ['Купить', 'Продать'].includes(item.name)
-); // "Купить", "Продать"
-
-// Элементы, которые уходят в "Ещё"
-const moreNavItems = [
-  ...mainNavigation.slice(2), // "Сдать", "Услуги"
-  ...secondaryNavigation.filter(item => ['Команда', 'Отзывы'].includes(item.name)),
-];
-
-// Контакты всегда видны отдельно
+// Состав компактного меню: Купить, Продать, Сдать, Ремонт, Контакты
 const contactsItem = secondaryNavigation.find(item => item.name === 'Контакты');
+const compactNavItems = [
+  ...mainNavigation.filter(item => ['Купить', 'Продать', 'Сдать'].includes(item.name)),
+  { name: 'Ремонт', href: '/services/renovation', icon: Wrench },
+  ...(contactsItem ? [contactsItem] : []),
+];
 
 export default function CompactDesktopNavigation() {
   const [location, setLocation] = useLocation();
@@ -53,8 +41,7 @@ export default function CompactDesktopNavigation() {
 
   return (
     <nav className="hidden xl:flex 2xl:hidden items-center space-x-1">
-      {/* Видимые основные элементы */}
-      {visibleMainItems.map(item => {
+      {compactNavItems.map(item => {
         const IconComponent = item.icon || Home;
         const isActive = location === item.href;
         const isMenuOpen = hoveredMenu === item.name;
@@ -137,7 +124,10 @@ export default function CompactDesktopNavigation() {
                 asChild
                 className={cn(isActive && 'text-accent-orange bg-orange-50')}
               >
-                <Link href={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={() => handleLinkClick(item.href)}
+                >
                   {IconComponent && <IconComponent className="w-4 h-4 mr-2" />}
                   {item.name}
                 </Link>
@@ -146,44 +136,6 @@ export default function CompactDesktopNavigation() {
           </div>
         );
       })}
-
-      {/* Кнопка "Ещё" с выпадающим меню */}
-      <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="sm">
-            <MoreHorizontal className="w-4 h-4 mr-2" />
-            Ещё
-          </Button>
-        </DropdownMenuTrigger>
-        <DropdownMenuContent align="center">
-          {moreNavItems.map(item => {
-            const IconComponent = item.icon || Home;
-            return (
-              <DropdownMenuItem key={item.name} asChild>
-                <Link href={item.href} onClick={() => handleLinkClick(item.href)}>
-                  {IconComponent && <IconComponent className="w-4 h-4 mr-2" />}
-                  {item.name}
-                </Link>
-              </DropdownMenuItem>
-            );
-          })}
-        </DropdownMenuContent>
-      </DropdownMenu>
-
-      {/* Контакты */}
-      {contactsItem && (
-        <Button
-          variant="ghost"
-          size="sm"
-          asChild
-          className={cn(location === contactsItem.href && 'text-accent-orange bg-orange-50')}
-        >
-          <Link href={contactsItem.href}>
-            {contactsItem.icon && <contactsItem.icon className="w-4 h-4 mr-2" />}
-            {contactsItem.name}
-          </Link>
-        </Button>
-      )}
     </nav>
   );
 } 

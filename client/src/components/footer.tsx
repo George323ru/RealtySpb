@@ -9,8 +9,8 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <div className="flex items-center mb-6">
-              <div className="w-12 h-12 bg-yandex-yellow rounded-lg flex items-center justify-center mr-3">
-                <Home className="text-yandex-black text-xl" />
+              <div className="w-12 h-12 bg-accent-orange rounded-lg flex items-center justify-center mr-3">
+                <Home className="text-black text-xl" />
               </div>
               <div>
                 <div className="text-xl font-bold">СПБ Недвижимость</div>
@@ -64,12 +64,12 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6">Основные услуги</h3>
             <ul className="space-y-3">
-              <li><Link href="/buy" className="text-gray-300 hover:text-yandex-yellow transition-colors">Хочу купить</Link></li>
-              <li><Link href="/sell" className="text-gray-300 hover:text-yandex-yellow transition-colors">Хочу продать</Link></li>
-              <li><Link href="/rent" className="text-gray-300 hover:text-yandex-yellow transition-colors">Хочу сдать</Link></li>
-              <li><Link href="/new-buildings" className="text-gray-300 hover:text-yandex-yellow transition-colors">Новостройки</Link></li>
-              <li><Link href="/secondary" className="text-gray-300 hover:text-yandex-yellow transition-colors">Вторичная недвижимость</Link></li>
-              <li><Link href="/buy?type=коммерческая" className="text-gray-300 hover:text-yandex-yellow transition-colors">Коммерческая недвижимость</Link></li>
+              <li><Link href="/buy" className="text-gray-300 hover:text-accent-orange transition-colors">Хочу купить</Link></li>
+              <li><Link href="/sell" className="text-gray-300 hover:text-accent-orange transition-colors">Хочу продать</Link></li>
+              <li><Link href="/rent" className="text-gray-300 hover:text-accent-orange transition-colors">Хочу сдать</Link></li>
+              <li><Link href="/new-buildings" className="text-gray-300 hover:text-accent-orange transition-colors">Новостройки</Link></li>
+              <li><Link href="/secondary" className="text-gray-300 hover:text-accent-orange transition-colors">Вторичная недвижимость</Link></li>
+              <li><Link href="/buy?type=коммерческая" className="text-gray-300 hover:text-accent-orange transition-colors">Коммерческая недвижимость</Link></li>
             </ul>
           </div>
           
@@ -77,12 +77,12 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6">Дополнительные услуги</h3>
             <ul className="space-y-3">
-              <li><Link href="/services" className="text-gray-300 hover:text-yandex-yellow transition-colors">Предпродажная подготовка</Link></li>
-              <li><Link href="/services" className="text-gray-300 hover:text-yandex-yellow transition-colors">Дизайн-проект</Link></li>
-              <li><Link href="/services" className="text-gray-300 hover:text-yandex-yellow transition-colors">Ремонт</Link></li>
-              <li><Link href="/services" className="text-gray-300 hover:text-yandex-yellow transition-colors">Строительство</Link></li>
-              <li><Link href="/services" className="text-gray-300 hover:text-yandex-yellow transition-colors">Юридическое сопровождение</Link></li>
-              <li><Link href="/services" className="text-gray-300 hover:text-yandex-yellow transition-colors">Все услуги</Link></li>
+              <li><Link href="/services" className="text-gray-300 hover:text-accent-orange transition-colors">Предпродажная подготовка</Link></li>
+              <li><Link href="/services" className="text-gray-300 hover:text-accent-orange transition-colors">Дизайн-проект</Link></li>
+              <li><Link href="/services" className="text-gray-300 hover:text-accent-orange transition-colors">Ремонт</Link></li>
+              <li><Link href="/services" className="text-gray-300 hover:text-accent-orange transition-colors">Строительство</Link></li>
+              <li><Link href="/services" className="text-gray-300 hover:text-accent-orange transition-colors">Юридическое сопровождение</Link></li>
+              <li><Link href="/services" className="text-gray-300 hover:text-accent-orange transition-colors">Все услуги</Link></li>
             </ul>
           </div>
           
@@ -128,28 +128,28 @@ export default function Footer() {
             <div>
               <h4 className="font-semibold mb-3">Информация</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/about" className="text-gray-400 hover:text-yandex-yellow transition-colors">О компании</Link></li>
-                <li><Link href="/realtor-constructor" className="text-gray-400 hover:text-yandex-yellow transition-colors">Подобрать специалиста</Link></li>
-                <li><Link href="/reviews" className="text-gray-400 hover:text-yandex-yellow transition-colors">Отзывы клиентов</Link></li>
-                <li><Link href="/blog" className="text-gray-400 hover:text-yandex-yellow transition-colors">Блог</Link></li>
+                <li><Link href="/about" className="text-gray-400 hover:text-accent-orange transition-colors">О компании</Link></li>
+                <li><Link href="/realtor-constructor" className="text-gray-400 hover:text-accent-orange transition-colors">Подобрать специалиста</Link></li>
+                <li><Link href="/reviews" className="text-gray-400 hover:text-accent-orange transition-colors">Отзывы клиентов</Link></li>
+                <li><Link href="/blog" className="text-gray-400 hover:text-accent-orange transition-colors">Блог</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-3">Покупателям</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/buy" className="text-gray-400 hover:text-yandex-yellow transition-colors">Каталог объектов</Link></li>
-                <li><Link href="/buy" className="text-gray-400 hover:text-yandex-yellow transition-colors">Поиск по карте</Link></li>
-                <li><Link href="/blog" className="text-gray-400 hover:text-yandex-yellow transition-colors">Ипотечные программы</Link></li>
-                <li><Link href="/blog" className="text-gray-400 hover:text-yandex-yellow transition-colors">Инвестиции в недвижимость</Link></li>
+                <li><Link href="/buy" className="text-gray-400 hover:text-accent-orange transition-colors">Каталог объектов</Link></li>
+                <li><Link href="/buy" className="text-gray-400 hover:text-accent-orange transition-colors">Поиск по карте</Link></li>
+                <li><Link href="/blog" className="text-gray-400 hover:text-accent-orange transition-colors">Ипотечные программы</Link></li>
+                <li><Link href="/blog" className="text-gray-400 hover:text-accent-orange transition-colors">Инвестиции в недвижимость</Link></li>
               </ul>
             </div>
             <div>
               <h4 className="font-semibold mb-3">Продавцам</h4>
               <ul className="space-y-2 text-sm">
-                <li><Link href="/sell" className="text-gray-400 hover:text-yandex-yellow transition-colors">Оценка недвижимости</Link></li>
-                <li><Link href="/services" className="text-gray-400 hover:text-yandex-yellow transition-colors">Подготовка к продаже</Link></li>
-                <li><Link href="/services" className="text-gray-400 hover:text-yandex-yellow transition-colors">Маркетинг объекта</Link></li>
-                <li><Link href="/services" className="text-gray-400 hover:text-yandex-yellow transition-colors">Документооборот</Link></li>
+                <li><Link href="/sell" className="text-gray-400 hover:text-accent-orange transition-colors">Оценка недвижимости</Link></li>
+                <li><Link href="/services" className="text-gray-400 hover:text-accent-orange transition-colors">Подготовка к продаже</Link></li>
+                <li><Link href="/services" className="text-gray-400 hover:text-accent-orange transition-colors">Маркетинг объекта</Link></li>
+                <li><Link href="/services" className="text-gray-400 hover:text-accent-orange transition-colors">Документооборот</Link></li>
               </ul>
             </div>
           </div>
@@ -161,9 +161,9 @@ export default function Footer() {
             © 2025 СПБ Недвижимость. Все права защищены.
           </div>
           <div className="flex flex-wrap gap-6 text-sm">
-            <a href="#" className="text-gray-400 hover:text-yandex-yellow transition-colors">Политика конфиденциальности</a>
-            <a href="#" className="text-gray-400 hover:text-yandex-yellow transition-colors">Пользовательское соглашение</a>
-            <a href="#" className="text-gray-400 hover:text-yandex-yellow transition-colors">Sitemap</a>
+            <a href="#" className="text-gray-400 hover:text-accent-orange transition-colors">Политика конфиденциальности</a>
+            <a href="#" className="text-gray-400 hover:text-accent-orange transition-colors">Пользовательское соглашение</a>
+            <a href="#" className="text-gray-400 hover:text-accent-orange transition-colors">Sitemap</a>
           </div>
         </div>
       </div>

@@ -34,6 +34,7 @@ import PreSalePreparation from "@/pages/services/PreSalePreparation";
 import PrivacyPolicy from "@/pages/privacy-policy";
 import AdminPage from "@/pages/admin";
 import Cleaning from "@/pages/services/Cleaning";
+import Renovation from "@/pages/services/Renovation";
 
 // Упрощенная анимация страниц
 const pageTransition = {
@@ -67,6 +68,7 @@ function Router() {
           <Route path="/services" component={Services} />
           <Route path="/services/pre-sale-preparation" component={PreSalePreparation} />
           <Route path="/services/cleaning" component={Cleaning} />
+          <Route path="/services/renovation" component={Renovation} />
           <Route path="/services/:slug" component={ServiceDetail} />
           <Route path="/land" component={Land} />
           <Route path="/about" component={About} />

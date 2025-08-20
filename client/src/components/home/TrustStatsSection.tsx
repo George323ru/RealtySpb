@@ -9,13 +9,11 @@ interface TrustStatsSectionProps {
 
 export default function TrustStatsSection({ userIntent, className }: TrustStatsSectionProps) {
   return (
-    <section className={`py-12 bg-neutral-100 ${className || ''}`}>
+    <section className={`py-16 md:py-20 lg:py-24 bg-neutral-100 ${className || ''}`}>
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
           <div>
-            <div className={`text-4xl font-bold mb-2 transition-all duration-500 ${
-              userIntent === 'buy' ? 'text-accent-orange scale-110 animate-pulse' : 'text-accent-orange'
-            }`}>
+            <div className={`text-4xl font-bold mb-2 text-accent-orange`}>
               15+ лет
             </div>
             <div className="text-text-secondary">на рынке недвижимости</div>
@@ -26,9 +24,7 @@ export default function TrustStatsSection({ userIntent, className }: TrustStatsS
             )}
           </div>
           <div>
-            <div className={`text-4xl font-bold mb-2 transition-all duration-500 ${
-              userIntent === 'sell' ? 'text-accent-orange scale-110 animate-pulse' : 'text-accent-orange'
-            }`}>
+            <div className={`text-4xl font-bold mb-2 text-accent-orange`}>
               1000+ клиентов
             </div>
             <div className="text-text-secondary">доверили нам сделки</div>
@@ -39,9 +35,7 @@ export default function TrustStatsSection({ userIntent, className }: TrustStatsS
             )}
           </div>
           <div>
-            <div className={`text-4xl font-bold mb-2 transition-all duration-500 ${
-              userIntent === 'service' ? 'text-accent-orange scale-110 animate-pulse' : 'text-accent-orange'
-            }`}>
+            <div className={`text-4xl font-bold mb-2 text-accent-orange`}>
               50+ экспертов
             </div>
             <div className="text-text-secondary">в команде</div>

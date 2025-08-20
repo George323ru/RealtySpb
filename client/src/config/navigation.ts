@@ -95,6 +95,7 @@ export const mainNavigation: NavigationItem[] = [
   },
   { name: "Продать", href: "/sell" },
   { name: "Сдать", href: "/rent" },
+  { name: "Ремонт", href: "/services/renovation" },
   {
     name: "Услуги",
     href: "/services",

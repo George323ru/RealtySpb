@@ -22,7 +22,7 @@ import { Info, ArrowRight, Users, CheckCircle, Clock } from "lucide-react";
 // Блок "Как мы работаем"
 function HowWeWorkSection() {
   return (
-    <section className="py-12 bg-white">
+    <section className="py-16 md:py-20 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
           <div>
@@ -54,7 +54,7 @@ function HowWeWorkSection() {
 // Блок "Подбор специалиста"
 function RealtorSelectionSection() {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 md:py-20 lg:py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
@@ -111,7 +111,7 @@ function RealtorSelectionSection() {
 // Блок "Обращение основателя"
 function FounderSection() {
     return (
-        <section className="py-12 bg-neutral-50">
+        <section className="py-16 md:py-20 lg:py-24 bg-neutral-50">
             <div className="container mx-auto px-4">
                 <div className="max-w-4xl mx-auto">
                     <Card className="bg-white shadow-lg border-0">
@@ -195,7 +195,7 @@ export default function Home() {
         <SectionBridge text={getBridgeText('experts-to-objects')} />
 
         {/* Блок: Объекты */}
-        <section className="py-16 bg-neutral-100">
+        <section className="py-16 md:py-20 lg:py-24 bg-neutral-100">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
@@ -239,7 +239,7 @@ export default function Home() {
         </section>
 
         {/* Новостройки */}
-        <section className="py-16 bg-white">
+        <section className="py-16 md:py-20 lg:py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
               <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
@@ -264,7 +264,7 @@ export default function Home() {
         <SectionBridge text={getBridgeText('objects-to-services')} />
 
         {/* Блок: Услуги */}
-        <section className="py-12 bg-neutral-100">
+        <section className="py-16 md:py-20 lg:py-24 bg-neutral-100">
             <div className="container mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {services.slice(0, 4).map((service) => {

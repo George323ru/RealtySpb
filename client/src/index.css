@@ -16,8 +16,8 @@ html, body {
 }
 
 /* Prevent horizontal scrolling on all elements */
-.container, .max-w-7xl, .max-w-6xl, .max-w-5xl, .max-w-4xl {
-  max-width: 100% !important;
+.container {
+  max-width: 100%;
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -73,6 +73,12 @@ img {
   /* Desktop header optimizations */
   .container {
     max-width: 1200px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1320px;
   }
 }
 
@@ -175,8 +181,8 @@ img {
   --card-foreground: hsl(20, 14.3%, 4.1%);
   --border: hsl(20, 5.9%, 90%);
   --input: hsl(20, 5.9%, 90%);
-  --primary: hsl(45, 100%, 50%);
-  --primary-foreground: hsl(0, 0%, 0%);
+  --primary: var(--accent-orange);
+  --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(60, 4.8%, 95.9%);
   --secondary-foreground: hsl(24, 9.8%, 10%);
   --accent: hsl(20, 90%, 48%);
@@ -206,8 +212,8 @@ img {
   --accent-orange-dark: hsl(20, 95%, 42%);
   
   /* Legacy colors for compatibility */
-  --yandex-yellow: hsl(20, 85%, 55%);
-  --yandex-black: hsl(210, 15%, 15%);
+  --yandex-yellow: var(--accent-orange);
+  --yandex-black: hsl(210, 15%, 8%);
   /* Text colors with improved contrast (4.5:1 minimum) */
   --text-primary: hsl(210, 15%, 8%);
   --text-secondary: hsl(210, 12%, 20%);
@@ -478,8 +484,8 @@ input:focus, textarea:focus, select:focus {
   --card-foreground: hsl(0, 0%, 98%);
   --border: hsl(240, 3.7%, 15.9%);
   --input: hsl(240, 3.7%, 15.9%);
-  --primary: hsl(45, 100%, 65%);
-  --primary-foreground: hsl(0, 0%, 0%);
+  --primary: var(--accent-orange-light);
+  --primary-foreground: hsl(0, 0%, 100%);
   --secondary: hsl(240, 3.7%, 15.9%);
   --secondary-foreground: hsl(0, 0%, 98%);
   --accent: hsl(20, 90%, 58%);
@@ -488,6 +494,15 @@ input:focus, textarea:focus, select:focus {
   --destructive-foreground: hsl(0, 0%, 98%);
   --ring: hsl(240, 4.9%, 83.9%);
   --radius: 0.5rem;
+}
+
+/* Respect reduced motion preferences globally */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* Hide scrollbar for navigation */
@@ -516,6 +531,40 @@ input:focus, textarea:focus, select:focus {
 }
 
 @layer utilities {
+  /* Apple-like glass utilities */
+  .glass-pane {
+    background-color: rgba(255, 255, 255, 0.65);
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+  }
+
+  .glass-card {
+    background-color: rgba(255, 255, 255, 0.75);
+    backdrop-filter: saturate(180%) blur(18px);
+    -webkit-backdrop-filter: saturate(180%) blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+  }
+
+  .glass-nav {
+    background-color: rgba(255, 255, 255, 0.70);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  /* Hairline borders */
+  .hairline {
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .hairline-top {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+  }
+  .hairline-bottom {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
   .text-yandex-yellow {
     color: var(--yandex-yellow);
   }

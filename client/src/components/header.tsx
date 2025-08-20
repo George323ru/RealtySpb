@@ -17,7 +17,7 @@ export default function Header() {
   return (
     <header 
       className={cn(
-        "bg-white shadow-sm border-b border-neutral-200 z-50",
+        "z-50 glass-nav",
         // На мобиле и планшете - sticky
         "sticky top-0",
         // На десктопе - fixed с анимацией

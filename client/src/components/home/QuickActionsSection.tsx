@@ -71,7 +71,7 @@ export default function QuickActionsSection({ userIntent, onUserIntentChange, cl
   const currentButtonProps = actionButtonProps[userIntent];
 
   return (
-    <section className={`py-16 bg-white ${className || ''}`}>
+    <section className={`py-16 md:py-20 lg:py-24 bg-white ${className || ''}`}>
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">Что вы хотите сделать?</h2>
@@ -90,14 +90,14 @@ export default function QuickActionsSection({ userIntent, onUserIntentChange, cl
             return (
               <Card
                 key={index}
-                className={`group bg-gradient-to-br ${action.color} hover:shadow-2xl shadow-md transition-all duration-300 cursor-pointer h-full border ${isActive ? 'ring-4 ring-accent-orange border-accent-orange' : ''}`}
+                className={`group bg-white hairline hover:shadow-lg transition-all duration-300 cursor-pointer h-full ${isActive ? 'ring-2 ring-accent-orange' : ''}`}
                 onClick={() => onUserIntentChange(intent)}
                 tabIndex={0}
                 role="button"
                 aria-pressed={isActive}
               >
                 <CardContent className="p-8 text-center h-full flex flex-col">
-                  <div className={`w-16 h-16 ${action.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
+                  <div className={`w-16 h-16 ${action.iconBg} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform`}>
                     <action.icon className="text-white text-2xl w-8 h-8" />
                   </div>
                   <h3 className="text-xl font-bold text-text-primary mb-3">{action.title}</h3>
@@ -115,7 +115,7 @@ export default function QuickActionsSection({ userIntent, onUserIntentChange, cl
         
         <div className="text-center mt-12">
           <Link href={currentButtonProps.link}>
-            <Button size="lg" className="bg-accent-orange text-white px-10 py-6 rounded-lg font-semibold hover:bg-orange-600 text-lg shadow-lg shadow-orange-500/30 transition-all hover:shadow-xl hover:scale-105">
+            <Button size="lg" className="bg-accent-orange text-white px-10 py-6 rounded-full font-semibold hover:bg-orange-600 text-lg shadow-md transition-all">
               {currentButtonProps.text}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
