@@ -30,7 +30,7 @@ type CarouselContextProps = {
 
 const CarouselContext = React.createContext<CarouselContextProps | null>(null)
 
-function useCarousel() {
+export function useCarousel() {
   const context = React.useContext(CarouselContext)
 
   if (!context) {
@@ -201,20 +201,19 @@ const CarouselPrevious = React.forwardRef<
   return (
     <Button
       ref={ref}
-      variant={variant}
-      size={size}
+      variant="ghost"
+      onClick={scrollPrev}
+      disabled={!canScrollPrev}
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "absolute z-10 h-10 w-10 rounded-lg border border-neutral-300 bg-white text-neutral-600 transition-colors hover:border-accent-orange hover:bg-white hover:text-accent-orange disabled:cursor-not-allowed disabled:border-neutral-200 disabled:bg-neutral-100 disabled:text-neutral-400",
         orientation === "horizontal"
           ? "-left-12 top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
-      disabled={!canScrollPrev}
-      onClick={scrollPrev}
       {...props}
     >
-      <ArrowLeft className="h-4 w-4" />
+      <ArrowLeft className="h-5 w-5" />
       <span className="sr-only">Previous slide</span>
     </Button>
   )
@@ -230,20 +229,19 @@ const CarouselNext = React.forwardRef<
   return (
     <Button
       ref={ref}
-      variant={variant}
-      size={size}
+      variant="ghost"
+      onClick={scrollNext}
+      disabled={!canScrollNext}
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "absolute z-10 h-10 w-10 rounded-lg border border-neutral-300 bg-white text-neutral-600 transition-colors hover:border-accent-orange hover:bg-white hover:text-accent-orange disabled:cursor-not-allowed disabled:border-neutral-200 disabled:bg-neutral-100 disabled:text-neutral-400",
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
         className
       )}
-      disabled={!canScrollNext}
-      onClick={scrollNext}
       {...props}
     >
-      <ArrowRight className="h-4 w-4" />
+      <ArrowRight className="h-5 w-5" />
       <span className="sr-only">Next slide</span>
     </Button>
   )

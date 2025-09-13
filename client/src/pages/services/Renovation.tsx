@@ -2,33 +2,27 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import LeadForm from "@/components/LeadForm";
-import { CheckCircle, Wrench, Paintbrush, Zap, Droplets, Shield, Clock } from "lucide-react";
+import { CheckCircle, Wrench, Paintbrush, Hammer, Shield, Clock } from "lucide-react";
 
 export default function Renovation() {
   const services = [
     {
-      icon: <Paintbrush className="w-8 h-8 text-blue-500" />,
-      title: "Косметический ремонт",
-      description: "Обновление интерьера без перепланировки",
+      icon: <Hammer className="w-8 h-8 text-blue-500" />,
+      title: "Подготовка",
+      description: "Демонтаж, выравнивание, подготовка поверхностей и черновые работы",
+      price: "от 2 000 ₽/м²"
+    },
+    {
+      icon: <Paintbrush className="w-8 h-8 text-green-500" />,
+      title: "Отделка",
+      description: "Чистовые отделочные работы: стены, полы, потолки, установка дверей",
       price: "от 4 000 ₽/м²"
     },
     {
-      icon: <Wrench className="w-8 h-8 text-green-500" />,
-      title: "Капитальный ремонт",
-      description: "Полная реконструкция с заменой коммуникаций",
+      icon: <Wrench className="w-8 h-8 text-orange-500" />,
+      title: "Ремонт",
+      description: "Комплекс работ под ключ: от сметы и закупки до сдачи объекта",
       price: "от 12 000 ₽/м²"
-    },
-    {
-      icon: <Zap className="w-8 h-8 text-yellow-500" />,
-      title: "Электромонтажные работы",
-      description: "Замена проводки и установка электрики",
-      price: "от 2 500 ₽/м²"
-    },
-    {
-      icon: <Droplets className="w-8 h-8 text-cyan-500" />,
-      title: "Сантехнические работы",
-      description: "Замена труб и установка сантехники",
-      price: "от 3 000 ₽/м²"
     }
   ];
 

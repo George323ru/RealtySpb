@@ -68,7 +68,7 @@ export default function DesktopNavigation() {
                 
                 <div 
                   className={cn(
-                    "absolute top-full mt-4 w-[900px] max-w-[calc(100vw-2rem)] rounded-2xl shadow-2xl border border-neutral-100 bg-white/95 backdrop-blur-sm p-8 transform transition-all duration-300 ease-in-out",
+                    "absolute top-full mt-4 w-[900px] max-w-[calc(100vw-2rem)] rounded-2xl shadow-xl glass-card p-8 transform transition-all duration-300 ease-in-out",
                     "left-0 -translate-x-1/3 xl:-translate-x-1/4",
                     isMenuOpen 
                       ? "opacity-100 visible pointer-events-auto scale-100" 
@@ -137,7 +137,7 @@ export default function DesktopNavigation() {
         );
       })}
       
-      {secondaryNavigation.filter(item => ['Команда', 'Контакты', 'Отзывы'].includes(item.name)).map((item) => {
+      {secondaryNavigation.filter(item => ['Контакты'].includes(item.name)).map((item) => {
         const IconComponent = item.icon || Home;
         const isActive = location === item.href;
         

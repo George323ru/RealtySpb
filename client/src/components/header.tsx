@@ -15,37 +15,37 @@ export default function Header() {
   const { isVisible } = useScrollDirection();
 
   return (
-    <header 
+    <header
       className={cn(
-        "bg-white shadow-sm border-b border-neutral-200 z-50",
-        // На мобиле и планшете - sticky
-        "sticky top-0",
-        // На десктопе - fixed с анимацией
-        "lg:fixed lg:top-0 lg:left-0 lg:right-0",
-        "lg:transition-transform lg:duration-300 lg:ease-in-out",
-        !isVisible && "lg:-translate-y-full"
+        // Fixed positioning for scroll behavior
+        "fixed top-4 inset-x-4 z-50",
+        // Minimalist container style
+        "minimal-container",
+        // Smooth animations
+        "transition-transform duration-300 ease-in-out",
+        !isVisible && "-translate-y-full"
       )}
     >
       {/* Top Contact Bar - Desktop Only */}
       <HeaderTopBar />
 
       {/* Main Navigation */}
-      <div className="container mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center justify-between py-4">
-          {/* Left Block: Logo */}
-          <div className="flex-shrink-0">
+          {/* Left Block: Logo and Title */}
+          <div className="flex items-center">
             <Logo />
           </div>
 
           {/* Center Block: Navigation Links (hidden on mobile) */}
-          <div className="hidden lg:flex flex-1 items-center justify-center">
+          <div className="hidden md:flex items-center">
             <DesktopNavigation />
             <CompactDesktopNavigation />
             <TabletNavigation />
           </div>
 
           {/* Right Block: Actions & Mobile Menu */}
-          <div className="flex items-center justify-end flex-1 lg:flex-none">
+          <div className="flex items-center">
             <DesktopHeaderActions />
             <TabletHeaderActions />
             <MobileNavigation />

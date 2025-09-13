@@ -16,18 +16,18 @@ const buttonVariants = cva(
         outline: "btn-outline",
         secondary: "btn-secondary", 
         ghost: `
-          bg-gradient-to-t from-orange-100/80 to-orange-100/80 
-          bg-no-repeat bg-bottom [background-size:100%_0%] 
-          hover:[background-size:100%_100%] hover:text-accent-orange
-          text-base font-medium
+          bg-transparent text-text-primary
+          hover:bg-black/5 hover:text-text-primary
+          transition-colors
         `,
-        link: "text-primary underline-offset-4 hover:underline min-h-auto min-w-auto rounded-none",
+        link: "text-text-primary/80 hover:text-text-primary underline-offset-4 hover:underline min-h-auto min-w-auto rounded-none",
       },
       size: {
         default: "h-12 px-6 py-3 text-base font-semibold rounded-xl",
         sm: "h-10 px-4 py-2 text-sm font-medium rounded-lg",
-        lg: "h-14 px-8 py-4 text-lg font-semibold rounded-xl", 
+        lg: "h-14 px-8 py-4 text-lg font-semibold rounded-xl",
         icon: "h-12 w-12 rounded-xl",
+        rounded: "h-12 px-8 py-3 text-base font-semibold rounded-full",
       },
     },
     defaultVariants: {
