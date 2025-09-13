@@ -55,7 +55,7 @@ const quickActions = [
     icon: Wrench,
     color: "from-orange-50 to-orange-100 border-orange-200",
     iconBg: "bg-gray-700",
-    buttonColor: "bg-accent-orange hover:bg-orange-600",
+    buttonColor: "bg-accent-gray hover:bg-accent-gray-dark",
     link: "/services"
   }
 ];
@@ -90,7 +90,7 @@ export default function QuickActionsSection({ userIntent, onUserIntentChange, cl
             return (
               <Card
                 key={index}
-                className={`group bg-white hairline hover:shadow-lg transition-all duration-300 cursor-pointer h-full ${isActive ? 'ring-2 ring-accent-orange' : ''}`}
+                className={`group bg-white hairline hover:shadow-lg transition-all duration-300 cursor-pointer h-full ${isActive ? 'ring-2 ring-accent-gray' : ''}`}
                 onClick={() => onUserIntentChange(intent)}
                 tabIndex={0}
                 role="button"
@@ -115,7 +115,7 @@ export default function QuickActionsSection({ userIntent, onUserIntentChange, cl
         
         <div className="text-center mt-12">
           <Link href={currentButtonProps.link}>
-            <Button size="lg" className="bg-accent-orange text-white px-10 py-6 rounded-full font-semibold hover:bg-orange-600 text-lg shadow-md transition-all">
+            <Button size="lg" className="bg-accent-gray text-white px-10 py-6 rounded-full font-semibold hover:bg-accent-gray-dark text-lg shadow-md transition-all">
               {currentButtonProps.text}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>

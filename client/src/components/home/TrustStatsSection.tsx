@@ -9,41 +9,50 @@ interface TrustStatsSectionProps {
 
 export default function TrustStatsSection({ userIntent, className }: TrustStatsSectionProps) {
   return (
-    <section className={`py-16 md:py-20 lg:py-24 bg-neutral-100 ${className || ''}`}>
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+    <section className={`py-20 lg:py-24 ${className || ''}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
-            <div className={`text-4xl font-bold mb-2 text-accent-orange`}>
+            <div className={`text-4xl font-bold mb-2 text-foreground`}>
               15+ лет
             </div>
-            <div className="text-text-secondary">на рынке недвижимости</div>
+            <div className="text-muted-foreground">на рынке недвижимости</div>
             {userIntent === 'buy' && (
-              <div className="text-xs text-accent-orange mt-1 font-medium">
+              <div className="text-xs text-accent-gray mt-1 font-medium">
                 ✓ Гарантия надежности для покупателей
               </div>
             )}
           </div>
           <div>
-            <div className={`text-4xl font-bold mb-2 text-accent-orange`}>
+            <div className={`text-4xl font-bold mb-2 text-foreground`}>
               1000+ клиентов
             </div>
-            <div className="text-text-secondary">доверили нам сделки</div>
+            <div className="text-muted-foreground">доверили нам сделки</div>
             {userIntent === 'sell' && (
-              <div className="text-xs text-accent-orange mt-1 font-medium">
+              <div className="text-xs text-accent-gray mt-1 font-medium">
                 ✓ Продаем на 15-20% дороже рынка
               </div>
             )}
           </div>
           <div>
-            <div className={`text-4xl font-bold mb-2 text-accent-orange`}>
+            <div className={`text-4xl font-bold mb-2 text-foreground`}>
               50+ экспертов
             </div>
-            <div className="text-text-secondary">в команде</div>
+            <div className="text-muted-foreground">в команде</div>
             {userIntent === 'service' && (
-              <div className="text-xs text-accent-orange mt-1 font-medium">
+              <div className="text-xs text-accent-gray mt-1 font-medium">
                 ✓ Решаем любые задачи под ключ
               </div>
             )}
+          </div>
+          <div>
+            <div className={`text-4xl font-bold mb-2 text-foreground`}>
+              24/7
+            </div>
+            <div className="text-muted-foreground">поддержка клиентов</div>
+            <div className="text-xs text-accent-orange mt-1 font-medium">
+              ✓ Всегда на связи
+            </div>
           </div>
         </div>
         

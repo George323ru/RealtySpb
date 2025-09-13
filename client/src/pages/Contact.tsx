@@ -99,24 +99,24 @@ export default function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-neutral-50">
+    <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-500 text-white py-16">
-        <div className="container mx-auto px-4">
+      <section className="bg-gradient-to-r from-accent-orange to-orange-600 text-white py-20 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-              Свяжитесь с нами 
-              <span className="text-yandex-yellow"> прямо сейчас</span>
+            <h1 className="text-4xl lg:text-6xl font-bold mb-6 tracking-tight">
+              Свяжитесь с нами
+              <span className="text-white"> прямо сейчас</span>
             </h1>
-            <p className="text-xl lg:text-2xl mb-8 opacity-90">
+            <p className="text-xl lg:text-2xl mb-8 opacity-90 leading-relaxed">
               Мы готовы ответить на ваши вопросы и помочь решить любые задачи с недвижимостью в Санкт-Петербурге
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button className="bg-yandex-yellow text-yandex-black hover:bg-yellow-400 px-8 py-4 text-lg font-semibold">
+              <Button className="bg-white text-accent-orange hover:bg-gray-100 px-8 py-4 text-lg font-semibold">
                 Позвонить сейчас
               </Button>
-              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
+              <Button variant="outline" className="border-white text-white hover:bg-white hover:text-accent-orange px-8 py-4 text-lg">
                 Написать в WhatsApp
               </Button>
             </div>
@@ -125,35 +125,39 @@ export default function Contact() {
       </section>
 
       {/* Quick Contact Methods */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-text-primary mb-4">
-              Выберите удобный способ связи
-            </h2>
-            <p className="text-lg text-text-secondary">
-              Отвечаем быстро в любое удобное для вас время
-            </p>
+      <section className="py-20 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header with justify-between layout */}
+          <div className="flex items-end justify-between mb-12">
+            <div>
+              <h2 className="text-4xl font-bold tracking-tight mb-4">
+                Выберите удобный способ связи
+              </h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Отвечаем быстро в любое удобное для вас время
+              </p>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Grid of contact methods */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {contactMethods.map((method, index) => (
-              <Card key={index} className="text-center hover:shadow-lg transition-shadow cursor-pointer group">
+              <Card key={index} className="text-center hover:shadow-lg transition-all duration-300 cursor-pointer group">
                 <CardContent className="p-8">
                   <div className="flex justify-center mb-4 group-hover:scale-110 transition-transform">
                     {method.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-text-primary mb-2">
+                  <h3 className="text-xl font-semibold text-card-foreground mb-2">
                     {method.title}
                   </h3>
-                  <p className="text-text-secondary mb-4">
+                  <p className="text-muted-foreground mb-4">
                     {method.description}
                   </p>
                   <div className="font-medium text-accent-orange mb-4">
                     {method.value}
                   </div>
                   <a href={method.action}>
-                    <Button className="bg-accent-orange text-white hover:bg-orange-600 w-full">
+                    <Button className="w-full">
                       Связаться
                     </Button>
                   </a>
@@ -165,9 +169,10 @@ export default function Contact() {
       </section>
 
       {/* Contact Form and Office Info */}
-      <section className="py-16 bg-neutral-100">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <section className="py-20 lg:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Two-column layout for Contact section */}
+          <div className="grid md:grid-cols-2 gap-8">
             {/* Contact Form */}
             <div>
               <LeadForm 
@@ -178,7 +183,7 @@ export default function Contact() {
 
             {/* Office Information */}
             <div>
-              <h2 className="text-3xl font-bold text-text-primary mb-8">
+              <h2 className="text-3xl font-bold text-card-foreground mb-8">
                 Наши офисы
               </h2>
 

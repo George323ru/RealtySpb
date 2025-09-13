@@ -133,7 +133,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
             </div>
           </div>
           
-          <Button onClick={handleSearch} className="w-full bg-accent-orange text-white hover:bg-orange-600">
+          <Button onClick={handleSearch} className="w-full bg-accent-gray text-white hover:bg-accent-gray-dark">
             <Search className="w-4 h-4 mr-2" />
             Найти недвижимость
           </Button>
@@ -143,28 +143,28 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
   }
 
   return (
-    <div className={`bg-white/95 backdrop-blur-sm rounded-xl shadow-lg border border-white/20 ${className || ''}`}>
-      <div className="p-4 sm:p-6">
+    <div className={`minimal-card ${className || ''}`}>
+      <div className="p-6">
         {/* Action Buttons - только для полной версии */}
         <div className="flex flex-wrap gap-2 justify-center lg:justify-start mb-6">
           <Button
             variant={action === "buy" ? "default" : "outline"}
             onClick={() => setAction("buy")}
-            className={action === "buy" ? "bg-accent-orange text-white" : ""}
+            className={action === "buy" ? "bg-accent-gray text-white" : ""}
           >
             Купить
           </Button>
           <Button
             variant={action === "sell" ? "default" : "outline"}
             onClick={() => setAction("sell")}
-            className={action === "sell" ? "bg-accent-orange text-white" : ""}
+            className={action === "sell" ? "bg-accent-gray text-white" : ""}
           >
             Продать
           </Button>
           <Button
             variant={action === "rent" ? "default" : "outline"}
             onClick={() => setAction("rent")}
-            className={action === "rent" ? "bg-accent-orange text-white" : ""}
+            className={action === "rent" ? "bg-accent-gray text-white" : ""}
           >
             Сдать
           </Button>
@@ -175,7 +175,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
           {/* Тип недвижимости */}
           <div className="flex-1 min-w-0">
             <Select value={filters.propertyType} onValueChange={(value) => updateFilter("propertyType", value)}>
-              <SelectTrigger className="h-12 border-0 bg-gray-50/80 hover:bg-gray-100/80 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:ring-offset-0 transition-all duration-200 focus:outline-none">
+              <SelectTrigger className="h-12 border-0 bg-muted/50 hover:bg-muted/80 focus:bg-background focus:ring-2 focus:ring-ring/30 focus:ring-offset-0 transition-all duration-200 focus:outline-none">
                 <SelectValue placeholder="Тип недвижимости" />
               </SelectTrigger>
               <SelectContent>
@@ -191,7 +191,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
           {/* Район */}
           <div className="flex-1 min-w-0">
             <Select value={filters.district} onValueChange={(value) => updateFilter("district", value)}>
-              <SelectTrigger className="h-12 border-0 bg-gray-50/80 hover:bg-gray-100/80 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:ring-offset-0 transition-all duration-200 focus:outline-none">
+              <SelectTrigger className="h-12 border-0 bg-muted/50 hover:bg-muted/80 focus:bg-background focus:ring-2 focus:ring-ring/30 focus:ring-offset-0 transition-all duration-200 focus:outline-none">
                 <SelectValue placeholder="Район" />
               </SelectTrigger>
               <SelectContent className="max-h-[300px]">
@@ -211,16 +211,16 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
                 value={filters.priceFrom?.toString() || ""}
                 onChange={(value) => updateFilter("priceFrom", value ? Number(value) : undefined)}
                 placeholder="Цена от"
-                className="h-12 border-0 bg-gray-50/80 hover:bg-gray-100/80 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:ring-offset-0 transition-all duration-200 focus:outline-none"
+                className="h-12 border-0 bg-muted/50 hover:bg-muted/80 focus:bg-background focus:ring-2 focus:ring-ring/30 focus:ring-offset-0 transition-all duration-200 focus:outline-none"
               />
             </div>
-            <span className="text-gray-400 font-light">—</span>
+            <span className="text-muted-foreground font-light">—</span>
             <div className="flex-1">
               <PriceInput
                 value={filters.priceTo?.toString() || ""}
                 onChange={(value) => updateFilter("priceTo", value ? Number(value) : undefined)}
                 placeholder="Цена до"
-                className="h-12 border-0 bg-gray-50/80 hover:bg-gray-100/80 focus:bg-white focus:ring-2 focus:ring-gray-200/50 focus:ring-offset-0 transition-all duration-200 focus:outline-none"
+                className="h-12 border-0 bg-muted/50 hover:bg-muted/80 focus:bg-background focus:ring-2 focus:ring-ring/30 focus:ring-offset-0 transition-all duration-200 focus:outline-none"
               />
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function SearchForm({ onSearch, defaultCategory, compact = false,
           {/* Кнопка поиска */}
           <Button
             onClick={handleSearch}
-            className="h-12 px-6 sm:px-8 bg-accent-orange hover:bg-accent-orange-dark focus:bg-accent-orange-dark focus:ring-2 focus:ring-accent-orange/30 focus:ring-offset-0 text-white font-medium flex items-center gap-2 transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none"
+            className="h-12 px-6 sm:px-8 bg-primary hover:bg-primary/90 focus:bg-primary/90 focus:ring-2 focus:ring-ring/30 focus:ring-offset-0 text-primary-foreground font-medium flex items-center gap-2 transition-all duration-200 shadow-lg hover:shadow-xl focus:outline-none"
           >
             <Search className="w-4 h-4" />
             <span className="hidden sm:inline">Найти</span>
